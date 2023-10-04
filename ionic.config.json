@@ -1,0 +1,7 @@
+{
+  "name": "bus-travel-dev",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

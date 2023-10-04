@@ -1,0 +1,109 @@
+import React from "react";
+import logo from "../../assets/images/Logo.png";
+import "./Footer.scss";
+
+const Footer = () => {
+  return (
+    <div>
+      <footer>
+        {/* <img src={star1} alt="" className="star1" />
+        <img src={star2} alt="" className="star2" /> */}
+        <div className="footer_pic">
+          <img src={logo} alt="" width={150} height={80} />
+        </div>
+
+        <div className="footer_content_width">
+          <div className="footer_content">
+            <p>
+              Founded on a passion for travel, our team is dedicated to curating
+              exceptional experiences. With years of expertise, we offer
+              personalized journeys, secure bookings, and expert guidance.
+            </p>
+          </div>
+        </div>
+        <span className="footer_line">{/* <img src={line} alt="" /> */}</span>
+        <div className="footer_container">
+          <div className="footer_container__">
+            <div className="footer_container_left">
+              <div className="footer_container_left_corporates">
+                <span>
+                  <i
+                    className="fa-solid fa-location-dot fa-lg"
+                    style={{ color: "#0f7bab"  }}
+                  ></i>
+                </span>
+                <span>Corporates Office</span>
+                <p>
+                  ⇢ 102, 1st floor, AjjeGowdru Nilaya, 7th A Cross Rd, Yelahanka
+                  Satellite Town, Yelahanka, Bengaluru, Karnataka 560064
+                </p>
+              </div>
+              <div className="footer_container_left_email">
+                <span>
+                  {" "}
+                  <i
+                    className="fa-solid fa-envelope fa-lg"
+                    style={{ color: "#0f7bab"  }}
+                  ></i>
+                </span>
+                <span>Email</span>
+                <p >info@seabed2crest.com</p>
+              </div>
+              <div className="footer_container_left_number">
+                <span>
+                  <i
+                    className="fa-solid fa-phone fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                </span>
+                <span>Phone Number</span>
+                <p >+91 7349368311</p>
+                <p >+91 7979699428</p>
+              </div>
+            </div>
+            <div className="footer_container_right">
+              <div className="footer_container_right_one">
+                <div className="footer_container_right_one_services">
+                  <p id="heading">Quick Links</p>
+                  <p>About Us</p>
+                  <p>Booking</p>
+                  <p>Booking Info</p>
+                  <p>Contact Us</p>
+                </div>
+              </div>
+              <div className="footer_container_right_technologies">
+                <p id="heading">Join on Social Media</p>
+                <span>
+                  <i
+                    className="fa-brands fa-facebook fa-2xl"
+                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-brands fa-instagram fa-2xl"
+                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-brands fa-linkedin-in fa-2xl"
+                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-brands fa-x-twitter fa-2xl"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Footer;
