@@ -27,11 +27,12 @@ const Home: React.FC  = () => {
         });
       };
   return (
-    <><div className="video">
-          <video width="100%" height="auto" loop muted autoPlay>
-  <source src={Video} type="video/mp4" />
-</video>
-      </div><div className="card_banner">
+    <><div className="video-container">
+    <video autoPlay loop muted>
+      <source src={Video} type="video/mp4"/>
+    </video>
+  </div>
+  <div className="card_banner">
               <div className="card_banner_content">
                   <div className="card_banner_content_one">
                       <Icon className="fa-solid fa-code-compare fa-2xl"></Icon>

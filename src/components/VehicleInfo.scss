@@ -4,12 +4,11 @@
     align-items: center;
     flex-direction: column;
 
-    // margin: 8vw 0;
+  
     &_banner {
-        margin-top: -7vw;
         width: -webkit-fill-available;
         height: 60vh;
-        background: url(../../assets/images/banner.jpg) no-repeat;
+        background: url(../assets/images/banner.jpg) no-repeat;
         background-position: center;
         background-size: cover;
         display: flex;
