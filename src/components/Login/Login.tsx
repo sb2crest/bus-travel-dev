@@ -67,10 +67,9 @@ const Login: React.FC = () => {
     };
 
     // OTP Generation Function
-    const handleSendOTP = () => {
+    const sendOTP = () => {
         const { phoneNumber } = state;
-        console.log("phone number in handleSendOtp:"+phoneNumber);
-        dataService.handleSendOTP(phoneNumber)
+        dataService.sendOTP(phoneNumber)
             .then((response) => {
                 if (response.data) {
                     setState({ ...state, sentOtp: response.data.sentOtp });
@@ -88,8 +87,12 @@ const Login: React.FC = () => {
     };
 
     // OTP Verification Function
-    const handleVerifyOTP = () => {
-        dataService.handleVerifyOTP()
+    const verifyOTP = () => {
+        let requestBody = {
+            "mobile": phoneNumber,
+            "otp": otp
+        }
+        dataService.verifyOTP(requestBody)
             .then((response: { data: any; }) => {
                 if (response.data) {
                     setState({ ...state, otpVerified: true });
@@ -301,7 +304,7 @@ const Login: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             className="btn btn-info btn-block btn-round verify-otp-button"
-                                                            onClick={handleVerifyOTP}
+                                                            onClick={verifyOTP}
                                                         >
                                                             Verify OTP
                                                         </button>
@@ -322,7 +325,7 @@ const Login: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     className="btn btn-info btn-block btn-round send-otp-button"
-                                                    onClick={handleSendOTP}
+                                                    onClick={sendOTP}
                                                 >
                                                     Send OTP
                                                 </button>
