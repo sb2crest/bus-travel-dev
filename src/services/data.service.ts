@@ -14,15 +14,13 @@ class DataService {
   }
 
   //Send OTP
-  handleSendOTP(mobile: string) {
-    // const requestData = { mobile };
-    // console.log("phone number:" + mobile);
+  sendOTP(mobile: string) {
     return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
   }
 
-  //bookVehicle
-  handleVerifyOTP() {
-    return http.post<IVehicleData>("handleVerifyOTP")
+  // Verify OTP
+  verifyOTP( data:any) {
+    return http.post<IVehicleData>("validateOTP", data);
   }
 
   // deleteVehicle
