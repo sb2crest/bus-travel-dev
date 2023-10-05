@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { ChangeEvent, useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import dataService from '../../services/data.service';
@@ -52,6 +52,9 @@ const Login: React.FC = () => {
     const [otp, setOtp] = useState('');
     const [countryCode, setCountryCode] = useState('');
     const [showNewPopUp, setShowNewPopUp] = useState(false);
+    const [resendDisabled, setResendDisabled] = useState<boolean>(false);
+    const [timer, setTimer] = useState<number>(180); // 180 seconds = 3 minutes
+
 
     console.log("showNewPopUp:", showNewPopUp);
 
@@ -104,6 +107,52 @@ const Login: React.FC = () => {
             .catch((error: any) => {
                 console.error("Error validating OTP:", error);
             });
+    };
+
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+
+        if (resendDisabled) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer - 1);
+            }, 1000);
+
+            if (timer <= 0) {
+                setResendDisabled(false);
+                clearInterval(interval);
+                setTimer(180); // Reset the timer to 3 minutes when it completes
+            }
+        }
+        return () => {
+            clearInterval(interval); // Cleanup interval on component unmount or timer completion
+        };
+    }, [resendDisabled, timer]);
+
+    const formatDigits = (value: number): string => {
+        return value.toString().padStart(2, '0');
+    }
+
+    const minutes: string = formatDigits(Math.floor(timer / 60));
+    const seconds: string = formatDigits(timer % 60);
+
+    const handleResendClick = (): void => {
+        const { phoneNumber } = state;
+        dataService.sendOTP(phoneNumber)
+            .then((response) => {
+                if (response.data) {
+                    setState({ ...state, sentOtp: response.data.sentOtp });
+                    console.log("OTP Sent!");
+                } else {
+                    console.log("Failed to send OTP.");
+                }
+            })
+            .catch((error: any) => {
+                console.error("Error sending OTP:", error);
+                console.log("An error occurred while sending OTP.");
+            });
+        setOtpSent(true);
+        setOtpResend(true);
+        setResendDisabled(true);
     };
 
     //For Clearing Form
@@ -194,7 +243,7 @@ const Login: React.FC = () => {
                                             <div className={`form-group ${!firstNameValid ? 'has-error' : ''}`}>
                                                 <input
                                                     type="text"
-                                                    className={`form-control name ${!firstNameValid ? 'error-border' : ''}`}
+                                                    className={`form-control first-name ${!firstNameValid ? 'error-border' : ''}`}
                                                     id="firstname"
                                                     value={firstName}
                                                     placeholder="First Name"
@@ -222,7 +271,7 @@ const Login: React.FC = () => {
                                             <div className="form-group">
                                                 <input
                                                     type="text"
-                                                    className="form-control name"
+                                                    className="form-control middle-name"
                                                     id="middlename"
                                                     value={middleName}
                                                     onChange={(e) => setMiddleName(e.target.value)}
@@ -233,7 +282,7 @@ const Login: React.FC = () => {
                                             <div className="form-group">
                                                 <input
                                                     type="text"
-                                                    className={`form-control name ${!lastNameValid ? 'error-border' : ''}`}
+                                                    className={`form-control last-name ${!lastNameValid ? 'error-border' : ''}`}
                                                     id="lastname"
                                                     value={lastName}
                                                     placeholder="Last Name"
@@ -273,7 +322,7 @@ const Login: React.FC = () => {
                                                     {/* Phone Number */}
                                                     <input
                                                         type="tel"
-                                                        className={`form-control col-sm-10 ${!phoneNumberValid ? 'error-border' : ''}`}
+                                                        className={`form-control col-sm-10 phone ${!phoneNumberValid ? 'error-border' : ''}`}
                                                         id="phone-number"
                                                         value={state.phoneNumber}
                                                         onChange={handlePhoneNumberChange}
@@ -289,35 +338,40 @@ const Login: React.FC = () => {
                                             </div>
                                             {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                                             {otpSent && !otpVerified && (
-                                                <div className="form-group">
+                                                <div className="form-group otp-group">
                                                     {/* OTP */}
-                                                    <input
-                                                        type="password"
-                                                        name="otp"
-                                                        className="form-control"
-                                                        placeholder="OTP"
-                                                        value={otp}
-                                                        onChange={(e) => setOtp(e.target.value)}
-                                                    />
-                                                    {/*  Verify OTP */}
-                                                    <div className="button-container">
+                                                    <div className="otp-container">
+                                                        <input
+                                                            type="password"
+                                                            name="otp"
+                                                            className="form-control otp"
+                                                            placeholder="OTP"
+                                                            value={otp}
+                                                            onChange={(e) => setOtp(e.target.value)}
+                                                            style={{ width: "60%" }}
+                                                        />
+                                                        {/*  Verify OTP */}
                                                         <button
                                                             type="button"
                                                             className="btn btn-info btn-block btn-round verify-otp-button"
                                                             onClick={verifyOTP}
+
                                                         >
-                                                            Verify OTP
+                                                            Verify
                                                         </button>
-                                                        {/*  Resend OTP */}
-                                                        {otpResend && (
-                                                            <button
-                                                                type="button"
-                                                                className="btn btn-info btn-block btn-round resend-otp-button"
-                                                            >
-                                                                Resend OTP
-                                                            </button>
-                                                        )}
                                                     </div>
+                                                    <div className="resend-container">
+                                                        <p className='header-5-custom'>
+                                                            {resendDisabled ? <span className='timer-custom'>Resend OTP in <span className='min-sec'>{minutes}:{seconds}</span> </span> :
+                                                                <span className='not-received'>Not Received OTP?</span>}
+                                                            {!resendDisabled && (
+                                                                <a className='resend-link' onClick={handleResendClick}>
+                                                                    Resend
+                                                                </a>
+                                                            )}
+                                                        </p>
+                                                    </div>
+
                                                 </div>
                                             )}
                                             {/* Send  OTP */}
@@ -330,11 +384,12 @@ const Login: React.FC = () => {
                                                     Send OTP
                                                 </button>
                                             )}
+
                                             {/* Email */}
                                             <div className="form-group">
                                                 <input
                                                     type="text"
-                                                    className="form-control name"
+                                                    className="form-control email"
                                                     id="email"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
