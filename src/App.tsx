@@ -17,6 +17,7 @@ import Home from './components/home/Home';
 import Booking from './components/booking/Booking';
 import VehicleInfo from './components/VehicleInfo';
 import AboutUs from './components/about/AboutUs';
+import Navbar from './components/navbar/Nav';
 
 
 
@@ -30,8 +31,9 @@ const images = [
 const App = () => {
   return (
     <Router>
-      <Header />
-      <div className="container mt-3">
+      {/* <Header /> */}
+      <Navbar/>
+      <div className='containers'>
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path="/vehicles" component={VehiclesList} />

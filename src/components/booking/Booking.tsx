@@ -9,7 +9,7 @@ import arrow2 from "../../assets/images/arrow2.png";
 
 const Booking: React.FC = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 450, behavior: "smooth" });
+    window.scrollTo({ top: 530, behavior: "smooth" });
   };
   return (
     <>
