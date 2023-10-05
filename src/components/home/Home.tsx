@@ -52,7 +52,7 @@ const Home: React.FC  = () => {
                   <div className="card_banner_content_four">
                       <Icon className="fa-solid fa-star fa-2xl"></Icon>
                       <h3>Trusted reviews</h3>
-                      <p>4.3 stars reviews</p>
+                      <p>0 stars reviews</p>
                   </div>
               </div>
           </div><div className="our_services">
