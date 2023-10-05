@@ -23,6 +23,11 @@ class DataService {
     return http.post<IVehicleData>("validateOTP", data);
   }
 
+  // Resend OTP
+  handleResendClick(mobile: string){
+    return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
+  }
+
   // deleteVehicle
   deleteVehicle(id: any) {
     return http.delete<any>(`deleteVehicle/${id}`);
