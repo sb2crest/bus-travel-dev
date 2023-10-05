@@ -2,18 +2,6 @@ footer {
     margin-top: 3vw;
     background-color: #062a46;
     position: relative;
-  
-  
-    .star1 {
-      position: absolute;
-      top: 10vh;
-      left: 7vw;
-    }
-    .star2 {
-      position: absolute;
-      bottom: 8vh;
-      right: 7vw;
-    }
     .footer_pic {
       & img {
         display: block;
@@ -214,12 +202,9 @@ footer {
   }
   @media only screen and (max-width: 480px) {
     footer {
-      .star1,.star2{
-        display: none;
-      }
       .footer_pic {
         & img{
-          width: 42%;
+          width: 30%;
           padding: 10px 0 5px;
         }
       }
@@ -246,18 +231,25 @@ footer {
           width: 95%;
           &_corporates {
             margin-bottom: 2vh;
+            span{
+              font-size: 16px;
+            }
             p{
-              margin-top: 0.5 vh;
-  
+              margin-top: 0.5vh;
+              
             }
           }
           &_email {
             margin-bottom: 2vh;
             width: 90%;
+            span{
+              font-size: 16px;
+            }
             &_corporates {
               margin-bottom: 2vh;
+              
               p{
-                margin-top: 0.5 vh;
+                margin-top: 0.5vh;
     
               }
             }
@@ -265,10 +257,13 @@ footer {
           &_number {
             margin-bottom: 2vh;
             width: 90%;
+            span{
+              font-size: 16px;
+            }
             &_corporates {
               margin-bottom: 2vh;
               p{
-                margin-top: 0.5 vh;
+                margin-top: 0.5vh;
     
               }
             }
@@ -277,13 +272,29 @@ footer {
        
         &_right {
           width: 76%;
+          &_technologies{
+            span{
+              margin-left: 2.5vw;
+            }
+            #heading{
+            font-size: 16px;
+          }
+          .fa-2xl {
+            font-size: 1.5em;
+          }
+          }
           &_one {
             &_services {
               margin-bottom: 2vh;
+              #heading{
+               
+                  font-size: 16px;
+                
+              }
             }
             &_media {
               #heading {
-              font-size: 16px;
+              font-size: 12px;
               }
               span{
                 img{
@@ -301,12 +312,9 @@ footer {
   }
   @media only screen and (min-width: 481px)and (max-width: 767px) {
     footer {
-      .star1,.star2{
-        display: none;
-      }
       .footer_pic {
         & img{
-          width: 42%;
+          width: 20%;
           padding: 10px 0 5px;
         }
       }
@@ -333,18 +341,24 @@ footer {
           width: 95%;
           &_corporates {
             margin-bottom: 2vh;
+            span{
+              font-size: 18px;
+            }
             p{
-              margin-top: 0.5 vh;
+              margin-top: 0.5vh;
   
             }
           }
           &_email {
             margin-bottom: 2vh;
             width: 90%;
+            span{
+              font-size: 18px;
+            }
             &_corporates {
               margin-bottom: 2vh;
               p{
-                margin-top: 0.5 vh;
+                margin-top: 0.5vh;
     
               }
             }
@@ -352,34 +366,39 @@ footer {
           &_number {
             margin-bottom: 2vh;
             width: 90%;
+            span{
+              font-size: 18px;
+            }
             &_corporates {
               margin-bottom: 2vh;
               p{
-                margin-top: 0.5 vh;
-    
+                margin-top: 0.5vh;
               }
             }
           }
         }
        
         &_right {
-          width: 84%;
+          width: 70%;
           display: flex;
           justify-content: space-between;
+          margin-left: -10%;
+          &_technologies{
+            span{
+              margin-left: 1vw;
+            }
+            #heading{
+              font-size: 18px;
+            }
+            .fa-2xl {
+              font-size: 1.7em;
+            }
+          }
                     &_one {
             &_services {
               margin-bottom: 2vh;
-            }
-            &_media {
-              #heading {
-              font-size: 18px;
-              }
-              span{
-                img{
-                  border-radius: 10px;
-                  padding: 8px;
-                margin-right: 10px;
-                }
+              #heading{
+                font-size: 18px;
               }
             }
           }
@@ -390,11 +409,6 @@ footer {
   }
   @media only screen and (min-width:767px)and (max-width:1024px) {
     footer {
-      .star1{
-        top: 6vh;
-        left: 7vw;
-      }
-     
       .footer_content_width {
         & .footer_content {
           width: 86%;
@@ -403,7 +417,6 @@ footer {
       }
       .footer_line img {
         padding-top: 8px;
-  
       }
       .footer_container {
         &__ {
@@ -414,13 +427,19 @@ footer {
           width: 40%;
           &_corporates {
             margin-bottom: 4vh;
+            span{
+              font-size: 18px;
+            }
             p{
-              margin-top: 0.5 vh;
+              margin-top: 0.5vh;
   
             }
           }
           &_email {
             margin-bottom: 4vh;
+            span{
+              font-size: 18px;
+            }
             &_corporates {
               margin-bottom: 4vh;
               
@@ -428,10 +447,13 @@ footer {
           }
           &_number {
             margin-bottom: 2vh;
+            span{
+              font-size: 18px;
+            }
             &_corporates {
               margin-bottom: 2vh;
               p{
-                margin-top: 0.5 vh;
+                margin-top: 0.5vh;
     
               }
             }
@@ -439,12 +461,23 @@ footer {
         }
        
         &_right {
-          width: 40%;
+          width: 43%;
           display: flex;
           justify-content: space-between;
+          &_technologies{
+            #heading{
+              font-size: 18px;
+            }
+            .fa-2xl {
+              font-size: 1.7em;
+            }
+          }
                     &_one {
             &_services {
               margin-bottom: 4vh;
+              #heading{
+                font-size: 18px;
+              }
             }
             &_media {
               #heading {
@@ -490,7 +523,7 @@ footer {
           &_corporates {
             margin-bottom: 4vh;
             p{
-              margin-top: 0.5 vh;
+              margin-top: 0.5vh;
   
             }
           }
@@ -506,7 +539,7 @@ footer {
             &_corporates {
               margin-bottom: 2vh;
               p{
-                margin-top: 0.5 vh;
+                margin-top: 0.5vh;
     
               }
             }
@@ -514,14 +547,14 @@ footer {
         }
        
         &_right {
+          width: 40%;
           display: flex;
           justify-content: space-between;
                     &_one {
             &_services {
               margin-bottom: 4vh;
             }
-            &_media {
-              
+            &_media { 
               span{
                 img{
                   border-radius: 10px;
@@ -532,7 +565,6 @@ footer {
             }
           }
         }
-  
       }
     }
   }
