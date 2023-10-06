@@ -353,10 +353,48 @@
     rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
+.aboutus_container_services{
+  margin: 5vw 0;
+  &_section{
+      &_images{
+          text-align: center;
 
-@media (min-width: 768px) {
-  .button-71 {
-    padding: 16px 48px;
+          img{
+              width: 225px;
+              height: 30vh;
+          }
+          h1{
+              color: #0f2454;
+              position: relative;
+      display: inline-block;
+          }
+          
+          h1::after{
+              display: inline-block;
+              content: '';
+              background-color: #0f7bab;
+              width: 95%;
+              padding: 5px;
+              position: absolute;
+              bottom: 2px;
+              left: 0%;
+              z-index: -1;
+          }
+          .services_img{
+              box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+          }
+          &_one{
+              margin-top: 3vw;
+              display: flex;
+              align-items: center;
+              justify-content: space-evenly;
+              h3{
+                  color: #0f2454;
+              }
+              
+          }
+         
+      }
   }
 }
 @media only screen and (max-width: 480px) {
@@ -521,7 +559,7 @@
       font-size: 14px;
       padding: 8px 12px;
     }
-    
+   
   }
   
  

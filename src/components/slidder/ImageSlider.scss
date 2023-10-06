@@ -1,0 +1,12 @@
+@media only screen and (max-width: 480px) {
+    .parent_containerStyles{
+        width: 360px !important;
+        height: 300px !important;
+        .sliderStyles{
+            height: 75% !important;
+            .leftArrowStyles,.rightArrowStyles{
+                font-size: 30px !important;
+            }
+        }
+    }
+}

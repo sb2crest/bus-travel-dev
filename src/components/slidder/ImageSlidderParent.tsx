@@ -7,7 +7,7 @@ import image4 from '../../assets/images/img_4.jpg';
 import image5 from '../../assets/images/img_5.jpg';
 import image6 from '../../assets/images/img_6.jpg';
 import image7 from '../../assets/images/img_7.jpg';
-
+import "./ImageSlider.scss"
 interface Slide {
   url: string;
   title: string;
@@ -22,25 +22,12 @@ const slides: Slide[] = [
   { url: image6, title: 'france' },
   { url: image7, title: 'london' },
 ];
-
-const containerStyles: React.CSSProperties = {
-  width: "800px",
-  height: "380px",
-  margin: "0 auto",
-};
-
-const container: React.CSSProperties = {
-  margin: "5vw auto 10vw",
-  color:"#0f7BAB",
-  textAlign:"center",
-};
-
 const ImageSliderParent: React.FC = () => {
   return (
-    <div style={container}>
+    <div className="parent_container">
       <h1>Top Destinations</h1>
-      <div style={containerStyles}>
-        <ImageSlider slides={slides} parentWidth={800} />
+      <div className="parent_containerStyles">
+        <ImageSlider slides={slides}  />
       </div>
     </div>
   );

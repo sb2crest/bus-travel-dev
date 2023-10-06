@@ -6,7 +6,11 @@ import './Home.scss'
 import ImageSlidderParent from '../../components/slidder/ImageSlidderParent';
 import { Link } from "react-router-dom";
 import Video from "../../assets/images/final.mp4";
-
+import schooltrip from "../../assets/images/schooltrip.jpg";
+import wedding from "../../assets/images/wedding.jpg";
+import trips from "../../assets/images/trips.jpg";
+import privatetrip from "../../assets/images/privatetrip.jpg";
+import sportsevent from "../../assets/images/sportsevent.jpg";
 
 const Icon = styled.i`
   font-size: 2rem; /* Set the initial size of the icon */
@@ -195,7 +199,53 @@ const Home: React.FC  = () => {
                   </div>
               </div>
           </div>
-          <ImageSlidderParent/>
+          <div className="lastcontainer">
+          <div className="aboutus_container_services">
+          <div className="aboutus_container_services_section">
+            <div className="aboutus_container_services_section_images">
+              <h1>Our Services</h1>
+              <div className="aboutus_container_services_section_images_one">
+                <div className="services_img">
+                  <img
+                    src={schooltrip}
+                    alt=""
+                  />
+                  <h3>School & College Trips</h3>
+                </div>
+                <div className="services_img">
+                  <img
+                    src={wedding}
+                    alt=""
+                  />
+                  <h3>Weddings</h3>
+                </div>
+                <div className="services_img">
+                  <img src={trips} alt="" />
+                  <h3>Corporate Trips</h3>
+                </div>
+                <div className="services_img">
+                  <img
+                    src={privatetrip}
+                    alt=""
+                  />
+                  <h3>Private Trips</h3>
+                </div>
+                
+                <div className="services_img">
+                  <img
+                    src={sportsevent}
+                    alt=""
+                  />
+                  <h3>Sports Events</h3>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <ImageSlidderParent/>  
+          </div>
+          
          
           </>
 
