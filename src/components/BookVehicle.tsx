@@ -44,34 +44,34 @@ const BookVehicle: React.FC<Props> = () => {
     };
 
     const handleSendOTP = () => {
-        DataService.handleSendOTP()
-            .then((response) => {
-                if (response.data) {
-                    setState({ ...state, sentOtp: response.data.sentOtp });
-                    console.log("OTP Sent!");
-                } else {
-                    console.log("Failed to send OTP.");
-                }
-            })
-            .catch((error) => {
-                console.error("Error sending OTP:", error);
-                console.log("An error occurred while sending OTP.");
-            });
+        // DataService.handleSendOTP()
+        //     .then((response) => {
+        //         if (response.data) {
+        //             setState({ ...state, sentOtp: response.data.sentOtp });
+        //             console.log("OTP Sent!");
+        //         } else {
+        //             console.log("Failed to send OTP.");
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error sending OTP:", error);
+        //         console.log("An error occurred while sending OTP.");
+        //     });
     };
 
     const handleVerifyOTP = () => {
-        DataService.handleVerifyOTP()
-            .then((response) => {
-                if (response.data) {
-                    setState({ ...state, otpVerified: true });
-                    console.log("OTP Verified!");
-                } else {
-                    console.log("OTP Verification Failed!");
-                }
-            })
-            .catch((error) => {
-                console.error("Error validating OTP:", error);
-            });
+        // DataService.handleVerifyOTP()
+        //     .then((response) => {
+        //         if (response.data) {
+        //             setState({ ...state, otpVerified: true });
+        //             console.log("OTP Verified!");
+        //         } else {
+        //             console.log("OTP Verification Failed!");
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error validating OTP:", error);
+        //     });
     };
 
     return (
