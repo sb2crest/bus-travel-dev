@@ -3,7 +3,6 @@ import { RouteComponentProps, useHistory, useParams } from 'react-router-dom';
 
 import DataService from "../services/data.service";
 import IVehicleData from "../types/vehicle.type";
-import IBusData from "../types/Bus.type";
 
 interface RouterProps {
   id: string;
@@ -58,16 +57,16 @@ const Vehicle: React.FC<Props> = (props) => {
     }
   }
 
-  const convertVehicleToBus = (vehicleData: IVehicleData): IBusData => {
-    return {
-      title: vehicleData.vehicleNumber,
-      description: vehicleData.image,
-    };
-  }
+  // const convertVehicleToBus = (vehicleData: IVehicleData): IVehicleData => {
+  //   return {
+  //     title: vehicleData.vehicleNumber,
+  //     description: vehicleData.image,
+  //   };
+  // }
 
   const updateVehicle = () => {
     if (currentVehicle) {
-      const busData: IBusData = convertVehicleToBus(currentVehicle);
+      //const busData: IBusData = convertVehicleToBus(currentVehicle);
 
       // DataService.update(busData, currentVehicle.vid || "")
       //   .then((response: any) => {
