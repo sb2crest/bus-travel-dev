@@ -44,28 +44,28 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
   };
 
   const removeAllVehicle = () => {
-    DataService.deleteAll()
-      .then((response: any) => {
-        console.log(response.data);
-        refreshList();
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    // DataService.deleteAll()
+    //   .then((response: any) => {
+    //     console.log(response.data);
+    //     refreshList();
+    //   })
+    //   .catch((e: Error) => {
+    //     console.log(e);
+    //   });
   };
 
   const searchByTitle = () => {
     setCurrentVehicle(null);
     setCurrentIndex(-1);
 
-    DataService.findByTitle(searchTitle)
-      .then((response: any) => {
-        setVehicles(response.data);
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    // DataService.findByTitle(searchTitle)
+    //   .then((response: any) => {
+    //     setVehicles(response.data);
+    //     console.log(response.data);
+    //   })
+    //   .catch((e: Error) => {
+    //     console.log(e);
+    //   });
   };
 
   return (

@@ -26,14 +26,14 @@ const Vehicle: React.FC<Props> = (props) => {
   }, [id]);
 
   const getVehicle = (id: string) => {
-    DataService.get(id)
-      .then((response: any) => {
-        setCurrentVehicle(response.data);
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
+    // DataService.get(id)
+    //   .then((response: any) => {
+    //     setCurrentVehicle(response.data);
+    //     console.log(response.data);
+    //   })
+    //   .catch((e: Error) => {
+    //     console.log(e);
+    //   });
   }
 
   const updatePublished = (status: boolean) => {
@@ -69,14 +69,14 @@ const Vehicle: React.FC<Props> = (props) => {
     if (currentVehicle) {
       const busData: IBusData = convertVehicleToBus(currentVehicle);
 
-      DataService.update(busData, currentVehicle.vid || "")
-        .then((response: any) => {
-          console.log(response.data);
-          setMessage("The Vehicle was updated successfully!");
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
+      // DataService.update(busData, currentVehicle.vid || "")
+      //   .then((response: any) => {
+      //     console.log(response.data);
+      //     setMessage("The Vehicle was updated successfully!");
+      //   })
+      //   .catch((e: Error) => {
+      //     console.log(e);
+      //   });
     }
   }
 
