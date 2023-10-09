@@ -16,7 +16,7 @@
   justify-content: center;
 
   &_content {
-    margin-top: -3vw;
+    margin-top: -14vw;
     width: 85%;
     display: flex;
     justify-content: space-between;
@@ -321,8 +321,6 @@
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", sans-serif;
   font-size: 18px;
   font-weight: 600;
   outline: 0;
@@ -355,9 +353,213 @@
     rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
+.aboutus_container_services{
+  margin: 5vw 0;
+  &_section{
+      &_images{
+          text-align: center;
 
-@media (min-width: 768px) {
-  .button-71 {
-    padding: 16px 48px;
+          img{
+              width: 225px;
+              height: 30vh;
+          }
+          h1{
+              color: #0f2454;
+              position: relative;
+      display: inline-block;
+          }
+          
+          h1::after{
+              display: inline-block;
+              content: '';
+              background-color: #0f7bab;
+              width: 95%;
+              padding: 5px;
+              position: absolute;
+              bottom: 2px;
+              left: 0%;
+              z-index: -1;
+          }
+          .services_img{
+              box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+          }
+          &_one{
+              margin-top: 3vw;
+              display: flex;
+              align-items: center;
+              justify-content: space-evenly;
+              h3{
+                  color: #0f2454;
+              }
+              
+          }
+         
+      }
   }
 }
+@media only screen and (max-width: 480px) {
+  .card_banner {
+    &_content {
+      width: 75%;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      grid-gap: 20px;
+      padding: 20px 40px;
+      &_one {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+      }
+  
+      &_two {
+        border: none;
+        padding-right: 0;
+        font-size: 14px;
+        
+        .fa-2xl {
+          font-size: 1.5rem;
+          
+        }
+      }
+  
+      &_three {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {         
+         font-size: 1.5rem;
+        }
+      }
+  
+      &_four {        
+        font-size: 14px;
+        .fa-2xl {         
+          font-size: 1.5rem;
+         }
+         
+        }
+      }
+    }
+    .our_services {
+      margin-top: 3vw;
+      &_heading {
+        flex-direction: column;
+        align-items: center;
+    
+        h4 {
+          margin-bottom: 0vw;
+        }
+    
+        h1 {
+          margin-bottom: 0vw;
+          font-size: 22px;
+        }
+    
+        h1 span.underline::after {
+          display: inline-block;
+          content: "";
+          background-color: #0f7bab;
+          width: 38%;
+          padding: 3px;
+          position: absolute;
+          bottom: 2px;
+          left: 36%;
+          z-index: -1;
+        }
+    
+        p {
+          width: 80%;
+          text-align: justify;
+        }
+      }
+    
+      &_cards {
+        margin-top: 5vw;
+        &_container {
+          width: 80%;
+          flex-direction: column;
+          align-items: center;
+          &_one {
+            .card_elements {
+              padding: 30px 25px 30px 25px;
+              margin: 0vw 0vw 5vw 0vw;
+              .fa-solid {
+                &:hover {
+                  font-size: 40px;
+                }
+              }
+            }
+          }
+    
+          &_two {
+            margin-top: 0;
+            .card_elements {
+              padding: 30px 25px 30px 25px;
+              margin: 0vw 0vw 5vw 0vw;
+              .fa-solid {
+                &:hover {
+                  font-size: 40px;
+                }
+              }
+            }
+          }
+          &_three {
+            .card_elements {
+              padding: 30px 25px 30px 25px;
+              margin: 0vw 0vw 5vw 0vw;
+              .fa-solid {
+                &:hover {
+                  font-size: 50px;
+                  transition: all 0.3s;
+                  color: #0f2454;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .aboutUs {
+      margin: 5vw 0;
+    
+      &_container {
+        flex-direction: column-reverse;
+        &_content {
+          h1{
+            font-size: 22px;
+          }
+          p{
+            font-size: 14px;
+            text-align: justify;
+            color: #0f2454;
+            line-height: 1.7;
+          }
+          .key_points {
+            margin-left: 0vw;
+            &_two{
+              margin-left: 6px;
+            }
+          }
+        }
+    
+        &_image {
+          #img1 {
+            width: 70%;
+          }
+          #img2 {
+            width: 32%; top: 80px;
+            right: 50px;
+          }
+        }
+      }
+    }
+    .button-71 {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+   
+  }
+  
+ 

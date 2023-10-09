@@ -31,7 +31,6 @@ const images = [
 const App = () => {
   return (
     <Router>
-      {/* <Header /> */}
       <Navbar/>
       <div className='containers'>
         <Switch>

@@ -57,7 +57,6 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
   const searchByTitle = () => {
     setCurrentVehicle(null);
     setCurrentIndex(-1);
-
     dataService.findByTitle(searchTitle)
       .then((response: any) => {
         setVehicles(response.data);
