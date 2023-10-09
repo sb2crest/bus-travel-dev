@@ -1,0 +1,78 @@
+/* BookingCalendar.scss */
+
+.calendar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .date-picker {
+    margin-right: 20px;
+    position: relative;
+
+    .start-date {
+      width: 92%;
+      height: 35px;
+    }
+
+    .end-date {
+      width: 100%;
+      margin-left: -20px;
+      height: 35px;
+    }
+
+    .calendar-icon {
+      color: rgb(15, 123, 171);
+    }
+
+    .react-datepicker-wrapper {
+      width: 100%;
+
+    }
+
+    .react-datepicker__input-container input::placeholder {
+      color: black;
+    }
+
+    .react-datepicker__input-container input {
+      border: 1.6px solid rgb(15, 123, 171);
+      border-radius: 2px;
+    }
+    .react-datepicker__input-container input:focus {
+      border-color: rgb(15, 123, 171); 
+      outline: none; 
+    }
+    .react-datepicker__header {
+      background-color: #3DD1E7;
+      color: #ffffff;
+    }
+
+    .react-datepicker__day--selected {
+      background-color: rgb(15, 123, 171);
+      color: #ffffff;
+    }
+
+  }
+
+  svg:not(:root).svg-inline--fa {
+    position: absolute;
+    top: 30%;
+    right: 2vw;
+  }
+
+  .button-search {
+    width: 25%;
+    background-color: #3DD1E7;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 35px;
+    border-radius: 0px;
+    margin-left: -25px;
+    text-align: center;
+    font-weight: 600;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  }
+}

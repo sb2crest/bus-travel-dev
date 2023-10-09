@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import DataService from "../services/data.service";
+import dataService from "../services/data.service";
 import { Link } from "react-router-dom";
 import IVehicleData from "../types/vehicle.type";
 
@@ -22,7 +22,7 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
   };
 
   const retrieveVehicles = () => {
-    DataService.listVehicles()
+    dataService.listVehicles()
       .then((response: any) => {
         setVehicles(response.data);
         console.log(response.data);
@@ -44,7 +44,7 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
   };
 
   const removeAllVehicle = () => {
-    DataService.deleteAll()
+    dataService.deleteAll()
       .then((response: any) => {
         console.log(response.data);
         refreshList();
@@ -54,19 +54,19 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
       });
   };
 
-  const searchByTitle = () => {
-    setCurrentVehicle(null);
-    setCurrentIndex(-1);
+  // const searchByTitle = () => {
+  //   setCurrentVehicle(null);
+  //   setCurrentIndex(-1);
 
-    DataService.findByTitle(searchTitle)
-      .then((response: any) => {
-        setVehicles(response.data);
-        console.log(response.data);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-      });
-  };
+  //   dataService.findByTitle(searchTitle)
+  //     .then((response: any) => {
+  //       setVehicles(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((e: Error) => {
+  //       console.log(e);
+  //     });
+  // };
 
   return (
     <div className="list row">
