@@ -353,48 +353,46 @@
     rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
 }
-.aboutus_container_services{
+.aboutus_container_services {
   margin: 5vw 0;
-  &_section{
-      &_images{
-          text-align: center;
-
-          img{
-              width: 225px;
-              height: 30vh;
-          }
-          h1{
-              color: #0f2454;
-              position: relative;
-      display: inline-block;
-          }
-          
-          h1::after{
-              display: inline-block;
-              content: '';
-              background-color: #0f7bab;
-              width: 95%;
-              padding: 5px;
-              position: absolute;
-              bottom: 2px;
-              left: 0%;
-              z-index: -1;
-          }
-          .services_img{
-              box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-          }
-          &_one{
-              margin-top: 3vw;
-              display: flex;
-              align-items: center;
-              justify-content: space-evenly;
-              h3{
-                  color: #0f2454;
-              }
-              
-          }
-         
+  &_section {
+    &_images {
+      text-align: center;
+      img {
+        width: 225px;
+        height: 30vh;
       }
+      h1 {
+        color: #0f2454;
+        position: relative;
+        display: inline-block;
+      }
+
+      h1::after {
+        display: inline-block;
+        content: "";
+        background-color: #0f7bab;
+        width: 95%;
+        padding: 5px;
+        position: absolute;
+        bottom: 2px;
+        left: 0%;
+        z-index: -1;
+      }
+      .services_img {
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+          rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+      }
+      &_one {
+        margin-top: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        h3 {
+          color: #0f2454;
+        }
+      }
+    }
   }
 }
 @media only screen and (max-width: 480px) {
@@ -412,154 +410,570 @@
           font-size: 1.5rem;
         }
       }
-  
+
       &_two {
         border: none;
         padding-right: 0;
         font-size: 14px;
-        
+
         .fa-2xl {
           font-size: 1.5rem;
-          
         }
       }
-  
+
       &_three {
         border-right: 1px solid #72716f;
         font-size: 14px;
-        .fa-2xl {         
-         font-size: 1.5rem;
+        .fa-2xl {
+          font-size: 1.5rem;
         }
       }
-  
-      &_four {        
+
+      &_four {
         font-size: 14px;
-        .fa-2xl {         
+        .fa-2xl {
           font-size: 1.5rem;
-         }
-         
         }
       }
     }
-    .our_services {
-      margin-top: 3vw;
-      &_heading {
+  }
+  .our_services {
+    margin-top: 3vw;
+    &_heading {
+      flex-direction: column;
+      align-items: center;
+
+      h4 {
+        margin-bottom: 0vw;
+      }
+
+      h1 {
+        margin-bottom: 0vw;
+        font-size: 22px;
+      }
+
+      h1 span.underline::after {
+        display: inline-block;
+        content: "";
+        background-color: #0f7bab;
+        width: 38%;
+        padding: 3px;
+        position: absolute;
+        bottom: 2px;
+        left: 36%;
+        z-index: -1;
+      }
+
+      p {
+        width: 80%;
+        text-align: justify;
+      }
+    }
+
+    &_cards {
+      margin-top: 5vw;
+      &_container {
+        width: 80%;
         flex-direction: column;
         align-items: center;
-    
-        h4 {
-          margin-bottom: 0vw;
+        &_one {
+          .card_elements {
+            padding: 30px 25px 30px 25px;
+            margin: 0vw 0vw 5vw 0vw;
+            .fa-solid {
+              &:hover {
+                font-size: 40px;
+              }
+            }
+          }
         }
-    
+
+        &_two {
+          margin-top: 0;
+          .card_elements {
+            padding: 30px 25px 30px 25px;
+            margin: 0vw 0vw 5vw 0vw;
+            .fa-solid {
+              &:hover {
+                font-size: 40px;
+              }
+            }
+          }
+        }
+        &_three {
+          .card_elements {
+            padding: 30px 25px 30px 25px;
+            margin: 0vw 0vw 5vw 0vw;
+            .fa-solid {
+              &:hover {
+                font-size: 50px;
+                transition: all 0.3s;
+                color: #0f2454;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      flex-direction: column-reverse;
+      &_content {
         h1 {
-          margin-bottom: 0vw;
           font-size: 22px;
         }
-    
-        h1 span.underline::after {
-          display: inline-block;
-          content: "";
-          background-color: #0f7bab;
-          width: 38%;
-          padding: 3px;
-          position: absolute;
-          bottom: 2px;
-          left: 36%;
-          z-index: -1;
-        }
-    
         p {
-          width: 80%;
+          font-size: 14px;
+          text-align: justify;
+          color: #0f2454;
+          line-height: 1.7;
+        }
+        .key_points {
+          margin-left: 0vw;
+          &_two {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      &_image {
+        #img1 {
+          width: 70%;
+        }
+        #img2 {
+          width: 32%;
+          top: 80px;
+          right: 50px;
+        }
+      }
+    }
+  }
+  .button-71 {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 255px !important;
+          height: 40vh !important;
+        }
+        h1 {
+          color: #0f2454;
+          font-size: 25px !important;
+        }
+
+        h1::after {
+          content: "";
+          width: 94% !important;
+          padding: 3px !important;
+          bottom: 2px !important;
+          left: 2% !important;
+        }
+        .services_img {
+          margin-top: 5vw;
+        }
+        &_one {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .card_banner {
+    &_content {
+      width: 75%;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      grid-gap: 20px;
+      padding: 20px 40px;
+      &_one {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+      }
+
+      &_two {
+        border: none;
+        padding-right: 0;
+        font-size: 14px;
+
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+      }
+
+      &_three {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+      }
+
+      &_four {
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .our_services {
+    margin-top: 5vw;
+
+    &_heading {
+      h1 {
+        font-size: 25px;
+      }
+
+      h1 span.underline::after {
+        padding: 3px;
+      }
+
+      p {
+        width: 78%;
+        font-size: 14px;
+      }
+    }
+
+    &_cards {
+      &_container {
+        flex-direction: column;
+        align-items: center;
+        &_one {
+          width: 75%;
+        }
+
+        &_two {
+          width: 75%;
+          margin-top: 0vw;
+        }
+        &_three {
+          width: 75%;
+        }
+      }
+    }
+  }
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      flex-direction: column-reverse;
+      &_content {
+        h1 {
+          font-size: 22px;
+        }
+        p {
+          font-size: 14px;
+          text-align: justify;
+          color: #0f2454;
+          line-height: 1.7;
+        }
+        .key_points {
+          margin-left: 0vw;
+          justify-content: start;
+          &_two {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      &_image {
+        #img1 {
+          width: 60%;
+        }
+        #img2 {
+          width: 30%;
+          top: 80px;
+          right: 60px;
+        }
+      }
+    }
+  }
+  .button-71 {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 255px !important;
+          height: 40vh !important;
+        }
+        h1 {
+          color: #0f2454;
+          font-size: 25px !important;
+        }
+
+        h1::after {
+          content: "";
+          width: 94% !important;
+          padding: 3px !important;
+          bottom: 2px !important;
+          left: 2% !important;
+        }
+        .services_img {
+          margin-top: 5vw;
+        }
+        &_one {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .card_banner {
+    &_content {
+      width: 87%;
+      padding: 30px;
+
+      &_one {
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_two {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_three {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_four {
+        margin-left: 0;
+        text-align: center;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .our_services {
+    margin-top: 5vw;
+    &_heading {
+      h1 {
+        font-size: 25px;
+      }
+
+      h1 span.underline::after {
+        padding: 3px;
+      }
+
+      p {
+        width: 80%;
+      }
+    }
+
+    &_cards {
+      margin-top: 4vw;
+
+      &_container {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &_one {
+          width: 95%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &_two {
+          width: 95%;
+          margin-top: 5vw;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &_three {
+          width: 95%;
+          display: flex;
+          margin-top: 5vw;
+        }
+      }
+    }
+  }
+
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      width: 95%;
+      &_content {
+        h1 {
+          font-size: 25px;
+        }
+        p {
+          font-size: 14px;
           text-align: justify;
         }
+
+        .key_points {
+          margin-left: -2vw;
+        }
       }
-    
-      &_cards {
-        margin-top: 5vw;
-        &_container {
-          width: 80%;
-          flex-direction: column;
-          align-items: center;
-          &_one {
-            .card_elements {
-              padding: 30px 25px 30px 25px;
-              margin: 0vw 0vw 5vw 0vw;
-              .fa-solid {
-                &:hover {
-                  font-size: 40px;
-                }
-              }
-            }
-          }
-    
-          &_two {
-            margin-top: 0;
-            .card_elements {
-              padding: 30px 25px 30px 25px;
-              margin: 0vw 0vw 5vw 0vw;
-              .fa-solid {
-                &:hover {
-                  font-size: 40px;
-                }
-              }
-            }
-          }
-          &_three {
-            .card_elements {
-              padding: 30px 25px 30px 25px;
-              margin: 0vw 0vw 5vw 0vw;
-              .fa-solid {
-                &:hover {
-                  font-size: 50px;
-                  transition: all 0.3s;
-                  color: #0f2454;
-                }
-              }
-            }
-          }
+
+      &_image {
+        text-align: center;
+        #img1 {
+          width: 60%;
+        }
+
+        #img2 {
+          width: 32%;
+          top: 70px;
         }
       }
     }
-    
-    .aboutUs {
-      margin: 5vw 0;
-    
-      &_container {
-        flex-direction: column-reverse;
-        &_content {
-          h1{
-            font-size: 22px;
-          }
-          p{
-            font-size: 14px;
-            text-align: justify;
-            color: #0f2454;
-            line-height: 1.7;
-          }
-          .key_points {
-            margin-left: 0vw;
-            &_two{
-              margin-left: 6px;
-            }
-          }
-        }
-    
-        &_image {
-          #img1 {
-            width: 70%;
-          }
-          #img2 {
-            width: 32%; top: 80px;
-            right: 50px;
-          }
-        }
-      }
-    }
-    .button-71 {
-      font-size: 14px;
-      padding: 8px 12px;
-    }
-   
   }
-  
- 
+
+  .button-71 {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 225px;
+          height: 30vh;
+        }
+        h1 {
+          font-size: 25px;
+        }
+
+        h1::after {
+          padding: 3px !important;
+          left: 2% !important;
+          z-index: -1;
+        }
+        &_one {
+          margin-top: 3vw;
+          display: grid !important;
+  grid-template-columns: auto auto !important;
+  align-content: center !important ;
+  gap: 40px 0px;
+          h3 {
+            color: #0f2454;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1023px) and (max-width: 1279px) {
+  .card_banner {
+    &_content {
+      width: 85%;
+      padding: 30px;
+
+      &_one {
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_two {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_three {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_four {
+        margin-left: 0;
+        text-align: center;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 170px !important;
+          height: 20vh !important;
+        }
+        h1 {
+          font-size: 35px;
+        }
+
+        h1::after {
+          padding: 3px !important;
+          left: 2% !important;
+          z-index: -1;
+        }
+        &_one {
+          margin-top: 3vw;
+          h3 {
+            color: #0f2454;
+          }
+        }
+      }
+    }
+  }
+}
