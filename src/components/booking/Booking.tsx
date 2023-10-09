@@ -1,16 +1,35 @@
-import React from "react";
-import {Link } from "react-router-dom";
+import React, { useEffect,useState } from "react";
+import { Link } from "react-router-dom";
 import "./Booking.scss";
 import busImage_1 from "../../assets/images/busImage_1.jpg";
 import busImage_2 from "../../assets/images/busImage_2.jpg";
 import busImage_3 from "../../assets/images/busImage_3.jpg";
 import arrow from "../../assets/images/arrow.png";
 import arrow2 from "../../assets/images/arrow2.png";
+import dataService from "../../services/data.service";
+import ListVehicles from "../../types/list.type";
+
 
 const Booking: React.FC = () => {
+  const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
   const scrollToTop = () => {
     window.scrollTo({ top: 530, behavior: "smooth" });
   };
+
+  const listVehicles = () => {
+    dataService.listVehicles().then((response) => {
+      const vehicles:ListVehicles[] = response.data;
+      setVehicles(vehicles);
+      console.log("Fetched vehicles:", vehicles);
+    }).catch((error) => {
+      console.error("Error in fetching data:", error);
+    })
+  }
+
+  useEffect(() => {
+    listVehicles();
+  }, []);
+
   return (
     <>
       <div className="booking">
@@ -36,7 +55,22 @@ const Booking: React.FC = () => {
               destinations.
             </p>
             <div className="booking_container_busDetails_section">
-              <div className="buses">
+              {vehicles.map((vehicle, index)=>(
+          <div className="buses" key={index}>
+            {/* Render vehicle details here */}
+            <h2>{vehicle.vehicleNumber}</h2>
+            <p>Seat Capacity: {vehicle.seatCapacity}</p>
+            <p>AC: {vehicle.isVehicleAC ? "Yes" : "No"}</p>
+            <p>Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}</p>
+            {/* Render other vehicle details */}
+            <Link to={"/vehicleinfo"}>
+              <button className="button-53" onClick={scrollToTop}>
+                View Details
+              </button>
+            </Link>
+          </div>
+        ))}
+              {/* <div className="buses">
                 <div className="busOne_img">
                   <img
                     src={busImage_1}
@@ -311,7 +345,7 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -392,6 +426,6 @@ const Booking: React.FC = () => {
       </div>
     </>
   );
-};
+}
 
 export default Booking;
