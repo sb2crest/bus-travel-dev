@@ -54,19 +54,19 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
       });
   };
 
-  // const searchByTitle = () => {
-  //   setCurrentVehicle(null);
-  //   setCurrentIndex(-1);
+  const searchByTitle = () => {
+    setCurrentVehicle(null);
+    setCurrentIndex(-1);
 
-  //   dataService.findByTitle(searchTitle)
-  //     .then((response: any) => {
-  //       setVehicles(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch((e: Error) => {
-  //       console.log(e);
-  //     });
-  // };
+    dataService.findByTitle(searchTitle)
+      .then((response: any) => {
+        setVehicles(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="list row">
