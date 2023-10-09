@@ -1,5 +1,5 @@
 body {
-  // overflow-x: hidden;
+  overflow-x: hidden;
 }
 nav {
   display: flex;
@@ -150,7 +150,7 @@ nav {
     color: white;
   }
   .menu-list.close {
-    right: -100%;
+    right: -101%;
     transition: all 0.5s ease-in-out;
   }
   .button-89 {
