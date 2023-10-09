@@ -274,3 +274,288 @@
           }
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .aboutus{
+        &_container{
+            &_banner{
+             height: 40vh;
+             h1{
+                font-size: 10vw;
+             }
+             h3{
+                margin-top: -6.5vw;
+                font-size: 4.3vw;
+             }
+    
+            }
+            &_intro{
+                margin: 3vw 0;
+                &_section{
+                flex-direction: column;
+                &_content{
+                    width: 95%;
+                    h5{
+                        font-size: 25px;
+                    }
+                   
+                    .key_points{
+                        font-size: 13.2px;
+                        margin-left: 0;
+                    }
+                }
+                &_img{
+                    padding: 0 15px 15px 10px;
+                    margin-top: 8vw;
+
+                  
+                    img{
+                        width: 250px;
+                        height: 250px;
+                    }
+                }
+                }
+            }
+            &_values {
+                margin-top: 15vw;  
+                
+                &_section {
+                  width: 94%;
+                  flex-direction: column;
+                  margin-top: 5vw;  
+                  &_mission {
+                    width: 90%;
+                  }
+                  &_vision {
+                    width: 90%;
+                  margin-top: 5vw;  
+                   
+                  }
+                }
+              }
+            
+              &_apart{
+                margin: 10vw 0;
+                &_section{
+                    align-items: center;
+                    flex-direction: column-reverse;
+                    &_left{
+                        width: 90% !important;
+                        margin-bottom: 10vw;                      
+                    }
+                    &_right{
+                        width: 90%;
+                    }
+                }
+              }
+        }
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    .aboutus{
+        &_container{
+            &_banner{
+             height: 40vh;
+             h1{
+                font-size: 10vw;
+             }
+             h3{
+                margin-top: -6.5vw;
+                font-size: 4.3vw;
+             }
+    
+            }
+            &_intro{
+                margin: 3vw 0;
+                &_section{
+                flex-direction: column;
+                &_content{
+                    width: 95%;
+                    h5{
+                        font-size: 25px;
+                    }
+                   
+                    .key_points{
+                        font-size: 15px;
+                        margin-left: 0;
+                    }
+                }
+                &_img{
+                    padding: 0 15px 15px 10px;
+                    margin-top: 8vw;
+
+                  
+                    img{
+                        width: 250px;
+                        height: 250px;
+                    }
+                }
+                }
+            }
+            &_values {
+                margin-top: 15vw;  
+                
+                &_section {
+                  width: 94%;
+                  flex-direction: column;
+                  margin-top: 5vw;  
+                  &_mission {
+                    width: 90%;
+                  }
+                  &_vision {
+                    width: 90%;
+                  margin-top: 5vw;  
+                   
+                  }
+                }
+              }
+            
+              &_apart{
+                margin: 10vw 0;
+                &_section{
+                    align-items: center;
+                    flex-direction: column-reverse;
+                    &_left{
+                        width: 90% !important;
+                        margin-bottom: 10vw;                      
+                    }
+                    &_right{
+                        width: 90%;
+                    }
+                }
+              }
+        }
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+    .aboutus{
+        &_container{
+            &_banner{
+    
+             height: 50vh;
+             h1{
+                font-size: 7vw;
+                
+             }
+             h3{
+                margin-top: -5vw;
+             }
+    
+            }
+            &_intro{
+                margin: 3vw 0;
+                &_section{
+                    width: 95%;
+                &_content{
+                    width: 70%;
+                    h5{
+                        font-size: 25px;
+                    }
+                  
+                    .key_points{
+                        margin-left: 0vw;
+                    }
+                }
+                &_img{
+                    padding: 0 10px 10px 10px;
+                  
+                    img{
+                        width: 250px;
+                        height: 280px;
+                    }
+                }
+                }
+            }
+            &_values {    
+                &_section {
+                  width: 95%;
+              
+                  &_mission {
+                    width: 45%;
+                    margin-right: 3vw;
+                  }
+                  &_vision {
+                    width: 45%;
+                    
+                  }
+                }
+              }
+            
+              &_apart{
+                margin: 10vw 0;
+                &_section{
+                    justify-content: space-evenly;
+                    align-items: start;
+                    &_left{
+                        width: 45%;
+                        #img12{
+                            width: 90%;
+                        } 
+                        #img13{
+                            width: 52%;
+                            bottom: -2vw;
+                            right: 2vw;
+                        }
+                      
+                    }
+                    &_right{
+                        width: 50%;
+                    }
+                }
+              }
+        }
+    }
+}
+
+
+@media screen and (min-width: 1023px) and (max-width: 1279px) {
+    .aboutus{
+        &_container{
+            &_banner{
+             height: 55vh;
+            }
+            &_intro{
+                &_section{
+                &_content{
+                    width: 60%;
+                    h5{
+                        font-size: 25px;
+                    }                
+                }
+               
+                }
+            }
+            &_values {
+                &_section {
+                  &_mission {
+                    width: 43%;
+                    
+                  }
+                  &_vision {
+                    width: 43%;
+                   
+                  }
+                }
+              }
+            
+              &_apart{
+                &_section{
+                    &_left{
+                        width: 45%;
+                    }
+                    &_right{
+                        width: 40%;
+                        h2{
+                            font-size: 30px;
+                        }
+                        p{
+                            font-size: 18px;                        
+                        }
+                    }
+                }
+              }
+        }
+    }
+}
