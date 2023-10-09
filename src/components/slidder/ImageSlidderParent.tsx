@@ -26,11 +26,11 @@ const ImageSliderParent: React.FC = () => {
   return (
     <div className="parent_container">
       <h1>Top Destinations</h1>
-      <div className="parent_containerStyles">
+      <div className="parent_container_Styles">
         <ImageSlider slides={slides}  />
       </div>
     </div>
   );
 };
 
-export default ImageSliderParent;
+export default ImageSliderParent; 
