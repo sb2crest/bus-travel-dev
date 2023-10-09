@@ -1,11 +1,13 @@
 import http from "../http-common";
 import IOTPData from "../types/otp.type";
 import IVehicleData from "../types/vehicle.type";
+import ListVehicle from "../types/list.type";
 
 class DataService {
+
   //listVehicles
   listVehicles() {
-    return http.get<Array<IVehicleData>>("listVehicles");
+    return http.get<Array<ListVehicle>>('listVehicles');
   }
 
   // addVehicle
@@ -33,22 +35,27 @@ class DataService {
     return http.delete<any>(`deleteVehicle/${id}`);
   }
 
+  // deleteAll
+  deleteAll(){
+    return http.delete<any>('deleteAll');
+  }
+
   // getVehicle
   getVehicle(id: string) {
     return http.get<IVehicleData>(`getVehicle/${id}`);
   }
 
-  //updateVehicle
+  // updateVehicle
   updateVehicle(data: IVehicleData, id: any) {
     return http.put<any>(`updateVehicle/${id}`, data);
   }
 
-  //generateOTP
+  // generateOTP
   generateOTP(mobile: string) {
     return http.post<IOTPData>("sendOTP", mobile);
   }
 
-  //validateOTP
+  // validateOTP
   validateOTP(data: IOTPData) {
     return http.post<IOTPData>("validateOTP", data);
   }

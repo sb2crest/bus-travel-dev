@@ -6,7 +6,8 @@ import ContactUs from './components/contact/ContactUs';
 import VehiclesList from './components/VehicleList';
 import Vehicle from './components/Vehicle';
 import BookVehicle from './components/BookVehicle';
-import Login from './components/Login/Login';
+//import Login from './components/Login/Login';
+import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import image1 from './assets/images/img_1.jpg';
 import image2 from './assets/images/img_2.jpg';
@@ -44,7 +45,7 @@ const App = () => {
           <Route exact path="/bookVehicle" component={BookVehicle} />
           <Route exact path="/contactus" component={ContactUs} />
           <Route exact path="/aboutus" component={AboutUs} />
-          <Route exact path="/login" component={Login} />
+          {/* <Route exact path="/login" component={Login} /> */}
         </Switch>
       </div>
       <Footer />
