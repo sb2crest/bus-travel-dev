@@ -136,3 +136,116 @@
         }
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .vehicleInfo {
+        &_banner {
+            height: 40vh;
+            h1 {
+                font-size: 10vw;
+            }
+        }
+        &_container {
+            margin: 4vw 0;
+            width: 95%;
+            align-items: center;
+            flex-direction: column;
+            .image-gallery {
+                .parent-image {
+                    img {
+                        width: 95%;
+                        height: 60vh;    
+                    }
+                }
+    
+                .child-images {
+                    img {
+                        width: 20%;
+                        height: 15vh;
+                    }
+                }
+            }
+    
+            .bus_details {
+                a {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    .vehicleInfo {
+        &_banner {
+            height: 40vh;
+            h1 {
+                font-size: 10vw;
+            }
+        }
+        &_container {
+            margin: 4vw 0;
+            width: 95%;
+            align-items: center;
+            flex-direction: column;
+            .image-gallery {
+                .parent-image {
+                    img {
+                        width: 95%;
+                        height: 60vh;    
+                    }
+                }
+    
+                .child-images {
+                    img {
+                        width: 20%;
+                        height: 15vh;
+                    }
+                }
+            }
+    
+            .bus_details {
+                a {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+    .vehicleInfo {
+        &_banner {
+            height: 50vh;
+            h1 {
+                font-size: 8vw;
+            }
+    
+        }
+    
+        &_container {
+            align-items: center;
+            flex-direction: column;
+    
+        }
+    }
+    
+}
+@media screen and (min-width: 1023px) and (max-width: 1279px) {
+    .vehicleInfo {
+        &_banner {
+            height: 60vh;
+            h1 {
+                font-size: 8vw;
+            }
+    
+        }
+    
+        &_container {
+            align-items: center;
+            flex-direction: column;
+    
+        }
+    }
+    
+}

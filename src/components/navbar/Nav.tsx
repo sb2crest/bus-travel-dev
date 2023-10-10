@@ -49,7 +49,7 @@ const Navbar = () => {
                   <button className="button-89" role="button">
                     <i
                       className="fa-solid fa-phone fa-md"
-                      style={{ color: "#0f2452" }}
+                      style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Contact Us
                   </button>
