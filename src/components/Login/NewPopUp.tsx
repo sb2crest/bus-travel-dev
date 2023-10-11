@@ -15,11 +15,11 @@ const NewPopUp: React.FC<NewPopUpProps> = ({ onClose , onConfirm }) => {
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <p className='message-popup'>Are you sure you want to Submit?</p>
+                        <p className='message-popup'>Are you sure you want to Book?</p>
+                        <button className="btn btn-secondary  btn-round popup-confirm d-inline" type='submit' onClick={onConfirm}>Book</button>
                         <button className="btn btn-secondary  btn-round  popup-close d-inline" onClick={onClose}>
                             Close
                         </button>
-                        <button className="btn btn-secondary  btn-round popup-confirm d-inline" type='submit' onClick={onConfirm}>Confirm</button>
                     </div>
                 </div>
             </div>

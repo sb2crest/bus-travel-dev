@@ -1,13 +1,12 @@
-import './VehicleInfo.scss'
+import "./VehicleInfo.scss";
 import { Link } from "react-router-dom";
 //import BookingCalendar from "./Booking Calendar/BookingCalendar";
-import React, { ChangeEvent, useState, useEffect } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../src/components/Login/Login.css';
-import { FaExclamationTriangle } from 'react-icons/fa';
-import dataService from '../services/data.service';
-import IVehicleData from '../types/vehicle.type';
-import NewPopUp from './Login/NewPopUp';
+import React, { ChangeEvent, useState, useEffect } from "react";
+import "../../src/components/Login/Login.scss";
+import { FaExclamationTriangle } from "react-icons/fa";
+import dataService from "../services/data.service";
+import IVehicleData from "../types/vehicle.type";
+import NewPopUp from "./Login/NewPopUp";
 interface Image {
   url: string;
 }
@@ -31,7 +30,7 @@ const initialVehicleData: IVehicleData = {
   isVehicleAC: false,
   isVehicleSleeper: false,
   sentOtp: null,
-  published: false
+  published: false,
 };
 
 interface VehicleInfoProps {
@@ -53,12 +52,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [otpResend, setOtpResend] = useState<boolean>(false);
-  const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
   const [showNewPopUp, setShowNewPopUp] = useState(false);
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(180); // 180 seconds = 3 minutes;
@@ -79,7 +78,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   // OTP Generation Function
   const sendOTP = () => {
     const { phoneNumber } = state;
-    dataService.sendOTP(phoneNumber)
+    dataService
+      .sendOTP(phoneNumber)
       .then((response) => {
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
@@ -98,11 +98,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   // OTP Verification Function
   const verifyOTP = () => {
     let requestBody = {
-      "mobile": phoneNumber,
-      "otp": otp
-    }
-    dataService.verifyOTP(requestBody)
-      .then((response: { data: any; }) => {
+      mobile: phoneNumber,
+      otp: otp,
+    };
+    dataService
+      .verifyOTP(requestBody)
+      .then((response: { data: any }) => {
         if (response.data) {
           setState({ ...state, otpVerified: true });
           console.log("OTP Verified!");
@@ -120,7 +121,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
     if (resendDisabled) {
       interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1);
+        setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
 
       if (timer <= 0) {
@@ -136,15 +137,16 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //Function to show timer in minutes and seconds
   const formatDigits = (value: number): string => {
-    return value.toString().padStart(2, '0');
-  }
+    return value.toString().padStart(2, "0");
+  };
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
   // Resend OTP Function
   const ResendOTP = (): void => {
     const { phoneNumber } = state;
-    dataService.sendOTP(phoneNumber)
+    dataService
+      .sendOTP(phoneNumber)
       .then((response) => {
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
@@ -164,30 +166,33 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //For Clearing Form
   const clearForm = () => {
-    setFirstName('');
-    setMiddleName('');
-    setLastName('');
-    setPhoneNumber('');
-    setEmail('');
-    setOtp('');
+    setFirstName("");
+    setMiddleName("");
+    setLastName("");
+    setPhoneNumber("");
+    setEmail("");
+    setOtp("");
   };
 
-  {/* Form Validation */ }
+  {
+    /* Form Validation */
+  }
   //Email Validation
   const emailValidation = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-
-  }
+  };
   //Name Validation
   const nameValidation = (name: string) => {
-    return name.trim() !== '' && /^[A-Za-z\s]+$/.test(name);
-  }
+    return name.trim() !== "" && /^[A-Za-z\s]+$/.test(name);
+  };
   //Phone Number Validation
   const phoneNumberValidation = (phone: string) => {
-    return phone.trim() !== '' && /^[0-9]{10}/.test(phone);
+    return phone.trim() !== "" && /^[0-9]{10}/.test(phone);
+  };
+  {
+    /*----------------------------------------------------- */
   }
-  {/*----------------------------------------------------- */ }
 
   // Function to show the new pop-up when the Submit button is clicked
   const showNewPopUpOnClick = () => {
@@ -201,9 +206,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //Function to confirm the new pop-up
   const confirmNewPopUp = () => {
-    setState({ ...state, isPopupOpen: false });// on Confirm open the popup and clear form
+    setState({ ...state, isPopupOpen: false }); // on Confirm open the popup and clear form
     clearForm();
-  }
+  };
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
   };
@@ -227,7 +232,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           </ul>
         </div>
         <div className="vehicleInfo_container">
-
           <div className="image-gallery">
             <h1>Bus Details</h1>
             <div className="parent-image">
@@ -253,24 +257,61 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           </div>
 
           <div className="bus_details">
-            <h2>Vehicle Facility</h2> 
+            <h2>Vehicle Facility</h2>
             <div className="facility_icons">
               <div className="facility_icons_one">
-                <p><i className="fa-solid fa-tv fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;Television</p>
-                <p> <i className="fa-solid fa-plug fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;240V Socket </p>
-                <p> <i className="fa-solid fa-bed fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;Cushioned seats </p>
+                <p>
+                  <i
+                    className="fa-solid fa-tv fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;Television
+                </p>
+                <p>
+                  {" "}
+                  <i
+                    className="fa-solid fa-plug fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;240V Socket{" "}
+                </p>
+                <p>
+                  {" "}
+                  <i
+                    className="fa-solid fa-bed fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;Cushioned seats{" "}
+                </p>
               </div>
               <div className="facility_icons_two">
-                <p><i className="fa-solid fa-music fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;Audio system</p>
-                <p><i className="fa-solid fa-fan  fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;AC</p>
-                <p><i className="fa-solid fa-compact-disc  fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;DVD player</p>
+                <p>
+                  <i
+                    className="fa-solid fa-music fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;Audio system
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-fan  fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;AC
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-compact-disc  fa-lg"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;&nbsp;DVD player
+                </p>
               </div>
             </div>
 
             <h2>Additional information</h2>
 
             <div className="additional_info">
-
               <div className="additional_info_one">
                 <p>Seats :&nbsp;&nbsp;&nbsp;60</p>
                 <p>Length :&nbsp;&nbsp;&nbsp;10.48 m</p>
@@ -283,7 +324,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 <p>Transmission :&nbsp;&nbsp;&nbsp;Manual</p>
                 <p>Year :&nbsp;&nbsp;&nbsp;2018</p>
               </div>
-
             </div>
             {/*Calender */}
             {/* <div className="calendar-container">
@@ -294,24 +334,32 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 <NewPopUp onClose={closeNewPopUp} onConfirm={confirmNewPopUp} />
               ) : (
                 <>
-                  <button className="button-53" onClick={() => setShowModal(true)}>Book Now</button>
+                  <button
+                    className="button-53"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Book Now
+                  </button>
                   {/*Pop-Up Logic*/}
                   <div
-                    className={`modal ${showModal ? 'show' : ''}`}
+                    className={`modal ${showModal ? "show" : ""}`}
                     id="loginModal"
                     tabIndex={-1}
                     role="dialog"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden={!showModal}
-                    style={{ display: showModal ? 'block' : 'none' }}
+                    style={{ display: showModal ? "block" : "none" }}
                   >
-                    <div className="modal-dialog modal-dialog-centered popup-content" role="document">
+                    <div
+                      className="modal-dialog modal-dialog-centered popup-content"
+                      role="document"
+                    >
                       <div className="modal-content">
                         {/* Cross Icon*/}
                         <div className="modal-header border-bottom-0">
                           <button
                             type="button"
-                            className="close"
+                            className="closes"
                             data-dismiss="modal"
                             aria-label="Close"
                             onClick={() => setShowModal(false)}
@@ -322,31 +370,43 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                         {/* Pop-Up Form*/}
                         <div className="modal-body">
                           <div className="d-flex flex-column text-center">
-                            <form >
+                            <form>
                               {/* First Name*/}
-                              <div className={`form-group ${!firstNameValid ? 'has-error' : ''}`}>
+                              <div
+                                className={`form-group ${
+                                  !firstNameValid ? "has-error" : ""
+                                }`}
+                              >
                                 <input
                                   type="text"
-                                  className={`form-control first-name ${!firstNameValid ? 'error-border' : ''}`}
+                                  className={`form-control first-name ${
+                                    !firstNameValid ? "error-border" : ''
+                                  }`}
                                   id="firstname"
                                   value={firstName}
                                   placeholder="First Name"
                                   onChange={(e) => setFirstName(e.target.value)}
-                                  onBlur={(e) => setFirstNameValid(nameValidation(e.target.value))}
+                                  onBlur={(e) =>
+                                    setFirstNameValid(
+                                      nameValidation(e.target.value)
+                                    )
+                                  }
                                 />
-                                {(!firstNameValid || !nameValidation(firstName)) && (
+                                {(!firstNameValid ||
+                                  !nameValidation(firstName)) && (
                                   <div className="error-message">
-                                    {(!firstNameValid && firstName.trim() === '') ?
+                                    {!firstNameValid &&
+                                    firstName.trim() === "" ? (
                                       <>
                                         <FaExclamationTriangle className="error-icon" />
                                         This field is required
                                       </>
-                                      : (!firstNameValid ?
-                                        <>
-                                          <FaExclamationTriangle className="error-icon" />
-                                          Please enter a valid first name
-                                        </>
-                                        : null)}
+                                    ) : !firstNameValid ? (
+                                      <>
+                                        <FaExclamationTriangle className="error-icon" />
+                                        Please enter a valid first name
+                                      </>
+                                    ) : null}
                                   </div>
                                 )}
                               </div>
@@ -357,7 +417,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   className="form-control middle-name"
                                   id="middlename"
                                   value={middleName}
-                                  onChange={(e) => setMiddleName(e.target.value)}
+                                  onChange={(e) =>
+                                    setMiddleName(e.target.value)
+                                  }
                                   placeholder="Middle Name"
                                 />
                               </div>
@@ -365,56 +427,71 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                               <div className="form-group">
                                 <input
                                   type="text"
-                                  className={`form-control last-name ${!lastNameValid ? 'error-border' : ''}`}
+                                  className={`form-control last-name ${
+                                    !lastNameValid ? "error-border" : ""
+                                  }`}
                                   id="lastname"
                                   value={lastName}
                                   placeholder="Last Name"
                                   onChange={(e) => setLastName(e.target.value)}
-                                  onBlur={(e) => setLastNameValid(nameValidation(e.target.value))}
+                                  onBlur={(e) =>
+                                    setLastNameValid(
+                                      nameValidation(e.target.value)
+                                    )
+                                  }
                                 />
-                                {(!lastNameValid || !nameValidation(lastName)) && (
+                                {(!lastNameValid ||
+                                  !nameValidation(lastName)) && (
                                   <div className="error-message">
-                                    {(!lastNameValid && lastName.trim() === '') ?
+                                    {!lastNameValid &&
+                                    lastName.trim() === "" ? (
                                       <>
                                         <FaExclamationTriangle className="error-icon" />
                                         This field is required
                                       </>
-                                      : (!lastNameValid ?
-                                        <>
-                                          <FaExclamationTriangle className="error-icon" />
-                                          Please enter a valid last name
-                                        </>
-                                        : null)}
+                                    ) : !lastNameValid ? (
+                                      <>
+                                        <FaExclamationTriangle className="error-icon" />
+                                        Please enter a valid last name
+                                      </>
+                                    ) : null}
                                   </div>
                                 )}
                               </div>
                               <div className="form-group">
-                                <div className="input-group">
-                                  <select className='select-custom'>
+                                <div className="input-group d-flex">
+                                  <select className="select-custom ">
                                     <option value="+91">+91</option>
                                   </select>
                                   {/* Phone Number */}
                                   <input
                                     type="tel"
-                                    className={`form-control col-sm-10 phone ${!phoneNumberValid ? 'error-border' : ''}`}
+                                    className={`form-control col-sm-10 phone ${
+                                      !phoneNumberValid ? "error-border" : ""
+                                    }`}
                                     id="phone-number"
                                     value={state.phoneNumber}
                                     onChange={handlePhoneNumberChange}
                                     placeholder="Phone Number"
-                                    onBlur={(e) => setPhoneNumberValid(e.target.value.trim() !== '')}
+                                    onBlur={(e) =>
+                                      setPhoneNumberValid(
+                                        e.target.value.trim() !== ""
+                                      )
+                                    }
                                   />
                                 </div>
-                                {!phoneNumberValid &&
+                                {!phoneNumberValid && (
                                   <div className="error-message">
                                     <FaExclamationTriangle className="error-icon" />
                                     Please enter a valid 10-digit phone number
-                                  </div>}
+                                  </div>
+                                )}
                               </div>
                               {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                               {otpSent && !otpVerified && (
                                 <div className="form-group otp-group">
                                   {/* OTP */}
-                                  <div className="otp-container">
+                                  <div className="otp-container d-flex">
                                     <input
                                       type="password"
                                       name="otp"
@@ -427,31 +504,44 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     {/*  Verify OTP */}
                                     <button
                                       type="button"
-                                      className="btn btn-info btn-block btn-round verify-otp-button"
+                                      className="btn btn-info btn-round verify-otp-button"
                                       onClick={verifyOTP}
+                                      style={{ width: "50%" }}
                                     >
                                       Verify
                                     </button>
                                   </div>
                                   <div className="resend-container">
-                                    <p className='header-5-custom'>
-                                      {resendDisabled ? <span className='timer-custom'>Resend OTP in <span className='min-sec'>{minutes}:{seconds}</span> </span> :
-                                        <span className='not-received'>Not Received OTP?</span>}
+                                    <p className="header-5-custom">
+                                      {resendDisabled ? (
+                                        <span className="timer-custom">
+                                          resend otp in{" "}
+                                          <span className="min-sec">
+                                            {minutes}:{seconds}
+                                          </span>{" "}
+                                        </span>
+                                      ) : (
+                                        <span className="not-received">
+                                          Not received otp?
+                                        </span>
+                                      )}
                                       {!resendDisabled && (
-                                        <a className='resend-link' onClick={ResendOTP}>
+                                        <a
+                                          className="resend-link"
+                                          onClick={ResendOTP}
+                                        >
                                           Resend
                                         </a>
                                       )}
                                     </p>
                                   </div>
-
                                 </div>
                               )}
                               {/* Send  OTP */}
                               {!otpSent && (
                                 <button
                                   type="button"
-                                  className="btn btn-info btn-block btn-round send-otp-button"
+                                  className="btn btn-info send-otp-button"
                                   onClick={sendOTP}
                                 >
                                   Send OTP
@@ -465,7 +555,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   id="email"
                                   value={email}
                                   onChange={(e) => setEmail(e.target.value)}
-                                  onBlur={(e) => setEmailValid(emailValidation(e.target.value))}
+                                  onBlur={(e) =>
+                                    setEmailValid(
+                                      emailValidation(e.target.value)
+                                    )
+                                  }
                                   placeholder="Email"
                                 />
                                 {!emailValid && (
@@ -482,13 +576,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     <div className="col">
                                       <button
                                         type="button"
-                                        className='btn btn-secondary btn-block btn-round submit-button'
+                                        className="btn btn-secondary btn-block btn-round submit-button"
                                         onClick={() => {
                                           // Show the new pop-up when the Submit button is clicked
                                           showNewPopUpOnClick();
                                         }}
                                       >
-                                        Submit
+                                        Book Now
                                       </button>
                                     </div>
                                     {/* Clear*/}
@@ -505,7 +599,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 </div>
                               </div>
                               {/* Conditionally render the new pop-up here */}
-                              {showNewPopUp && <NewPopUp onClose={closeNewPopUp} onConfirm={confirmNewPopUp} />}
+                              {showNewPopUp && (
+                                <NewPopUp
+                                  onClose={closeNewPopUp}
+                                  onConfirm={confirmNewPopUp}
+                                />
+                              )}
                             </form>
                           </div>
                         </div>
