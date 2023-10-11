@@ -252,7 +252,7 @@
         &_cards{
             margin-top: 6vw;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             width: 95%;
             position: relative;
@@ -261,21 +261,21 @@
                 position: absolute;
             }
             .img1{
-                top: 5%;
-                left: 22%;
+                top: 35%;
+                left: 30%;
                 mix-blend-mode: color-burn;
                 color: #0f7bab;
             }
             .img2{
-                top: 55%;
-                left: 48%;
+                top: 41%;
+                right: 30%;
                 mix-blend-mode: color-burn;
             }
-            .img3{
-                top: 5%;
-                right: 21%;
-                mix-blend-mode: color-burn;
-            }
+            // .img3{
+            //     top: 5%;
+            //     right: 21%;
+            //     mix-blend-mode: color-burn;
+            // }
             &_one{
                 width: 20%;
                 border-radius: 10px;
@@ -370,9 +370,337 @@
   left: 2px;
 }
 
-@media (min-width: 768px) {
-  .button-53 {
-    padding: .75rem 3rem;
-    font-size: 1.25rem;
-  }
+@media only screen and (max-width: 480px) {
+    .booking{
+        &_container{
+            &_banner{
+             height: 40vh;
+             h1{
+                font-size: 10vw;
+                
+             }
+             h3{
+                margin-top: -8vw;
+                font-size: 4vw;
+             }
+            }
+            &_busDetails{
+                margin-top: 2vw;
+                font-size: 14px;
+                .header_content{
+                    margin-top: -2.5vw;
+                    font-size: 25px;
+                }
+                .content{
+                    margin-top: -2vw;
+                    width: 95%;
+                }
+                &_section{
+                    width: 95%;
+                    flex-direction: column;
+                    .buses{
+                        width: 85%;
+                        padding: 12px 0px;
+                        margin-bottom: 10vw;
+                        .busOne_img{
+                            width: 95%;
+                            img{
+                                width: 100%;
+                                border-radius: 10px;
+                                
+                            }
+                        }
+                        .busOne_details{
+                            p{
+                                margin:0vw;
+                            }
+                            h2{
+                                font-size: 20px;
+                            }                                
+                        }
+                        .busTwo_img{
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .busTwo_details{
+                            p{
+                                margin:0vw;
+                            }
+                            h2{
+                                font-size: 20px;
+                            }
+                        }
+                        .busThree_img{
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .busThree_details{
+                            p{
+                                margin:0;
+                            }
+                            }
+                        .busFour_img{
+                            img{
+                                width: 100%;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .howitworks{
+            &_header{
+                h1{
+                   font-size: 22px;
+                }
+            }
+            &_cards{
+                margin-top: 3vw;
+                flex-direction: column;
+                img{
+                    display: none;
+                }
+                &_one{
+                    width: 70%;
+                    margin-bottom: 5vw;
+                }
+                &_two{
+                    width: 70%;
+                    margin-bottom: 5vw;
+                }               
+                &_four{
+                    width: 70%;
+                    margin-bottom: 5vw;
+                }
+            }
+        }
+    }
+    .button-53 {
+        margin-top: 5vw;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+      }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    .booking{
+        &_container{
+            &_banner{
+             height: 50vh;
+             h1{
+                font-size: 10vw;
+                
+             }
+             h3{
+                margin-top: -8vw;
+                font-size: 4vw;
+             }
+            }
+            &_busDetails{
+                margin-top: 2vw;
+                font-size: 14px;
+                .header_content{
+                    margin-top: -2.5vw;
+                    font-size: 25px;
+                }
+                .content{
+                    margin-top: -2vw;
+                    width: 95%;
+                }
+                &_section{
+                    width: 95%;
+                    flex-direction: column;
+                    .buses{
+                        width: 70%;
+                        padding: 12px 0px;
+                        margin-bottom: 10vw;
+                        .busOne_img{
+                            width: 95%;
+                            img{
+                                width: 100%;
+                                border-radius: 10px;
+                                
+                            }
+                        }
+                        .busOne_details{
+                            p{
+                                margin:0vw;
+                            }
+                            h2{
+                                font-size: 20px;
+                            }                                
+                        }
+                        .busTwo_img{
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .busTwo_details{
+                            p{
+                                margin:0vw;
+                            }
+                            h2{
+                                font-size: 20px;
+                            }
+                        }
+                        .busThree_img{
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .busThree_details{
+                            p{
+                                margin:0;
+                            }
+                            }
+                        .busFour_img{
+                            img{
+                                width: 100%;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .howitworks{
+            &_header{
+                h1{
+                   font-size: 22px;
+                }
+            }
+            &_cards{
+                margin-top: 3vw;
+                flex-direction: column;
+                img{
+                    display: none;
+                }
+                &_one{
+                    width: 60%;
+                    margin-bottom: 5vw;
+                }
+                &_two{
+                    width: 60%;
+                    margin-bottom: 5vw;
+                }               
+                &_four{
+                    width: 60%;
+                    margin-bottom: 5vw;
+                }
+            }
+        }
+    }
+    .button-53 {
+        margin-top: 5vw;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+      }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+    .booking{
+        &_container{
+            &_banner{        
+             h1{
+                font-size: 8vw;
+             }
+             h3{
+                margin-top: -5vw;
+                font-size: 3.3vw;
+             }              
+            }
+            &_busDetails{
+                .content{
+                    width: 90%;
+                }
+                &_section{
+                    width: 98%;
+                    .buses{
+                        width: 31%;
+                        .busOne_img{
+                            img{
+                                width: 95%;
+                            }
+                        }
+                        .busOne_details{
+                            h2{
+                                font-size: 20px;
+                            }
+                            p{
+                                margin-bottom: -2vw;
+                            }
+                        }
+                        .busTwo_img{
+                            img{
+                                width: 95%;
+                            }
+                        }
+                        .busTwo_details{
+                            h2{
+                                font-size: 20px;
+                            }
+                            p{
+                                margin-bottom: -2vw;
+                            }
+                        }
+                        .busThree_img{
+                            img{
+                                width: 95%;
+                            }
+                        }
+                        .busThree_details{
+                            h2{
+                                font-size: 20px;
+                            }
+                            p{
+                                margin-bottom: -2vw;
+                            }
+                        }
+                        .busFour_img{
+                            width: 95%;
+                            img{
+                                width: 90%;
+                                border-radius: 10px;
+                                
+                            }
+                        }                      
+                    }
+                }
+            }
+        }
+        .howitworks{
+            &_cards{
+                margin-top: 4vw;
+                width: 100%;
+                .img1{
+                    top: 40%;
+                    left: 33%;
+                    width: 7%;
+                }
+                .img2{
+                    top: 45%;
+                    right: 30%;
+                    width: 7%;
+                }
+                &_one{
+                    width: 27%;
+                }
+                &_two{
+                    width: 23%;
+                }
+                
+                &_four{
+                    width: 25%;
+                }
+            }
+        }
+    }
+    .button-53 {
+        margin-top: 5vw;
+        padding: .3rem 1rem;
+        font-size: 1rem;
+      }
 }

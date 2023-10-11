@@ -2,7 +2,7 @@ import './VehicleInfo.scss'
 import { Link } from "react-router-dom";
 //import BookingCalendar from "./Booking Calendar/BookingCalendar";
 import React, { ChangeEvent, useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../src/components/Login/Login.css';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import dataService from '../services/data.service';
@@ -253,7 +253,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           </div>
 
           <div className="bus_details">
-            <h2>Vehicle Facility</h2>
+            <h2>Vehicle Facility</h2> 
             <div className="facility_icons">
               <div className="facility_icons_one">
                 <p><i className="fa-solid fa-tv fa-lg" style={{ color: "#0f7bab" }}></i>&nbsp;&nbsp;&nbsp;Television</p>
@@ -289,7 +289,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
             {/* <div className="calendar-container">
               <BookingCalendar onSearch={Search} />
             </div> */}
-            <div className="container">
+            <div className="containers">
               {state.isPopupOpen ? ( // Conditionally render the NewPopUp component
                 <NewPopUp onClose={closeNewPopUp} onConfirm={confirmNewPopUp} />
               ) : (

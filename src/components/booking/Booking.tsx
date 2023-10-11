@@ -13,7 +13,7 @@ import ListVehicles from "../../types/list.type";
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
   const scrollToTop = () => {
-    window.scrollTo({ top: 530, behavior: "smooth" });
+    window.scrollTo({ top: 550, behavior: "smooth" });
   };
 
   const listVehicles = () => {
@@ -57,7 +57,7 @@ const Booking: React.FC = () => {
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index)=>(
           <div className="buses" key={index}>
-            {/* Render vehicle details here */}
+         {/* Render vehicle details here */}
             <h2>{vehicle.vehicleNumber}</h2>
             <p>Seat Capacity: {vehicle.seatCapacity}</p>
             <p>AC: {vehicle.isVehicleAC ? "Yes" : "No"}</p>
@@ -70,7 +70,7 @@ const Booking: React.FC = () => {
             </Link>
           </div>
         ))}
-              {/* <div className="buses">
+              <div className="buses">
                 <div className="busOne_img">
                   <img
                     src={busImage_1}
@@ -208,151 +208,13 @@ const Booking: React.FC = () => {
                   </Link>
                 </div>
               </div>
-              <div className="buses">
-                <div className="busFour_img">
-                  <img
-                    src={busImage_2}
-                    alt=""
-                  />
-                </div>
-                <div className="busFour_details">
-                  <h2>Bus Name4</h2>
-                  <p>
-                    <i
-                      className="fa-solid fa-user-group fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    60 Seat
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-bed fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    2 driver staff
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-gears fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Manual
-                  </p>
-                  <br />
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-fan fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Ac/Non Ac
-                  </p>
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>View Details</button>
-                  </Link>
-                </div>
-              </div>
-              <div className="buses">
-                <div className="busFive_img">
-                  <img
-                    src={busImage_3}
-                    alt=""
-                  />
-                </div>
-                <div className="busFive_details">
-                  <h2>Bus Name5</h2>
-                  <p>
-                    <i
-                      className="fa-solid fa-user-group fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    60 Seat
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-bed fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    2 driver staff
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-gears fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Manual
-                  </p>
-                  <br />
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-fan fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Ac/Non Ac
-                  </p>
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>View Details</button>
-                  </Link>
-                </div>
-              </div>
-              <div className="buses">
-                <div className="busSix_img">
-                  <img
-                    src={busImage_1}
-                    alt=""
-                  />
-                </div>
-                <div className="busSix_details">
-                  <h2>Bus Name6</h2>
-                  <p>
-                    <i
-                      className="fa-solid fa-user-group fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    60 Seat
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-bed fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    2 driver staff
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-gears fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Manual
-                  </p>
-                  <br />
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-fan fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Ac/Non Ac
-                  </p>
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>View Details</button>
-                  </Link>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
         <div className="howitworks">
           <div className="howitworks_header">
             <h2>How It Works</h2>
-            <h1>4 Steps To Booking a Bus On Nandhu Travels</h1>
+            <h1>3 Steps To Booking a Bus On Nandhu Travels</h1>
           </div>
           <div className="howitworks_cards">
             <img
@@ -361,12 +223,12 @@ const Booking: React.FC = () => {
               width={70}
               alt=""
             />
-            <img
+            {/* <img
               className="img3"
               src={arrow}
               width={70}
               alt=""
-            />
+            /> */}
             <img
               className="img2"
               src={arrow2}
@@ -397,7 +259,7 @@ const Booking: React.FC = () => {
                 booking before confirming your reservation.
               </p>
             </div>
-            <div className="howitworks_cards_three">
+            {/* <div className="howitworks_cards_three">
               <i
                 className="fa-solid fa-money-check-dollar fa-2xl"
                 style={{ color: "#0f7bab" }}
@@ -408,7 +270,7 @@ const Booking: React.FC = () => {
                 Complete the payment process securely, ensuring your seat is
                 reserved for the upcoming journey.
               </p>
-            </div>
+            </div> */}
             <div className="howitworks_cards_four">
               <i
                 className="fa-solid fa-map-location-dot fa-2xl"
