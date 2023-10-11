@@ -48,10 +48,11 @@
 .popup-close {
     width: 30%;
     background-color: #0f7bab;
+    margin-left: 50px;
+
 }
 
 .popup-confirm {
     width: 30%;
-    margin-left: 50px;
     background-color: #0f7bab;
 }
