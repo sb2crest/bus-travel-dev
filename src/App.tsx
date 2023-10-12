@@ -7,7 +7,6 @@ import VehiclesList from './components/VehicleList';
 import Vehicle from './components/Vehicle';
 import BookVehicle from './components/BookVehicle';
 //import Login from './components/Login/Login';
-import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import image1 from './assets/images/img_1.jpg';
 import image2 from './assets/images/img_2.jpg';
@@ -18,7 +17,8 @@ import Booking from './components/booking/Booking';
 import VehicleInfo from './components/VehicleInfo';
 import AboutUs from './components/about/AboutUs';
 import Navbar from './components/navbar/Nav';
-
+import {useState,useEffect} from 'react'
+import Preloader from './components/preloader/Preloader';
 
 
 const images = [
@@ -29,7 +29,19 @@ const images = [
 ];
 
 const App = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() =>{
+    const loader = () =>{
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 4000);
+    };
+    loader();
+  },[]);
+  return isLoading ?
+  (<Preloader/>):
+  (
     <Router>
       <Navbar/>
       <div className='containers'>
