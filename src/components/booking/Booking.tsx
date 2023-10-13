@@ -8,10 +8,12 @@ import arrow from "../../assets/images/arrow.png";
 import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
+import Filter from './Filter/Filter';
 
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
   };
@@ -54,6 +56,7 @@ const Booking: React.FC = () => {
               options for a safe and enjoyable journey to your desired
               destinations.
             </p>
+            <Filter/>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index)=>(
           <div className="buses" key={index}>

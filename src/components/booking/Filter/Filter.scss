@@ -1,0 +1,218 @@
+.filter-container {
+
+    &-button-custom {
+
+        .filter-button {
+            margin-bottom: 30px;
+            margin-left: -575px;
+            border-radius: 25px;
+            width: 120px;
+            height: 38px;
+            text-align: center;
+            padding-left: 20px;
+            position: relative;
+            background-color: #ffffff;
+            color: #0f2454;
+            border: 0.2px solid grey;
+            font-weight: 640;
+
+        }
+
+        .filter-icon {
+            position: absolute;
+            left: 27px;
+            top: 55%;
+            width: 18px;
+            height: 18px;
+            transform: translateY(-50%);
+        }
+
+    }
+
+    .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: transparent;
+        animation: popup 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        animation-fill-mode: both;
+        transform: scale(1);
+        opacity: 1;
+
+        .modal-container {
+            left: 31%;
+            top: 25%;
+            width: 450px;
+            height: 235px;
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            padding-left: 5px;
+
+            .filter-modal {
+                color: #0f2454;
+                font-weight: 650;
+                border-bottom: solid 1.2px #e1e1e1;
+                width: 800px;
+            }
+
+            .close-button {
+                background-color: white;
+                border: 0px solid white;
+            }
+
+            label {
+                margin-bottom: 0 !important;
+            }
+
+            .form-content {
+                margin-left: 11px;
+
+                .ac-filter {
+                    margin-top: 10px;
+                    margin-left: 20px;
+
+                    .button-ac-filter {
+                        margin-left: 50px;
+                        border: 1px solid grey;
+                        background-color: white;
+                        padding: 5px 35px 5px 35px;
+                        border-radius: 20px;
+                        height: 35px;
+                        display: inline;
+                        cursor: pointer;
+                        color: grey;
+                        font-weight: 500
+                    }
+
+                    .ac-clicked {
+                        margin-left: 50px;
+                        border: 1.2px solid darkcyan;
+                        color: darkcyan;
+                        background-color: white;
+                        padding: 5px 35px 5px 35px;
+                        border-radius: 20px;
+                        height: 35px;
+                        display: inline;
+                        cursor: pointer;
+                        font-weight: 500;
+                    }
+
+                    .button-non-ac-filter {
+                        margin-left: 10px;
+                        border: 1px solid grey;
+                        background-color: white;
+                        padding: 5px 30px 5px 35px;
+                        border-radius: 20px;
+                        height: 35px;
+                        display: inline;
+                        cursor: pointer;
+                        color: grey;
+                        font-weight: 500
+                    }
+
+                    .non-ac-clicked {
+                        margin-left: 10px;
+                        border: 1.2px solid darkcyan;
+                        color: darkcyan;
+                        background-color: white;
+                        padding: 5px 30px 5px 35px;
+                        border-radius: 20px;
+                        height: 35px;
+                        display: inline;
+                        cursor: pointer;
+                        font-weight: 500;
+                    }
+
+                }
+
+                .sleeper-filter {
+                    margin-top: 25px;
+                    margin-left: 20px;
+
+                    .button-sleeper-filter {
+                        margin-left: 50px;
+                        border: 1px solid grey;
+                        background-color: white;
+                        padding: 6px 20px 6px 20px;
+                        border-radius: 20px;
+                        display: inline;
+                        cursor: pointer;
+                        color: grey;
+                        font-weight: 500
+                    }
+
+                    .sleeper-clicked {
+                        margin-left: 50px;
+                        border: 1.2px solid darkcyan;
+                        color: darkcyan;
+                        background-color: white;
+                        padding: 6px 20px 6px 20px;
+                        border-radius: 20px;
+                        display: inline;
+                        cursor: pointer;
+                        font-weight: 500;
+                    }
+
+                }
+
+                .button-non-sleeper-filter {
+                    margin-left: 10px;
+                    border: 1px solid grey;
+                    background-color: white;
+                    padding: 6px 12px 6px 12px;
+                    border-radius: 20px;
+                    display: inline;
+                    cursor: pointer;
+                    color: grey;
+                    font-weight: 500
+                }
+
+                .non-sleeper-clicked {
+                    margin-left: 10px;
+                    border: 1.2px solid darkcyan;
+                    color: darkcyan;
+                    background-color: white;
+                    padding: 6px 12px 6px 12px;
+                    border-radius: 20px;
+                    display: inline;
+                    cursor: pointer;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .button-close-clear {
+            margin-top: 40px;
+
+            .button-close {
+                margin-left: 15px;
+                border: 0px solid;
+                background-color: #0f2454;
+                color: white;
+                border-radius: 5px;
+                font-weight: 400;
+                width: 80px;
+                height: 35px;
+            }
+
+            .button-clear {
+                margin-left: 230px;
+                border: 0px solid;
+                background-color: #0f2454;
+                color: white;
+                border-radius: 5px;
+                font-weight: 400;
+                width: 100px;
+                height: 35px;
+            }
+        }
+    }
+}
