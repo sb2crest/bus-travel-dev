@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Navitems } from "./Navitems";
 import "./Nav.scss";
 import logo from "../../assets/images/Logo.png";
+import Fade from 'react-reveal/Fade';
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
   const menuList = Navitems.map(({ url, title, imgSrc }, index) => {
@@ -17,7 +18,7 @@ const Navbar = () => {
           <span>{title}</span>
         )}
         {imgSrc && (
-          <img src={imgSrc} alt="Menu Image" width={90} className="hideimg" />
+          <img src={imgSrc} alt="Menu Image" width={90} className="hideimg" height={90}/>
         )}
       </li>
     );
@@ -30,6 +31,7 @@ const Navbar = () => {
   return (
     <div className="header">
       <div className="header_container">
+      <Fade top>
         <nav>
           <div className="logo">
             <img src={logo} alt="Logo" width={60} />
@@ -58,6 +60,7 @@ const Navbar = () => {
             </ul>
           </div>
         </nav>
+        </Fade>
       </div>
     </div>
   );
