@@ -166,7 +166,7 @@ nav {
 
     li {
       margin: 0 1.5vw;
-      font-size: 12px; 
+      font-size: 12px;
     }
   }
 
@@ -177,38 +177,36 @@ nav {
   .menu-list li a {
     padding: 5px 8px;
     margin-left: 0px;
-    
   }
   .button-89 {
-    --b: 1px; 
-    --s: 0.20em; 
+    --b: 1px;
+    --s: 0.2em;
     padding: 10px;
     font-size: 12px;
-  
   }
 }
 
 @media screen and (min-width: 1023px) and (max-width: 1279px) {
-      .menu-list {
-        margin: 1vw 0 !important;
-        padding: 0 !important;
-        li {
-          margin: 0 2.5vw;
-        }
-      }
-      .hideimg{
-        margin-right: -1.5vw;
-      }
-      .menu-list li:last-child {
-        margin-right: -15vw;
-        margin-left: -2vw;
-      }
-      .menu-list li:nth-child(5) {
-        margin-left: -10px;
-      }
+  .menu-list {
+    margin: 1vw 0 !important;
+    padding: 0 !important;
+    li {
+      margin: 0 2.5vw;
+    }
+  }
+  .hideimg {
+    margin-right: -1.5vw;
+  }
+  .menu-list li:last-child {
+    margin-right: -15vw;
+    margin-left: -2vw;
+  }
+  .menu-list li:nth-child(5) {
+    margin-left: -10px;
+  }
 
-      .menu-list li a {
-        padding: 5px 5px;
-        margin-left: 20px;
-      }
+  .menu-list li a {
+    padding: 5px 5px;
+    margin-left: 20px;
+  }
 }

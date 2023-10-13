@@ -133,19 +133,7 @@
 
 
                 }
-                // Animation
-                animation: slideFromLeft 1s ease-in-out;
-          
-                @keyframes slideFromLeft {
-                  0% {
-                    transform: translateX(-100%);
-                    opacity: 0;
-                  }
-                  100% {
-                    transform: translateX(0);
-                    opacity: 1;
-                  }
-                }
+                
               }
               &_vision {
                 width: 33%;
@@ -166,19 +154,6 @@
 
 
                 }
-                // Animation
-                animation: slideFromRight 1s ease-in-out;
-          
-                @keyframes slideFromRight {
-                  0% {
-                    transform: translateX(100%);
-                    opacity: 0;
-                  }
-                  100% {
-                    transform: translateX(0);
-                    opacity: 1;
-                  }
-                }
               }
             }
           }
@@ -198,17 +173,17 @@
                 display: inline-block;
                     }
                     
-                    h1::after{
-                        display: inline-block;
-                        content: '';
-                        background-color: #0f7bab;
-                        width: 95%;
-                        padding: 5px;
-                        position: absolute;
-                        bottom: 2px;
-                        left: 0%;
-                        z-index: -1;
-                    }
+                    // h1::after{
+                    //     display: inline-block;
+                    //     content: '';
+                    //     background-color: #0f7bab;
+                    //     width: 95%;
+                    //     padding: 5px;
+                    //     position: absolute;
+                    //     bottom: 2px;
+                    //     left: 0%;
+                    //     z-index: -1;
+                    // }
                     .services_img{
                         box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
                     }
