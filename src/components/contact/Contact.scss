@@ -2,6 +2,12 @@
     justify-content: center;
     align-items: center;
 display: flex;
+flex-direction: column;
+margin-top: 3vw;
+
+h1{
+  color: #0f7bab;
+}
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; 
@@ -12,10 +18,10 @@ display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
+   
     .col-md-4 {
       .card {
         background-color: #fff;
-        margin-top: -3vw;
         box-shadow: 0 0 3px rgba(0, 123, 204, 0.5);
         padding: 20px;
         height: 30vh;
