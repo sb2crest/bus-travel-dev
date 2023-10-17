@@ -70,7 +70,7 @@ footer {
             font-weight: 600;
             line-height: 28px; /* 140% */
             letter-spacing: 0.4px;
-          }
+          } 
         }
         &_email {
           margin-bottom: 7vh;
@@ -85,6 +85,10 @@ footer {
             opacity: 0.5699999928474426;
             margin-left: 40px;
             margin-top: 1vh;
+          }
+          a {
+            color: var(--white, #fff);
+            text-decoration: none;
           }
           span {
             color: var(--white, #fff);
@@ -151,6 +155,10 @@ footer {
               letter-spacing: 0.28px;
               opacity: 0.5699999928474426;
               text-align: left;
+            }
+            a {
+              color: var(--white, #fff);
+              text-decoration: none;
             }
           }
           &_media {

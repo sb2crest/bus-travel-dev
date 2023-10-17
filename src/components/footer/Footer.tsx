@@ -47,7 +47,9 @@ const Footer = () => {
                   ></i>
                 </span>
                 <span>Email</span>
-                <p >info@seabed2crest.com</p>
+                <p >
+                <a href="mailto: info@seabed2crest.com">info@seabed2crest.com</a> 
+                </p>
               </div>
               <div className="footer_container_left_number">
                 <span>
@@ -65,10 +67,10 @@ const Footer = () => {
               <div className="footer_container_right_one">
                 <div className="footer_container_right_one_services">
                   <p id="heading">Quick Links</p>
-                  <p>About Us</p>
-                  <p>Booking</p>
-                  <p>Booking Info</p>
-                  <p>Contact Us</p>
+                  <p><a href={"/aboutus"}>About Us</a></p>
+                  <p><a href={"/booking"}>Booking</a></p>
+                  <p><a href={"/bookininfo"}>Booking Info</a></p>
+                  <p> <a href={"/contactus"}>Contact Us</a></p>
                 </div>
               </div>
               <div className="footer_container_right_technologies">
