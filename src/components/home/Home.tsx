@@ -69,7 +69,6 @@ const Home: React.FC = () => {
       <div className="our_services">
         <div className="our_services_heading">
           <Slide left>
-            <h4>Our Services</h4>
           </Slide>
           <Fade bottom>
             <h1>
