@@ -10,6 +10,7 @@ const Contact = () => {
   }
   return (
     <div className="container mt-5">
+        <h1>Contact Details</h1>
       <div className="row">
       <Fade top>
         <div className="col-md-4">
