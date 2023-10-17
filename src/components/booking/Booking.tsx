@@ -9,7 +9,6 @@ import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Filter from './Filter/Filter';
-
 import Fade from 'react-reveal/Fade';
 
 const Booking: React.FC = () => {
