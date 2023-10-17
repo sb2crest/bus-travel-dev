@@ -9,6 +9,10 @@ import privatetrip from "../../assets/images/privatetrip.jpg";
 import sportsevent from "../../assets/images/sportsevent.jpg";
 import whatsets from "../../assets/images/whatsets.jpeg";
 import whatsets2 from "../../assets/images/whatsets2.jpeg";
+import Flip from 'react-reveal/Flip';
+import Bounce from 'react-reveal/Bounce';
+import Tada from 'react-reveal/Tada';
+import Fade from 'react-reveal/Fade';
 const AboutUs = () => {
   return (
     <div className="aboutus">
@@ -26,6 +30,7 @@ const AboutUs = () => {
         </div>
         <div className="aboutus_container_intro">
           <div className="aboutus_container_intro_section">
+          <Flip top>
             <div className="aboutus_container_intro_section_content">
               <h5>About Us</h5>
               <p>
@@ -101,17 +106,22 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
+            </Flip>
+          <Flip bottom>
             <div className="aboutus_container_intro_section_img">
+
               <img
                 src={aboutUsImage}
                 height={350}
                 alt=""
               />
             </div>
+            </Flip>
           </div>
         </div>
         <div className="aboutus_container_values">
           <div className="aboutus_container_values_section">
+          <Bounce right>
             <div className="aboutus_container_values_section_mission">
               <h4>
                 <b>Our Mission</b>
@@ -129,6 +139,8 @@ const AboutUs = () => {
                 travelers.
               </p>
             </div>
+            </Bounce>
+          <Bounce left>
             <div className="aboutus_container_values_section_vision">
               <h4>
                 <b>Our Vision</b>
@@ -147,6 +159,7 @@ const AboutUs = () => {
                 accessible to all.
               </p>
             </div>
+            </Bounce>
           </div>
         </div>
         <div className="aboutus_container_services">
@@ -154,6 +167,7 @@ const AboutUs = () => {
             <div className="aboutus_container_services_section_images">
               <h1>Our Services</h1>
               <div className="aboutus_container_services_section_images_one">
+              <Tada>
                 <div className="services_img">
                   <img
                     src={schooltrip}
@@ -161,6 +175,8 @@ const AboutUs = () => {
                   />
                   <h3>School & College Trips</h3>
                 </div>
+                </Tada>
+              <Tada>
                 <div className="services_img">
                   <img
                     src={wedding}
@@ -168,10 +184,14 @@ const AboutUs = () => {
                   />
                   <h3>Weddings</h3>
                 </div>
+                </Tada>
+              <Tada>
                 <div className="services_img">
                   <img src={trips} alt="" />
                   <h3>Corporate Trips</h3>
                 </div>
+                </Tada>
+              <Tada>
                 <div className="services_img">
                   <img
                     src={privatetrip}
@@ -179,7 +199,8 @@ const AboutUs = () => {
                   />
                   <h3>Private Trips</h3>
                 </div>
-                
+                </Tada>
+              <Tada>
                 <div className="services_img">
                   <img
                     src={sportsevent}
@@ -187,6 +208,7 @@ const AboutUs = () => {
                   />
                   <h3>Sports Events</h3>
                 </div>
+                </Tada>
               </div>
               
             </div>
@@ -194,10 +216,13 @@ const AboutUs = () => {
         </div>
         <div className="aboutus_container_apart">
           <div className="aboutus_container_apart_section">
+          <Fade left>
             <div className="aboutus_container_apart_section_left">
               <img id="img12" src={whatsets} alt="" />
               <img id="img13" src={whatsets2} alt="" />
             </div>
+            </Fade>
+          <Fade right>
             <div className="aboutus_container_apart_section_right">
               <h2>What sets us apart</h2>
               <p>
@@ -217,6 +242,7 @@ const AboutUs = () => {
                 your journey comfortable, memorable, and hassle-free.
               </p>
             </div>
+            </Fade>
           </div>
         </div>
       </div>
