@@ -9,7 +9,7 @@ import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Filter from './Filter/Filter';
-
+import Fade from 'react-reveal/Fade';
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
@@ -48,6 +48,7 @@ const Booking: React.FC = () => {
             </ul>
           </div>
           <div className="booking_container_busDetails">
+          <Fade top>
             <h2>our buses</h2>
             <h1 className="header_content">Our Bus Collection</h1>
             <p className="content">
@@ -57,6 +58,7 @@ const Booking: React.FC = () => {
               destinations.
             </p>
             <Filter/>
+            </Fade>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index)=>(
           <div className="buses" key={index}>
@@ -73,6 +75,7 @@ const Booking: React.FC = () => {
             </Link>
           </div>
         ))}
+         <Fade left>
               <div className="buses">
                 <div className="busOne_img">
                   <img
@@ -119,6 +122,8 @@ const Booking: React.FC = () => {
                   </Link>
                 </div>
               </div>
+              </Fade>
+              <Fade bottom>
               <div className="buses">
                 <div className="busTwo_img">
                   <img
@@ -165,6 +170,8 @@ const Booking: React.FC = () => {
                   </Link>
                 </div>
               </div>
+              </Fade>
+              <Fade right>
               <div className="buses">
                 <div className="busThree_img">
                   <img
@@ -211,14 +218,17 @@ const Booking: React.FC = () => {
                   </Link>
                 </div>
               </div>
+              </Fade>
             </div>
           </div>
         </div>
         <div className="howitworks">
+        <Fade top>
           <div className="howitworks_header">
             <h2>How It Works</h2>
             <h1>3 Steps To Booking a Bus On Nandhu Travels</h1>
           </div>
+          </Fade>
           <div className="howitworks_cards">
             <img
               className="img1"
@@ -238,7 +248,7 @@ const Booking: React.FC = () => {
               width={60}
               alt=""
             />
-
+        <Fade left>
             <div className="howitworks_cards_one">
               <i
                 className="fa-solid fa-bus fa-2xl"
@@ -250,6 +260,8 @@ const Booking: React.FC = () => {
                 destination, departure time, and seating preferences.
               </p>
             </div>
+          </Fade>
+        <Fade top>
             <div className="howitworks_cards_two">
               <i
                 className="fa-solid fa-file fa-2xl"
@@ -262,6 +274,7 @@ const Booking: React.FC = () => {
                 booking before confirming your reservation.
               </p>
             </div>
+          </Fade>
             {/* <div className="howitworks_cards_three">
               <i
                 className="fa-solid fa-money-check-dollar fa-2xl"
@@ -274,6 +287,7 @@ const Booking: React.FC = () => {
                 reserved for the upcoming journey.
               </p>
             </div> */}
+        <Fade right>
             <div className="howitworks_cards_four">
               <i
                 className="fa-solid fa-map-location-dot fa-2xl"
@@ -286,6 +300,7 @@ const Booking: React.FC = () => {
                 designated departure point, ready for your road trip.
               </p>
             </div>
+          </Fade>
           </div>
         </div>
       </div>
