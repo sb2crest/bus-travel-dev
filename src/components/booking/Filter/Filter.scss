@@ -1,0 +1,387 @@
+.filter-container {
+    position: relative;
+
+    &-button-custom {
+
+        .filter-button {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+            margin-left: -600px;
+            border-radius: 25px;
+            width: 120px;
+            height: 38px;
+            text-align: center;
+            padding-left: 20px;
+            position: relative;
+            background-color: #ffffff;
+            color: #0f2454;
+            border: 0.2px solid grey;
+            font-weight: 640;
+
+        }
+
+        .filter-icon {
+            position: absolute;
+            left: 27px;
+            top: 55%;
+            width: 18px;
+            height: 18px;
+            transform: translateY(-50%);
+
+        }
+
+    }
+
+    .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: transparent;
+        animation: popup 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        animation-fill-mode: both;
+        transform: scale(1);
+        opacity: 1;
+
+        .modal-container {
+            left: 31%;
+            top: 12%;
+            width: 490px;
+            height: 465px;
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            padding-left: 5px;
+            overflow: hidden;
+
+            .filter-modal {
+                color: #0f2454;
+                font-weight: bold;
+                border-bottom: solid 0.5px #0f2454;
+                width: 800px;
+            }
+
+            .cross-icon {
+                border: 1px solid white;
+                background-color: #ffffff;
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            .form-content {
+                margin-left: 11px;
+
+                .ac-section {
+                    .ac-filter-button {
+                        background-color: #eee;
+                        color: #0f2454;
+                        font-weight: 650;
+                        cursor: pointer;
+                        padding: 18px;
+                        width: 90%;
+                        text-align: left;
+                        border: none;
+                        outline: none;
+                        height: 50px;
+                        margin-bottom: 12px;
+                    }
+
+
+
+                    .plus-icon-ac {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+                    }
+
+                    .minus-icon-ac {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+
+                    }
+
+                    .checkbox-section-01 {
+                       
+                        .label-ac {
+                            color: #444;
+                            font-weight: 600;
+                        }
+
+                        .input-ac {
+                            margin-left: 20px;
+                            margin-right: 5px;
+                            width: 16px;
+                            height: 16px;
+                        }
+
+
+                        .label-non-ac {
+                            color: #444;
+                            font-weight: 600;
+                        }
+
+                        .input-non-ac {
+                            margin-right: 5px;
+                            margin-left: 18px;
+                            width: 16px;
+                            height: 16px;
+                        }
+
+                    }
+                    
+                }
+
+                .sleeper-section {
+                    .sleeper-filter-button {
+                        background-color: #eee;
+                        margin-top: 10px;
+                        color: #0f2454;
+                        font-weight: 650;
+                        cursor: pointer;
+                        padding: 18px;
+                        width: 90%;
+                        text-align: left;
+                        border: none;
+                        outline: none;
+                        transition: 0.4s;
+                        margin-bottom: 10px;
+                    }
+
+                    .plus-icon-sleeper {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+                    }
+
+                    .minus-icon-sleeper {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+
+                    }
+
+                    .checkbox-section-02 {
+                        .label-semi-sleeper {
+                            color: #444;
+                            font-weight: 600;
+                        }
+
+                        .input-semi-sleeper {
+                            margin-left: 20px;
+                            margin-right: 5px;
+                            width: 16px;
+                            height: 16px;
+                        }
+
+                        .label-non-sleeper {
+                            color: #444;
+                            font-weight: 600;
+                        }
+
+                        .input-non-sleeper {
+                            margin-right: 5px;
+                            margin-left: 18px;
+                            width: 16px;
+                            height: 16px;
+                        }
+
+                    }
+
+                    .sleeper-filter {
+                        margin-left: 20px;
+                        border: 1px solid grey;
+                        background-color: white;
+                        padding: 6px 20px 6px 20px;
+                        border-radius: 20px;
+                        display: inline;
+                        cursor: pointer;
+                        color: grey;
+                        font-weight: 500;
+                        overflow: hidden;
+
+
+                    }
+
+                    .non-sleeper-filter {
+                        margin-left: 10px;
+                        border: 1px solid grey;
+                        background-color: white;
+                        padding: 6px 12px 6px 12px;
+                        border-radius: 20px;
+                        display: inline;
+                        cursor: pointer;
+                        color: grey;
+                        font-weight: 500;
+                        overflow: hidden;
+                    }
+
+
+                }
+
+                .amenities-section {
+                    .amenities-filter-button {
+                        background-color: #eee;
+                        color: #0f2454;
+                        font-weight: 650;
+                        cursor: pointer;
+                        padding: 18px;
+                        width: 90%;
+                        text-align: left;
+                        border: none;
+                        outline: none;
+                        transition: 0.4s;
+                        margin-top: 11px;
+                        margin-bottom: 15px;
+                    }
+
+                    .plus-icon-amenities {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+                    }
+
+                    .minus-icon-amenities {
+                        width: 14px;
+                        float: right;
+                        height: 12px;
+                        margin-left: 5px;
+
+                    }
+
+                    .section-1 {
+                        margin-bottom: 18px;
+
+                        .wifi {
+                            border: 1px solid grey;
+                            background-color: white;
+                            padding: 7px 20px 7px 25px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: grey;
+                            font-weight: 700;
+                            overflow: hidden;
+                            margin-left: 10px;
+                        }
+
+                        .wifi-clicked {
+                            border: 1px solid #0f2454;
+                            background-color: white;
+                            padding: 7px 20px 7px 25px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: #0f2454;
+                            font-weight: 700;
+                            overflow: hidden;
+                            margin-left: 10px;
+
+                        }
+
+                        .charge {
+                            margin-left: 20px;
+                            border: 1px solid grey;
+                            background-color: white;
+                            padding: 6px 20px 6px 20px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: grey;
+                            font-weight: 700;
+                            overflow: hidden;
+                        }
+
+                        .charge-clicked {
+                            margin-left: 20px;
+                            border: 1px solid #0f2454;
+                            background-color: white;
+                            padding: 6px 20px 6px 20px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: #0f2454;
+                            font-weight: 700;
+                            overflow: hidden;
+                        }
+
+                        .charge-icon {
+                            padding-right: 2px;
+                        }
+
+                        .movie {
+                            margin-left: 10px;
+                            border: 1px solid grey;
+                            background-color: white;
+                            padding: 6px 20px 6px 20px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: grey;
+                            font-weight: 700;
+                            overflow: hidden;
+                        }
+
+                        .movie-Clicked {
+                            margin-left: 10px;
+                            border: 1px solid grey;
+                            border: 1px solid #0f2454;
+                            padding: 6px 20px 6px 20px;
+                            border-radius: 20px;
+                            display: inline;
+                            cursor: pointer;
+                            color: #0f2454;
+                            font-weight: 700;
+                            overflow: hidden;
+                        }
+
+                        .movie-icon {
+                            padding-right: 3px;
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        .button-close-clear {
+            margin-top: 50px;
+
+            .button-close {
+                margin-left: 6px;
+                border: 0px solid;
+                background-color: #0f2454;
+                color: white;
+                border-radius: 5px;
+                font-weight: 400;
+                width: 80px;
+                height: 35px;
+            }
+
+            .button-clear {
+                margin-left: 250px;
+                border: 0px solid;
+                background-color: #0f2454;
+                color: white;
+                border-radius: 5px;
+                font-weight: 400;
+                width: 100px;
+                height: 35px;
+            }
+        }
+    }
+}
