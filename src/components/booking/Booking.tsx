@@ -57,8 +57,8 @@ const Booking: React.FC = () => {
               options for a safe and enjoyable journey to your desired
               destinations.
             </p>
-            <Filter/>
             </Fade>
+            <Filter/>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index)=>(
           <div className="buses" key={index}>

@@ -55,8 +55,8 @@ const Home: React.FC = () => {
             </div>
             <div className="card_banner_content_three">
               <Icon className="fa-regular fa-calendar fa-2xl"></Icon>
-              <h3>Reserve now, pay later</h3>
-              <p>Book your spot.</p>
+              <h3>Reserve now</h3>
+              <p>Book your Bus.</p>
             </div>
             <div className="card_banner_content_four">
               <Icon className="fa-solid fa-star fa-2xl"></Icon>
@@ -181,38 +181,38 @@ const Home: React.FC = () => {
             <div className="aboutus_container_services_section_images">
               <h1>Our Services</h1>
               <div className="aboutus_container_services_section_images_one">
-                <Tada>
+                <Fade top>
                   <div className="services_img">
                     <img src={schooltrip} alt="" />
                     <h3>School & College Trips</h3>
                   </div>
-                </Tada>
-                <Tada>
+                </Fade >
+                <Fade bottom>
                   <div className="services_img">
                     <img src={wedding} alt="" />
                     <h3>Weddings</h3>
                   </div>
-                </Tada>
-                <Tada>
+                </Fade >
+                <Fade top>
                   <div className="services_img">
                     <img src={trips} alt="" />
                     <h3>Corporate Trips</h3>
                   </div>
-                </Tada>
+                </Fade >
 
-                <Tada>
+                <Fade bottom>
                   <div className="services_img">
                     <img src={privatetrip} alt="" />
                     <h3>Private Trips</h3>
                   </div>
-                </Tada>
+                </Fade >
 
-                <Tada>
+                <Fade top>
                   <div className="services_img">
                     <img src={sportsevent} alt="" />
                     <h3>Sports Events</h3>
                   </div>
-                </Tada>
+                </Fade >
               </div>
             </div>
           </div>

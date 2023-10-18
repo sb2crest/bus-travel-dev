@@ -167,7 +167,7 @@ const AboutUs = () => {
             <div className="aboutus_container_services_section_images">
               <h1>Our Services</h1>
               <div className="aboutus_container_services_section_images_one">
-              <Tada>
+              <Fade top>
                 <div className="services_img">
                   <img
                     src={schooltrip}
@@ -175,8 +175,8 @@ const AboutUs = () => {
                   />
                   <h3>School & College Trips</h3>
                 </div>
-                </Tada>
-              <Tada>
+                </Fade >
+              <Fade bottom>
                 <div className="services_img">
                   <img
                     src={wedding}
@@ -184,14 +184,14 @@ const AboutUs = () => {
                   />
                   <h3>Weddings</h3>
                 </div>
-                </Tada>
-              <Tada>
+                </Fade >
+              <Fade top>
                 <div className="services_img">
                   <img src={trips} alt="" />
                   <h3>Corporate Trips</h3>
                 </div>
-                </Tada>
-              <Tada>
+                </Fade >
+              <Fade bottom>
                 <div className="services_img">
                   <img
                     src={privatetrip}
@@ -199,8 +199,8 @@ const AboutUs = () => {
                   />
                   <h3>Private Trips</h3>
                 </div>
-                </Tada>
-              <Tada>
+                </Fade >
+              <Fade top>
                 <div className="services_img">
                   <img
                     src={sportsevent}
@@ -208,7 +208,7 @@ const AboutUs = () => {
                   />
                   <h3>Sports Events</h3>
                 </div>
-                </Tada>
+                </Fade >
               </div>
               
             </div>

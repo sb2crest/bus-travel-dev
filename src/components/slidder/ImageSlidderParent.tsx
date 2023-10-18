@@ -25,7 +25,7 @@ const slides: Slide[] = [
   { url: image6, title: 'India Gate' },
   { url: image7, title: 'Kanyakumari' },
   { url: image8, title: 'Taj Mahal' },
-  { url: image9, title: 'Tirumal Tirupati' },
+  { url: image9, title: 'Tirumala Tirupati' },
 ];
 const ImageSliderParent: React.FC = () => {
   return (
