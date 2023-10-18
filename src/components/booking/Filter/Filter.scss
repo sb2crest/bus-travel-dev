@@ -4,14 +4,13 @@
     &-button-custom {
 
         .filter-button {
-            position: relative;
             z-index: 1;
             margin-bottom: 30px;
             margin-left: -600px;
             border-radius: 25px;
             width: 120px;
             height: 38px;
-            text-align: center;
+            text-align: left;
             padding-left: 20px;
             position: relative;
             background-color: #ffffff;
@@ -23,7 +22,7 @@
 
         .filter-icon {
             position: absolute;
-            left: 27px;
+            left: 77px;
             top: 55%;
             width: 18px;
             height: 18px;

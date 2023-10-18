@@ -9,7 +9,7 @@ const Navbar = () => {
   const menuList = Navitems.map(({ url, title, imgSrc }, index) => {
     const isUrlDefined = typeof url === "string";
     return (
-      <li key={index}>
+      <li key={index} onClick={() => setClicked(false)}>
         {isUrlDefined ? (
           <NavLink exact to={url!} activeClassName="active">
             {title}
@@ -42,12 +42,12 @@ const Navbar = () => {
           <div className="ul">
             <ul className={clicked ? "menu-list" : "menu-list close"}>
               {menuList}
-              <li className="hidecontact">
+              <li className="hidecontact" onClick={() => setClicked(false)}>
                 <NavLink to={"/contactus"}>Contact Us</NavLink>
               </li>
 
               <li>
-                <NavLink to={"/contactus"}>
+                <NavLink to={"/contactus"} >
                   <button className="button-89" role="button">
                     <i
                       className="fa-solid fa-phone fa-md"

@@ -313,17 +313,17 @@
         font-size: 22px;
       }
 
-      h1 span.underline::after {
-        display: inline-block;
-        content: "";
-        background-color: #0f7bab;
-        width: 38%;
-        padding: 3px;
-        position: absolute;
-        bottom: 2px;
-        left: 36%;
-        z-index: -1;
-      }
+      // h1 span.underline::after {
+      //   display: inline-block;
+      //   content: "";
+      //   background-color: #0f7bab;
+      //   width: 38%;
+      //   padding: 3px;
+      //   position: absolute;
+      //   bottom: 2px;
+      //   left: 36%;
+      //   z-index: -1;
+      // }
 
       p {
         width: 80%;
