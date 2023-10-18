@@ -52,7 +52,9 @@ const Footer = () => {
                   ></i>
                 </span>
                 <span>Email</span>
-                <p >info@seabed2crest.com</p>
+                <p >
+                <a href="mailto: info@seabed2crest.com">info@seabed2crest.com</a> 
+                </p>
               </div>
               <div className="footer_container_left_number">
                 <span>
