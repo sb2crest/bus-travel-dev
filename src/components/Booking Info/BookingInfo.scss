@@ -1,0 +1,184 @@
+.booking-info {
+    display: flex;
+    justify-content: center;
+
+    .booking-info-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        text-align: center;
+
+        .form {
+            margin-left: 20px;
+
+            .header-custom {
+
+                .header {
+                    font-size: 30px;
+                    text-transform: uppercase;
+                    color: #0f7bab;
+                    font-weight: 450;
+                }
+            }
+
+            .booking-id {
+
+                .input-booking-id {
+                    margin-top: 5px;
+                    width: 120%;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .input-booking-id:focus {
+                    color: #495057;
+                    background-color: #fff;
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+                }
+            }
+
+            .phone {
+                margin-top: 5px;
+                .input-phone {
+                    width: 120%;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .input-phone:focus {
+                    color: #495057;
+                    background-color: #fff;
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+                }
+            }
+
+            .send-otp {
+
+                .button-send-otp {
+                    margin-top: 5px;
+                    margin-left: 78%;
+                    width: 50%;
+                    height: 35px;
+                    font-size: 16px;
+                    background-color: #0f7bab;
+                    color: white;
+                    border: none;
+                    border-radius: 2px;
+                    cursor: pointer;
+                }
+            }
+
+            .otp {
+                padding: 0 !important;
+
+                .input-otp {
+                    margin-top: 5px;
+                    width: 125%;
+                    padding: 10px;
+                    font-size: 16px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .input-otp:focus {
+                    color: #495057;
+                    background-color: #fff;
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+                }
+            }
+
+            .verify-resend {
+
+                .verify-resend-01 {
+
+                    .verify {
+                        margin-left: 20%;
+                        margin-top: 5px;
+                        width: 35%;
+                        font-size: 16px;
+                        background-color: #0f7bab;
+                        color: white;
+                        border: none;
+                        border-radius: 2px;
+                        text-align: center;
+                        cursor: pointer;
+                        height: 35px;
+                    }
+
+                    .resend {
+                        margin-top: 5px;
+                        margin-left: 15px;
+                        width: 35%;
+                        font-size: 16px;
+                        background-color: #0f7bab;
+                        color: white;
+                        border: none;
+                        border-radius: 2px;
+                        text-align: center;
+                        cursor: pointer;
+                        height: 35px;
+                    }
+                }
+            }
+
+            .show-details {
+
+                .show-details-01 {
+
+                    .anchor-custom {
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
+
+                        .button-show-details {
+                            margin-left: 25%;
+                            margin-top: 5px;
+                            width: 105%;
+                            height: 35px;
+                            font-size: 16px;
+                            background-color: #0f7bab;
+                            color: white;
+                            border: none;
+                            border-radius: 2px;
+                            text-align: center;
+                            cursor: pointer;
+                        }
+                    }
+
+
+
+                }
+
+            }
+
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .image-class {
+                margin-top: 50px;
+                width: 55%;
+                height: auto;
+            }
+        }
+    }
+}
