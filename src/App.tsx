@@ -20,6 +20,7 @@ import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
 import BookingInfo from './components/Booking Info/BookingInfo';
 import BookingDetails from './components/Booking Info/Booking Details/BookingDetails';
+import Test from './components/test/Test';
 
 
 const images = [
@@ -60,6 +61,7 @@ const App = () => {
             <Route exact path="/bookVehicle" component={BookVehicle} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/test" component={Test} />
           </Switch>
         </div>
         <Footer />
