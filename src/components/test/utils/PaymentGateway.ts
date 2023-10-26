@@ -6,7 +6,8 @@ export default async function displayRazorpay() {
   console.log(data);
 
   const options = {
-    key: 'rzp_test_I3bD1mfILhLGTE', //process.env.RAZORPAY_KEY_ID,
+    //key: 'rzp_test_I3bD1mfILhLGTE', //process.env.RAZORPAY_KEY_ID,
+    key: 'rzp_test_nHgaZ8pP0SqyOm',
     currency: data.currency,
     amount: data.amount,
     name: "Pay Now",
@@ -14,7 +15,7 @@ export default async function displayRazorpay() {
     // image: "http://localhost:8000/logo.png",
     image: "http://localhost:8100/src/assets/images/Logo.png",
     order_id: data.id,
-    handler: function (response:any) {
+    handler: function (response: any) {
       alert("PAYMENT ID ::" + response.razorpay_payment_id);
       alert("ORDER ID :: " + response.razorpay_order_id);
     },
