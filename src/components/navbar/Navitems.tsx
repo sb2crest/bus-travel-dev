@@ -12,10 +12,14 @@ export const Navitems = [
     },
     {
       title: "Booking Info",
-      url: "/bookininfo",
+      url: "/bookinginfo",
     },
     {
       title: "About Us",
       url: "/aboutus",
     },
+    // {
+    //   title: "Test",
+    //   url: "/test",
+    // },
   ];

@@ -1,12 +1,13 @@
 import "./VehicleInfo.scss";
 import { Link } from "react-router-dom";
 //import BookingCalendar from "./Booking Calendar/BookingCalendar";
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import "../../src/components/Login/Login.scss";
 import { FaExclamationTriangle } from "react-icons/fa";
 import dataService from "../services/data.service";
 import IVehicleData from "../types/vehicle.type";
 import NewPopUp from "./Login/NewPopUp";
+import Warning from "./Warning Component/Warning";
 interface Image {
   url: string;
 }
@@ -59,8 +60,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [showNewPopUp, setShowNewPopUp] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(180); // 180 seconds = 3 minutes;
+  const [showConfirmationpop, setShowConfirmationpop] = useState(false);
 
   console.log("showNewPopUp:", showNewPopUp);
 
@@ -206,18 +209,36 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //Function to confirm the new pop-up
   const confirmNewPopUp = () => {
-    setState({ ...state, isPopupOpen: false }); // on Confirm open the popup and clear form
+    setShowNewPopUp(false);
     clearForm();
   };
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
   };
 
-  //Function to Handle Search
-  const Search = (startDate: Date | null, endDate: Date | null) => {
-    console.log("Start Date:", startDate);
-    console.log("End Date:", endDate);
+  //Function to Check All fields are filled
+  const isFormFilled = () => {
+    const firstNameValid = nameValidation(firstName);
+    const lastNameValid = nameValidation(lastName);
+    const emailValid = emailValidation(email);
+    const phoneNumberValid = state.phoneNumber.trim() !== "";
+    const otpValid = !otpSent || (otpSent && otpVerified && otp.trim() !== "");
+    return firstNameValid && lastNameValid && emailValid && phoneNumberValid && otpValid;
   };
+
+  // Function to Submit the form
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log("handleSubmit is being hit");
+    e.preventDefault();
+    if (isFormFilled()) {
+      showNewPopUpOnClick();
+      console.log("Form submitted successfully!");
+    } else {
+      setShowConfirmationpop(!showConfirmationpop);
+      console.log("Please fill out all fields in the form correctly.");
+    }
+  };
+
   return (
     <>
       <div className="vehicleInfo">
@@ -370,18 +391,16 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                         {/* Pop-Up Form*/}
                         <div className="modal-body">
                           <div className="d-flex flex-column text-center">
-                            <form>
+                            <form onSubmit={handleSubmit} >
                               {/* First Name*/}
                               <div
-                                className={`form-group ${
-                                  !firstNameValid ? "has-error" : ""
-                                }`}
+                                className={`form-group ${!firstNameValid ? "has-error" : ""
+                                  }`}
                               >
                                 <input
                                   type="text"
-                                  className={`form-control first-name ${
-                                    !firstNameValid ? "error-border" : ''
-                                  }`}
+                                  className={`form-control first-name ${!firstNameValid ? "error-border" : ''
+                                    }`}
                                   id="firstname"
                                   value={firstName}
                                   placeholder="First Name"
@@ -394,21 +413,21 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 />
                                 {(!firstNameValid ||
                                   !nameValidation(firstName)) && (
-                                  <div className="error-message">
-                                    {!firstNameValid &&
-                                    firstName.trim() === "" ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        This field is required
-                                      </>
-                                    ) : !firstNameValid ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        Please enter a valid first name
-                                      </>
-                                    ) : null}
-                                  </div>
-                                )}
+                                    <div className="error-message">
+                                      {!firstNameValid &&
+                                        firstName.trim() === "" ? (
+                                        <>
+                                          <FaExclamationTriangle className="error-icon" />
+                                          This field is required
+                                        </>
+                                      ) : !firstNameValid ? (
+                                        <>
+                                          <FaExclamationTriangle className="error-icon" />
+                                          Please enter a valid first name
+                                        </>
+                                      ) : null}
+                                    </div>
+                                  )}
                               </div>
                               {/* Middle Name*/}
                               <div className="form-group">
@@ -427,9 +446,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                               <div className="form-group">
                                 <input
                                   type="text"
-                                  className={`form-control last-name ${
-                                    !lastNameValid ? "error-border" : ""
-                                  }`}
+                                  className={`form-control last-name ${!lastNameValid ? "error-border" : ""
+                                    }`}
                                   id="lastname"
                                   value={lastName}
                                   placeholder="Last Name"
@@ -442,21 +460,21 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 />
                                 {(!lastNameValid ||
                                   !nameValidation(lastName)) && (
-                                  <div className="error-message">
-                                    {!lastNameValid &&
-                                    lastName.trim() === "" ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        This field is required
-                                      </>
-                                    ) : !lastNameValid ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        Please enter a valid last name
-                                      </>
-                                    ) : null}
-                                  </div>
-                                )}
+                                    <div className="error-message">
+                                      {!lastNameValid &&
+                                        lastName.trim() === "" ? (
+                                        <>
+                                          <FaExclamationTriangle className="error-icon" />
+                                          This field is required
+                                        </>
+                                      ) : !lastNameValid ? (
+                                        <>
+                                          <FaExclamationTriangle className="error-icon" />
+                                          Please enter a valid last name
+                                        </>
+                                      ) : null}
+                                    </div>
+                                  )}
                               </div>
                               <div className="form-group">
                                 <div className="input-group d-flex">
@@ -466,9 +484,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   {/* Phone Number */}
                                   <input
                                     type="tel"
-                                    className={`form-control col-sm-10 phone ${
-                                      !phoneNumberValid ? "error-border" : ""
-                                    }`}
+                                    className={`form-control col-sm-10 phone ${!phoneNumberValid ? "error-border" : ""
+                                      }`}
                                     id="phone-number"
                                     value={state.phoneNumber}
                                     onChange={handlePhoneNumberChange}
@@ -575,12 +592,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   <div className="row">
                                     <div className="col">
                                       <button
-                                        type="button"
+                                        type="submit"
                                         className="btn btn-secondary btn-block btn-round submit-button"
-                                        onClick={() => {
-                                          // Show the new pop-up when the Submit button is clicked
-                                          showNewPopUpOnClick();
-                                        }}
                                       >
                                         Submit
                                       </button>
@@ -598,6 +611,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   </div>
                                 </div>
                               </div>
+                              {/* Confirmation pop-up */}
+                              {showConfirmationpop && <Warning/>}
                               {/* Conditionally render the new pop-up here */}
                               {showNewPopUp && (
                                 <NewPopUp
