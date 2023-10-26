@@ -53,7 +53,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [otpResend, setOtpResend] = useState<boolean>(false);
   const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
+  const [middleName, setMiddleName] = useState("");  
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -582,7 +582,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                           showNewPopUpOnClick();
                                         }}
                                       >
-                                        Book Now
+                                        Submit
                                       </button>
                                     </div>
                                     {/* Clear*/}

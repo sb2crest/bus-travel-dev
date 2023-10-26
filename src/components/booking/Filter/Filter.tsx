@@ -69,10 +69,10 @@ const Filter: React.FC = () => {
             {/* Filter Button */}
             <div className="filter-container">
                 <div className="filter-container-button-custom">
-                    <button className="filter-button" onClick={() => setShowModal(true)}>
+                    <p className="filter-button" onClick={() => setShowModal(true)}>
                         Filter
                         <img src={filterIcon} className='filter-icon' />
-                    </button>
+                    </p>
                 </div>
                 {/* POP-Up Page */}
                 <div
@@ -94,7 +94,7 @@ const Filter: React.FC = () => {
                                 aria-label="Close"
                                 onClick={() => setShowModal(false)}
                             >
-                                <span aria-hidden="true">X</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <form>
