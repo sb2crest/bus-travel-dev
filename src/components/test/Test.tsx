@@ -3,7 +3,7 @@ import "./Test.scss";
 import Card from "./Card";
 
 const Test = () => {
-  const loadScript = (src) => {
+  const loadScript = (src: any) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = src;

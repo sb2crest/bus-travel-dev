@@ -226,7 +226,7 @@ const Booking: React.FC = () => {
         <Fade top>
           <div className="howitworks_header">
             <h2>How It Works</h2>
-            <h1>3 Steps To Booking a Bus On Nandhu Travels</h1>
+            <h1>3 Steps To Booking a Bus On NandhuBus</h1>
           </div>
           </Fade>
           <div className="howitworks_cards">

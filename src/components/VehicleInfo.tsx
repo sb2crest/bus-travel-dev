@@ -54,7 +54,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [otpResend, setOtpResend] = useState<boolean>(false);
   const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
+  const [middleName, setMiddleName] = useState("");  
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -595,7 +595,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         type="submit"
                                         className="btn btn-secondary btn-block btn-round submit-button"
                                       >
-                                        Book Now
+                                        Submit
                                       </button>
                                     </div>
                                     {/* Clear*/}
