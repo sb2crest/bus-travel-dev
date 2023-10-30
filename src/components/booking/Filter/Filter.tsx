@@ -1,5 +1,5 @@
 import './Filter.scss';
-import filterIcon from './Filter Icon/Filter.png'
+import filterIcon from '../../../assets/images/Filter.png'
 import React, { useState } from 'react';
 
 const Filter: React.FC = () => {
@@ -179,7 +179,7 @@ const Filter: React.FC = () => {
                                                 </p>
                                                 <p className={`movie ${movieClicked ? 'movie-Clicked' : ''}`}
                                                     onClick={handleMovieClicked}>
-                                                    <i className="fa-solid fa-video movie-icon"></i>Movie
+                                                    <i className="fa-solid fa-tv movie-icon"></i>Telivision
                                                 </p>
                                             </div>
 
