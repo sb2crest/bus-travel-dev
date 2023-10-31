@@ -2,11 +2,6 @@ import React from 'react';
 import './Confirmation.scss';
 import { Link } from 'react-router-dom';
 
-// interface Confirmation {
-//     returnTo: () => void
-// }
-console.log("Confirmation pop-up is rendered")
-
 const Confirmation: React.FC = () => {
     return (
         <div className="modal show" id="newPopUp">
@@ -19,9 +14,9 @@ const Confirmation: React.FC = () => {
                         <div className='info'>
                             <p className='set'>Booking Complete!</p>
                             <p className='info-message'>
-                                Your Booking ID is 
-                               <span className='booking-id'>    NB123478</span> <br />
-                               <br/>
+                                Your Booking ID is
+                                <span className='booking-id'>NB123478</span> <br />
+                                <br />
                                 Your booking details has been sent to your email, <br />
                                 navigate to Booking Info Page to review  Booking Information
                             </p>
