@@ -5,6 +5,7 @@ import ListVehicle from "../types/list.type";
 import IBookingInfoRequest from "../types/BookingInfo/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IPaymentRequest from "../types/payment/payment.request.type";
+import IGetInTouch from "../types/getInTouch.type";
 class DataService {
 
   //Book now
@@ -21,7 +22,10 @@ class DataService {
   addVehicle(data: IVehicleData) {
     return http.post<IVehicleData>("addVehicle", data);
   }
-
+ // getInTouch
+ getInTouch(data: IGetInTouch) {
+  return http.post<IGetInTouch>("getInTouch", data);
+}
   //create Payment
   createPayment(data :IPaymentRequest){
     return http.post<IPaymentRequest>('createPayment',data);
