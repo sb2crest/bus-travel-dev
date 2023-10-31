@@ -15,14 +15,13 @@
 }
 
 .custom-modal {
-    width: 350px;
-    max-height: 190px;
+    width: 22%;
+    max-height: 70%;
     padding: 20px;
     background-color: whitesmoke;
     border: 2px solid gray;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
     z-index: 1001;
 }
 
@@ -31,5 +30,36 @@
 }
 
 .confirmation-popup {
+    text-align: center;
+}
+.icon-container{
+    font-size: 5.5vw;
+    color: #0f7bab;
+    margin-top: -5.5vw;
+    i{
+        background-color: #fff;
+        border-radius: 50%;
+    }
+}
+.thank-you{
+    font-size: 2.5vw;
+    font-weight: 500;
+    p{
+        margin: 0;
+    }
+}
+.get-back{
+    font-size: 1.3vw;
+    p{
+        margin:0 0 20px;
+    }
+}
+.done{
+    background-color: #0f7bab;
+    border: none;
+    width: 95%;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.5vw;
     text-align: center;
 }
