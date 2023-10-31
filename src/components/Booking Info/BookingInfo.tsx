@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
 import './BookingInfo.scss';
-import asideImage from './Booking Info Images/Aside Image.png';
+import asideImage from '../../assets/images/Aside Image.png';
 import { Link } from 'react-router-dom';
 import dataService from '../../services/data.service';
 import IVehicleData from '../../types/vehicle.type';

@@ -1,9 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import { RouteComponentProps, useHistory, useParams } from 'react-router-dom';
-
 import DataService from "../services/data.service";
 import IVehicleData from "../types/vehicle.type";
-
 interface RouterProps {
   id: string;
 }
