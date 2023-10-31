@@ -1,0 +1,213 @@
+.modal-checkout {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(0px);
+    z-index: 1000;
+
+    .modal-dialog-checkout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90%;
+
+        .modal-checkout-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            height: 420px;
+
+            .modal-checkout-body {
+                margin-bottom: 20px;
+
+                .checkout-container {
+                    text-align: left;
+
+                    .summary-container {
+                       
+                        .booking-summary {
+                            .booking-summary-header {
+                                text-align: center;
+                                font-size: 4.5vh;
+                                font-weight: 400;
+                                margin-top: auto;
+                                text-transform: uppercase;
+                                color: #0f7bab;
+                            }
+                        }
+
+                        .booking-summary-content {
+                            display: flex;
+                            align-items: self-start;
+    
+                            .image-container {
+                                img {
+                                    margin-top: 4vh;
+                                    width: 32vh;
+                                    height: 40vh;
+                                }
+                            }
+
+                            .summary-content {
+                                margin-left: 4vh;
+
+                                .booking-id {
+                                    margin-bottom: 0vh;
+                                    color: grey;
+                                    text-transform: uppercase;
+                                    font-weight: 500;
+
+                                    .booking-number {
+                                        font-weight: 400;
+                                        color: black;
+                                        font-style: normal;
+                                    }
+                                }
+
+                                .phone-number-container {
+                                    .phone-number {
+                                        margin-bottom: 0vh;
+                                        color: grey;
+                                        text-transform: uppercase;
+                                        font-weight: 500;
+                                        font-style: normal;
+
+                                        .mobile {
+                                            font-weight: 400;
+                                            color: black;
+                                            font-style: normal;
+                                        }
+                                    }
+                                }
+
+                                .from-to-date {
+                                    display: flex;
+                                    align-items: center;
+
+                                    .from {
+                                        color: grey;
+                                        text-transform: uppercase;
+                                        font-weight: 500;
+                                        font-style: normal;
+
+                                        .from-date {
+                                            font-weight: 400;
+                                            color: black;
+                                            font-style: normal;
+                                        }
+                                    }
+
+                                    .to {
+                                        color: grey;
+                                        text-transform: uppercase;
+                                        font-weight: 500;
+                                        font-style: normal;
+                                        margin-left: 3vh;
+
+                                        .to-date {
+                                            font-weight: 400;
+                                            color: black;
+                                            font-style: normal;
+                                        }
+                                    }
+
+                                }
+
+                                .line {
+                                    border-bottom: 1.2px solid #D3D3D3;
+                                    width: 100%;
+                                    margin: auto;
+                                    padding-top: 1%;
+                                }
+
+                                .fare-container {
+                                    .fare-header {
+                                        text-align: center;
+                                        color: grey;
+                                        text-transform: uppercase;
+                                        font-weight: 500;
+                                        font-style: normal;
+                                        line-height: 0vh;
+                                    }
+
+                                    .amount-header {
+                                        font-weight: 300;
+
+                                        .tax-cal{
+                                            font-weight: 100;
+                                            font-size: 2vh;
+                                        }
+
+                                        .price {
+                                            margin-left: 12vh;
+                                            font-size: 14px;
+                                            font-weight: 500;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .checkout-container {
+                        margin-top: 5vh;
+                        text-align: center;
+
+                        .checkout-button {
+                            background-color: #0f7bab;
+                            font-weight: 300;
+                            color: white;
+                            border: none;
+                            width: 50vh;
+                            height: 8vh;
+                            text-align: center;
+                            font-size: 16px;
+                            margin: 10px 2px;
+                            border-radius: 0px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+// .modal-body .btn-primary {
+//     background-color: #007bff;
+//     color: #fff;
+//     border: none;
+//     padding: 8px 16px;
+//     margin-right: 10px;
+//     cursor: pointer;
+// }
+
+// .message-popup {
+//     font-family: 'Georgia', serif;
+//     font-size: 1.1em;
+//     font-style: inherit;
+// }
+
+// .popup-close {
+//     width: 30%;
+//     background-color: #0f7bab;
+//     margin-left: 50px;
+
+// }
+
+// .popup-confirm {
+//     width: 30%;
+//     background-color: #0f7bab;
+// }

@@ -1,8 +1,24 @@
 import React from 'react'
 import './BookingDetails.scss';
-import icon from './Booking Details Images/Logo-booking-details.jpg'
+import icon from './Booking Details Images/Logo-booking-details.jpg';
+import IBookingInfoResponse from '../../../types/BookingInfo/response.type';
 
-const BookingDetails = () => {
+interface BookingInfoProps {
+    bookingDetails: IBookingInfoResponse;
+}
+
+const BookingDetails: React.FC<BookingInfoProps> = ({ bookingDetails }) => {
+    const {
+        bookingID,
+        driverName,
+        driverNumber,
+        alternateNumber,
+        vehicleNumber,
+        fromDate,
+        toDate,
+        bookingDate
+    } = bookingDetails;
+
     return (
         <div className='booking-details-main'>
             <div className='booking-details-container'>
@@ -29,12 +45,12 @@ const BookingDetails = () => {
                 <div className='line'></div>
                 <div className='date-booking-id-container'>
                     <p className='booking-date'>
-                        Sunday, November 12 2023
+                        {/* {bookingDate} */}
                     </p>
                     <p className='booking-id'>
                         <span className='booking-no'>Booking Number</span>
                         <br></br>
-                        <span className='number'>12345PN0912</span>
+                        <span className='number'>{bookingID}</span>
                     </p>
                 </div>
                 <div className='line-01'></div>

@@ -1,6 +1,17 @@
-export default async function displayRazorpay() {
-  const data = await fetch("http://localhost:8000/razorpay", { // java API
+export default async function displayRazorpay(bookingId: string, mobile: string, amount: number) {
+ 
+  let requestBody = {
+    bookingId: bookingId,
+    mobile: mobile,
+    amount: amount
+  }
+
+  const data = await fetch("http://localhost:8085/createPayment", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json", 
+    },
+    body: JSON.stringify(requestBody), 
   }).then((t) => t.json());
 
   console.log(data);

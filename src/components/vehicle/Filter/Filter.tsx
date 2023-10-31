@@ -1,5 +1,5 @@
 import './Filter.scss';
-import filterIcon from './Filter Icon/Filter.png'
+import filterIcon from '../../../assets/images/filter.png';
 import React, { useState } from 'react';
 
 const Filter: React.FC = () => {
@@ -119,7 +119,7 @@ const Filter: React.FC = () => {
                                     {isACClicked && (
                                         <>
                                             <div className='checkbox-section-01'>
-                                            <input type='checkbox' className='input-ac'/>
+                                                <input type='checkbox' className='input-ac' />
                                                 <label className='label-ac'>AC</label>
                                                 <input type='checkbox' className='input-non-ac' />
                                                 <label className='label-non-ac'>Non-AC</label>
@@ -155,7 +155,7 @@ const Filter: React.FC = () => {
                                 {/* Amenities */}
                                 <div className='amenities-section'>
                                     <button className='amenities-filter-button' onClick={handleAmenitiesClicked}>Other Amenities
-                                    {isAmenitiesClicked ? (
+                                        {isAmenitiesClicked ? (
                                             <svg className="minus-icon-amenities" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
                                                 <line x1="1" y1="6" x2="11" y2="6" stroke="#0f2454" strokeWidth="2" />
                                             </svg>
