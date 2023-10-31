@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import './ConfirmationPopup.css'; 
+import './ConfirmationPopup.scss'; 
 
 interface ConfirmationPopupProps {
   isOpen: boolean;
@@ -13,6 +13,7 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
 }) => {
   const modalClass = `custom-modal-container ${isOpen ? 'show' : ''}`;
   return (
+    
     <Modal
       isOpen={isOpen}
       contentLabel="Confirmation Popup"
@@ -27,6 +28,7 @@ const ConfirmationPopup: React.FC<ConfirmationPopupProps> = ({
         </div>
       </div>
     </Modal>
+  
   );
 };
 
