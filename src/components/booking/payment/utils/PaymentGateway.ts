@@ -1,10 +1,13 @@
-export default async function displayRazorpay(bookingId: string, mobile: string, amount: number) {
-
+export default async function displayRazorpay(
+  bookingId: string,
+  mobile: string,
+  amount: number
+) {
   let requestBody = {
     bookingId: bookingId,
     mobile: mobile,
-    amount: amount
-  }
+    amount: amount,
+  };
 
   const data = await fetch("http://localhost:8085/createPayment", {
     method: "POST",
@@ -17,16 +20,18 @@ export default async function displayRazorpay(bookingId: string, mobile: string,
   console.log(data);
 
   const options = {
-    key: 'rzp_test_nHgaZ8pP0SqyOm',
+    key: "rzp_test_nHgaZ8pP0SqyOm",
     currency: data.currency,
     amount: amount,
     name: "Pay Now",
     description: "Wallet Transaction",
     image: "http://localhost:8100/src/assets/images/Logo.png",
-    order_id: data.id,
+    order_id: data.razorPayOrderId,
     handler: function (response: any) {
       alert("PAYMENT ID ::" + response.razorpay_payment_id);
       alert("ORDER ID :: " + response.razorpay_order_id);
+      alert("Signature:: " + response.razorpay_signature);
+      // console.log(response)
     },
     prefill: {
       name: bookingId,
