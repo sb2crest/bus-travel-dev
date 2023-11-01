@@ -5,7 +5,7 @@ import './form.scss';
 import { FaExclamationTriangle } from "react-icons/fa";
 import dataService from "../../../services/data.service";
 import IVehicleData from "../../../types/vehicle.type";
-import Warning from "../../warning component/Warning";
+import Warning from "../../Warning Component/Warning";
 import Checkout from "../../booking/checkout/Checkout";
 
 interface Image {
@@ -221,7 +221,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
       },
       slot: {
         vehicleNumber: "KA09EQ1234",
-        fromDate: '2023-10-30',
+        fromDate: '2023-11-30',
         toDate: '2023-11-05'
       }
     }

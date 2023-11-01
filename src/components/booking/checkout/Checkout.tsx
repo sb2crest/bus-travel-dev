@@ -36,10 +36,10 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
     };
 
     const razorpay: MouseEventHandler<HTMLButtonElement> = async (event) => {
-        const bookingId = 'BookingId';
-        const mobile = 'MobileNumber';
+        // const bookingId = 'BookingId';
+        // const mobile = 'MobileNumber';
         const amount = 100;
-        await displayRazorpay(bookingId, mobile, amount);
+        await displayRazorpay(bookingId, phoneNumber, amount);
     };
 
     return (
@@ -94,7 +94,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                     <p>Show Fare Details</p>
                                 </div> */}
                                 <div className='checkout-container'>
-                                    <button type="button" className='checkout-button' onClick={razorpay} >
+                                    <button type="button" className='checkout-button'  onClick={razorpay} >
                                         Proceed to Payment
                                     </button>
                                 </div>
