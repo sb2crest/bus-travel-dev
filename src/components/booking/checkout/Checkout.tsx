@@ -1,6 +1,6 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
 import './Checkout.scss';
-import Confirmation from '../booking confirmation/Confirmation';
+import Confirmation from '../Booking Confirmation/Confirmation';
 import VehicleImage from '../../../assets/images/booking-summary-dummy-image.webp';
 import displayRazorpay from '../payment/utils/PaymentGateway';
 

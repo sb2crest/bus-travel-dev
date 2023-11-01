@@ -1,8 +1,8 @@
 import React from "react";
 import "./Cards.scss";
 import styled from "styled-components";
-import Rotate from 'react-reveal/Rotate';
-import Pulse from 'react-reveal/Pulse';
+import Slide from "react-reveal/Slide";
+
 const Icon = styled.i`
   font-size: 2rem; /* Set the initial size of the icon */
   color: #0f7bab;
@@ -17,8 +17,8 @@ const Icon = styled.i`
 const Cards = () => {
   return (
     <div className="ag-format-container">
+      <Slide bottom>
       <div className="ag-courses_box">
-      <Rotate top left>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -38,8 +38,6 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Rotate>
-        <Pulse>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -59,8 +57,6 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Pulse>
-      <Rotate top right>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -81,8 +77,6 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Rotate>
-        <Rotate bottom left>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -103,8 +97,6 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Rotate>
-        <Pulse>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -124,8 +116,6 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Pulse>
-        <Rotate bottom right>
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
@@ -145,8 +135,8 @@ const Cards = () => {
             </div>
           </a>
         </div>
-        </Rotate>
       </div>
+      </Slide>
     </div>
   );
 };
