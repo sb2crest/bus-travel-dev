@@ -14,7 +14,6 @@ import sportsevent from "../../assets/images/sportsevent.jpg";
 import Cards from "../cards/Cards";
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
-import Tada from "react-reveal/Tada";
 const Icon = styled.i`
   font-size: 2rem; /* Set the initial size of the icon */
   color: #0f7bab;
@@ -68,8 +67,7 @@ const Home: React.FC = () => {
       </Slide>
       <div className="our_services">
         <div className="our_services_heading">
-          <Slide left>
-          </Slide>
+          <Slide left></Slide>
           <Fade bottom>
             <h1>
               We Provide <span className="underline">Best Services</span> For
@@ -181,38 +179,26 @@ const Home: React.FC = () => {
             <div className="aboutus_container_services_section_images">
               <h1>Our Services</h1>
               <div className="aboutus_container_services_section_images_one">
-                <Fade top>
-                  <div className="services_img">
-                    <img src={schooltrip} alt="" />
-                    <h3>School & College Trips</h3>
-                  </div>
-                </Fade >
-                <Fade bottom>
-                  <div className="services_img">
-                    <img src={wedding} alt="" />
-                    <h3>Weddings</h3>
-                  </div>
-                </Fade >
-                <Fade top>
-                  <div className="services_img">
-                    <img src={trips} alt="" />
-                    <h3>Corporate Trips</h3>
-                  </div>
-                </Fade >
-
-                <Fade bottom>
-                  <div className="services_img">
-                    <img src={privatetrip} alt="" />
-                    <h3>Private Trips</h3>
-                  </div>
-                </Fade >
-
-                <Fade top>
-                  <div className="services_img">
-                    <img src={sportsevent} alt="" />
-                    <h3>Sports Events</h3>
-                  </div>
-                </Fade >
+                <div className="services_img">
+                  <img src={schooltrip} alt="" />
+                  <h3>School & College Trips</h3>
+                </div>
+                <div className="services_img">
+                  <img src={wedding} alt="" />
+                  <h3>Weddings</h3>
+                </div>
+                <div className="services_img">
+                  <img src={trips} alt="" />
+                  <h3>Corporate Trips</h3>
+                </div>
+                <div className="services_img">
+                  <img src={privatetrip} alt="" />
+                  <h3>Private Trips</h3>
+                </div>
+                <div className="services_img">
+                  <img src={sportsevent} alt="" />
+                  <h3>Sports Events</h3>
+                </div>
               </div>
             </div>
           </div>

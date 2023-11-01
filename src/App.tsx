@@ -12,15 +12,15 @@ import image2 from './assets/images/img_2.jpg';
 import image3 from './assets/images/img_3.jpg';
 import image4 from './assets/images/img_4.jpg';
 import Home from './components/home/Home';
-import List from './components/vehicle/vehicle list/List';
 import VehicleInfo from './components/vehicle/vehicle info/VehicleInfo';
 import AboutUs from './components/about/AboutUs';
 import Navbar from './components/navbar/Nav';
 import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
-// import BookingInfo from './components/booking info/BookingInfo';
-// import BookingDetails from './components/booking info/Booking Details/BookingDetails';
+import BookingInfo from './components/Booking Info/BookingInfo';
+import BookingDetails from './components/Booking Info/Booking Details/BookingDetails';
 import Test from './components/test/Test';
+import Booking from './components/booking/Booking';
 
 
 const images = [
@@ -51,9 +51,9 @@ const App = () => {
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/vehicles" component={VehiclesList} />
             <Route exact path="/addVehicle" component={AddVehicle} />
-            <Route exact path="/List" component={List} />
-            {/* <Route exact path="/bookinginfo" component={BookingInfo} />
-            <Route path='/booking-details' component={BookingDetails} /> */}
+            <Route exact path="/booking" component={Booking} />
+            <Route exact path="/bookinginfo" component={BookingInfo} />
+            <Route path='/booking-details' component={BookingDetails} />
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />
