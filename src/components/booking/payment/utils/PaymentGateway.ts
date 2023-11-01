@@ -19,7 +19,7 @@ export default async function displayRazorpay(bookingId: string, mobile: string,
   const options = {
     key: 'rzp_test_nHgaZ8pP0SqyOm',
     currency: data.currency,
-    amount: data.amount,
+    amount: amount,
     name: "Pay Now",
     description: "Wallet Transaction",
     image: "http://localhost:8100/src/assets/images/Logo.png",
@@ -31,7 +31,7 @@ export default async function displayRazorpay(bookingId: string, mobile: string,
     prefill: {
       name: "Vijay Krisna",
       email: "vkg.arya@gmail.com",
-      contact: "9999999999",
+      contact: mobile,
     },
   };
 
