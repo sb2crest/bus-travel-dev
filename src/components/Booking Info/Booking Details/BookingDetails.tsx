@@ -1,6 +1,7 @@
 import React from 'react'
 import './BookingDetails.scss';
-import icon from '../../../assets/images/Logo.png'
+import icon from '../../../assets/images/Logo.png';
+
 
 const BookingDetails = () => {
     return (
