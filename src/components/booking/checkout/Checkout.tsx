@@ -87,7 +87,6 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                                 </p>
                                                 <div className='line'></div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +94,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                     <p>Show Fare Details</p>
                                 </div> */}
                                 <div className='checkout-container'>
-                                    <button type="button" className='checkout-button'>
+                                    <button type="button" className='checkout-button' onClick={razorpay} >
                                         Proceed to Payment
                                     </button>
                                 </div>

@@ -2,8 +2,8 @@ import http from "../http-common";
 import IOTPData from "../types/otp.type";
 import IVehicleData from "../types/vehicle.type";
 import ListVehicle from "../types/list.type";
-import IBookingInfoRequest from "../types/BookingInfo/request.type";
-import IBookNowRequest from "../types/BookNow/request.type";
+import IBookingInfoRequest from "../types/bookinginfo/request.type";
+import IBookNowRequest from "../types/booknow/request.type";
 import IPaymentRequest from "../types/payment/payment.request.type";
 import IGetInTouch from "../types/getInTouch.type";
 class DataService {
@@ -66,19 +66,9 @@ class DataService {
     return http.put<any>(`updateVehicle/${id}`, data);
   }
 
-  // generateOTP
-  // generateOTP(mobile: string) {
-  //   return http.post<IOTPData>("sendOTP", mobile);
-  // }
-
-  // validateOTP
-  // validateOTP(data: IOTPData) {
-  //   return http.post<IOTPData>("validateOTP", data);
-  // }
-
   // bookingInfo
   bookingInfo(bookingID: string) {
-    return http.get<IBookingInfoRequest>("getBookingInfoByBookingId?bookingId="+ bookingID);
+    return http.get<IBookingInfoRequest>("getBookingInfoByBookingId?bookingId=" +bookingID);
   }
 }
 
