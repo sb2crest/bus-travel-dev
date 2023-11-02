@@ -5,7 +5,7 @@ import './form.scss';
 import { FaExclamationTriangle } from "react-icons/fa";
 import dataService from "../../../services/data.service";
 import IVehicleData from "../../../types/vehicle.type";
-import Warning from "../../Warning Component/Warning";
+import Warning from '../../warning component/Warning';
 import Checkout from "../../booking/checkout/Checkout";
 
 interface Image {

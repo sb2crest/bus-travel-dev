@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent } from 'react'
 import './BookingInfo.scss';
 import asideImage from '../../assets/images/Aside Image.png';
-import { Link } from 'react-router-dom';
 import dataService from '../../services/data.service';
+import BookingDetails from './booking details/BookingDetails';
 
 interface State {
     phoneNumber: string;
@@ -27,12 +27,14 @@ const BookingInfo = () => {
     const [verify, setVerify] = useState(false);
     const [otpResend, setOtpResend] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState<any>(null);
+    const[ShowDetailsButton, setShowDetailsButton]=useState(false);
 
     const sendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const { phoneNumber } = state;
+        let mobile = phoneNumber;
         dataService
-            .sendOTP(phoneNumber)
+            .sendOTP(mobile)
             .then((response) => {
                 if (response.data) {
                     setState({ ...state, sentOtp: response.data.sentOtp });
@@ -60,6 +62,7 @@ const BookingInfo = () => {
             .then((response: { data: any }) => {
                 if (response.data) {
                     setState({ ...state, otpVerified: true });
+                   
                     console.log("OTP Verified!");
                 } else {
                     console.log("OTP Verification Failed!");
@@ -69,7 +72,7 @@ const BookingInfo = () => {
                 console.error("Error validating OTP:", error);
             });
         setVerify(true);
-        setShowDetails(true);
+        setShowDetailsButton(true);
         setOtpSent(false);
     }
 
@@ -94,13 +97,16 @@ const BookingInfo = () => {
         setOtpResend(true);
     }
 
-    const bookingInfo = () => {
-        const { bookingID } = state;
+    const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        let bookingNumber = bookingID;
         dataService
-            .bookingInfo(bookingID)
+            .bookingInfo(bookingNumber)
             .then((response) => {
                 if (response.data) {
                     console.log("Booking Info Retrieved:", response.data);
+                    setBookingDetails(response.data);
+                    setShowDetails(true);
                 } else {
                     console.log("Failed to retrieve booking info.");
                 }
@@ -113,73 +119,73 @@ const BookingInfo = () => {
 
     return (
         <div className='booking-info'>
-            <div className='booking-info-container'>
-                <form className='form'>
-                    <div className='header-custom'>
-                        <p className='header'>Booking Details</p>
-                    </div>
-                    <div className='booking-id'>
-                        <input
-                            placeholder='Booking ID'
-                            type='text'
-                            value={bookingID}
-                            onChange={(e) => setBookingID(e.target.value)}
-                            className='input-booking-id' />
-                    </div>
-                    <div className='phone'>
-                        <input
-                            placeholder='Phone Number'
-                            type='text'
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                            className='input-phone' />
-                    </div>
-                    <div className='send-otp'>
-                        {otpSent ? (
-                            <>
-                                <div className='otp'>
-                                    <input
-                                        placeholder='OTP'
-                                        type='password'
-                                        value={otp}
-                                        onChange={(e) => setOtp(e.target.value)}
-                                        className='input-otp' />
-                                </div>
-                                <div className='verify-resend'>
-                                    <div className='verify-resend-01'>
-                                        <button className='verify' onClick={verifyOTP}>Verify OTP</button>
-                                        <button className='resend' onClick={resendOTP}>Resend</button>
+            {!showDetails ? (
+                <div className='booking-info-container'>
+                    <form className='form'>
+                        <div className='header-custom'>
+                            <p className='header'>Booking Details</p>
+                        </div>
+                        <div className='booking-id'>
+                            <input
+                                placeholder='Booking ID'
+                                type='text'
+                                value={bookingID}
+                                onChange={(e) => setBookingID(e.target.value)}
+                                className='input-booking-id' />
+                        </div>
+                        <div className='phone'>
+                            <input
+                                placeholder='Phone Number'
+                                type='text'
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                className='input-phone' />
+                        </div>
+                        <div className='send-otp'>
+                            {otpSent ? (
+                                <>
+                                    <div className='otp'>
+                                        <input
+                                            placeholder='OTP'
+                                            type='password'
+                                            value={otp}
+                                            onChange={(e) => setOtp(e.target.value)}
+                                            className='input-otp' />
                                     </div>
-                                </div>
-                            </>
-                        ) :
-                            !showDetails ? (
-                                <button className='button-send-otp' onClick={sendOTP}>
-                                    Send OTP
-                                </button>
-                            )
-                                : null}
-                    </div>
-                    {showDetails && (
-                        <>
+                                    <div className='verify-resend'>
+                                        <div className='verify-resend-01'>
+                                            <button className='verify' onClick={verifyOTP}>Verify OTP</button>
+                                            <button className='resend' onClick={resendOTP}>Resend</button>
+                                        </div>
+                                    </div>
+                                </>
+                            ) :
+                                !showDetails ? (
+                                    <button className='button-send-otp' onClick={sendOTP}>
+                                        Send OTP
+                                    </button>
+                                )
+                                    : null}
+                        </div>
+                        {ShowDetailsButton && (
                             <div className='show-details'>
                                 <div className='show-details-01'>
-                                    <Link to='/booking-details' className='anchor-custom'>
-                                        <button className='button-show-details' onClick={bookingInfo}>Show Details</button>
-                                    </Link>
+                                    <button className='button-show-details' onClick={bookingInfo}>Show Details</button>
                                 </div>
                             </div>
-                        </>
-                    )}
-                </form>
-                <div className='image-container'>
-                    <div className='image-wrapper'>
-                        <img src={asideImage} alt='Image' className='image-class' />
+                        )}
+                    </form>
+                    <div className='image-container'>
+                        <div className='image-wrapper'>
+                            <img src={asideImage} alt='Image' className='image-class' />
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                bookingDetails && <BookingDetails bookingDetails={bookingDetails}  bookingID={bookingID} />
+            )}
+
         </div>
     )
 }
-
 export default BookingInfo

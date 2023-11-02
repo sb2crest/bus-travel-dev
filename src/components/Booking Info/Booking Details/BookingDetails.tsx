@@ -1,8 +1,21 @@
 import React from 'react'
 import './BookingDetails.scss';
-import icon from '../../../assets/images/Logo.png'
+import icon from '../../../assets/images/Logo.png';
 
-const BookingDetails = () => {
+interface BookingDetailsProps {
+    bookingDetails: {
+        bookingDate: string;
+        vehicleNumber: string;
+        fromDate: string;
+        toDate: string;
+        driverName: string;
+        driverNumber: string;
+        alternateNumber: string;
+    };
+    bookingID: string;
+}
+
+const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails, bookingID }) => {
     return (
         <div className='booking-details-main'>
             <div className='booking-details-container'>
@@ -29,12 +42,12 @@ const BookingDetails = () => {
                 <div className='line'></div>
                 <div className='date-booking-id-container'>
                     <p className='booking-date'>
-                        Sunday, November 12 2023
+                        {bookingDetails.bookingDate}
                     </p>
                     <p className='booking-id'>
                         <span className='booking-no'>Booking Number</span>
                         <br></br>
-                        <span className='number'>12345PN0912</span>
+                        <span className='number'>{bookingID}</span>
                     </p>
                 </div>
                 <div className='line-01'></div>
@@ -47,21 +60,20 @@ const BookingDetails = () => {
                     <div className='bus-name'>
                         <p className='bus-name-number'>
                             <span className='bus-number-header'>Bus Number : </span>
-                            <a href="#"><span className='bus-number'>KA09EQ12349</span></a>
+                            <span className='bus-number'>{bookingDetails.vehicleNumber}</span>
                             <br />
-                            <span className='bus-name'>Semi-Sleeper A/C</span>
                         </p>
                     </div>
                     <div className='departure-date'>
                         <p className='from-date'>
                             <span className='departure'>From-Date : </span>
-                            <span className='date'>02-10-2023</span>
+                            <span className='date'>{bookingDetails.fromDate}</span>
                         </p>
                     </div>
                     <div className='to-date'>
                         <p className='to-date-arrival'>
                             <span className='arrival'>To-Date : </span>
-                            <span className='arrival-date'>07-10-2023</span>
+                            <span className='arrival-date'>{bookingDetails.toDate}</span>
                         </p>
                     </div>
                 </div>
@@ -75,19 +87,19 @@ const BookingDetails = () => {
                     <div className='driver-info'>
                         <p className='driver'>
                             <span className='name'>Driver Name : </span>
-                            <span className='driver-name'> Suresh M</span>
+                            <span className='driver-name'>{bookingDetails.driverName}</span>
                         </p>
                     </div>
                     <div className='driver-contact'>
                         <p className='number'>
                             <span className='contact'>Contact No : </span>
-                            <span className='driver-number'>8910098124</span>
+                            <span className='driver-number'>{bookingDetails.driverNumber}</span>
                         </p>
                     </div>
                     <div className='driver-alternate'>
                         <p className='driver-alternate-number'>
                             <span className='alernative-number'>Alternate No : </span>
-                            <span className='driver-alternative'>8910923712</span>
+                            <span className='driver-alternative'>{bookingDetails.alternateNumber}</span>
                         </p>
                     </div>
                 </div>

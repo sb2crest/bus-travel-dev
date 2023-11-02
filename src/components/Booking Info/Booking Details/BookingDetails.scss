@@ -92,8 +92,10 @@
         }
 
         .number {
-          font-size: 13px;
+          font-size: 14px;
           font-style: initial;
+          font-weight: 500;
+          color: grey;
         }
       }
     }
@@ -136,12 +138,6 @@
             font-weight: 600;
           }
 
-          .bus-name {
-            margin-left: 90px;
-            font-size: 11px;
-            color: grey;
-            font-style: italic;
-          }
         }
       }
 
@@ -268,6 +264,7 @@
       top: 50%;
       position: absolute;
     }
+
     .hr-lines:after {
       content: "";
       display: block;
@@ -280,11 +277,13 @@
     }
   }
 }
+
 @media only screen and (max-width: 480px) {
   .booking-details-main {
     .booking-details-container {
       width: 85%;
       padding: 0px;
+
       .header {
         flex-direction: column;
 
@@ -316,12 +315,15 @@
       .date-booking-id-container {
         display: block;
         width: 100%;
+
         .booking-id {
           margin-left: 0px;
         }
       }
+
       .vehicle-details {
         width: 100%;
+
         .vehicle-header {
           .vehicle-heading {
             margin-left: 0px;
@@ -335,9 +337,11 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+
         .bus-name {
           text-align: center;
           width: 100%;
+
           .bus-name-number {
             margin-left: 0px;
           }
@@ -354,6 +358,7 @@
 
       .driver-details {
         width: 100%;
+
         .driver-header {
           .driver-heading {
             margin-left: 0px;
@@ -367,6 +372,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+
         .driver-info {
           .driver {
             margin-left: 0px;
@@ -418,11 +424,13 @@
     }
   }
 }
+
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .booking-details-main {
     .booking-details-container {
       width: 85%;
       padding: 0px;
+
       .header {
         flex-direction: column;
 
@@ -454,12 +462,15 @@
       .date-booking-id-container {
         display: block;
         width: 100%;
+
         .booking-id {
           margin-left: 0px;
         }
       }
+
       .vehicle-details {
         width: 100%;
+
         .vehicle-header {
           .vehicle-heading {
             margin-left: 0px;
@@ -473,9 +484,11 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+
         .bus-name {
           text-align: center;
           width: 100%;
+
           .bus-name-number {
             margin-left: 0px;
           }
@@ -492,6 +505,7 @@
 
       .driver-details {
         width: 100%;
+
         .driver-header {
           .driver-heading {
             margin-left: 0px;
@@ -505,6 +519,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+
         .driver-info {
           .driver {
             margin-left: 0px;
@@ -558,403 +573,413 @@
 }
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {
-    .booking-details-main {
-        align-items: center;
-        .booking-details-container {
-          justify-content: center;
-          width: 80%;
-          padding: 0px;
-          .header {
-            display: flex;
-            width: 100%;
-            .header-left {
-              .logo-line {
-                height: 70%;
-              }
-      
-              .heading {
-                padding-right: 200px;
-              }
-            }
-      
+  .booking-details-main {
+    align-items: center;
+
+    .booking-details-container {
+      justify-content: center;
+      width: 80%;
+      padding: 0px;
+
+      .header {
+        display: flex;
+        width: 100%;
+
+        .header-left {
+          .logo-line {
+            height: 70%;
           }
-      
-          .date-booking-id-container {
-            display: flex;
-      
-            .booking-date {
-              font-size: 15px;
-              font-weight: 600;
-            }
-      
-            .booking-id {
-              margin-left: 300px;
-                
-              .booking-no {
-                font-size: 14px;
-                font-style: italic;
-                font-weight: 500;
-              }
-      
-              .number {
-                font-size: 13px;
-                font-style: initial;
-              }
-            }
+
+          .heading {
+            padding-right: 200px;
           }
-          .vehicle-details {
-            width: 100%;
-            .vehicle-header {
-              .vehicle-heading {
-                margin-left: 0px;
-                text-align: center;
-              }
-            }
+        }
+
+      }
+
+      .date-booking-id-container {
+        display: flex;
+
+        .booking-date {
+          font-size: 15px;
+          font-weight: 600;
+        }
+
+        .booking-id {
+          margin-left: 300px;
+
+          .booking-no {
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 500;
           }
-      
-          .vehicle-timing-container {
-            display: flex;
-      
-            .bus-name {
-              .bus-name-number {
-                margin-left: 0px;
-      
-                .bus-name {
-                  margin-left: 0px;
-                }
-              }
-            }
-      
-            .departure-date {
-              margin-left: 140px;
-            }
-      
-            .to-date {
-              margin-left: 160px;
-      
-            }
-          }
-      
-          .driver-details {
-            width: 100%;
-            .driver-header {
-              .driver-heading {
-                margin-left:0px;
-                text-align: center;
-              }
-            }
-          }
-          .hr-lines {
-            font-family: sans-serif;
-            margin: 30px auto;
-            color: rgb(15, 123, 175);
-            text-align: center;
-            font-size: 25px;
-            max-width: 400px;
-            position: relative;
-          }
-      
-          .hr-lines:before {
-            content: "";
-            display: block;
-            width: 170px;
-            height: 2.5px;
-            background: #191970;
-            left: -65%;
-            top: 50%;
-            position: absolute;
-          }
-          .hr-lines:after {
-            content: "";
-            display: block;
-            width: 170px;
-            height: 2.5px;
-            background: #191970;
-            right: -65%;
-            top: 50%;
-            position: absolute;
+
+          .number {
+            font-size: 13px;
+            font-style: initial;
           }
         }
       }
+
+      .vehicle-details {
+        width: 100%;
+
+        .vehicle-header {
+          .vehicle-heading {
+            margin-left: 0px;
+            text-align: center;
+          }
+        }
+      }
+
+      .vehicle-timing-container {
+        display: flex;
+
+        .bus-name {
+          .bus-name-number {
+            margin-left: 0px;
+
+            .bus-name {
+              margin-left: 0px;
+            }
+          }
+        }
+
+        .departure-date {
+          margin-left: 140px;
+        }
+
+        .to-date {
+          margin-left: 160px;
+
+        }
+      }
+
+      .driver-details {
+        width: 100%;
+
+        .driver-header {
+          .driver-heading {
+            margin-left: 0px;
+            text-align: center;
+          }
+        }
+      }
+
+      .hr-lines {
+        font-family: sans-serif;
+        margin: 30px auto;
+        color: rgb(15, 123, 175);
+        text-align: center;
+        font-size: 25px;
+        max-width: 400px;
+        position: relative;
+      }
+
+      .hr-lines:before {
+        content: "";
+        display: block;
+        width: 170px;
+        height: 2.5px;
+        background: #191970;
+        left: -65%;
+        top: 50%;
+        position: absolute;
+      }
+
+      .hr-lines:after {
+        content: "";
+        display: block;
+        width: 170px;
+        height: 2.5px;
+        background: #191970;
+        right: -65%;
+        top: 50%;
+        position: absolute;
+      }
+    }
+  }
 }
+
 @media screen and (min-width: 1023px) and (max-width: 1279px) {
-    .booking-details-main {
-        .booking-details-container {
+  .booking-details-main {
+    .booking-details-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      width: 80%;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      text-align: center;
+
+      .header {
+        display: flex;
+        width: 100%;
+
+        .header-left {
+          flex: 1;
           display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          position: relative;
-          width: 80%;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          background-color: white;
-          text-align: center;
-      
-          .header {
+          align-items: center;
+
+          .icon {
+            width: 15%;
             display: flex;
-            width: 100%;
-      
-            .header-left {
-              flex: 1;
-              display: flex;
-              align-items: center;
-      
-              .icon {
-                width: 15%;
-                display: flex;
-                align-items: flex-start;
-              }
-      
-              .logo-line {
-                border-left: 1.2px solid #d3d3d3;
-                height: 100%;
-                margin-right: auto;
-                margin-left: 10px;
-              }
-      
-              .heading {
-                padding-bottom: 1%;
-                padding-right: 420px;
-                font-size: 26px;
-                font-weight: 450;
-                color: rgb(15, 123, 175);
-              }
-            }
-      
-            .header-right {
-              line-height: 1.2;
-              margin-top: 12px;
-      
-              .query {
-                font-size: 14px;
-                font-weight: 600;
-                color: rgb(15, 123, 175);
-              }
-      
-              .contact {
-                font-size: 12px;
-                font-weight: 400;
-              }
-      
-              .gmail {
-                font-size: 12px;
-                font-weight: 400;
-              }
-            }
+            align-items: flex-start;
           }
-      
-          .line {
-            border-bottom: 1.2px solid #d3d3d3;
-            width: 100%;
-            margin: auto;
-            padding-top: 1%;
+
+          .logo-line {
+            border-left: 1.2px solid #d3d3d3;
+            height: 100%;
+            margin-right: auto;
+            margin-left: 10px;
           }
-      
-          .date-booking-id-container {
-            display: flex;
-      
-            .booking-date {
-              font-size: 17px;
-              font-weight: 600;
-            }
-      
-            .booking-id {
-              margin-left: 550px;
-      
-              .booking-no {
-                font-size: 14px;
-                font-style: italic;
-                font-weight: 500;
-              }
-      
-              .number {
-                font-size: 13px;
-                font-style: initial;
-              }
-            }
-          }
-      
-          .line-01 {
-            border-bottom: 2px solid #002d62;
-            width: 100%;
-            margin: auto;
-            padding-top: 1%;
-          }
-      
-          .vehicle-details {
-            .vehicle-header {
-              .vehicle-heading {
-                margin-left: 360px;
-                font-size: 24px;
-                font-weight: 600;
-                text-decoration: underline;
-                color: rgb(15, 123, 175);
-                line-height: 1.5px;
-              }
-            }
-          }
-      
-          .vehicle-timing-container {
-            display: flex;
-      
-            .bus-name {
-              .bus-name-number {
-                margin-left: 20px;
-      
-                .bus-number-header {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .bus-number {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-      
-                .bus-name {
-                  margin-left: 90px;
-                  font-size: 11px;
-                  color: grey;
-                  font-style: italic;
-                }
-              }
-            }
-      
-            .departure-date {
-              margin-left: 125px;
-      
-              .from-date {
-                .departure {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .date {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-              }
-            }
-      
-            .to-date {
-              margin-left: 130px;
-      
-              .to-date-arrival {
-                .arrival {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .arrival-date {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-              }
-            }
-          }
-      
-          .driver-details {
-            .driver-header {
-              .driver-heading {
-                margin-left: 360px;
-                font-size: 24px;
-                font-weight: 600;
-                text-decoration: underline;
-                color: rgb(15, 123, 175);
-                line-height: 1.5px;
-              }
-            }
-          }
-      
-          .driver-info-container {
-            display: flex;
-      
-            .driver-info {
-              .driver {
-                margin-left: 20px;
-      
-                .name {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .driver-name {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-              }
-            }
-      
-            .driver-contact {
-              .number {
-                margin-left: 150px;
-      
-                .contact {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .driver-number {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-              }
-            }
-      
-            .driver-alternate {
-              margin-left: 120px;
-      
-              .driver-alternate-number {
-                .alernative-number {
-                  font-size: 15px;
-                  color: grey;
-                }
-      
-                .driver-alternative {
-                  padding-left: 6px;
-                  font-size: 16px;
-                  font-weight: 600;
-                }
-              }
-            }
-          }
-      
-          .hr-lines {
-            font-family: sans-serif;
-            margin: 30px auto;
+
+          .heading {
+            padding-bottom: 1%;
+            padding-right: 420px;
+            font-size: 26px;
+            font-weight: 450;
             color: rgb(15, 123, 175);
-            text-align: center;
-            font-size: 25px;
-            max-width: 400px;
-            position: relative;
           }
-      
-          .hr-lines:before {
-            content: "";
-            display: block;
-            width: 250px;
-            height: 2.5px;
-            background: #191970;
-            left: -100%;
-            top: 50%;
-            position: absolute;
+        }
+
+        .header-right {
+          line-height: 1.2;
+          margin-top: 12px;
+
+          .query {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(15, 123, 175);
           }
-          .hr-lines:after {
-            content: "";
-            display: block;
-            width: 250px;
-            height: 2.5px;
-            background: #191970;
-            right: -100%;
-            top: 50%;
-            position: absolute;
+
+          .contact {
+            font-size: 12px;
+            font-weight: 400;
+          }
+
+          .gmail {
+            font-size: 12px;
+            font-weight: 400;
           }
         }
       }
+
+      .line {
+        border-bottom: 1.2px solid #d3d3d3;
+        width: 100%;
+        margin: auto;
+        padding-top: 1%;
+      }
+
+      .date-booking-id-container {
+        display: flex;
+
+        .booking-date {
+          font-size: 17px;
+          font-weight: 600;
+        }
+
+        .booking-id {
+          margin-left: 550px;
+
+          .booking-no {
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 500;
+          }
+
+          .number {
+            font-size: 13px;
+            font-style: initial;
+          }
+        }
+      }
+
+      .line-01 {
+        border-bottom: 2px solid #002d62;
+        width: 100%;
+        margin: auto;
+        padding-top: 1%;
+      }
+
+      .vehicle-details {
+        .vehicle-header {
+          .vehicle-heading {
+            margin-left: 360px;
+            font-size: 24px;
+            font-weight: 600;
+            text-decoration: underline;
+            color: rgb(15, 123, 175);
+            line-height: 1.5px;
+          }
+        }
+      }
+
+      .vehicle-timing-container {
+        display: flex;
+
+        .bus-name {
+          .bus-name-number {
+            margin-left: 20px;
+
+            .bus-number-header {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .bus-number {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+
+            .bus-name {
+              margin-left: 90px;
+              font-size: 11px;
+              color: grey;
+              font-style: italic;
+            }
+          }
+        }
+
+        .departure-date {
+          margin-left: 125px;
+
+          .from-date {
+            .departure {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .date {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+
+        .to-date {
+          margin-left: 130px;
+
+          .to-date-arrival {
+            .arrival {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .arrival-date {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      .driver-details {
+        .driver-header {
+          .driver-heading {
+            margin-left: 360px;
+            font-size: 24px;
+            font-weight: 600;
+            text-decoration: underline;
+            color: rgb(15, 123, 175);
+            line-height: 1.5px;
+          }
+        }
+      }
+
+      .driver-info-container {
+        display: flex;
+
+        .driver-info {
+          .driver {
+            margin-left: 20px;
+
+            .name {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .driver-name {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+
+        .driver-contact {
+          .number {
+            margin-left: 150px;
+
+            .contact {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .driver-number {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+
+        .driver-alternate {
+          margin-left: 120px;
+
+          .driver-alternate-number {
+            .alernative-number {
+              font-size: 15px;
+              color: grey;
+            }
+
+            .driver-alternative {
+              padding-left: 6px;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      .hr-lines {
+        font-family: sans-serif;
+        margin: 30px auto;
+        color: rgb(15, 123, 175);
+        text-align: center;
+        font-size: 25px;
+        max-width: 400px;
+        position: relative;
+      }
+
+      .hr-lines:before {
+        content: "";
+        display: block;
+        width: 250px;
+        height: 2.5px;
+        background: #191970;
+        left: -100%;
+        top: 50%;
+        position: absolute;
+      }
+
+      .hr-lines:after {
+        content: "";
+        display: block;
+        width: 250px;
+        height: 2.5px;
+        background: #191970;
+        right: -100%;
+        top: 50%;
+        position: absolute;
+      }
+    }
+  }
 }

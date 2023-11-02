@@ -17,8 +17,7 @@ import AboutUs from './components/about/AboutUs';
 import Navbar from './components/navbar/Nav';
 import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
-import BookingInfo from './components/Booking Info/BookingInfo';
-import BookingDetails from './components/Booking Info/Booking Details/BookingDetails';
+import BookingInfo from './components/booking info/BookingInfo';
 import Test from './components/test/Test';
 import Booking from './components/booking/Booking';
 
@@ -53,7 +52,7 @@ const App = () => {
             <Route exact path="/addVehicle" component={AddVehicle} />
             <Route exact path="/booking" component={Booking} />
             <Route exact path="/bookinginfo" component={BookingInfo} />
-            <Route path='/booking-details' component={BookingDetails} />
+            {/* <Route path='/booking-details' component={BookingDetails} /> */}
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />
