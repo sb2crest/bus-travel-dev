@@ -1,6 +1,7 @@
 .booking-info {
   display: flex;
   justify-content: center;
+
   .booking-info-container {
     display: flex;
     align-items: center;
@@ -12,6 +13,7 @@
     background-color: white;
     text-align: center;
     margin-right: -12vw;
+
     .form {
       margin-left: 20px;
 
@@ -45,6 +47,7 @@
 
       .phone {
         margin-top: 5px;
+
         .input-phone {
           width: 120%;
           padding: 10px;
@@ -132,26 +135,25 @@
 
       .show-details {
         .show-details-01 {
-          .anchor-custom {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
 
-            .button-show-details {
-              margin-left: 25%;
-              margin-top: 5px;
-              width: 105%;
-              height: 35px;
-              font-size: 16px;
-              background-color: #0f7bab;
-              color: white;
-              border: none;
-              border-radius: 2px;
-              text-align: center;
-              cursor: pointer;
-            }
+          .button-show-details {
+            margin-left: 25%;
+            margin-top: 5px;
+            width: 105%;
+            height: 35px;
+            font-size: 16px;
+            background-color: #0f7bab;
+            color: white;
+            border: none;
+            border-radius: 2px;
+            text-align: center;
+            cursor: pointer;
           }
+
         }
       }
     }
@@ -169,15 +171,18 @@
     }
   }
 }
+
 @media only screen and (max-width: 480px) {
   .booking-info {
     align-items: center;
+
     .booking-info-container {
       flex-direction: column;
       background-color: #a2e0fd;
       padding: 0px;
       border-radius: 0;
       margin-right: 0;
+
       .form {
         margin-left: 0px;
 
@@ -198,6 +203,7 @@
 
         .phone {
           margin-top: 10px;
+
           .input-phone {
             width: 100%;
           }
@@ -212,6 +218,7 @@
         .otp {
           padding: 0 !important;
           text-align: justify;
+
           .input-otp {
             width: 103%;
           }
@@ -252,16 +259,19 @@
     }
   }
 }
+
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .booking-info {
     align-items: center;
     display: block !important;
+
     .booking-info-container {
       flex-direction: column;
       padding: 0px;
       background-color: #a2e0fd;
       border-radius: 0;
       margin-right: 0;
+
       .form {
         margin-left: 0px;
 
@@ -282,6 +292,7 @@
 
         .phone {
           margin-top: 10px;
+
           .input-phone {
             width: 100%;
           }
@@ -296,6 +307,7 @@
         .otp {
           padding: 0 !important;
           text-align: justify;
+
           .input-otp {
             width: 103%;
           }
@@ -336,10 +348,12 @@
     }
   }
 }
+
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .booking-info {
     align-items: center;
     display: block !important;
+
     .booking-info-container {
       flex-direction: column;
       padding: 0px;
@@ -367,6 +381,7 @@
 
         .phone {
           margin-top: 10px;
+
           .input-phone {
             width: 100%;
           }
@@ -381,6 +396,7 @@
         .otp {
           padding: 0 !important;
           text-align: justify;
+
           .input-otp {
             width: 103%;
           }
