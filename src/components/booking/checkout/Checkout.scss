@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(0px);
     z-index: 1000;
 
@@ -13,15 +13,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 90%;
+        min-height: 100%;
 
         .modal-checkout-content {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            height: 420px;
+            max-width: 100%;
+            height: 380px;
 
             .modal-checkout-body {
                 margin-bottom: 20px;
@@ -30,22 +30,11 @@
                     text-align: left;
 
                     .summary-container {
-                       
-                        .booking-summary {
-                            .booking-summary-header {
-                                text-align: center;
-                                font-size: 4.5vh;
-                                font-weight: 400;
-                                margin-top: auto;
-                                text-transform: uppercase;
-                                color: #0f7bab;
-                            }
-                        }
 
                         .booking-summary-content {
                             display: flex;
                             align-items: self-start;
-    
+
                             .image-container {
                                 img {
                                     margin-top: 4vh;
@@ -56,30 +45,39 @@
 
                             .summary-content {
                                 margin-left: 4vh;
+                                margin-top: 15px;
 
-                                .booking-id {
-                                    margin-bottom: 0vh;
-                                    color: grey;
-                                    text-transform: uppercase;
-                                    font-weight: 500;
+                                .section-01 {
+                                    display: flex;
+                                    align-items: self-start;
+                                    
 
-                                    .booking-number {
-                                        font-weight: 400;
-                                        color: black;
-                                        font-style: normal;
-                                    }
-                                }
-
-                                .phone-number-container {
-                                    .phone-number {
+                                    .booking-id {
+                                        margin-top: 15px;
                                         margin-bottom: 0vh;
                                         color: grey;
-                                        text-transform: uppercase;
-                                        font-weight: 500;
-                                        font-style: normal;
+                                        font-weight: 400;
+                                        font-size: 14px;
+                                        margin-right: 10%;
 
-                                        .mobile {
+                                        .booking-number {
                                             font-weight: 400;
+                                            color: black;
+                                            font-style: normal;
+                                            font-size: 13px;
+                                            font-family: Arial, Helvetica, sans-serif;
+                                        }
+                                    }
+
+                                    .from {
+                                        color: grey;
+                                        font-weight: 400;
+                                        font-size: 14px;
+                                        margin-left: 23px;
+
+                                        .from-date {
+                                            font-size: 13px;
+                                            font-family: Arial, Helvetica, sans-serif;
                                             color: black;
                                             font-style: normal;
                                         }
@@ -88,35 +86,37 @@
 
                                 .from-to-date {
                                     display: flex;
-                                    align-items: center;
+                                    align-items: self-start;
 
-                                    .from {
+                                    .phone-number {
+                                        margin-bottom: 0vh;
                                         color: grey;
-                                        text-transform: uppercase;
-                                        font-weight: 500;
+                                        font-weight: 400;
+                                        font-size: 14px;
                                         font-style: normal;
 
-                                        .from-date {
+                                        .mobile {
                                             font-weight: 400;
                                             color: black;
                                             font-style: normal;
+                                            font-size: 13px;
+                                            font-family: Arial, Helvetica, sans-serif;
                                         }
                                     }
 
                                     .to {
                                         color: grey;
-                                        text-transform: uppercase;
-                                        font-weight: 500;
-                                        font-style: normal;
+                                        font-weight: 400;
+                                        font-size: 14px;
                                         margin-left: 3vh;
 
                                         .to-date {
-                                            font-weight: 400;
+                                            font-size: 13px;
                                             color: black;
+                                            font-family: Arial, Helvetica, sans-serif;
                                             font-style: normal;
                                         }
                                     }
-
                                 }
 
                                 .line {
@@ -131,15 +131,14 @@
                                         text-align: center;
                                         color: grey;
                                         text-transform: uppercase;
-                                        font-weight: 500;
-                                        font-style: normal;
+                                        font-weight: 400;
                                         line-height: 0vh;
                                     }
 
                                     .amount-header {
                                         font-weight: 300;
 
-                                        .tax-cal{
+                                        .tax-cal {
                                             font-weight: 100;
                                             font-size: 2vh;
                                         }
@@ -150,25 +149,72 @@
                                             font-weight: 500;
                                         }
                                     }
+
+                                    .show-hide-fare-details {
+                                        font-size: 14px;
+                                        color: #0f7bab;
+                                        text-align: right;
+                                        cursor: pointer;
+                                    }
+
+                                    .base-fare {
+                                        font-weight: 300;
+                                        display: flex;
+                                        align-items: center;
+                                    }
+
+                                    .fare {
+                                        font-size: 14px;
+                                        margin-left: 10vh;
+                                        color: black;
+                                        font-weight: 500;
+                                    }
+
+                                    .gst-fare {
+                                        font-weight: 300;
+                                        display: flex;
+                                        align-items: center;
+                                    }
+
+                                    .gst-percentage {
+                                        font-size: 14px;
+                                        margin-left: 16.6vh;
+                                        color: black;
+                                        font-weight: 500;
+                                    }
                                 }
                             }
                         }
                     }
+
                     .checkout-container {
-                        margin-top: 5vh;
+                        margin-top: 1vh;
                         text-align: center;
+
+                        .close-button {
+                            background-color: #0f7bab;
+                            font-weight: 300;
+                            color: white;
+                            border: none;
+                            text-align: center;
+                            font-size: 16px;
+                            border-radius: 0px;
+                            padding: 8px 12px 8px 12px;
+                            width: 20vh;
+                            margin-right: 60px;
+                        }
 
                         .checkout-button {
                             background-color: #0f7bab;
                             font-weight: 300;
                             color: white;
                             border: none;
-                            width: 50vh;
-                            height: 8vh;
                             text-align: center;
                             font-size: 16px;
                             margin: 10px 2px;
                             border-radius: 0px;
+                            padding: 8px 12px 8px 12px;
+                            width: 30vh;
                         }
                     }
                 }
@@ -179,35 +225,3 @@
     }
 
 }
-
-
-
-
-
-
-// .modal-body .btn-primary {
-//     background-color: #007bff;
-//     color: #fff;
-//     border: none;
-//     padding: 8px 16px;
-//     margin-right: 10px;
-//     cursor: pointer;
-// }
-
-// .message-popup {
-//     font-family: 'Georgia', serif;
-//     font-size: 1.1em;
-//     font-style: inherit;
-// }
-
-// .popup-close {
-//     width: 30%;
-//     background-color: #0f7bab;
-//     margin-left: 50px;
-
-// }
-
-// .popup-confirm {
-//     width: 30%;
-//     background-color: #0f7bab;
-// }

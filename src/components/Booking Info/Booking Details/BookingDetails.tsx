@@ -5,6 +5,7 @@ import icon from '../../../assets/images/Logo.png';
 interface BookingDetailsProps {
     bookingDetails: {
         bookingDate: string;
+        bookingID: string;
         vehicleNumber: string;
         fromDate: string;
         toDate: string;
@@ -12,10 +13,9 @@ interface BookingDetailsProps {
         driverNumber: string;
         alternateNumber: string;
     };
-    bookingID: string;
 }
 
-const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails, bookingID }) => {
+const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
     return (
         <div className='booking-details-main'>
             <div className='booking-details-container'>
@@ -47,7 +47,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails, booking
                     <p className='booking-id'>
                         <span className='booking-no'>Booking Number</span>
                         <br></br>
-                        <span className='number'>{bookingID}</span>
+                        <span className='number'>{bookingDetails.bookingID}</span>
                     </p>
                 </div>
                 <div className='line-01'></div>
