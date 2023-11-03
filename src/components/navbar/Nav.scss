@@ -110,6 +110,8 @@ nav {
     margin-left: 4%;
   }
   nav {
+    display: grid;
+    grid-template-columns: 1fr 0fr;
     align-items: center;
     justify-content: space-around;
     width: 100%;
@@ -117,7 +119,7 @@ nav {
   .menu-icon {
     display: block;
     color: #000;
-    margin-left: 73%;
+    margin-left: -40%;
   }
   .menu-list {
     flex-direction: column;

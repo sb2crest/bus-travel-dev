@@ -30,6 +30,7 @@
   overflow: hidden;
   text-decoration: none;
   position: relative;
+  cursor: default;
   p{
     color: gray;
   }
@@ -95,6 +96,7 @@
   .ag-courses_box {
     flex-direction: column;
     align-items: center;
+    padding: 0;
     .ag-courses_item {
       width: 90%;
     }
@@ -102,10 +104,16 @@
 }
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .ag-courses_box {
-    flex-direction: column;
-    align-items: center;
+    // flex-direction: column;
+    // align-items: center;
+    // padding: 0;/
+    display: grid;
+    grid-template-columns:1fr;
+    grid-gap: 10px; 
+    justify-items: center;
+    align-items: center; 
     .ag-courses_item {
-      width: 80%;
+      width: 75%;
     }
   }
 }

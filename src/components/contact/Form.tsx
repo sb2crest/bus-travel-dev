@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 import "./Form.scss";
 import IGetInTouch from "../../types/getInTouch.type";
 import dataService from "../../services/data.service";
 import ConfirmationPopup from "./ConfirmationPopup";
-import axios from "axios";
 
 const Form: React.FC = () => {
   const [name, setName] = useState("");

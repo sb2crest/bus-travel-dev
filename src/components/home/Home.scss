@@ -17,12 +17,12 @@
   justify-content: center;
 
   &_content {
-    margin-top: -15.5vw;
-  margin-bottom: 4vw;
-    width: 85%;
+    margin-top: -15vw;
+    margin-bottom: 4vw;
+    width: 70%;
     display: flex;
     justify-content: space-between;
-    padding: 40px;
+    padding: 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     background-color: white;
     border-radius: 10px;
@@ -122,7 +122,6 @@
       text-align: center;
     }
   }
-
 }
 
 .aboutUs {
@@ -185,7 +184,7 @@
   font-size: 18px;
   font-weight: 600;
   outline: 0;
-  padding: 16px 21px;
+  padding: 10px 14px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -263,12 +262,21 @@
       display: grid;
       grid-template-columns: 2fr 2fr;
       grid-gap: 20px;
-      padding: 20px 40px;
+      padding: 20px 0px;
+      margin-bottom: 0vw;
+      box-shadow: none;
+      background: none;
       &_one {
         border-right: 1px solid #72716f;
         font-size: 14px;
         .fa-2xl {
           font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
         }
       }
 
@@ -280,6 +288,12 @@
         .fa-2xl {
           font-size: 1.5rem;
         }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
       }
 
       &_three {
@@ -288,6 +302,12 @@
         .fa-2xl {
           font-size: 1.5rem;
         }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
       }
 
       &_four {
@@ -295,11 +315,17 @@
         .fa-2xl {
           font-size: 1.5rem;
         }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
       }
     }
   }
   .our_services {
-    margin-top: 3vw;
+    margin-top: 0vw;
     &_heading {
       flex-direction: column;
       align-items: center;
@@ -310,7 +336,7 @@
 
       h1 {
         margin-bottom: 0vw;
-        font-size: 22px;
+        font-size: 18px;
       }
 
       // h1 span.underline::after {
@@ -327,11 +353,10 @@
 
       p {
         width: 80%;
-        text-align: justify;
+        text-align: center;
+        font-size: 14px;
       }
     }
-
-   
   }
 
   .aboutUs {
@@ -350,7 +375,7 @@
           line-height: 1.7;
         }
         .key_points {
-          margin-left: 0vw;
+          margin-left: -2vw;
           &_two {
             margin-left: 6px;
           }
@@ -358,20 +383,13 @@
       }
 
       &_image {
-        #img1 {
-          width: 70%;
-        }
-        #img2 {
-          width: 32%;
-          top: 80px;
-          right: 50px;
-        }
+        display: none;
       }
     }
   }
   .button-71 {
-    font-size: 14px;
-    padding: 8px 12px;
+    font-size: 12px;
+    padding: 6px 10px;
   }
   .aboutus_container_services {
     &_section {
@@ -411,11 +429,20 @@
       grid-template-columns: 2fr 2fr;
       grid-gap: 20px;
       padding: 20px 40px;
+      box-shadow: none;
+      background: none;
+      margin-bottom: 0vw;
       &_one {
         border-right: 1px solid #72716f;
         font-size: 14px;
         .fa-2xl {
           font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
         }
       }
 
@@ -427,6 +454,12 @@
         .fa-2xl {
           font-size: 1.5rem;
         }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
       }
 
       &_three {
@@ -435,12 +468,24 @@
         .fa-2xl {
           font-size: 1.5rem;
         }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
       }
 
       &_four {
         font-size: 14px;
         .fa-2xl {
           font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
         }
       }
     }
@@ -462,7 +507,6 @@
         font-size: 14px;
       }
     }
-
   }
   .aboutUs {
     margin: 5vw 0;
@@ -489,14 +533,7 @@
       }
 
       &_image {
-        #img1 {
-          width: 60%;
-        }
-        #img2 {
-          width: 30%;
-          top: 80px;
-          right: 60px;
-        }
+        display: none;
       }
     }
   }
@@ -506,7 +543,12 @@
   }
   .aboutus_container_services {
     &_section {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: center; 
       &_images {
+        
         img {
           width: 255px !important;
           height: 40vh !important;
@@ -537,16 +579,17 @@
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .card_banner {
     &_content {
-      width: 87%;
+      width: 80%;
       padding: 30px;
+      margin-bottom: 0vw;
 
       &_one {
         padding-right: 2vw;
         h3 {
-          font-size: 16px;
+          font-size: 14px;
         }
         p {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -554,10 +597,10 @@
         margin-left: 0;
         padding-right: 2vw;
         h3 {
-          font-size: 16px;
+          font-size: 14px;
         }
         p {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -565,10 +608,10 @@
         margin-left: 0;
         padding-right: 2vw;
         h3 {
-          font-size: 16px;
+          font-size: 14px;
         }
         p {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -576,10 +619,10 @@
         margin-left: 0;
         text-align: center;
         h3 {
-          font-size: 16px;
+          font-size: 14px;
         }
         p {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
     }
@@ -600,7 +643,6 @@
         width: 80%;
       }
     }
-
   }
 
   .aboutUs {
@@ -637,8 +679,8 @@
   }
 
   .button-71 {
-    font-size: 16px;
-    padding: 10px 14px;
+    font-size: 14px;
+    padding: 8px 10px;
   }
   .aboutus_container_services {
     &_section {
@@ -659,9 +701,9 @@
         &_one {
           margin-top: 3vw;
           display: grid !important;
-  grid-template-columns: auto auto !important;
-  align-content: center !important ;
-  gap: 40px 0px;
+          grid-template-columns: auto auto !important;
+          align-content: center !important ;
+          gap: 40px 0px;
           h3 {
             color: #0f2454;
           }
@@ -674,7 +716,7 @@
 @media screen and (min-width: 1023px) and (max-width: 1279px) {
   .card_banner {
     &_content {
-      width: 85%;
+      width: 75%;
       padding: 30px;
 
       &_one {

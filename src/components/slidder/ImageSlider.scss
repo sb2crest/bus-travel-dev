@@ -83,3 +83,22 @@
     }
    }
 }
+
+@media only screen and (max-width: 480px) {
+    .parent_container{
+        &_Styles{
+         width: 70%;
+         .slider_container{
+             &_index{
+                 &_images{
+                  img{
+                     width: 80%;
+                     height: 35vh;
+                    
+                  }
+                 }
+             }
+         }
+        }
+     }
+  }
