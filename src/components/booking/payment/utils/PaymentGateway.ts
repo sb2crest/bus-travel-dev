@@ -66,7 +66,8 @@ export default async function displayRazorpay(
       contact: mobile,
     },
   };
-  const rzp1 = new Razorpay(options);
+  // const rzp1 = new Razorpay(options);
+  const rzp1 = new (window as any).Razorpay(options);
   rzp1.on(
     "payment.failed",
     function (response: {
@@ -88,6 +89,7 @@ export default async function displayRazorpay(
       alert(response.error.metadata.payment_id);
     }
   );
-  const paymentObject = new window.Razorpay(options);
+  // const paymentObject = new window.Razorpay(options);
+  const paymentObject = new (window as any).Razorpay(options);
   paymentObject.open();
 }
