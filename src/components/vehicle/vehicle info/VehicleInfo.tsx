@@ -7,6 +7,7 @@ import dataService from "../../../services/data.service";
 import IVehicleData from "../../../types/vehicle.type";
 import Warning from '../../warning component/Warning';
 import Checkout from "../../booking/checkout/Checkout";
+import BookingCalendar from "../../booking calendar/BookingCalendar";
 
 interface Image {
   url: string;
@@ -82,8 +83,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [checkout, setCheckout] = useState(false);
   const [bookingId, setBookingId] = useState<string>("");
 
-  //State Variables used in showing Booking Confirmation pop-up
+  //State Variable used in showing Booking Confirmation pop-up
   const [showConfirmation, setShowConfirmation] = useState(false);
+
+  //State Variable used in showing warning component
+  const [showWarning, setShowWarning] = useState(false);
+
+  const [showForm, setShowForm] = useState(true);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -112,28 +118,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     setPhoneNumber("");
     setEmail("");
     setOtp("");
-  };
-
-  //Function to Check All fields are filled
-  const isFormFilled = () => {
-    const firstNameValid = nameValidation(firstName);
-    const lastNameValid = nameValidation(lastName);
-    const emailValid = emailValidation(email);
-    const phoneNumberValid = phoneNumberValidation(phoneNumber);
-    return firstNameValid && lastNameValid && emailValid && phoneNumberValid;
-  };
-
-  // Function to Submit the form
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (otpSent && otpVerified) {
-      if (isFormFilled()) {
-        console.log("Form submitted successfully!");
-      } else {
-        setShowConfirmationpop(!showConfirmationpop);
-        console.log("Please fill out all fields in the form correctly");
-      }
-    }
   };
 
   /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
@@ -186,7 +170,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   { /*Resend OTP Function*/ }
   const ResendOTP = (): void => {
-    const { phoneNumber } = state;
     dataService
       .sendOTP(phoneNumber)
       .then((response) => {
@@ -207,47 +190,52 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   };
 
   {/* Book Now Function */ }
-  const bookVehicle = () => {
-    let requestBody = {
-      vehicleNumber: "KA09EQ1234",
-      fromDate: '2023-11-30',
-      toDate: '2023-11-05',
-      user: {
-        firstName: firstName,
-        middleName: middleName,
-        lastName: lastName,
-        mobile: phoneNumber,
-        email: email
-      },
-      slot: {
+  const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !phoneNumber || !otp || !email) {
+      setShowWarning(true);
+    }
+    else {
+      let requestBody = {
         vehicleNumber: "KA09EQ1234",
         fromDate: '2023-11-30',
-        toDate: '2023-11-05'
+        toDate: '2023-11-05',
+        user: {
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName,
+          mobile: phoneNumber,
+          email: email
+        },
+        slot: {
+          vehicleNumber: "KA09EQ1234",
+          fromDate: '2023-11-30',
+          toDate: '2023-11-05'
+        }
       }
+      dataService
+        .bookNow(requestBody)
+        .then((response: { data: any }) => {
+          if (response.data && response.data.bookingId) {
+            const bookingId = response.data;
+            setCheckout(true);
+            setBookingId(response.data.bookingId);
+            console.log("Booking successful! Booking ID: " + response.data);
+          }
+          else {
+            console.log(" Booking failed");
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error in sending Request:", error);
+        })
     }
-    dataService
-      .bookNow(requestBody)
-      .then((response: { data: any }) => {
-        if (response.data && response.data.bookingId) {
-          const bookingId = response.data;
-          setCheckout(true);
-          setBookingId(response.data.bookingId);
-          console.log("Booking successful! Booking ID: " + response.data);
-        }
-        else {
-          console.log(" Booking failed");
-        }
-      })
-      .catch((error: any) => {
-        console.error("Error in sending Request:", error);
-      })
+    
   }
   /*-----------------------------------------------------------------------------------------------------------------------*/
-
   {/* Resend Timer  */ }
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
     if (resendDisabled) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
@@ -269,11 +257,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
   };
 
+  const closeWarning = () => {
+    setShowWarning(false);
+  };
   return (
     <>
       <div className="vehicleInfo">
@@ -313,7 +303,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           </div>
 
           <div className="bus_details">
-            <h2>Vehicle Facility</h2>
+            {/* <h2>Vehicle Facility</h2> */}
             <div className="facility_icons">
               <div className="facility_icons_one">
                 <p>
@@ -365,9 +355,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
               </div>
             </div>
 
-            <h2>Additional information</h2>
+            {/* <h2>Additional information</h2> */}
 
-            <div className="additional_info">
+            {/* <div className="additional_info">
               <div className="additional_info_one">
                 <p>Seats :&nbsp;&nbsp;&nbsp;60</p>
                 <p>Length :&nbsp;&nbsp;&nbsp;10.48 m</p>
@@ -380,6 +370,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 <p>Transmission :&nbsp;&nbsp;&nbsp;Manual</p>
                 <p>Year :&nbsp;&nbsp;&nbsp;2018</p>
               </div>
+            </div> */}
+            <div>
+              <BookingCalendar />
             </div>
             <div className="containers">
               <>
@@ -419,7 +412,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                       {/* Pop-Up Form*/}
                       <div className="modal-body">
                         <div className="d-flex flex-column text-center">
-                          <form onSubmit={handleSubmit} >
+                          <form>
                             {/* First Name*/}
                             <div
                               className={`form-group ${!firstNameValid ? "has-error" : ""
@@ -654,12 +647,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                               </div>
                             </div>
                             {/* Warning pop-up */}
-                            {showConfirmationpop && <Warning />}
-                            {/* Checkout pop-up */}
-                            {checkout && <Checkout bookingId={bookingId} phoneNumber={phoneNumber} />}
+                            {showWarning && <Warning onClose={closeWarning} />}
                           </form>
                         </div>
                       </div>
+                      {/* Checkout pop-up */}
+                      {checkout && <Checkout bookingId={bookingId} phoneNumber={phoneNumber} />}
                     </div>
                   </div>
                 </div>
