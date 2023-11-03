@@ -18,7 +18,7 @@ import Navbar from './components/navbar/Nav';
 import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
 import BookingInfo from './components/booking info/BookingInfo';
-import Test from './components/test/Test';
+// import Test from './components/test/Test';
 import Booking from './components/booking/Booking';
 
 
@@ -60,7 +60,7 @@ const App = () => {
             <Route exact path="/bookVehicle" component={BookVehicle} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/aboutus" component={AboutUs} />
-            <Route exact path="/test" component={Test} />
+            {/* <Route exact path="/test" component={Test} /> */}
           </Switch>
         </div>
         <Footer />
