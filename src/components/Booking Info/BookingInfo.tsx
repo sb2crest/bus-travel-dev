@@ -10,18 +10,15 @@ interface State {
     otp: string;
     sentOtp: string | null;
     otpVerified: boolean;
-    bookingID: string
 }
 
 const BookingInfo = () => {
     const [state, setState] = useState<State>({
-        bookingID: "",
         phoneNumber: "",
         otp: "",
         otpVerified: false,
         sentOtp: null,
     });
-    const [bookingID, setBookingID] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
@@ -100,13 +97,13 @@ const BookingInfo = () => {
 
     const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (!bookingID || !phoneNumber || (!otpSent && !otp)) {
+        if (!phoneNumber || (!otpSent && !otp)) {
             setShowWarning(true);
         }
         else {
-            let bookingNumber = bookingID;
+            let mobile = phoneNumber;
             dataService
-                .bookingInfo(bookingNumber)
+                .bookingInfo(mobile)
                 .then((response) => {
                     if (response.data) {
                         console.log("Booking Info Retrieved:", response.data);
@@ -122,11 +119,9 @@ const BookingInfo = () => {
                 });
         }
     };
-
     const closeWarning = () => {
         setShowWarning(false);
     };
-
     return (
         <div className='booking-info'>
             {!showDetails ? (
@@ -134,14 +129,6 @@ const BookingInfo = () => {
                     <form className='form'>
                         <div className='header-custom'>
                             <p className='header'>Booking Details</p>
-                        </div>
-                        <div className='booking-id'>
-                            <input
-                                placeholder='Booking ID'
-                                type='text'
-                                value={bookingID}
-                                onChange={(e) => setBookingID(e.target.value)}
-                                className='input-booking-id' />
                         </div>
                         <div className='phone'>
                             <input
@@ -192,7 +179,7 @@ const BookingInfo = () => {
                     </div>
                 </div>
             ) : (
-                bookingDetails && <BookingDetails bookingDetails={bookingDetails} bookingID={bookingID} />
+                bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
             )}
             {showWarning && <Warning onClose={closeWarning} />}
         </div>
