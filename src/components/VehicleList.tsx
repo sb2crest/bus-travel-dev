@@ -11,15 +11,15 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
     null
   );
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
-  const [searchTitle, setSearchTitle] = useState<string>("");
+  // const [searchTitle, setSearchTitle] = useState<string>("");
 
   useEffect(() => {
     retrieveVehicles();
   }, []);
 
-  const onChangeSearchTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTitle(e.target.value);
-  };
+  // const onChangeSearchTitle = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setSearchTitle(e.target.value);
+  // };
 
   const retrieveVehicles = () => {
     dataService.listVehicles()
@@ -71,21 +71,21 @@ const VehiclesList: React.FC<VehiclesListProps> = () => {
     <div className="list row">
       <div className="col-md-8">
         <div className="input-group mb-3">
-          <input
+          {/* <input
             type="text"
             className="form-control"
             placeholder="Search by title"
             value={searchTitle}
             onChange={onChangeSearchTitle}
-          />
+          /> */}
           <div className="input-group-append">
-            <button
+            {/* <button
               className="btn btn-outline-secondary"
               type="button"
               onClick={searchByTitle}
             >
               Search
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
