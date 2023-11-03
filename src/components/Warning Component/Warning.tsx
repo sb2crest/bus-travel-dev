@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './Warning.scss';
 
-const Warning: React.FC = () => {
+interface WarningProps {
+    onClose: () => void;
+}
+
+const Warning: React.FC<WarningProps> = ({ onClose }) => {
     
     return (
         <div className='warning-container'>
@@ -13,11 +17,11 @@ const Warning: React.FC = () => {
                         </div>
                         <div className='warning-message-container'>
                             <p className='warning-message'>
-                                You have left a fields empty and value must be entered
+                                You have left fields empty and value must be entered
                             </p>
                         </div>
                         <div className='warning-button-container'>
-                            <button className='okay-button'>Okay</button>
+                            <button className='okay-button' type='submit' onClick={onClose}>Okay</button>
                         </div>
                     </div>
                 </div>

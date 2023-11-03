@@ -3,6 +3,7 @@ import './BookingInfo.scss';
 import asideImage from '../../assets/images/Aside Image.png';
 import dataService from '../../services/data.service';
 import BookingDetails from './booking details/BookingDetails';
+import Warning from '../warning component/Warning';
 
 interface State {
     phoneNumber: string;
@@ -28,7 +29,9 @@ const BookingInfo = () => {
     const [otpResend, setOtpResend] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [bookingDetails, setBookingDetails] = useState<any>(null);
-    const[ShowDetailsButton, setShowDetailsButton]=useState(false);
+    const [ShowDetailsButton, setShowDetailsButton] = useState(false);
+    const [showSendButton, setShowSendButton] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
 
     const sendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -48,39 +51,13 @@ const BookingInfo = () => {
                 console.log("An error occurred while sending OTP.");
             });
         setOtpSent(true);
-        console.log("OTP sent!");
-    }
-
-    const verifyOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        let requestBody = {
-            mobile: phoneNumber,
-            otp: otp,
-        };
-        dataService
-            .verifyOTP(requestBody)
-            .then((response: { data: any }) => {
-                if (response.data) {
-                    setState({ ...state, otpVerified: true });
-                   
-                    console.log("OTP Verified!");
-                } else {
-                    console.log("OTP Verification Failed!");
-                }
-            })
-            .catch((error: any) => {
-                console.error("Error validating OTP:", error);
-            });
-        setVerify(true);
-        setShowDetailsButton(true);
-        setOtpSent(false);
     }
 
     const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const { phoneNumber } = state;
+        let mobile = phoneNumber;
         dataService
-            .sendOTP(phoneNumber)
+            .sendOTP(mobile)
             .then((response) => {
                 if (response.data) {
                     setState({ ...state, sentOtp: response.data.sentOtp });
@@ -97,24 +74,57 @@ const BookingInfo = () => {
         setOtpResend(true);
     }
 
-    const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const verifyOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        let bookingNumber = bookingID;
+        let requestBody = {
+            mobile: phoneNumber,
+            otp: otp,
+        };
         dataService
-            .bookingInfo(bookingNumber)
+            .verifyOTP(requestBody)
             .then((response) => {
                 if (response.data) {
-                    console.log("Booking Info Retrieved:", response.data);
-                    setBookingDetails(response.data);
-                    setShowDetails(true);
+                    setState({ ...state, otpVerified: true });
+                    setShowDetailsButton(true);
+                    console.log("OTP Verified!");
                 } else {
-                    console.log("Failed to retrieve booking info.");
+                    console.log("OTP Verification Failed!");
                 }
             })
-            .catch((error) => {
-                console.error("Error fetching booking info:", error);
-                console.log("An error occurred while retrieving booking info.");
+            .catch((error: any) => {
+                console.error("Error validating OTP:", error);
             });
+        setVerify(true);
+        setOtpSent(false);
+    }
+
+    const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        if (!bookingID || !phoneNumber || (!otpSent && !otp)) {
+            setShowWarning(true);
+        }
+        else {
+            let bookingNumber = bookingID;
+            dataService
+                .bookingInfo(bookingNumber)
+                .then((response) => {
+                    if (response.data) {
+                        console.log("Booking Info Retrieved:", response.data);
+                        setBookingDetails(response.data);
+                        setShowDetails(true);
+                    } else {
+                        console.log("Failed to retrieve booking info.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching booking info:", error);
+                    console.log("An error occurred while retrieving booking info.");
+                });
+        }
+    };
+
+    const closeWarning = () => {
+        setShowWarning(false);
     };
 
     return (
@@ -160,7 +170,7 @@ const BookingInfo = () => {
                                     </div>
                                 </>
                             ) :
-                                !showDetails ? (
+                                !verify ? (
                                     <button className='button-send-otp' onClick={sendOTP}>
                                         Send OTP
                                     </button>
@@ -182,9 +192,9 @@ const BookingInfo = () => {
                     </div>
                 </div>
             ) : (
-                bookingDetails && <BookingDetails bookingDetails={bookingDetails}  bookingID={bookingID} />
+                bookingDetails && <BookingDetails bookingDetails={bookingDetails} bookingID={bookingID} />
             )}
-
+            {showWarning && <Warning onClose={closeWarning} />}
         </div>
     )
 }
