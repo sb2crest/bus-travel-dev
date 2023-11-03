@@ -27,11 +27,38 @@ export default async function displayRazorpay(
     description: "Wallet Transaction",
     image: "http://localhost:8100/src/assets/images/Logo.png",
     order_id: data.razorPayOrderId,
-    handler: function (response: any) {
+    handler: async function (response: any) {
       alert("PAYMENT ID ::" + response.razorpay_payment_id);
       alert("ORDER ID :: " + response.razorpay_order_id);
       alert("Signature:: " + response.razorpay_signature);
       // console.log(response)
+       // Make a POST API call here
+      try {
+        const postData = {
+          razorPayPaymentId: response.razorpay_payment_id,
+          razorPayOrderId: response.razorpay_order_id,
+          razorPaySignature: response.razorpay_signature,
+          // Add any other data you need to send
+        };
+
+        const postResponse = await fetch("http://localhost:8085/verifySignature", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        });
+        console.log(postResponse)
+        if (postResponse.ok) {
+          // Handle success
+          console.log(`status code is ${postResponse.status}`)
+        } else {
+          // Handle error
+          console.error("Failed to make the POST API call");
+        }
+      } catch (error) {
+        console.error("An error occurred while making the POST API call", error);
+      }
     },
     prefill: {
       name: bookingId,
@@ -39,7 +66,28 @@ export default async function displayRazorpay(
       contact: mobile,
     },
   };
-
+  const rzp1 = new Razorpay(options);
+  rzp1.on(
+    "payment.failed",
+    function (response: {
+      error: {
+        code: any;
+        description: any;
+        source: any;
+        step: any;
+        reason: any;
+        metadata: { order_id: any; payment_id: any };
+      };
+    }) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    }
+  );
   const paymentObject = new window.Razorpay(options);
   paymentObject.open();
 }
