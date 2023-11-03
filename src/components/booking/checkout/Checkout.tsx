@@ -1,9 +1,8 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
 import './Checkout.scss';
-import Confirmation from '../booking confirmation/Confirmation';
 import { Link } from 'react-router-dom';
 import VehicleImage from '../../../assets/images/booking-summary-dummy-image.webp';
-import displayRazorpay from '../payment/utils/PaymentGateway';
+import displayRazorpay from '../payment/PaymentGateway';
 
 interface CheckoutProps {
     bookingId: string;
