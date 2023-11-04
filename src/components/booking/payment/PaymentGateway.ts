@@ -9,7 +9,8 @@ export default async function displayRazorpay(
     amount: amount,
   };
 
-  const data = await fetch("http://localhost:8085/createPayment", {
+  // const data = await fetch("http://localhost:8085/createPayment", {
+    const data = await fetch("http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/createPayment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
