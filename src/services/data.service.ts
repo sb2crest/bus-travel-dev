@@ -2,41 +2,38 @@ import http from "../http-common";
 import IOTPData from "../types/otp.type";
 import IVehicleData from "../types/vehicle.type";
 import ListVehicle from "../types/list.type";
-import IBookingInfoRequest from "../types/BookingInfo/request.type";
-import IBookNowRequest from "../types/BookNow/request.type";
+import IBookingInfoRequest from "../types/bookinginfo/request.type";
+import IBookNowRequest from "../types/booknow/request.type";
 import IPaymentRequest from "../types/payment/payment.request.type";
 import IGetInTouch from "../types/getInTouch.type";
 import IVerifyPayment from "../types/payment/VerifyPayment.type";
 class DataService {
 
-  //Book now
-  bookNow(data:IBookNowRequest){
-    return http.post<IBookNowRequest>('booking',data);
+  // Book now
+  bookNow(data: IBookNowRequest) {
+    return http.post<IBookNowRequest>('booking', data);
   }
 
-  //listVehicles
+  // listVehicles
   listVehicles() {
     return http.get<Array<ListVehicle>>('listVehicles');
   }
 
-  // addVehicle
-  // addVehicle(data: IVehicleData) {
-  //   return http.post<IVehicleData>("addVehicle", data);
-  // }
- // getInTouch
- getInTouch(data: IGetInTouch) {
-  return http.post<IGetInTouch>("getInTouch", data);
-}
-  //create Payment
-  createPayment(data :IPaymentRequest){
-    return http.post<IPaymentRequest>('createPayment',data);
+  // getInTouch
+  getInTouch(data: IGetInTouch) {
+    return http.post<IGetInTouch>("getInTouch", data);
   }
-  //verify Payment
-  verifyPayment(data :IVerifyPayment){
-    return http.post<IVerifyPayment>('verifyPayment',data);
+  // create Payment
+  createPayment(data: IPaymentRequest) {
+    return http.post<IPaymentRequest>('createPayment', data);
+  }
+  
+  // verify Payment
+  verifyPayment(data: IVerifyPayment) {
+    return http.post<IVerifyPayment>('verifyPayment', data);
   }
 
-  //Send OTP
+  // Send OTP
   sendOTP(mobile: string) {
     return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
   }
@@ -46,10 +43,10 @@ class DataService {
     return http.post<IVehicleData>("validateOTP", data);
   }
 
-  // Resend OTP // it is not required
-  // handleResendClick(mobile: string){
-  //   return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
-  // }
+  // bookingInfo
+  bookingInfo(mobile: string) {
+    return http.get<IBookingInfoRequest>("bookingDetails?mobile=" + mobile);
+  }
 
   // deleteVehicle
   deleteVehicle(id: any) {
@@ -69,11 +66,6 @@ class DataService {
   // updateVehicle
   updateVehicle(data: IVehicleData, id: any) {
     return http.put<any>(`updateVehicle/${id}`, data);
-  }
-
-  // bookingInfo
-  bookingInfo(bookingID: string) {
-    return http.get<IBookingInfoRequest>("getBookingInfoByBookingId?bookingId=" +bookingID);
   }
 }
 
