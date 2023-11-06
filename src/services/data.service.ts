@@ -20,9 +20,9 @@ class DataService {
   }
 
   // addVehicle
-  addVehicle(data: IVehicleData) {
-    return http.post<IVehicleData>("addVehicle", data);
-  }
+  // addVehicle(data: IVehicleData) {
+  //   return http.post<IVehicleData>("addVehicle", data);
+  // }
  // getInTouch
  getInTouch(data: IGetInTouch) {
   return http.post<IGetInTouch>("getInTouch", data);
