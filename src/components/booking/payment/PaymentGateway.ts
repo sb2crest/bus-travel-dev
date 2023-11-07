@@ -22,6 +22,7 @@ export default async function displayRazorpay(
   }).then((t) => t.json());
 
   console.log(data);
+  console.log(requestBody);
 
   const options = {
     key: "rzp_test_nHgaZ8pP0SqyOm",

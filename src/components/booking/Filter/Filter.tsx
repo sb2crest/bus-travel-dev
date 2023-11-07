@@ -1,6 +1,10 @@
 import './Filter.scss';
 import filterIcon from '../../../assets/images/filter.png';
 import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import '../../booking-calendar/BookingCalendar.scss'
+import { FaCalendar } from 'react-icons/fa';
 
 const Filter: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
@@ -9,6 +13,10 @@ const Filter: React.FC = () => {
     const [isSleeperClicked, setIsSleeperClicked] = useState(false);
     const [isNonSleeperClicked, setIsNonSleeperClicked] = useState(false);
     const [isAmenitiesClicked, setIsAmenitiesClicked] = useState(false);
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
+    const [isACButtonVisible, setIsACButtonVisible] = useState(true);
+    const [isMinusIconClicked, setIsMinusIconClicked] = useState(false);
 
     {/* state variables for onclick event for Other Amenities Section */ }
     const [wifiClicked, setWifiClicked] = useState(false);
@@ -63,6 +71,10 @@ const Filter: React.FC = () => {
         setMovieClicked(!movieClicked)
     }
 
+    const handleMinusIconClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setIsMinusIconClicked(true);
+    };
 
     return (
         <>
@@ -101,31 +113,41 @@ const Filter: React.FC = () => {
                             <div className='form-content'>
                                 {/* AC Filter */}
                                 <div className='ac-section'>
-                                    <button className='ac-filter-button'
+                                    {!isACClicked && !isMinusIconClicked ? (
+                                        <button className='ac-filter-button' onClick={handleACClick}>
+                                            AC
+                                            <svg className="plus-icon-ac" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
+                                                <line x1="1" y1="6" x2="11" y2="6" stroke="#0f2454" strokeWidth="2" />
+                                                <line x1="6" y1="1" x2="6" y2="11" stroke="#0f2454" strokeWidth="2" />
+                                            </svg>
+                                        </button>
+                                    ) : (
+                                        <div className='checkbox-section-01'>
+                                            <input type='checkbox' className='input-ac' />
+                                            <label className='label-ac'>AC</label>
+                                            <input type='checkbox' className='input-non-ac' />
+                                            <label className='label-non-ac'>Non-AC</label>
+                                            {!isMinusIconClicked && (
+                                                <button onClick={handleMinusIconClick}>
+                                                    <svg className="minus-icon-ac" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
+                                                        <line x1="1" y1="6" x2="11" y2="6" stroke="#0f2454" strokeWidth="2" />
+                                                    </svg>
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
+                                    {/* <button className='ac-filter-button'
                                         onClick={handleACClick}>
                                         AC
                                         {isACClicked ? (
-                                            <svg className="minus-icon-ac" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
-                                                <line x1="1" y1="6" x2="11" y2="6" stroke="#0f2454" strokeWidth="2" />
-                                            </svg>
+                                           
                                         ) : (
                                             <svg className="plus-icon-ac" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
                                                 <line x1="1" y1="6" x2="11" y2="6" stroke="#0f2454" strokeWidth="2" />
                                                 <line x1="6" y1="1" x2="6" y2="11" stroke="#0f2454" strokeWidth="2" />
                                             </svg>
                                         )}
-                                    </button>
-
-                                    {isACClicked && (
-                                        <>
-                                            <div className='checkbox-section-01'>
-                                                <input type='checkbox' className='input-ac' />
-                                                <label className='label-ac'>AC</label>
-                                                <input type='checkbox' className='input-non-ac' />
-                                                <label className='label-non-ac'>Non-AC</label>
-                                            </div>
-                                        </>
-                                    )}
+                                    </button> */}
                                 </div>
                                 {/* Sleeper Filter */}
                                 <div className='sleeper-section'>
@@ -153,7 +175,7 @@ const Filter: React.FC = () => {
                                     )}
                                 </div>
                                 {/* Amenities */}
-                                <div className='amenities-section'>
+                                {/* <div className='amenities-section'>
                                     <button className='amenities-filter-button' onClick={handleAmenitiesClicked}>Other Amenities
                                         {isAmenitiesClicked ? (
                                             <svg className="minus-icon-amenities" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12">
@@ -185,6 +207,35 @@ const Filter: React.FC = () => {
 
                                         </>
                                     )}
+                                </div> */}
+                                <div className="calendar-container">
+                                    <div className="from-to-date-container">
+                                        <div className="date-picker">
+                                            <DatePicker
+                                                selected={startDate}
+                                                onChange={(date: Date) => setStartDate(date)}
+                                                selectsStart
+                                                startDate={startDate}
+                                                endDate={endDate}
+                                                dateFormat="MM/dd/yyyy"
+                                                placeholderText="From-Date"
+                                                className="start-date"
+                                            />
+                                        </div>
+                                        <div className="date-picker">
+                                            <DatePicker
+                                                selected={endDate}
+                                                onChange={(date: Date) => setEndDate(date)}
+                                                selectsEnd
+                                                startDate={startDate}
+                                                endDate={endDate}
+                                                minDate={startDate}
+                                                dateFormat="MM/dd/yyyy"
+                                                placeholderText="To-Date"
+                                                className="end-date"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                                 {/* Close Button */}
                                 <div className='button-close-clear'>
