@@ -6,7 +6,7 @@ import IBookingInfoRequest from "../types/BookingInfo/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IPaymentRequest from "../types/payment/payment.request.type";
 import IGetInTouch from "../types/getInTouch.type";
-import IVerifyPayment from "../types/payment/VerifyPayment.type";
+import IVerifySignature from "../types/payment/VerifyPayment.type";
 class DataService {
 
   //Book now
@@ -32,8 +32,8 @@ class DataService {
     return http.post<IPaymentRequest>('createPayment',data);
   }
   //verify Payment
-  verifyPayment(data :IVerifyPayment){
-    return http.post<IVerifyPayment>('verifyPayment',data);
+  verifySignature(data :IVerifySignature){
+    return http.post<IVerifySignature>('verifySignature',data);
   }
 
   //Send OTP

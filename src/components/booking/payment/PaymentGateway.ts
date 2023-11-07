@@ -42,17 +42,18 @@ export default async function displayRazorpay(
           // Add any other data you need to send
         };
 
-        const postResponse = await fetch("http://localhost:8085/verifySignature", {
+        const postResponse = await fetch("http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/verifySignature", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(postData),
-        });
+        }).then((t) => t.json());
         console.log(postResponse)
         if (postResponse.ok) {
           // Handle success
-          console.log(`status code is ${postResponse.status}`)
+          // console.log(`status code is ${postResponse.status}`)
+          console.log(postResponse)
         } else {
           // Handle error
           console.error("Failed to make the POST API call");
