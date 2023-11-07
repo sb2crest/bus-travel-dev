@@ -9,7 +9,7 @@ import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Fade from 'react-reveal/Fade';
-import Filter from "./filter/Filter";
+import Filter from "./Filter/Filter";
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
@@ -75,8 +75,8 @@ const Booking: React.FC = () => {
             </Link>
           </div>
         ))}
-         <Fade left>
-              <div className="buses">
+         {/* <Fade left> */}
+              {/* <div className="buses">
                 <div className="busOne_img">
                   <img
                     src={busImage_1}
@@ -121,8 +121,8 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div>
-              </Fade>
+              </div> */}
+              {/* </Fade>
               <Fade bottom>
               <div className="buses">
                 <div className="busTwo_img">
@@ -169,8 +169,8 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div>
-              </Fade>
+              </div> */}
+              {/* </Fade>
               <Fade right>
               <div className="buses">
                 <div className="busThree_img">
@@ -217,8 +217,8 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div>
-              </Fade>
+              </div> */}
+              {/* </Fade> */}
             </div>
           </div>
         </div>

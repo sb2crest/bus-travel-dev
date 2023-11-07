@@ -7,6 +7,7 @@ import IBookNowRequest from "../types/booknow/request.type";
 import IPaymentRequest from "../types/payment/payment.request.type";
 import IGetInTouch from "../types/getInTouch.type";
 import IVerifyPayment from "../types/payment/VerifyPayment.type";
+import IFilterRequest from "../types/filter/request.type";
 class DataService {
 
   // Book now
@@ -27,7 +28,7 @@ class DataService {
   createPayment(data: IPaymentRequest) {
     return http.post<IPaymentRequest>('createPayment', data);
   }
-  
+
   // verify Payment
   verifyPayment(data: IVerifyPayment) {
     return http.post<IVerifyPayment>('verifyPayment', data);
@@ -46,6 +47,11 @@ class DataService {
   // bookingInfo
   bookingInfo(mobile: string) {
     return http.get<IBookingInfoRequest>("bookingDetails?mobile=" + mobile);
+  }
+
+  // filter 
+  filter(data: IBookingInfoRequest) {
+    return http.post<IFilterRequest>("getVehicleAvailability", data);
   }
 
   // deleteVehicle
