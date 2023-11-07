@@ -42,10 +42,10 @@ class DataService {
     return http.post<IVehicleData>("validateOTP", data);
   }
 
-  // bookingInfo
-  bookingInfo(mobile: string) {
-    return http.get<IBookingInfoRequest>("bookingDetails?mobile=" + mobile);
-  }
+ // bookingInfo
+ bookingInfo(mobile: string) {
+  return http.get<IBookingInfoRequest>("getBookingInfo?mobile=" + mobile);
+}
 
   // deleteVehicle
   deleteVehicle(id: any) {

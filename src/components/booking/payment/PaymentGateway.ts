@@ -11,7 +11,8 @@ export default async function displayRazorpay(
 
   //TODO:: environment specific URL
   //let baseUrl: "http://localhost:8085/";
-  let baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/"
+  let baseUrl =
+    "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
 
   const data = await fetch(`${baseUrl}createPayment`, {
     method: "POST",
@@ -53,17 +54,20 @@ export default async function displayRazorpay(
           },
           body: JSON.stringify(postData),
         }).then((t) => t.json());
-        console.log(postResponse)
-        if (postResponse.ok) {
+        console.log(postResponse);
+        if (postResponse.statusCode===200) {
           // Handle success
           // console.log(`status code is ${postResponse.status}`)
-          console.log(postResponse)
+          console.log(postResponse);
         } else {
           // Handle error
-          console.error("Failed to make the POST API call");
+          console.error("Unable to validate Signature");
         }
       } catch (error) {
-        console.error("An error occurred while making the POST API call", error);
+        console.error(
+          "An error occurred while making the POST API call",
+          error
+        );
       }
     },
     prefill: {

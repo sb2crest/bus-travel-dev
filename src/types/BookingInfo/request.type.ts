@@ -1,4 +1,4 @@
 export default interface IBookingInfoRequest {
-    bookingID: string;
+    mobile: string;
 }
 
