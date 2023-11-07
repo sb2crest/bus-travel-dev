@@ -8,7 +8,12 @@ export default async function displayRazorpay(
     mobile: mobile,
     amount: amount,
   };
-  const data = await fetch("http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/createPayment", {
+
+  //TODO:: environment specific URL
+  //let baseUrl: "http://localhost:8085/";
+  let baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/"
+
+  const data = await fetch(`${baseUrl}createPayment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,6 +36,7 @@ export default async function displayRazorpay(
       alert("PAYMENT ID ::" + response.razorpay_payment_id);
       alert("ORDER ID :: " + response.razorpay_order_id);
       alert("Signature:: " + response.razorpay_signature);
+      // console.log(response)
       // Make a POST API call here
       try {
         const postData = {
@@ -40,7 +46,7 @@ export default async function displayRazorpay(
           // Add any other data you need to send
         };
 
-        const postResponse = await fetch("http://localhost:8085/verifySignature", {
+        const postResponse = await fetch(`${baseUrl}verifySignature`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
