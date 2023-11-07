@@ -37,7 +37,6 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
     useEffect(() => {
         loadScript("https://checkout.razorpay.com/v1/checkout.js");
     });
-
     const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setShowConfirmation(true);
@@ -47,7 +46,6 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
         const amount = 100;
         await displayRazorpay(bookingId, phoneNumber, amount);
     };
-
     return (
         <div className="modal-checkout" id="newPopUp">
             <>
@@ -72,9 +70,9 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                                 </p>
                                             </div>
                                             <div className='from-to-date'>
-                                                    <p className='phone-number'>Phone Number <br />
-                                                        <span className='mobile'>{phoneNumber}</span>
-                                                    </p>
+                                                <p className='phone-number'>Phone Number <br />
+                                                    <span className='mobile'>{phoneNumber}</span>
+                                                </p>
                                                 <p className='to'>To Date <br />
                                                     <span className='to-date'>11-05-2023</span>
                                                 </p>
@@ -83,25 +81,24 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                             <div className='fare-container'>
                                                 <p className='fare-header'>Fare Details</p>
                                                 <div className='line'></div>
+                                                {showFareDetails && (
+                                                    <>
+                                                        <p className='show-hide-fare-details' onClick={hideDetails}>Hide Fare Details</p>
+                                                        <div className='base-fare'>
+                                                            Basic Fare <span className='fare'> 19,800 INR</span>
+                                                        </div>
+                                                        <div className='gst-fare'>
+                                                            GST <span className='gst-percentage'> 3542 INR</span>
+                                                        </div>
+                                                        <div className='line'></div>
+                                                    </>
+                                                )}
                                                 <p className='amount-header'>Amount
                                                     <span className='price'> 20000 INR</span>
                                                     <br />
                                                     <span className='tax-cal'>(Taxes will be calculated during payment)</span>
                                                 </p>
-                                                {!showFareDetails ?
-                                                    <p className='show-hide-fare-details' onClick={fareDetails} >Show Fare Details</p>
-                                                    : (
-                                                        <>
-                                                            <p className='show-hide-fare-details' onClick={hideDetails}>Hide Fare Details</p>
-                                                            <div className='base-fare'>
-                                                                Basic Fare <span className='fare'> 19,800 INR</span>
-                                                            </div>
-                                                            <div className='gst-fare'>
-                                                                GST <span className='gst-percentage'> 3542 INR</span>
-                                                            </div>
-                                                        </>
-                                                    )
-                                                }
+                                                <p className='show-hide-fare-details' onClick={fareDetails} >Show Fare Details</p>
                                                 <div className='line'></div>
                                             </div>
                                         </div>

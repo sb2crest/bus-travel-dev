@@ -30,6 +30,9 @@ const BookingInfo = () => {
     const [showSendButton, setShowSendButton] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
 
+    /*--------------------------------- API Integartion------------------------------------------ */
+
+    {/* OTP Generation Function */ }
     const sendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let mobile = phoneNumber;
@@ -50,6 +53,7 @@ const BookingInfo = () => {
         setOtpSent(true);
     }
 
+    {/* OTP Resend Function */ }
     const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let mobile = phoneNumber;
@@ -71,6 +75,7 @@ const BookingInfo = () => {
         setOtpResend(true);
     }
 
+    {/* OTP Verification Function */ }
     const verifyOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let requestBody = {
@@ -95,6 +100,7 @@ const BookingInfo = () => {
         setOtpSent(false);
     }
 
+    {/* Get Details Function */ }
     const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (!phoneNumber || (!otpSent && !otp)) {
@@ -119,6 +125,9 @@ const BookingInfo = () => {
                 });
         }
     };
+    /*--------------------------------------------------------------------------------------------- */
+
+    {/* Close Warning Function */ }
     const closeWarning = () => {
         setShowWarning(false);
     };
