@@ -1,7 +1,6 @@
-import React from 'react';
+// import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
-
 import image1 from './assets/images/img_1.jpg';
 import image2 from './assets/images/img_2.jpg';
 import image3 from './assets/images/img_3.jpg';
@@ -65,5 +64,4 @@ const App = () => {
       </Router>
     );
 };
-
 export default App;

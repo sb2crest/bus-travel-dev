@@ -32,7 +32,6 @@ const Form: React.FC = () => {
     .catch((error) => {
       console.error('Error:', error);
     });
-    
   }
 
   const handleCancel = () => {
