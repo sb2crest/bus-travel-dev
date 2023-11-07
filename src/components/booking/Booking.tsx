@@ -75,8 +75,8 @@ const Booking: React.FC = () => {
             </Link>
           </div>
         ))}
-         {/* <Fade left> */}
-              {/* <div className="buses">
+         <Fade left>
+              <div className="buses">
                 <div className="busOne_img">
                   <img
                     src={busImage_1}
@@ -121,56 +121,8 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div> */}
-              {/* </Fade>
-              <Fade bottom>
-              <div className="buses">
-                <div className="busTwo_img">
-                  <img
-                    src={busImage_2}
-                    alt=""
-                  />
-                </div>
-                <div className="busTwo_details">
-                  <h2>Bus Name2</h2>
-                  <p>
-                    <i
-                      className="fa-solid fa-user-group fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    60 Seat
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-bed fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    2 driver staff
-                  </p>
-                  <br />
-                  <p>
-                    <i
-                      className="fa-solid fa-gears fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Manual
-                  </p>
-                  <br />
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-fan fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Ac/Non Ac
-                  </p>
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>View Details</button>
-                  </Link>
-                </div>
-              </div> */}
-              {/* </Fade>
+              </div>
+            </Fade>
               <Fade right>
               <div className="buses">
                 <div className="busThree_img">
@@ -217,8 +169,8 @@ const Booking: React.FC = () => {
                     <button className="button-53" onClick={scrollToTop}>View Details</button>
                   </Link>
                 </div>
-              </div> */}
-              {/* </Fade> */}
+              </div> 
+               </Fade>
             </div>
           </div>
         </div>
