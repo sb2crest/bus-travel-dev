@@ -42,7 +42,8 @@
         border: 0px solid #ffffff;
         border-radius: 6px;
         text-align: center;
-
+        color: #0f2454;
+        font-weight: 600;
       }
 
       .react-datepicker__input-container input:focus {
@@ -51,7 +52,7 @@
       }
 
       .react-datepicker__header {
-        background-color: #3DD1E7;
+        background-color: #eee;
         color: #ffffff;
       }
 
@@ -63,18 +64,6 @@
     }
   }
 
-  .from-icon-calendar {
-    color: rgb(15, 123, 171);
-    margin-left: -4vw;
-    z-index: 3;
-  }
-
-  .to-icon-calendar {
-    color: rgb(15, 123, 171);
-    margin-left: -4vw;
-    z-index: 3;
-  }
-
   svg:not(:root).svg-inline--fa {
     position: absolute;
     top: 30%;
@@ -82,7 +71,7 @@
   }
 
   button {
-    background-color: #3DD1E7;
+    background-color: #eee;
     color: black;
     font-weight: 500;
     font-size: medium;
