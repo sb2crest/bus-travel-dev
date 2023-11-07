@@ -1,56 +1,78 @@
-/* BookingCalendar.scss */
-
 .calendar-container {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 
-  .date-picker {
-    margin-right: 20px;
-    position: relative;
+  .from-to-date-container {
+    display: flex;
+    align-items: center;
+    background-color: #eee;
+    padding: 12px;
+    width: 85%;
 
-    .start-date {
-      width: 92%;
-      height: 35px;
-    }
+    .date-picker {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: start;
 
-    .end-date {
-      width: 100%;
-      margin-left: -20px;
-      height: 35px;
-    }
+      .start-date {
+        width: 80%;
+        height: 35px;
+        margin-left: 2vh;
+      }
 
-    .calendar-icon {
-      color: rgb(15, 123, 171);
-    }
+      .end-date {
+        width: 80%;
+        height: 35px;
+        margin-left: 5vh;
+      }
 
-    .react-datepicker-wrapper {
-      width: 100%;
+      .react-datepicker-wrapper {
+        width: 100%;
+
+      }
+
+      .react-datepicker__input-container input::placeholder {
+        color: #0f2454;
+        font-weight: bold;
+      }
+
+      .react-datepicker__input-container input {
+        border: 0px solid #ffffff;
+        border-radius: 6px;
+        text-align: center;
+
+      }
+
+      .react-datepicker__input-container input:focus {
+        border-color: rgb(15, 123, 171);
+        outline: none;
+      }
+
+      .react-datepicker__header {
+        background-color: #3DD1E7;
+        color: #ffffff;
+      }
+
+      .react-datepicker__day--selected {
+        background-color: rgb(15, 123, 171);
+        color: #ffffff;
+      }
 
     }
+  }
 
-    .react-datepicker__input-container input::placeholder {
-      color: black;
-    }
+  .from-icon-calendar {
+    color: rgb(15, 123, 171);
+    margin-left: -4vw;
+    z-index: 3;
+  }
 
-    .react-datepicker__input-container input {
-      border: 1.6px solid rgb(15, 123, 171);
-      border-radius: 2px;
-    }
-    .react-datepicker__input-container input:focus {
-      border-color: rgb(15, 123, 171); 
-      outline: none; 
-    }
-    .react-datepicker__header {
-      background-color: #3DD1E7;
-      color: #ffffff;
-    }
-
-    .react-datepicker__day--selected {
-      background-color: rgb(15, 123, 171);
-      color: #ffffff;
-    }
-
+  .to-icon-calendar {
+    color: rgb(15, 123, 171);
+    margin-left: -4vw;
+    z-index: 3;
   }
 
   svg:not(:root).svg-inline--fa {
@@ -59,20 +81,18 @@
     right: 2vw;
   }
 
-  .button-search {
-    width: 25%;
+  button {
     background-color: #3DD1E7;
     color: black;
+    font-weight: 500;
+    font-size: medium;
+    padding: 9px 22px 9px 22px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 35px;
     border-radius: 0px;
-    margin-left: -25px;
     text-align: center;
-    font-weight: 600;
     font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
   }
 }

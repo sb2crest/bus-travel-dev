@@ -76,20 +76,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [phoneNumberValid, setPhoneNumberValid] = useState<boolean>(true);
   const [emailValid, setEmailValid] = useState<boolean>(true);
 
-  // State Variables used in showing Empty Field Warning 
-  const [showConfirmationpop, setShowConfirmationpop] = useState(false);
-
   // State Variables used in Checkout pop-up 
   const [checkout, setCheckout] = useState(false);
   const [bookingId, setBookingId] = useState<string>("");
 
-  //State Variable used in showing Booking Confirmation pop-up
-  const [showConfirmation, setShowConfirmation] = useState(false);
-
   //State Variable used in showing warning component
   const [showWarning, setShowWarning] = useState(false);
-
-  const [showForm, setShowForm] = useState(true);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -230,9 +222,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           console.error("Error in sending Request:", error);
         })
     }
-
   }
   /*-----------------------------------------------------------------------------------------------------------------------*/
+
   {/* Resend Timer  */ }
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -257,15 +249,17 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-  const handleImageClick = (image: Image) => {
-    setSelectedImage(image);
-  };
-
+  {/* Function to Close Warning  */ }
   const closeWarning = () => {
     setShowWarning(false);
   };
+
+  const handleImageClick = (image: Image) => {
+    setSelectedImage(image);
+  };
   return (
     <>
+      {/* Vehicle Info */}
       <div className="vehicleInfo">
         <div className="vehicleInfo_banner">
           <h1>Vehicle Details</h1>
@@ -301,7 +295,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
               ))}
             </div>
           </div>
-
           <div className="bus_details">
             {/* <h2>Vehicle Facility</h2> */}
             <div className="facility_icons">
@@ -354,27 +347,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 </p>
               </div>
             </div>
-
-            {/* <h2>Additional information</h2> */}
-
-            {/* <div className="additional_info">
-              <div className="additional_info_one">
-                <p>Seats :&nbsp;&nbsp;&nbsp;60</p>
-                <p>Length :&nbsp;&nbsp;&nbsp;10.48 m</p>
-                <p>Width :&nbsp;&nbsp;&nbsp;2.49 m</p>
-                <p>Height :&nbsp;&nbsp;&nbsp;3.33 m</p>
-              </div>
-              <div className="additional_info_two">
-                <p>Fuel Type :&nbsp;&nbsp;&nbsp;Diesel</p>
-                <p>Tank Capacity :&nbsp;&nbsp;&nbsp;260L</p>
-                <p>Transmission :&nbsp;&nbsp;&nbsp;Manual</p>
-                <p>Year :&nbsp;&nbsp;&nbsp;2018</p>
-              </div>
-            </div> */}
+            {/* Calendar Component  */}
             <div>
-              <BookingCalendar onSearch={function (startDate: Date | null, endDate: Date | null): void {
-                throw new Error("Function not implemented.");
-              } } />
+              <BookingCalendar/>
             </div>
             <div className="containers">
               <>
@@ -384,280 +359,282 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 >
                   Book Now
                 </button>
-                {/*Pop-Up Logic*/}
-                <div
-                  className={`modal ${showModal ? "show" : ""}`}
-                  id="loginModal"
-                  tabIndex={-1}
-                  role="dialog"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden={!showModal}
-                  style={{ display: showModal ? "block" : "none" }}
-                >
-                  <div
-                    className="modal-dialog modal-dialog-centered popup-content"
-                    role="document"
-                  >
-                    <div className="modal-content">
-                      {/* Cross Icon*/}
-                      <div className="modal-header border-bottom-0">
-                        <button
-                          type="button"
-                          className="closes"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                          onClick={() => setShowModal(false)}
-                        >
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      {/* Pop-Up Form*/}
-                      <div className="modal-body">
-                        <div className="d-flex flex-column text-center">
-                          <form>
-                            {/* First Name*/}
-                            <div
-                              className={`form-group ${!firstNameValid ? "has-error" : ""
-                                }`}
+                {/*  Checkout Component */}
+                {checkout ? (<Checkout bookingId={bookingId} phoneNumber={phoneNumber} />)
+                  :
+                  (
+                    <div
+                      className={`modal ${showModal ? "show" : ""}`}
+                      id="loginModal"
+                      tabIndex={-1}
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden={!showModal}
+                      style={{ display: showModal ? "block" : "none" }}
+                    >
+                      <div
+                        className="modal-dialog modal-dialog-centered popup-content"
+                        role="document"
+                      >
+                        <div className="modal-content">
+                          {/* Cross Icon*/}
+                          <div className="modal-header border-bottom-0">
+                            <button
+                              type="button"
+                              className="closes"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                              onClick={() => setShowModal(false)}
                             >
-                              <input
-                                type="text"
-                                className={`form-control first-name ${!firstNameValid ? "error-border" : ''
-                                  }`}
-                                id="firstname"
-                                value={firstName}
-                                placeholder="First Name"
-                                onChange={(e) => setFirstName(e.target.value)}
-                                onBlur={(e) =>
-                                  setFirstNameValid(
-                                    nameValidation(e.target.value)
-                                  )
-                                }
-                              />
-                              {(!firstNameValid ||
-                                !nameValidation(firstName)) && (
-                                  <div className="error-message">
-                                    {!firstNameValid &&
-                                      firstName.trim() === "" ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        This field is required
-                                      </>
-                                    ) : !firstNameValid ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        Please enter a valid first name
-                                      </>
-                                    ) : null}
-                                  </div>
-                                )}
-                            </div>
-                            {/* Middle Name*/}
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control middle-name"
-                                id="middlename"
-                                value={middleName}
-                                onChange={(e) =>
-                                  setMiddleName(e.target.value)
-                                }
-                                placeholder="Middle Name"
-                              />
-                            </div>
-                            {/* Last Name*/}
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className={`form-control last-name ${!lastNameValid ? "error-border" : ""
-                                  }`}
-                                id="lastname"
-                                value={lastName}
-                                placeholder="Last Name"
-                                onChange={(e) => setLastName(e.target.value)}
-                                onBlur={(e) =>
-                                  setLastNameValid(
-                                    nameValidation(e.target.value)
-                                  )
-                                }
-                              />
-                              {(!lastNameValid ||
-                                !nameValidation(lastName)) && (
-                                  <div className="error-message">
-                                    {!lastNameValid &&
-                                      lastName.trim() === "" ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        This field is required
-                                      </>
-                                    ) : !lastNameValid ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        Please enter a valid last name
-                                      </>
-                                    ) : null}
-                                  </div>
-                                )
-                              }
-                            </div>
-                            <div className="form-group">
-                              <div className="input-group d-flex">
-                                <select className="select-custom ">
-                                  <option value="+91">+91</option>
-                                </select>
-                                {/* Phone Number */}
-                                <input
-                                  type="tel"
-                                  className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          {/* Pop-Up Form*/}
+                          <div className="modal-body">
+                            <div className="d-flex flex-column text-center">
+                              <form>
+                                {/* First Name*/}
+                                <div
+                                  className={`form-group ${!firstNameValid ? "has-error" : ""
                                     }`}
-                                  id="phone-number"
-                                  value={phoneNumber}
-                                  onChange={(e) => setPhoneNumber(e.target.value)}
-                                  placeholder="Phone Number"
-                                  onBlur={(e) =>
-                                    setPhoneNumberValid(
-                                      phoneNumberValidation(e.target.value)
+                                >
+                                  <input
+                                    type="text"
+                                    className={`form-control first-name ${!firstNameValid ? "error-border" : ''
+                                      }`}
+                                    id="firstname"
+                                    value={firstName}
+                                    placeholder="First Name"
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    onBlur={(e) =>
+                                      setFirstNameValid(
+                                        nameValidation(e.target.value)
+                                      )
+                                    }
+                                  />
+                                  {(!firstNameValid ||
+                                    !nameValidation(firstName)) && (
+                                      <div className="error-message">
+                                        {!firstNameValid &&
+                                          firstName.trim() === "" ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            This field is required
+                                          </>
+                                        ) : !firstNameValid ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            Please enter a valid first name
+                                          </>
+                                        ) : null}
+                                      </div>
+                                    )}
+                                </div>
+                                {/* Middle Name*/}
+                                <div className="form-group">
+                                  <input
+                                    type="text"
+                                    className="form-control middle-name"
+                                    id="middlename"
+                                    value={middleName}
+                                    onChange={(e) =>
+                                      setMiddleName(e.target.value)
+                                    }
+                                    placeholder="Middle Name"
+                                  />
+                                </div>
+                                {/* Last Name*/}
+                                <div className="form-group">
+                                  <input
+                                    type="text"
+                                    className={`form-control last-name ${!lastNameValid ? "error-border" : ""
+                                      }`}
+                                    id="lastname"
+                                    value={lastName}
+                                    placeholder="Last Name"
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    onBlur={(e) =>
+                                      setLastNameValid(
+                                        nameValidation(e.target.value)
+                                      )
+                                    }
+                                  />
+                                  {(!lastNameValid ||
+                                    !nameValidation(lastName)) && (
+                                      <div className="error-message">
+                                        {!lastNameValid &&
+                                          lastName.trim() === "" ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            This field is required
+                                          </>
+                                        ) : !lastNameValid ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            Please enter a valid last name
+                                          </>
+                                        ) : null}
+                                      </div>
                                     )
                                   }
-                                />
-                              </div>
-                              {(!phoneNumberValid ||
-                                !phoneNumberValidation(phoneNumber)) && (
-                                  <div className="error-message">
-                                    {!phoneNumberValid &&
-                                      phoneNumber.trim() === "" ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        This field is required
-                                      </>
-                                    ) : !phoneNumberValid ? (
-                                      <>
-                                        <FaExclamationTriangle className="error-icon" />
-                                        Please enter a valid mobile number
-                                      </>
-                                    ) : null}
+                                </div>
+                                <div className="form-group">
+                                  <div className="input-group d-flex">
+                                    <select className="select-custom ">
+                                      <option value="+91">+91</option>
+                                    </select>
+                                    {/* Phone Number */}
+                                    <input
+                                      type="tel"
+                                      className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
+                                        }`}
+                                      id="phone-number"
+                                      value={phoneNumber}
+                                      onChange={(e) => setPhoneNumber(e.target.value)}
+                                      placeholder="Phone Number"
+                                      onBlur={(e) =>
+                                        setPhoneNumberValid(
+                                          phoneNumberValidation(e.target.value)
+                                        )
+                                      }
+                                    />
                                   </div>
-                                )
-                              }
-                            </div>
-                            {/* Conditonal Rendering For Verify OTP and Send OTP*/}
-                            {otpSent && !otpVerified && (
-                              <div className="form-group otp-group">
-                                {/* OTP */}
-                                <div className="otp-container d-flex">
-                                  <input
-                                    type="password"
-                                    name="otp"
-                                    className="form-control otp"
-                                    placeholder="OTP"
-                                    value={otp}
-                                    onChange={(e) => setOtp(e.target.value)}
-                                    style={{ width: "60%" }}
-                                  />
-                                  {/*  Verify OTP */}
+                                  {(!phoneNumberValid ||
+                                    !phoneNumberValidation(phoneNumber)) && (
+                                      <div className="error-message">
+                                        {!phoneNumberValid &&
+                                          phoneNumber.trim() === "" ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            This field is required
+                                          </>
+                                        ) : !phoneNumberValid ? (
+                                          <>
+                                            <FaExclamationTriangle className="error-icon" />
+                                            Please enter a valid mobile number
+                                          </>
+                                        ) : null}
+                                      </div>
+                                    )
+                                  }
+                                </div>
+                                {/* Conditonal Rendering For Verify OTP and Send OTP*/}
+                                {otpSent && !otpVerified && (
+                                  <div className="form-group otp-group">
+                                    {/* OTP */}
+                                    <div className="otp-container d-flex">
+                                      <input
+                                        type="password"
+                                        name="otp"
+                                        className="form-control otp"
+                                        placeholder="OTP"
+                                        value={otp}
+                                        onChange={(e) => setOtp(e.target.value)}
+                                        style={{ width: "60%" }}
+                                      />
+                                      {/*  Verify OTP */}
+                                      <button
+                                        type="button"
+                                        className="btn btn-info btn-round verify-otp-button"
+                                        onClick={verifyOTP}
+                                        style={{ width: "50%" }}
+                                      >
+                                        Verify
+                                      </button>
+                                    </div>
+                                    <div className="resend-container">
+                                      <p className="header-5-custom">
+                                        {resendDisabled ? (
+                                          <span className="timer-custom">
+                                            resend otp in{" "}
+                                            <span className="min-sec">
+                                              {minutes}:{seconds}
+                                            </span>{" "}
+                                          </span>
+                                        ) : (
+                                          <span className="not-received">
+                                            Not received otp?
+                                          </span>
+                                        )}
+                                        {!resendDisabled && (
+                                          <a
+                                            className="resend-link"
+                                            onClick={ResendOTP}
+                                          >
+                                            Resend
+                                          </a>
+                                        )}
+                                      </p>
+                                    </div>
+                                  </div>
+                                )}
+                                {/* Send  OTP */}
+                                {!otpSent && (
                                   <button
                                     type="button"
-                                    className="btn btn-info btn-round verify-otp-button"
-                                    onClick={verifyOTP}
-                                    style={{ width: "50%" }}
+                                    className="btn btn-info send-otp-button"
+                                    onClick={sendOTP}
                                   >
-                                    Verify
+                                    Send OTP
                                   </button>
+                                )}
+                                {/* Email */}
+                                <div className="form-group">
+                                  <input
+                                    type="text"
+                                    className="form-control email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    onBlur={(e) =>
+                                      setEmailValid(
+                                        emailValidation(e.target.value)
+                                      )
+                                    }
+                                    placeholder="Email"
+                                  />
+                                  {!emailValid && (
+                                    <div className="error-message">
+                                      <FaExclamationTriangle />
+                                      Please enter a valid email address
+                                    </div>
+                                  )}
                                 </div>
-                                <div className="resend-container">
-                                  <p className="header-5-custom">
-                                    {resendDisabled ? (
-                                      <span className="timer-custom">
-                                        resend otp in{" "}
-                                        <span className="min-sec">
-                                          {minutes}:{seconds}
-                                        </span>{" "}
-                                      </span>
-                                    ) : (
-                                      <span className="not-received">
-                                        Not received otp?
-                                      </span>
-                                    )}
-                                    {!resendDisabled && (
-                                      <a
-                                        className="resend-link"
-                                        onClick={ResendOTP}
-                                      >
-                                        Resend
-                                      </a>
-                                    )}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                            {/* Send  OTP */}
-                            {!otpSent && (
-                              <button
-                                type="button"
-                                className="btn btn-info send-otp-button"
-                                onClick={sendOTP}
-                              >
-                                Send OTP
-                              </button>
-                            )}
-                            {/* Email */}
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                onBlur={(e) =>
-                                  setEmailValid(
-                                    emailValidation(e.target.value)
-                                  )
-                                }
-                                placeholder="Email"
-                              />
-                              {!emailValid && (
-                                <div className="error-message">
-                                  <FaExclamationTriangle />
-                                  Please enter a valid email address
-                                </div>
-                              )}
-                            </div>
-                            <div className="form-group">
-                              <div className="form-group">
-                                {/* Submit */}
-                                <div className="row">
-                                  <div className="col">
-                                    <button
-                                      type="submit"
-                                      className="btn btn-secondary btn-block btn-round submit-button"
-                                      onClick={bookVehicle}
-                                    >
-                                      Book Now
-                                    </button>
-                                  </div>
-                                  {/* Clear*/}
-                                  <div className="col">
-                                    <button
-                                      type="button"
-                                      className="btn btn-secondary btn-block btn-round clear-button"
-                                      onClick={clearForm}
-                                    >
-                                      Clear
-                                    </button>
+                                <div className="form-group">
+                                  <div className="form-group">
+                                    {/* Submit */}
+                                    <div className="row">
+                                      <div className="col">
+                                        <button
+                                          type="submit"
+                                          className="btn btn-secondary btn-block btn-round submit-button"
+                                          onClick={bookVehicle}
+                                        >
+                                          Book Now
+                                        </button>
+                                      </div>
+                                      {/* Clear*/}
+                                      <div className="col">
+                                        <button
+                                          type="button"
+                                          className="btn btn-secondary btn-block btn-round clear-button"
+                                          onClick={clearForm}
+                                        >
+                                          Clear
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+                                {/* Warning pop-up */}
+                                {showWarning && <Warning onClose={closeWarning} />}
+                              </form>
                             </div>
-                            {/* Warning pop-up */}
-                            {showWarning && <Warning onClose={closeWarning} />}
-                          </form>
+                          </div>
                         </div>
                       </div>
-                      {/* Checkout pop-up */}
-                      {checkout && <Checkout bookingId={bookingId} phoneNumber={phoneNumber} />}
                     </div>
-                  </div>
-                </div>
+                  )}
               </>
             </div>
           </div>
