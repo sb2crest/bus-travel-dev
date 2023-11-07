@@ -38,7 +38,6 @@ const BookingCalendar: React.FC = () => {
           <FaCalendar className="to-icon-calendar" />
         </div>
       </div>
-      <button className="button-search">Search</button>
     </div>
   );
 };

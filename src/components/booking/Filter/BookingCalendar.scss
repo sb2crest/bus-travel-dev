@@ -1,0 +1,85 @@
+.calendar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .from-to-date-container {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+
+    .date-picker {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      .start-date {
+        width: 80%;
+        height: 35px;
+        margin-left: 2vh;
+      }
+
+      .end-date {
+        width: 80%;
+        height: 35px;
+        margin-left: 5vh;
+      }
+
+      .react-datepicker-wrapper {
+        width: 100%;
+
+      }
+
+      .react-datepicker__input-container input::placeholder {
+        color: #0f2454;
+        font-weight: bold;
+      }
+
+      .react-datepicker__input-container input {
+        border: 0px solid #ffffff;
+        border-radius: 6px;
+        text-align: center;
+        color: #0f2454;
+        font-weight: 600;
+      }
+
+      .react-datepicker__input-container input:focus {
+        border-color: rgb(15, 123, 171);
+        outline: none;
+      }
+
+      .react-datepicker__header {
+        background-color: #eee;
+        color: #ffffff;
+      }
+
+      .react-datepicker__day--selected {
+        background-color: rgb(15, 123, 171);
+        color: #ffffff;
+      }
+
+    }
+  }
+
+  svg:not(:root).svg-inline--fa {
+    position: absolute;
+    top: 30%;
+    right: 2vw;
+  }
+
+  button {
+    background-color: #eee;
+    color: black;
+    font-weight: 500;
+    font-size: medium;
+    padding: 9px 22px 9px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0px;
+    text-align: center;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+}

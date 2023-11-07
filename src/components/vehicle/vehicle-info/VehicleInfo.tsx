@@ -347,10 +347,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                 </p>
               </div>
             </div>
-            {/* Calendar Component  */}
-            <div>
-              <BookingCalendar/>
-            </div>
             <div className="containers">
               <>
                 <button
@@ -478,46 +474,50 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     )
                                   }
                                 </div>
-                                <div className="form-group">
-                                  <div className="input-group d-flex">
-                                    <select className="select-custom ">
-                                      <option value="+91">+91</option>
-                                    </select>
-                                    {/* Phone Number */}
-                                    <input
-                                      type="tel"
-                                      className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
-                                        }`}
-                                      id="phone-number"
-                                      value={phoneNumber}
-                                      onChange={(e) => setPhoneNumber(e.target.value)}
-                                      placeholder="Phone Number"
-                                      onBlur={(e) =>
-                                        setPhoneNumberValid(
-                                          phoneNumberValidation(e.target.value)
-                                        )
-                                      }
-                                    />
+                                {!otpVerified ?
+                                  <div className="form-group">
+                                    <div className="input-group d-flex">
+                                      <select className="select-custom ">
+                                        <option value="+91">+91</option>
+                                      </select>
+                                      {/* Phone Number */}
+                                      <input
+                                        type="tel"
+                                        className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
+                                          }`}
+                                        id="phone-number"
+                                        value={phoneNumber}
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        placeholder="Phone Number"
+                                        onBlur={(e) =>
+                                          setPhoneNumberValid(
+                                            phoneNumberValidation(e.target.value)
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    {(!phoneNumberValid ||
+                                      !phoneNumberValidation(phoneNumber)) && (
+                                        <div className="error-message">
+                                          {!phoneNumberValid &&
+                                            phoneNumber.trim() === "" ? (
+                                            <>
+                                              <FaExclamationTriangle className="error-icon" />
+                                              This field is required
+                                            </>
+                                          ) : !phoneNumberValid ? (
+                                            <>
+                                              <FaExclamationTriangle className="error-icon" />
+                                              Please enter a valid mobile number
+                                            </>
+                                          ) : null}
+                                        </div>
+                                      )
+                                    }
                                   </div>
-                                  {(!phoneNumberValid ||
-                                    !phoneNumberValidation(phoneNumber)) && (
-                                      <div className="error-message">
-                                        {!phoneNumberValid &&
-                                          phoneNumber.trim() === "" ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            This field is required
-                                          </>
-                                        ) : !phoneNumberValid ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            Please enter a valid mobile number
-                                          </>
-                                        ) : null}
-                                      </div>
-                                    )
-                                  }
-                                </div>
+                                  :
+                                  <BookingCalendar />
+                                }
                                 {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                                 {otpSent && !otpVerified && (
                                   <div className="form-group otp-group">
