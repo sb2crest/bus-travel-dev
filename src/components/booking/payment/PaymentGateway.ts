@@ -8,9 +8,7 @@ export default async function displayRazorpay(
     mobile: mobile,
     amount: amount,
   };
-
-  // const data = await fetch("http://localhost:8085/createPayment", {
-    const data = await fetch("http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/createPayment", {
+  const data = await fetch("http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/createPayment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,6 +17,7 @@ export default async function displayRazorpay(
   }).then((t) => t.json());
 
   console.log(data);
+  console.log(requestBody);
 
   const options = {
     key: "rzp_test_nHgaZ8pP0SqyOm",
@@ -32,8 +31,7 @@ export default async function displayRazorpay(
       alert("PAYMENT ID ::" + response.razorpay_payment_id);
       alert("ORDER ID :: " + response.razorpay_order_id);
       alert("Signature:: " + response.razorpay_signature);
-      // console.log(response)
-       // Make a POST API call here
+      // Make a POST API call here
       try {
         const postData = {
           razorPayPaymentId: response.razorpay_payment_id,
