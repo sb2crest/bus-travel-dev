@@ -11,7 +11,8 @@ export default async function displayRazorpay(
 
   //TODO:: environment specific URL
   //let baseUrl: "http://localhost:8085/";
-  let baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/"
+  let baseUrl =
+    "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
 
   const data = await fetch(`${baseUrl}createPayment`, {
     method: "POST",
@@ -33,9 +34,9 @@ export default async function displayRazorpay(
     image: "http://localhost:8100/src/assets/images/Logo.png",
     order_id: data.razorPayOrderId,
     handler: async function (response: any) {
-      alert("PAYMENT ID ::" + response.razorpay_payment_id);
-      alert("ORDER ID :: " + response.razorpay_order_id);
-      alert("Signature:: " + response.razorpay_signature);
+      // alert("PAYMENT ID ::" + response.razorpay_payment_id);
+      // alert("ORDER ID :: " + response.razorpay_order_id);
+      // alert("Signature:: " + response.razorpay_signature);
       // console.log(response)
       // Make a POST API call here
       try {
@@ -52,17 +53,21 @@ export default async function displayRazorpay(
             "Content-Type": "application/json",
           },
           body: JSON.stringify(postData),
-        });
-        console.log(postResponse)
-        if (postResponse.ok) {
+        }).then((t) => t.json());
+        console.log(postResponse);
+        if (postResponse.statusCode===200) {
           // Handle success
-          console.log(`status code is ${postResponse.status}`)
+          // console.log(`status code is ${postResponse.status}`)
+          console.log(postResponse);
         } else {
           // Handle error
-          console.error("Failed to make the POST API call");
+          console.error("Unable to validate Signature");
         }
       } catch (error) {
-        console.error("An error occurred while making the POST API call", error);
+        console.error(
+          "An error occurred while making the POST API call",
+          error
+        );
       }
     },
     prefill: {
