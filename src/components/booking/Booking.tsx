@@ -11,7 +11,6 @@ import ListVehicles from "../../types/list.type";
 import Fade from 'react-reveal/Fade';
 import Filter from "./Filter/Filter";
 
-
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
 

@@ -19,6 +19,7 @@ import BookingInfo from './components/booking-info/BookingInfo';
 import VehiclesList from './components/vehicle/vehicle-list/VehicleList';
 import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
+import BookingDetails from './components/booking-info/booking-details/BookingDetails';
 
 const images = [
   { url: image1 },
@@ -49,8 +50,8 @@ const App = () => {
             <Route exact path="/vehicles" component={VehiclesList} />
             {/* <Route exact path="/addVehicle" component={AddVehicle} /> */}
             <Route exact path="/booking" component={Booking} />
-            <Route exact path="/bookinginfo" component={BookingInfo} />
-            {/* <Route path='/booking-details' component={BookingDetails} /> */}
+            {/* <Route exact path="/bookinginfo" component={BookingInfo} /> */}
+            <Route path='/bookinginfo' component={BookingDetails} />
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />

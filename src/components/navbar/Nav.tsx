@@ -18,7 +18,7 @@ const Navbar = () => {
           <span>{title}</span>
         )}
         {imgSrc && (
-          <img src={imgSrc} alt="Menu Image" width={90} className="hideimg" height={90}/>
+          <img src={logo} alt="Menu Image" width={90} className="hideimg" height={90}/>
         )}
       </li>
     );
