@@ -3,6 +3,7 @@ import './Checkout.scss';
 import { Link } from 'react-router-dom';
 import VehicleImage from '../../../assets/images/booking-summary-dummy-image.webp';
 import displayRazorpay from '../payment/PaymentGateway';
+import Confirmation from '../booking-confirmation/Confirmation';
 
 interface CheckoutProps {
     bookingId: string;
@@ -12,7 +13,6 @@ interface CheckoutProps {
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, toDate }) => {
-    const [showConfirmation, setShowConfirmation] = useState(false);
     const [showFareDetails, setShowFareDetails] = useState(false);
 
     const fareDetails = () => {
@@ -39,15 +39,11 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, t
     useEffect(() => {
         loadScript("https://checkout.razorpay.com/v1/checkout.js");
     });
-    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setShowConfirmation(true);
-    };
 
     const razorpay: MouseEventHandler<HTMLButtonElement> = async (event) => {
         const amount = 500000;
         await displayRazorpay(bookingId, phoneNumber, amount);
-        console.log("Request Body:"+bookingId+","+phoneNumber+","+amount);
+        console.log("Request Body:" + bookingId + "," + phoneNumber + "," + amount);
     };
     return (
         <div className="modal-checkout" id="newPopUp">
@@ -120,7 +116,6 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, t
                     </div>
                 </div>
             </>
-            
         </div>
     );
 };
