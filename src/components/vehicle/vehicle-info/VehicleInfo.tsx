@@ -12,6 +12,9 @@ import Warning from "../../warning/Warning";
 import Checkout from "../../booking/checkout/Checkout";
 import dataService from "../../../services/data.service";
 import { toDate } from "date-fns";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface Image {
   url: string;
@@ -283,7 +286,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         </div>
         <div className="vehicleInfo_container">
           <div className="image-gallery">
-            <h1>Bus Details</h1>
+            {/* <h1>Bus Details</h1> */}
             <div className="parent-image">
               <img
                 src={selectedImage.url}
@@ -306,55 +309,81 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
             </div>
           </div>
           <div className="bus_details">
-            {/* <h2>Vehicle Facility</h2> */}
-            <div className="facility_icons">
-              <div className="facility_icons_one">
-                <p>
-                  <i
-                    className="fa-solid fa-tv fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;Television
-                </p>
-                <p>
-                  {" "}
-                  <i
-                    className="fa-solid fa-plug fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;240V Socket{" "}
-                </p>
-                <p>
-                  {" "}
-                  <i
-                    className="fa-solid fa-bed fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;Cushioned seats{" "}
-                </p>
+            <div className="inclusions">
+              <p className="inclusion-01">Inclusions</p>
+              <div className="operator-icon-and-text">
+                <FontAwesomeIcon icon={faMapMarkerAlt} style={{ color: "#0f7bab" }} />
+                <p>Extra usage at Rs. 15/KM to be paid to the operator</p>
               </div>
-              <div className="facility_icons_two">
-                <p>
-                  <i
-                    className="fa-solid fa-music fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;Audio system
-                </p>
-                <p>
-                  <i
-                    className="fa-solid fa-fan  fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;AC
-                </p>
-                <p>
-                  <i
-                    className="fa-solid fa-compact-disc  fa-lg"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                  &nbsp;&nbsp;&nbsp;DVD player
-                </p>
+            </div>
+            <div className="exclusions">
+              <p className="exclusion-01">Exclusions</p>
+              <div className="exclusion-info">
+                <div className="rupee-icon-and-text">
+                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{ color: "#0f7bab" }} />
+                  <p>Interstate taxes are excluded</p>
+                </div>
+                <div className="icon-and-text">
+                  <FontAwesomeIcon icon={faIndianRupeeSign} style={{ color: "#0f7bab" }} />
+                  <p>Toll charges are excluded in base fare</p>
+                </div>
+              </div>
+            </div>
+            {/* <div className="driver-details">
+              <h2 >Vehicle & Driver Details</h2>
+              <p className="details">You will receive driver and vehicle details one day before your journey.</p>
+            </div> */}
+            <div className="amenities">
+              <h3>Amenities</h3>
+              <div className="facility_icons">
+                <div className="facility_icons_one">
+                  <p>
+                    <i
+                      className="fa-solid fa-tv fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;Television
+                  </p>
+                  <p>
+                    {" "}
+                    <i
+                      className="fa-solid fa-plug fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;240V Socket{" "}
+                  </p>
+                  <p>
+                    {" "}
+                    <i
+                      className="fa-solid fa-bed fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;Cushioned seats{" "}
+                  </p>
+                </div>
+                <div className="facility_icons_two">
+                  <p>
+                    <i
+                      className="fa-solid fa-music fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;Audio system
+                  </p>
+                  <p>
+                    <i
+                      className="fa-solid fa-fan  fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;AC
+                  </p>
+                  <p>
+                    <i
+                      className="fa-solid fa-compact-disc  fa-lg"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                    &nbsp;&nbsp;&nbsp;DVD player
+                  </p>
+                </div>
               </div>
             </div>
             <div className="containers">

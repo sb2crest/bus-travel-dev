@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  
+
     &_banner {
         width: -webkit-fill-available;
         height: 60vh;
@@ -51,21 +51,23 @@
         width: 95%;
         display: flex;
         justify-content: space-around;
-        align-items: baseline;
+        align-items: self-start;
 
         .image-gallery {
             text-align: center;
 
             h1 {
-                color: #0f2454;
+                color: rgb(15, 123, 171);
                 position: relative;
                 display: inline-block;
+                font-size: xx-large;
+                font-family: "Courier New", monospace;
             }
 
             h1::after {
                 display: inline-block;
                 content: '';
-                background-color: #0f7bab;
+                // background-color: #0f7bab;
                 width: 95%;
                 padding: 5px;
                 position: absolute;
@@ -92,8 +94,87 @@
         }
 
         .bus_details {
-            h2 {
-                color: #0f2454;
+            .inclusions {
+
+                .inclusion-01 {
+                    color: rgb(15, 123, 171);
+                    font-size: 22px;
+                    font-weight: bold;
+                    font-family: Inter, sans-serif;
+                    margin-bottom: 0vh;
+                }
+
+                .operator-icon-and-text {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .operator-icon-and-text p {
+                    margin-left: 10px;
+                }
+            }
+
+            .exclusions {
+                .exclusion-01 {
+                    color: rgb(15, 123, 171);
+                    font-size: 22px;
+                    font-weight: bold;
+                    font-family: Inter, sans-serif;
+                    margin-bottom: 0vh;
+                }
+
+                .exclusion-info {
+                    line-height: 5px;
+                }
+
+                .rupee-icon-and-text {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 0vh;
+                }
+
+                .rupee-icon-and-text p {
+                    margin-left: 10px;
+                }
+
+                .icon-and-text {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
+
+                .icon-and-text p {
+                    margin-left: 10px;
+                }
+            }
+
+            // .driver-details {
+            //     line-height: 2.5px;
+            //     margin-bottom: 5vh;
+
+            //     h3 {
+            //         color: #1446a0;
+            //         font-size: 22px;
+            //         font-weight: bold;
+            //         font-family: Inter, sans-serif;
+            //         line-height: 1.2;
+            //     }
+
+            //     .details {
+            //         color: #1446a0;
+            //     }
+            // }
+            .amenities{
+                line-height: 10px;
+                margin-bottom: 5vh;
+                
+            }
+
+            h3 {
+                color: rgb(15, 123, 171);
+                font-size: 22px;
+                font-weight: bold;
+                font-family: Inter, sans-serif;
             }
 
             .facility_icons {
@@ -138,23 +219,26 @@
     .vehicleInfo {
         &_banner {
             height: 40vh;
+
             h1 {
                 font-size: 10vw;
             }
         }
+
         &_container {
             margin: 4vw 0;
             width: 95%;
             align-items: center;
             flex-direction: column;
+
             .image-gallery {
                 .parent-image {
                     img {
                         width: 95%;
-                        height: 60vh;    
+                        height: 60vh;
                     }
                 }
-    
+
                 .child-images {
                     img {
                         width: 20%;
@@ -162,7 +246,7 @@
                     }
                 }
             }
-    
+
             .bus_details {
                 a {
                     text-decoration: none;
@@ -176,23 +260,26 @@
     .vehicleInfo {
         &_banner {
             height: 40vh;
+
             h1 {
                 font-size: 10vw;
             }
         }
+
         &_container {
             margin: 4vw 0;
             width: 95%;
             align-items: center;
             flex-direction: column;
+
             .image-gallery {
                 .parent-image {
                     img {
                         width: 95%;
-                        height: 60vh;    
+                        height: 60vh;
                     }
                 }
-    
+
                 .child-images {
                     img {
                         width: 20%;
@@ -200,7 +287,7 @@
                     }
                 }
             }
-    
+
             .bus_details {
                 a {
                     text-decoration: none;
@@ -214,35 +301,38 @@
     .vehicleInfo {
         &_banner {
             height: 50vh;
+
             h1 {
                 font-size: 8vw;
             }
-    
+
         }
-    
+
         &_container {
             align-items: center;
             flex-direction: column;
-    
+
         }
     }
-    
+
 }
+
 @media screen and (min-width: 1023px) and (max-width: 1200px) {
     .vehicleInfo {
         &_banner {
             height: 60vh;
+
             h1 {
                 font-size: 8vw;
             }
-    
+
         }
-    
+
         &_container {
             align-items: center;
             flex-direction: column;
-    
+
         }
     }
-    
+
 }
