@@ -3,14 +3,16 @@ import './Checkout.scss';
 import { Link } from 'react-router-dom';
 import VehicleImage from '../../../assets/images/booking-summary-dummy-image.webp';
 import displayRazorpay from '../payment/PaymentGateway';
+import Confirmation from '../booking-confirmation/Confirmation';
 
 interface CheckoutProps {
     bookingId: string;
     phoneNumber: string;
+    fromDate: Date;
+    toDate: Date
 }
 
-const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
-    const [showConfirmation, setShowConfirmation] = useState(false);
+const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, toDate }) => {
     const [showFareDetails, setShowFareDetails] = useState(false);
 
     const fareDetails = () => {
@@ -37,14 +39,11 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
     useEffect(() => {
         loadScript("https://checkout.razorpay.com/v1/checkout.js");
     });
-    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setShowConfirmation(true);
-    };
 
     const razorpay: MouseEventHandler<HTMLButtonElement> = async (event) => {
-        const amount = 100;
+        const amount = 500000;
         await displayRazorpay(bookingId, phoneNumber, amount);
+        console.log("Request Body:" + bookingId + "," + phoneNumber + "," + amount);
     };
     return (
         <div className="modal-checkout" id="newPopUp">
@@ -66,7 +65,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                                     <span className='booking-number'>{bookingId}</span>
                                                 </p>
                                                 <p className='from'>From Date <br />
-                                                    <span className='from-date'>31-10-2023</span>
+                                                    <span className='from-date'>{fromDate.toLocaleDateString()}</span>
                                                 </p>
                                             </div>
                                             <div className='from-to-date'>
@@ -74,7 +73,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                                     <span className='mobile'>{phoneNumber}</span>
                                                 </p>
                                                 <p className='to'>To Date <br />
-                                                    <span className='to-date'>11-05-2023</span>
+                                                    <span className='to-date'>{toDate.toLocaleDateString()}</span>
                                                 </p>
                                             </div>
                                             <div className='line'></div>
@@ -85,16 +84,16 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber }) => {
                                                     <>
                                                         <p className='show-hide-fare-details' onClick={hideDetails}>Hide Fare Details</p>
                                                         <div className='base-fare'>
-                                                            Basic Fare <span className='fare'> 19,800 INR</span>
+                                                            Base Fare <span className='fare'> 4900 INR</span>
                                                         </div>
                                                         <div className='gst-fare'>
-                                                            GST <span className='gst-percentage'> 3542 INR</span>
+                                                            GST <span className='gst-percentage'>100 INR</span>
                                                         </div>
                                                         <div className='line'></div>
                                                     </>
                                                 )}
                                                 <p className='amount-header'>Amount
-                                                    <span className='price'> 20000 INR</span>
+                                                    <span className='price'> 5000 INR</span>
                                                     <br />
                                                     <span className='tax-cal'>(Taxes will be calculated during payment)</span>
                                                 </p>

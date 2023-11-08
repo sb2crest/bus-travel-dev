@@ -212,14 +212,33 @@ select {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
+
+// .form-group-first {
+//   margin-bottom: 0.5rem
+// }
+
+// .form-group-middle {
+//   margin-bottom: 1rem
+// }
+
+// .form-group-last {
+//   margin-bottom: 0.5em;
+// }
 
 .first-name {
   margin-right: 10px;
   margin-top: -5px;
   font-size: 1rem;
+}
 
+.middle-name {
+  margin-right: 10px;
+}
+
+.last-name {
+  margin-right: 10px;
 }
 
 .form-control {
@@ -250,35 +269,26 @@ input[type="text" i] {
   text-decoration: underline !important;
 }
 
-.error-message {
-  display: block;
-  color: rgb(230, 43, 43);
-  left: -10px;
-  transform: translateY(-50%);
-  display: flex;
-  top: calc(100% + 5px);
-  align-items: center;
-  margin-top: 10px;
-  font-size: 13px;
-}
+// .error-message {
+//   display: block;
+//   color: rgb(230, 43, 43);
+//   left: -10px;
+//   transform: translateY(-50%);
+//   display: flex;
+//   top: calc(100% + 5px);
+//   align-items: center;
+//   font-size: 13px;
+//   height: 1.5rem;
+// }
 
-.error-border {
-  border: 1.5px solid rgb(230, 43, 43) !important;
-}
+// .error-border {
+//   border: 1.5px solid rgb(230, 43, 43) !important;
+// }
 
 .text-center {
   text-align: center !important;
 }
 
-.middle-name {
-  margin-right: 10px;
-  margin-top: -15px;
-}
-
-.last-name {
-  margin-right: 10px;
-  margin-top: -5px;
-}
 
 #phone-number {
   padding: 0.1rem 0.75rem !important;
