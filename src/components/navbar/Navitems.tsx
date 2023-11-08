@@ -8,7 +8,7 @@ export const Navitems = [
       url: "/booking",
     },
     {
-        imgSrc: "../../src/assets/images/Logo.png",
+        imgSrc: "../../assets/images/Logo.png",
     },
     {
       title: "Booking Info",
