@@ -1,12 +1,11 @@
-.calendar-container {
+.calendar {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 
-  .from-to-date-container {
+  .from-to-date {
     display: flex;
     align-items: center;
-    background-color: #ffffff;
 
     .date-picker {
       position: relative;
@@ -17,13 +16,11 @@
       .start-date {
         width: 80%;
         height: 35px;
-        margin-left: 2vh;
       }
 
       .end-date {
         width: 80%;
         height: 35px;
-        margin-left: 5vh;
       }
 
       .react-datepicker-wrapper {
@@ -32,21 +29,24 @@
       }
 
       .react-datepicker__input-container input::placeholder {
-        color: #0f2454;
-        font-weight: bold;
+        color: #757575;
       }
 
       .react-datepicker__input-container input {
-        border: 0px solid #ffffff;
+        border: 1px solid #ced4da;
         border-radius: 6px;
         text-align: center;
-        color: #0f2454;
-        font-weight: 600;
+        height: calc(1.3em + 0.75rem + 2px);
+        font-size: 1rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
       }
 
       .react-datepicker__input-container input:focus {
-        border-color: rgb(15, 123, 171);
-        outline: none;
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
       }
 
       .react-datepicker__header {

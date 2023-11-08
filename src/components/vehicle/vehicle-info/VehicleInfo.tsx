@@ -5,9 +5,13 @@ import './form.scss';
 import { FaExclamationTriangle } from "react-icons/fa";
 import IVehicleData from "../../../types/vehicle.type";
 import BookingCalendar from "../../booking-calendar/BookingCalendar";
+import DatePicker from "react-datepicker";
+import '../../booking-calendar/BookingCalendar.scss';
+import "react-datepicker/dist/react-datepicker.css";
 import Warning from "../../warning/Warning";
 import Checkout from "../../booking/checkout/Checkout";
 import dataService from "../../../services/data.service";
+import { toDate } from "date-fns";
 
 interface Image {
   url: string;
@@ -83,6 +87,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   //State Variable used in showing warning component
   const [showWarning, setShowWarning] = useState(false);
 
+  //State Variables for Date
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
   //Email Validation
@@ -110,6 +118,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     setPhoneNumber("");
     setEmail("");
     setOtp("");
+    setStartDate(null);
+    setEndDate(null);
   };
 
   /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
@@ -190,8 +200,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     else {
       let requestBody = {
         vehicleNumber: "KA09EQ1234",
-        fromDate: '2023-11-30',
-        toDate: '2023-11-05',
+        fromDate: startDate ? startDate.toISOString().split('T')[0] : '',
+        toDate: endDate ? endDate.toISOString().split('T')[0] : '',
         user: {
           firstName: firstName,
           middleName: middleName,
@@ -201,10 +211,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         },
         slot: {
           vehicleNumber: "KA09EQ1234",
-          fromDate: '2023-11-30',
-          toDate: '2023-11-05'
+          fromDate: startDate ? startDate.toISOString().split('T')[0] : '',
+          toDate: endDate ? endDate.toISOString().split('T')[0] : ''
         }
-      }
+      };
       dataService
         .bookNow(requestBody)
         .then((response: { data: any }) => {
@@ -356,7 +366,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                   Book Now
                 </button>
                 {/*  Checkout Component */}
-                {checkout ? (<Checkout bookingId={bookingId} phoneNumber={phoneNumber} />)
+                {checkout ? (<Checkout bookingId={bookingId} phoneNumber={phoneNumber} fromDate={startDate ?? new Date()} toDate={endDate ?? new Date()} />)
                   :
                   (
                     <div
@@ -408,7 +418,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                       )
                                     }
                                   />
-                                  {(!firstNameValid ||
+                                  {/* {(!firstNameValid ||
                                     !nameValidation(firstName)) && (
                                       <div className="error-message">
                                         {!firstNameValid &&
@@ -424,7 +434,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                           </>
                                         ) : null}
                                       </div>
-                                    )}
+                                    )} */}
                                 </div>
                                 {/* Middle Name*/}
                                 <div className="form-group">
@@ -455,7 +465,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                       )
                                     }
                                   />
-                                  {(!lastNameValid ||
+                                  {/* {(!lastNameValid ||
                                     !nameValidation(lastName)) && (
                                       <div className="error-message">
                                         {!lastNameValid &&
@@ -472,7 +482,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         ) : null}
                                       </div>
                                     )
-                                  }
+                                  } */}
                                 </div>
                                 {!otpVerified ?
                                   <div className="form-group">
@@ -496,7 +506,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         }
                                       />
                                     </div>
-                                    {(!phoneNumberValid ||
+                                    {/* {(!phoneNumberValid ||
                                       !phoneNumberValidation(phoneNumber)) && (
                                         <div className="error-message">
                                           {!phoneNumberValid &&
@@ -513,10 +523,38 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                           ) : null}
                                         </div>
                                       )
-                                    }
+                                    } */}
                                   </div>
                                   :
-                                  <BookingCalendar />
+                                  <div className="calendar">
+                                    <div className="from-to-date">
+                                      <div className="date-picker">
+                                        <DatePicker
+                                          selected={startDate}
+                                          onChange={(date: Date) => setStartDate(date)}
+                                          selectsStart
+                                          startDate={startDate}
+                                          endDate={endDate}
+                                          dateFormat="MM/dd/yyyy"
+                                          placeholderText="From-Date"
+                                          className="start-date"
+                                        />
+                                      </div>
+                                      <div className="date-picker">
+                                        <DatePicker
+                                          selected={endDate}
+                                          onChange={(date: Date) => setEndDate(date)}
+                                          selectsEnd
+                                          startDate={startDate}
+                                          endDate={endDate}
+                                          minDate={startDate}
+                                          dateFormat="MM/dd/yyyy"
+                                          placeholderText="To-Date"
+                                          className="end-date"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
                                 }
                                 {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                                 {otpSent && !otpVerified && (
@@ -593,12 +631,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     }
                                     placeholder="Email"
                                   />
-                                  {!emailValid && (
+                                  {/* {!emailValid && (
                                     <div className="error-message">
                                       <FaExclamationTriangle />
                                       Please enter a valid email address
                                     </div>
-                                  )}
+                                  )} */}
                                 </div>
                                 <div className="form-group">
                                   <div className="form-group">
