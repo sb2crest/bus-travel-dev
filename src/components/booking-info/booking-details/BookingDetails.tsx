@@ -8,14 +8,19 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton/IconButton";
+import { Link } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -27,31 +32,194 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
-
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
+  bookingId: string,
+  username: string,
+  fromDate: string,
+  toDate: string,
+  amount: number,
+  status: string,
+  bookingDate: string,
+  driverName: string,
+  driverNumber: number,
+  vehicleNumber: string,
+  seatCapacity: number
 ) {
-  return { name, calories, fat, carbs, protein };
+  return {
+    bookingId,
+    username,
+    fromDate,
+    toDate,
+    amount,
+    status,
+    bookingDate,
+    driverName,
+    driverNumber,
+    vehicleNumber,
+    seatCapacity,
+  };
+}
+
+function Row(props: { row: ReturnType<typeof createData> }) {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <React.Fragment>
+      <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+        <StyledTableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </StyledTableCell>
+        <StyledTableCell component="th" scope="row">
+          {row.bookingId}
+        </StyledTableCell>
+        <StyledTableCell align="center">{row.username}</StyledTableCell>
+        <StyledTableCell align="center">{row.fromDate}</StyledTableCell>
+        <StyledTableCell align="center">{row.toDate}</StyledTableCell>
+        <StyledTableCell align="center">{row.amount}</StyledTableCell>
+        <StyledTableCell align="center">{row.status}</StyledTableCell>
+      </StyledTableRow>
+      <StyledTableRow>
+        <StyledTableCell
+          style={{ paddingBottom: 0, paddingTop: 0 }}
+          colSpan={6}
+        >
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                fontWeight="600"
+              >
+                Additional Info
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <StyledTableRow>
+                    <StyledTableCell className="thead">
+                      Booking Date
+                    </StyledTableCell>
+                    <StyledTableCell className="thead">
+                      Driver Name
+                    </StyledTableCell>
+                    <StyledTableCell align="center" className="thead">
+                      Driver Number
+                    </StyledTableCell>
+                    <StyledTableCell align="center" className="thead">
+                      Vehicle Number
+                    </StyledTableCell>
+                    <StyledTableCell align="center" className="thead">
+                      SeatCapacity
+                    </StyledTableCell>
+                  </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                  <StyledTableRow key={row.status}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.bookingDate}
+                    </StyledTableCell>
+                    <StyledTableCell>{row.driverName}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.driverNumber}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.vehicleNumber}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.seatCapacity}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </StyledTableCell>
+      </StyledTableRow>
+    </React.Fragment>
+  );
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData(
+    "NB12665261",
+    "umesha",
+    "12-12-2023",
+    "12-12-2023",
+    24,
+    "Enquiry",
+    "12-12-2023",
+    "harsha",
+    1234567890,
+    "KA-43-8877",
+    60
+  ),
+  createData(
+    "NB12665261",
+    "harsha",
+    "12-12-2023",
+    "12-12-2023",
+    37,
+    "Booked",
+    "12-12-2023",
+    "harsha",
+    1234567890,
+    "KA-43-8877",
+    80
+  ),
+  createData(
+    "NB12665261",
+    "javeed",
+    "12-12-2023",
+    "12-12-2023",
+    24,
+    "Enquiry",
+    "12-12-2023",
+    "harsha",
+    1234567890,
+    "KA-43-8877",
+    70
+  ),
+  createData(
+    "NB12665261",
+    "akash",
+    "12-12-2023",
+    "12-12-2023",
+    67,
+    "Booked",
+    "12-12-2023",
+    "harsha",
+    1234567890,
+    "KA-43-8877",
+    50
+  ),
+  createData(
+    "NB12665261",
+    "kavya",
+    "12-12-2023",
+    "12-12-2023",
+    49,
+    "Enquiry",
+    "12-12-2023",
+    "harsha",
+    1234567890,
+    "KA-43-8877",
+    50
+  ),
 ];
 
 const Accordion = styled((props: AccordionProps) => (
@@ -68,7 +236,9 @@ const Accordion = styled((props: AccordionProps) => (
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+    expandIcon={
+      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem", color: "#0F7BAB" }} />
+    }
     {...props}
   />
 ))(({ theme }) => ({
@@ -115,6 +285,17 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   return (
     <div className="booking-details-main">
       <div className="booking-details-container">
+        <div className="booking_container_banner">
+          <h1>Booking Info</h1>
+          <h3>Check Your Booking Details here...</h3>
+          <ul>
+            <li>
+              <Link to={"/#"}>Home</Link>
+            </li>
+            <li>&#10095;</li>
+            <li>Booking Info</li>
+          </ul>
+        </div>
         <div className="header">
           <h1>Booking Details</h1>
           {/* <ul className="list-group">
@@ -135,35 +316,43 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Upcoming Booking Details</Typography>
+                <Typography className="upcoming" fontWeight="600">
+                  Upcoming Booking Details
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <Table aria-label="collapsible table">
+                    <TableHead>
+                      <StyledTableRow>
+                        <StyledTableCell className="thead" />
+                        <StyledTableCell className="thead">
+                          Booking ID
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          UserName
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          FromDate
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          ToDate
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          Amount
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          Booking Status
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <Row key={row.bookingId} row={row} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -174,35 +363,43 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                 aria-controls="panel2d-content"
                 id="panel2d-header"
               >
-                <Typography>Past Booking Details</Typography>
+                <Typography className="past" fontWeight="600">
+                  Past Booking Details
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
-              <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                <TableContainer component={Paper}>
+                  <Table aria-label="collapsible table">
+                    <TableHead>
+                      <StyledTableRow>
+                        <StyledTableCell className="thead" />
+                        <StyledTableCell className="thead">
+                          Booking ID
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          UserName
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          FromDate
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          ToDate
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          Amount
+                        </StyledTableCell>
+                        <StyledTableCell className="thead" align="center">
+                          Booking Status
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row) => (
+                        <Row key={row.bookingId} row={row} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </AccordionDetails>
             </Accordion>
           </div>
