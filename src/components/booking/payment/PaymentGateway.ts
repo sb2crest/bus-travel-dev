@@ -34,9 +34,9 @@ export default async function displayRazorpay(
     image: "http://localhost:8100/src/assets/images/Logo.png",
     order_id: data.razorPayOrderId,
     handler: async function (response: any) {
-      alert("PAYMENT ID ::" + response.razorpay_payment_id);
-      alert("ORDER ID :: " + response.razorpay_order_id);
-      alert("Signature:: " + response.razorpay_signature);
+      // alert("PAYMENT ID ::" + response.razorpay_payment_id);
+      // alert("ORDER ID :: " + response.razorpay_order_id);
+      // alert("Signature:: " + response.razorpay_signature);
       // console.log(response)
       // Make a POST API call here
       try {
