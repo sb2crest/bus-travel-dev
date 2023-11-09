@@ -40,13 +40,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+// Create rows dynamically based on the data
 function createData(
   bookingId: string,
-  username: string,
+  userName: string,
   fromDate: string,
   toDate: string,
   amount: number,
-  status: string,
+  bookingStatus: string,
   bookingDate: string,
   driverName: string,
   driverNumber: number,
@@ -55,17 +56,30 @@ function createData(
 ) {
   return {
     bookingId,
-    username,
+    userName,
     fromDate,
     toDate,
     amount,
-    status,
+    bookingStatus,
     bookingDate,
     driverName,
     driverNumber,
     vehicleNumber,
     seatCapacity,
   };
+}
+interface BookingDetailsProps {
+  bookingDetails: any;
+  //   bookingDetails: {
+  //     bookingDate: string; 
+  //     bookingID: string;
+  //     vehicleNumber: string;
+  //     fromDate: string;
+  //     toDate: string;
+  //     driverName: string;
+  //     driverNumber: string;
+  //     alternateNumber: string;
+  //   };
 }
 
 function Row(props: { row: ReturnType<typeof createData> }) {
@@ -87,11 +101,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <StyledTableCell component="th" scope="row">
           {row.bookingId}
         </StyledTableCell>
-        <StyledTableCell align="center">{row.username}</StyledTableCell>
+        <StyledTableCell align="center">{row.userName}</StyledTableCell>
         <StyledTableCell align="center">{row.fromDate}</StyledTableCell>
         <StyledTableCell align="center">{row.toDate}</StyledTableCell>
         <StyledTableCell align="center">{row.amount}</StyledTableCell>
-        <StyledTableCell align="center">{row.status}</StyledTableCell>
+        <StyledTableCell align="center">{row.bookingStatus}</StyledTableCell>
       </StyledTableRow>
       <StyledTableRow>
         <StyledTableCell
@@ -129,7 +143,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                  <StyledTableRow key={row.status}>
+                  <StyledTableRow key={row.bookingStatus}>
                     <StyledTableCell component="th" scope="row">
                       {row.bookingDate}
                     </StyledTableCell>
@@ -153,74 +167,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     </React.Fragment>
   );
 }
-
-const rows = [
-  createData(
-    "NB12665261",
-    "umesha",
-    "12-12-2023",
-    "12-12-2023",
-    24,
-    "Enquiry",
-    "12-12-2023",
-    "harsha",
-    1234567890,
-    "KA-43-8877",
-    60
-  ),
-  createData(
-    "NB12665261",
-    "harsha",
-    "12-12-2023",
-    "12-12-2023",
-    37,
-    "Booked",
-    "12-12-2023",
-    "harsha",
-    1234567890,
-    "KA-43-8877",
-    80
-  ),
-  createData(
-    "NB12665261",
-    "javeed",
-    "12-12-2023",
-    "12-12-2023",
-    24,
-    "Enquiry",
-    "12-12-2023",
-    "harsha",
-    1234567890,
-    "KA-43-8877",
-    70
-  ),
-  createData(
-    "NB12665261",
-    "akash",
-    "12-12-2023",
-    "12-12-2023",
-    67,
-    "Booked",
-    "12-12-2023",
-    "harsha",
-    1234567890,
-    "KA-43-8877",
-    50
-  ),
-  createData(
-    "NB12665261",
-    "kavya",
-    "12-12-2023",
-    "12-12-2023",
-    49,
-    "Enquiry",
-    "12-12-2023",
-    "harsha",
-    1234567890,
-    "KA-43-8877",
-    50
-  ),
-];
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -260,28 +206,23 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-interface BookingDetailsProps {
-  bookingDetails: any;
-  //   bookingDetails: {
-  //     bookingDate: string; 
-  //     bookingID: string;
-  //     vehicleNumber: string;
-  //     fromDate: string;
-  //     toDate: string;
-  //     driverName: string;
-  //     driverNumber: string;
-  //     alternateNumber: string;
-  //   };
-}
 
 const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-      setExpanded(newExpanded ? panel : false);
-    };
+  const handleChange = (panel: string) => (
+    event: React.SyntheticEvent,
+    newExpanded: boolean
+  ) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+  const upcoming = Array.isArray(bookingDetails.upcoming)
+  ? bookingDetails.upcoming
+  : [];
 
+const history = Array.isArray(bookingDetails.history)
+  ? bookingDetails.history
+  : [];
   return (
     <div className="booking-details-main">
       <div className="booking-details-container">
@@ -347,8 +288,23 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                       </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row) => (
-                        <Row key={row.bookingId} row={row} />
+                    {upcoming.map((booking: any, index: number) => (
+                        <Row
+                          key={index}
+                          row={createData(
+                            booking.bookingId,
+                            booking.userName,
+                            booking.fromDate,
+                            booking.toDate,
+                            booking.amount,
+                            booking.bookingStatus,
+                            booking.bookingDate,
+                            booking.driverName,
+                            booking.driverNumber,
+                            booking.vehicleNumber,
+                            booking.seatCapacity
+                          )}
+                        />
                       ))}
                     </TableBody>
                   </Table>
@@ -394,8 +350,23 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                       </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row) => (
-                        <Row key={row.bookingId} row={row} />
+                    {history.map((booking: any, index: number) => (
+                        <Row
+                          key={index}
+                          row={createData(
+                            booking.bookingID,
+                            booking.username,
+                            booking.fromDate,
+                            booking.toDate,
+                            booking.amount,
+                            booking.status,
+                            booking.bookingDate,
+                            booking.driverName,
+                            booking.driverNumber,
+                            booking.vehicleNumber,
+                            booking.seatCapacity
+                          )}
+                        />
                       ))}
                     </TableBody>
                   </Table>
@@ -409,4 +380,4 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   );
 };
 
-export default BookingDetails;
+export default BookingDetails; 

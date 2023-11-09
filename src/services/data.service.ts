@@ -46,7 +46,7 @@ class DataService {
 
   // bookingInfo
   bookingInfo(mobile: string) {
-    return http.get<IBookingInfoRequest>("bookingDetails?mobile=" + mobile);
+    return http.get<IBookingInfoRequest>("getBookingInfo?mobile=" + mobile);
   }
 
   // filter 
