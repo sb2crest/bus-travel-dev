@@ -8,7 +8,6 @@ import IVerifyPayment from "../types/payment/VerifyPayment.type";
 import IFilterRequest from "../types/filter/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IBookingInfoRequest from "../types/BookingInfo/request.type";
-// import IBookingInfoRequest from "../types/BookingInfo/request.type";
 class DataService {
 
   // Book now
