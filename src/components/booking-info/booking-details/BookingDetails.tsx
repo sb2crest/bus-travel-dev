@@ -263,7 +263,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 interface BookingDetailsProps {
   bookingDetails: any;
   //   bookingDetails: {
-  //     bookingDate: string;
+  //     bookingDate: string; 
   //     bookingID: string;
   //     vehicleNumber: string;
   //     fromDate: string;

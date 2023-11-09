@@ -50,8 +50,8 @@ const App = () => {
             <Route exact path="/vehicles" component={VehiclesList} />
             {/* <Route exact path="/addVehicle" component={AddVehicle} /> */}
             <Route exact path="/booking" component={Booking} />
-            {/* <Route exact path="/bookinginfo" component={BookingInfo} /> */}
-            <Route path='/bookinginfo' component={BookingDetails} />
+            <Route exact path="/bookinginfo" component={BookingInfo} />
+            {/* <Route path='/bookinginfo' component={BookingDetails} /> */}
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />
