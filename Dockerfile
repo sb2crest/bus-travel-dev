@@ -4,13 +4,12 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --force
 COPY . .
-EXPOSE 8100
 RUN npm run build
-CMD [ "ionic", "serve" ]
 
 # Second stage: Serve the application using Nginx
 FROM nginx:1.23-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
-COPY --from=nodework /app/dist /usr/share/nginx/html
+COPY --from=nodework /app/www /usr/share/nginx/html
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
