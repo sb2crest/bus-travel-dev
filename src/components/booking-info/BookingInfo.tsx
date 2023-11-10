@@ -210,6 +210,7 @@ const BookingInfo = () => {
             open={snackbarOpen}
             autoHideDuration={7000}
             onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
             <Alert onClose={handleSnackbarClose} severity="success">
               OTP Sent successfully!
