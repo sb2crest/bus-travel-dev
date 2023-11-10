@@ -17,12 +17,11 @@ const Icon = styled.i`
 const Cards = () => {
   return (
     <div className="ag-format-container">
-      <Slide bottom>
       <div className="ag-courses_box">
         <div className="ag-courses_item">
           <a href="#" className="ag-courses-item_link">
             <div className="ag-courses-item_bg"></div>
-            
+
             <div className="ag-courses-item_title">
               <Icon
                 className="fa-solid fa-regular fa-shield fa-2xl"
@@ -49,10 +48,10 @@ const Cards = () => {
               ></Icon>
               <h3>Schedule On Time</h3>
               <p>
-                We pride ourselves on punctuality. Our commitment to keeping
-                schedules on time ensures that you'll have a reliable and
-                efficient travel experience every step of the way. Your time is
-                valuable, and we respect it.
+                We pride ourselves on punctuality.Planned event at specified
+                time. Our commitment to keeping schedules on time ensures that
+                you'll have a reliable and efficient travel experience every
+                step of the way. Your time is valuable, and we respect it.
               </p>
             </div>
           </a>
@@ -136,7 +135,6 @@ const Cards = () => {
           </a>
         </div>
       </div>
-      </Slide>
     </div>
   );
 };

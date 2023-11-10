@@ -272,28 +272,22 @@
                     width: 95%;
                     h5{
                         font-size: 25px;
+                        margin: 20px 0;
                     }
                    
                     .key_points{
-                        font-size: 13.2px;
+                        font-size: 11px;
                         margin-left: 0;
                     }
                 }
                 &_img{
-                    padding: 0 15px 15px 10px;
-                    margin-top: 8vw;
-
-                  
-                    img{
-                        width: 250px;
-                        height: 250px;
-                    }
+                   display: none;
                 }
                 }
             }
             &_values {
                 margin-top: 15vw;  
-                
+                background: none;
                 &_section {
                   width: 94%;
                   flex-direction: column;
@@ -315,8 +309,7 @@
                     align-items: center;
                     flex-direction: column-reverse;
                     &_left{
-                        width: 90% !important;
-                        margin-bottom: 10vw;                      
+                       display: none;                    
                     }
                     &_right{
                         width: 90%;
@@ -349,6 +342,7 @@
                     width: 95%;
                     h5{
                         font-size: 25px;
+                        margin: 20px 0;
                     }
                    
                     .key_points{
@@ -357,14 +351,7 @@
                     }
                 }
                 &_img{
-                    padding: 0 15px 15px 10px;
-                    margin-top: 8vw;
-
-                  
-                    img{
-                        width: 250px;
-                        height: 250px;
-                    }
+                    display: none;
                 }
                 }
             }
@@ -392,8 +379,7 @@
                     align-items: center;
                     flex-direction: column-reverse;
                     &_left{
-                        width: 90% !important;
-                        margin-bottom: 10vw;                      
+                        display: none;                   
                     }
                     &_right{
                         width: 90%;

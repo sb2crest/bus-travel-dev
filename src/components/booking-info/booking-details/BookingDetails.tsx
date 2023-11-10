@@ -206,7 +206,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-
+//Getting booking details from props
 const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 

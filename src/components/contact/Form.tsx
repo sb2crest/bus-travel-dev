@@ -50,6 +50,7 @@ const Form: React.FC = () => {
             <div className="col-md-6 form-group">
               <label htmlFor="name">Enter your name</label>
               <input
+              className="nameContact"
                 type="text"
                 name="name"
                 value={name}
