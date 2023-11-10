@@ -30,8 +30,8 @@
       .row {
         margin: 0 5px;
         display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: space-between;
         .form-group {
           width: 45%;
           position: relative;
@@ -44,10 +44,10 @@
             font-weight: 700;
           }
           input[type="text"],
-          input[type="email"]{
+          input[type="email"] {
             position: relative;
             display: block;
-            width: 100%;
+            width: 93%;
             font-size: 15px;
             color: #25283a;
             line-height: 30px;
@@ -57,20 +57,21 @@
             border: 1px solid #f8f8f8;
             transition: all 300ms ease;
             margin-top: 20px;
-            outline: none; 
+            outline: none;
           }
-            i {
-              position: absolute;
-              right: 5px;
-              top: 62px;
-              font-size: 18px;
-             background-color: #0f7bab;
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            
+          i {
+            position: absolute;
+            right: 25px;
+            top: 62px;
+            font-size: 18px;
+            background-color: #0f7bab;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          .nameContact {
+            padding-left: 20px !important;
           }
         }
-        
       }
       label {
         position: relative;
@@ -78,46 +79,44 @@
         font-size: 16px;
         font-weight: 700;
       }
-          textarea {
-            overflow: hidden;
-            height: 140px;
-            resize: none;
-            position: relative;
-            display: block;
-            width: 97.5%;
-            font-size: 15px;
-            color: #25283a;
-            line-height: 30px;
-            font-weight: 400;
-            padding: 14px 20px;
-            background-color: #f8f8f8;
-            border: none;
-            transition: all 300ms ease;
-            margin-top: 20px;
-            outline: none;
-          }
-          i {
-            position: absolute;
-            right: 37px;
-            top: 62px;
-            font-size: 18px;
-           background-color: #0f7bab;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          
-        }
-        button{
-          color: white;
-          border: none;
-          display: block;
-          z-index: 1;
-          padding: 13px 20px;
-          border-radius: 30px;
-          background-image: linear-gradient(90deg,#3DD1E7 10%, #0f7bab 100%);
-          font-weight: 600;
-        }
+      textarea {
+        overflow: hidden;
+        height: 140px;
+        resize: none;
+        position: relative;
+        display: block;
+        width: 94.5%;
+        font-size: 15px;
+        color: #25283a;
+        line-height: 30px;
+        font-weight: 400;
+        padding: 14px 20px;
+        background-color: #f8f8f8;
+        border: none;
+        transition: all 300ms ease;
+        margin-top: 20px;
+        outline: none;
+      }
+      i {
+        position: absolute;
+        right: 57px;
+        top: 62px;
+        font-size: 18px;
+        background-color: #0f7bab;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      button {
+        color: white;
+        border: none;
+        display: block;
+        z-index: 1;
+        padding: 13px 20px;
+        border-radius: 30px;
+        background-image: linear-gradient(90deg, #3dd1e7 10%, #0f7bab 100%);
+        font-weight: 600;
+      }
     }
-   
   }
 }
 
@@ -137,27 +136,30 @@
       form {
         .row {
           margin: 0;
-      flex-direction: column;
+          flex-direction: column;
           .form-group {
-            width: 84%;  
-          }
-          
-        }
-            textarea {
-              width: 82.5%;
+            width: 84%;
+            input[type="text"],
+            input[type="email"] {
+              width: 98%;
             }
-            i {
-              right: 70px;
-            
+            i{
+              right: 0px;
+            }
           }
-          button{
-            padding: 10px 20px;
-          }
+        }
+        textarea {
+          width: 82.5%;
+        }
+        i {
+          right: 16%;
+        }
+        button {
+          padding: 10px 20px;
+        }
       }
-     
     }
   }
-  
 }
 
 @media only screen and (min-width: 481px) and (max-width: 767px) {
@@ -176,27 +178,27 @@
       form {
         .row {
           margin: 0;
-      flex-direction: column;
+          flex-direction: column;
           .form-group {
-            width: 84%;  
-          }
-          
-        }
-            textarea {
-              width: 82.5%;
+            width: 95%;
+            i{
+              right: 5%;
             }
-            i {
-              right: 115px;
-              top: 62px;
           }
-          button{
-            padding: 12px 25px;
-          }
+        }
+        textarea {
+          width: 88%;
+        }
+        i {
+          right:10%;
+          top: 62px;
+        }
+        button {
+          padding: 12px 25px;
+        }
       }
-     
     }
   }
-  
 }
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -212,26 +214,24 @@
           .form-group {
             width: 45%;
             input[type="text"],
-            input[type="email"]{
+            input[type="email"] {
               width: 87%;
             }
-              i {
-                right: 25px;
-            }
-          }
-          
-        }
-            textarea {
-              width: 90.5%;
-            }
             i {
-              right: 57px;
+              right: 8%;
+            }
           }
-          button{
-            padding: 15px 35px;
-          }
+        }
+        textarea {
+          width: 90.5%;
+        }
+        i {
+          right: 8%;
+        }
+        button {
+          padding: 15px 35px;
+        }
       }
-     
     }
   }
 }
@@ -248,26 +248,24 @@
           .form-group {
             width: 45%;
             input[type="text"],
-            input[type="email"]{
+            input[type="email"] {
               width: 90%;
             }
-              i {
-                right: 25px;
-            }
-          }
-          
-        }
-            textarea {
-              width: 92.5%;
-            }
             i {
-              right: 57px;
+              right: 25px;
+            }
           }
-          button{
-            padding: 10px 15px;
-          }
+        }
+        textarea {
+          width: 92.5%;
+        }
+        i {
+          right: 57px;
+        }
+        button {
+          padding: 10px 15px;
+        }
       }
-     
     }
   }
 }
