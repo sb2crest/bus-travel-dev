@@ -3,7 +3,7 @@
         &_banner{
          height: 60vh;
          background: url(../../assets/images/busBackground.jpg) no-repeat;
-         background-position: center;
+         background-position: bottom 53% right !important;
          background-size: cover;
          display: flex;
          justify-content: center;
@@ -12,12 +12,14 @@
          h1{
             font-size: 6vw;
             color: #0f7bab;
+            -webkit-text-stroke: 0.5px #fff; 
             
          }
          h3{
             margin-top: -4.5vw;
             font-size: 2.3vw;
             color: #05f867;
+
          }
          ul{
             margin-top: -2vw;
@@ -25,6 +27,7 @@
             display: flex;
             color: #fff;
             padding-inline-start: 0px;
+            align-items: center;
             li{
                 margin-left: 10px;
                 a{
@@ -375,13 +378,18 @@
         &_container{
             &_banner{
              height: 40vh;
+             background-position: bottom 60% right !important;
              h1{
                 font-size: 10vw;
+            -webkit-text-stroke: 0.4px #fff; 
                 
              }
              h3{
                 margin-top: -8vw;
                 font-size: 4vw;
+             }
+             li{
+                font-size: 12px;
              }
             }
             &_busDetails{
@@ -490,6 +498,8 @@
         &_container{
             &_banner{
              height: 50vh;
+             background-position: bottom 55% right !important;
+
              h1{
                 font-size: 10vw;
                 
@@ -604,11 +614,13 @@
     .booking{
         &_container{
             &_banner{        
+             background-position: bottom 56% right !important;
+
              h1{
                 font-size: 8vw;
              }
              h3{
-                margin-top: -5vw;
+                margin-top: -3vw;
                 font-size: 3.3vw;
              }              
             }
