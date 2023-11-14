@@ -104,6 +104,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   //State Variables for Snackbar
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
+  const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
 
   //State Variable for phone number change
   const [phoneNumberChange, setPhoneNumberChange] = useState(false);
@@ -312,6 +313,14 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     }
     setVerifySnackbarOpen(false);
   };
+
+  const handleSlotsSnackbarClose = (event?: React.SyntheticEvent | Event,
+    reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSlotsBookedSnackbarOpen(false);
+  }
 
   {/* Phone Number Change */ }
   const changePhoneNumber = () => {
@@ -634,7 +643,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     </div>
                                   </div>
                                 }
-                                {otpSent && (
+                                {otpSent && !otpVerified && (
                                   <p onClick={changePhoneNumber} className="change-phone-number">Change Phone Number</p>
                                 )
                                 }
