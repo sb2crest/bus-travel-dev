@@ -191,7 +191,7 @@ const BookingInfo = () => {
             <div className="phone">
               <input
                 placeholder="Phone Number"
-                type="text"
+                type="number"
                 name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={handleChange}
