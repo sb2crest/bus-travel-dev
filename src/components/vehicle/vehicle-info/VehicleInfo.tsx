@@ -215,7 +215,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   {/* Book Now Function */ }
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!firstName || !lastName || !phoneNumber || !otp || !email) {
+    if (!firstName || !lastName || !phoneNumber || !otp || !email || !startDate || !endDate) {
       setShowWarning(true);
     }
     else {
@@ -246,7 +246,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
             console.log("Booking successful! Booking ID: " + response.data);
           }
           else {
+            console.log("Response:", response.data.message);
             console.log(" Booking failed");
+            if (response.data.message === 'Slots already Booked') {
+              setSlotsBookedSnackbarOpen(true);
+            }
           }
         })
         .catch((error: any) => {
@@ -767,6 +771,16 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                               >
                                 <Alert onClose={handleVerifyClose} severity="success">
                                   Validation successful!
+                                </Alert>
+                              </Snackbar>
+                              <Snackbar
+                                open={slotsBookedSnackbarOpen}
+                                autoHideDuration={7000}
+                                onClose={handleSlotsSnackbarClose}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                              >
+                                <Alert onClose={handleSlotsSnackbarClose} severity="error">
+                                  Slots are Already Booked!
                                 </Alert>
                               </Snackbar>
                             </div>
