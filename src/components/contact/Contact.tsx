@@ -18,7 +18,8 @@ const Contact = () => {
             <div className="card-body  ">
               <i className="fas fa-envelope fa-2xl" style={{ ...blueIconStyle, marginTop: '1px' }}></i>
               <h5 className="card-title mt-3">Email</h5>
-              <p className="card-text">info@seabed2crest.com</p>
+              <a href="mailto: info@seabed2crest.com" className="card-text">info@seabed2crest.com</a> 
+
             </div>
           </div>
         </div>
@@ -29,8 +30,8 @@ const Contact = () => {
             <div className="card-body">
               <i className="fas fa-phone fa-2xl " style={{ ...blueIconStyle, marginBottom: '1px' }}></i>
               <h5 className="card-title mt-3">Phone</h5>
-              <p className="card-text" >+91 7349368311</p>
-              <p className="card-text" >+91 7979699428</p>
+              <p className="card-text" ><a href="tel:+91 7349368311">+91 7349368311</a></p>
+              <p className="card-text" ><a href="tel:+91 7979699428">+91 7979699428</a></p>
             </div>
           </div>
         </div>

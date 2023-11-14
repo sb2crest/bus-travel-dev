@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
 import './BookingInfo.scss';
 import asideImage from '../../assets/images/Aside Image.png';
 import dataService from '../../services/data.service';
@@ -8,6 +6,8 @@ import Warning from '../warning/Warning';
 import BookingDetails from './booking-details/BookingDetails';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 interface State {
   phoneNumber: string;
@@ -19,8 +19,6 @@ interface State {
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
-
 
 const BookingInfo = () => {
   const [state, setState] = useState<State>({
@@ -41,21 +39,15 @@ const BookingInfo = () => {
   const [showWarning, setShowWarning] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-
-  const validationSchema = yup.object({
-    phoneNumber: yup
-      .string()
+  const validationSchema = Yup.object({
+    phoneNumber: Yup.string()
+      .matches(/^[0-9]*$/, 'Phone number must contain only digits')
       .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits')
       .required('Phone number is required'),
-    otp: yup.string().test('conditionalRequired', 'OTP is required', function (value, context) {
-      const { parent } = context;
-      const phoneNumber = parent.phoneNumber as string | undefined;
-  
-      if (!!otpSent && !!phoneNumber) {
-        return !!value;
-      }
-  
-      return true; // Validation passes if not in the condition
+    otp: Yup.lazy((value) => {
+      return value?.otpSent
+        ? Yup.string().required('OTP is required')
+        : Yup.string();
     }),
   });
   
@@ -64,43 +56,69 @@ const BookingInfo = () => {
     initialValues: {
       phoneNumber: '',
       otp: '',
+      otpSent: false,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // Handle form submission if needed
+      if (values.otpSent) {
+        verifyOTP();
+      } else {
+        sendOTP();
+      }
     },
   });
 
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    setFieldTouched,
+  } = formik;
   /*--------------------------------- API Integration------------------------------------------ */
-  const sendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
 
-    // Check if the phone number is valid before sending OTP
-    if (phoneValid) {
-      let mobile = formik.values.phoneNumber;
-      dataService
-        .sendOTP(mobile)
-        .then((response) => {
-          if (response.data) {
-            setState({ ...state, sentOtp: response.data.sentOtp });
-            console.log('OTP Sent!');
-            setOtpSent(true);
-            setSnackbarOpen(true); // Open Snackbar on OTP send
-          } else {
-            console.log('Failed to send OTP.');
-          }
-        })
-        .catch((error: any) => {
-          console.error('Error sending OTP:', error);
-          console.log('An error occurred while sending OTP.');
-        });
-    } else {
-      // Display a message or handle the case where the phone number is not valid.
-      console.log('Invalid phone number. Please enter a valid phone number.');
+  const sendOTP = async () => {
+    try {
+      let mobile = values.phoneNumber;
+      const response = await dataService.sendOTP(mobile);
+  
+      if (response.status === 200) {
+        setState({ ...state, sentOtp: response.data.sentOtp });
+        formik.setFieldValue('otpSent', true);
+        setSnackbarOpen(true); // Open Snackbar on OTP send
+      } else {
+        console.log('Failed to send OTP.');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      console.log('An error occurred while sending OTP.');
     }
   };
+  
+  const verifyOTP = async () => {
+    try {
+      let requestBody = {
+        mobile: values.phoneNumber,
+        otp: values.otp,
+      };
+      const response = await dataService.verifyOTP(requestBody);
+  
+      if (response.data) {
+        setState({ ...state, otpVerified: true });
+        setShowDetailsButton(true);
+        console.log('OTP Verified!');
+      } else {
+        console.log('OTP Verification Failed!');
+      }
+    } catch (error) {
+      console.error('Error validating OTP:', error);
+    } finally {
+      formik.setFieldValue('otpSent', false);
+    }
+  };
+  /*--------------------------------------------------------------------------------------------- */
 
- 
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -114,11 +132,11 @@ const BookingInfo = () => {
 
   const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let mobile = phoneNumber;
+    let mobile = values.phoneNumber;
     dataService
       .sendOTP(mobile)
       .then((response) => {
-        if (response.data) {
+        if (response.status==200) {
           setState({ ...state, sentOtp: response.data.sentOtp });
           console.log('OTP Resent!');
         } else {
@@ -129,40 +147,17 @@ const BookingInfo = () => {
         console.error('Error sending OTP:', error);
         console.log('An error occurred while sending OTP.');
       });
-    setOtpSent(true);
-    setOtpResend(true);
+    formik.setFieldValue('otpSent', true);
   };
 
-  const verifyOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    let requestBody = {
-      mobile: phoneNumber,
-      otp: otp,
-    };
-    dataService
-      .verifyOTP(requestBody)
-      .then((response) => {
-        if (response.data) {
-          setState({ ...state, otpVerified: true });
-          setShowDetailsButton(true);
-          console.log('OTP Verified!');
-        } else {
-          console.log('OTP Verification Failed!');
-        }
-      })
-      .catch((error: any) => {
-        console.error('Error validating OTP:', error);
-      });
-    setVerify(true);
-    setOtpSent(false);
-  };
+  
 
   const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!phoneNumber || (!otpSent && !otp)) {
+    if (!values.phoneNumber || (!values.otpSent && !values.otp)) {
       setShowWarning(true);
     } else {
-      let mobile = phoneNumber;
+      let mobile = values.phoneNumber;
       dataService
         .bookingInfo(mobile)
         .then((response) => {
@@ -185,57 +180,48 @@ const BookingInfo = () => {
     setShowWarning(false);
   };
 
-
   return (
     <div className="booking-info">
       {!showDetails ? (
         <div className="booking-info-container">
-          <form className="form" onSubmit={formik.handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
             <div className="header-custom">
               <p className="header">Booking Details</p>
             </div>
             <div className="phone">
               <input
                 placeholder="Phone Number"
-                type="text"
+                type="number"
                 name="phoneNumber"
-                value={formik.values.phoneNumber}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className={
-                  formik.errors.phoneNumber && formik.touched.phoneNumber
-                    ? 'input-phone error'
-                    : 'input-phone'
-                }
+                value={values.phoneNumber}
+                onChange={handleChange}
+                onBlur={() => setFieldTouched('phoneNumber', true)}
+                className="input-phone"
               />
-              {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-                <div className="error-message" style={{color:'red'}}>{formik.errors.phoneNumber}</div>
+              {touched.phoneNumber && errors.phoneNumber && (
+                <div className="error" style={{color:'red'}}>{errors.phoneNumber}</div>
               )}
             </div>
             <div className="send-otp">
-              {otpSent ? (
+              {values.otpSent ? (
                 <>
                   <div className="otp">
                     <input
                       placeholder="OTP"
                       type="password"
                       name="otp"
-                      value={formik.values.otp}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className={
-                        formik.errors.otp && formik.touched.otp
-                          ? 'input-otp error'
-                          : 'input-otp'
-                      }
+                      value={values.otp}
+                      onChange={handleChange}
+                      onBlur={() => setFieldTouched('otp', true)}
+                      className="input-otp"
                     />
-                    {formik.errors.otp && formik.touched.otp && (
-                      <div className="error-message" style={{color:'red'}}>{formik.errors.otp}</div>
+                    {touched.otp && errors.otp && (
+                      <div className="error" style={{color:'red'}}>{errors.otp}</div>
                     )}
                   </div>
                   <div className="verify-resend">
                     <div className="verify-resend-01">
-                      <button type="submit" className="verify" onClick={verifyOTP}>
+                      <button className="verify" onClick={verifyOTP}>
                         Verify OTP
                       </button>
                       <button className="resend" onClick={resendOTP}>
@@ -245,7 +231,7 @@ const BookingInfo = () => {
                   </div>
                 </>
               ) : !verify ? (
-                <button type="submit" className="button-send-otp" onClick={sendOTP} disabled={!phoneValid}>
+                <button className="button-send-otp" onClick={sendOTP}>
                   Send OTP
                 </button>
               ) : null}
@@ -253,7 +239,7 @@ const BookingInfo = () => {
             {ShowDetailsButton && (
               <div className="show-details">
                 <div className="show-details-01">
-                  <button type="submit" className="button-show-details" onClick={bookingInfo}>
+                  <button className="button-show-details" onClick={bookingInfo}>
                     Show Details
                   </button>
                 </div>
@@ -269,7 +255,6 @@ const BookingInfo = () => {
             open={snackbarOpen}
             autoHideDuration={7000}
             onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
             <Alert onClose={handleSnackbarClose} severity="success">
               OTP Sent successfully!

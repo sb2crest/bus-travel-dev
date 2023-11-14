@@ -60,6 +60,8 @@ footer {
             opacity: 0.5699999928474426;
             margin-left: 40px;
             margin-top: 1vh;
+            text-decoration: none;
+
           }
           span {
             margin-left: 10px;
@@ -114,6 +116,13 @@ footer {
             opacity: 0.5699999928474426;
             margin-left: 40px;
             margin-top: 1vh;
+            a{
+              text-decoration: none !important;
+            color: var(--white, #fff);
+
+            }
+            
+            
           }
           span {
             color: var(--white, #fff);

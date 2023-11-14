@@ -64,8 +64,9 @@ const Footer = () => {
                   ></i>
                 </span>
                 <span>Phone Number</span>
-                <p >+91 7349368311</p>
-                <p >+91 7979699428</p>
+               <p> <a href="tel:+91 7349368311" >+91 7349368311</a></p>
+               <p > <a href="tel:+91 7979699428" >+91 7979699428</a>
+                </p>
               </div>
             </div>
             <div className="footer_container_right">
