@@ -123,7 +123,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //Phone Number Validation
   const phoneNumberValidation = (phone: string) => {
-    return phone.trim() !== "" && /^[0-9]{10}/.test(phone);
+    return /^\d{10}$/.test(phone);
   };
 
 
@@ -159,7 +159,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         console.error("Error sending OTP:", error);
         console.log("An error occurred while sending OTP.");
       });
-      };
+  };
 
   { /*OTP Verification Function*/ }
   const verifyOTP = () => {
@@ -214,7 +214,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   {/* Book Now Function */ }
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!firstName || !lastName || !phoneNumber || !otp || !email) {
+    if (!firstName || !lastName || !phoneNumber || !otp || !email || !startDate || !endDate) {
       setShowWarning(true);
     }
     else {
@@ -589,24 +589,25 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         }
                                       />
                                     </div>
-                                    {/* {(!phoneNumberValid ||
+                                    {(!phoneNumberValid ||
                                       !phoneNumberValidation(phoneNumber)) && (
                                         <div className="error-message">
-                                          {!phoneNumberValid &&
+                                          {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
                                               <FaExclamationTriangle className="error-icon" />
                                               This field is required
                                             </>
-                                          ) : !phoneNumberValid ? (
+                                          ) :  */}
+                                          {!phoneNumberValid && (
                                             <>
-                                              <FaExclamationTriangle className="error-icon" />
-                                              Please enter a valid mobile number
+                                              {/* <FaExclamationTriangle className="error-icon" /> */}
+                                              <span className="phone-warning">Please enter a valid mobile number</span>
                                             </>
-                                          ) : null}
+                                          )}
                                         </div>
                                       )
-                                    } */}
+                                    }
                                   </div>
                                   :
                                   <div className="calendar">

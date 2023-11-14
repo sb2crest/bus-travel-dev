@@ -304,9 +304,9 @@ input[type="text" i] {
 }
 
 .send-otp-button {
-  margin-bottom: 15px;
+  margin-bottom: 17px;
   margin-right: 0px;
-  margin-top: -10px;
+  margin-top: -5px;
   float: right;
   width: 45%;
   border-radius: 0 !important;
@@ -374,6 +374,11 @@ input[type="text" i] {
   text-decoration: underline;
   line-height: 0.5;
   text-align: center;
+}
+
+.phone-warning{
+  color: red;
+  margin-right: 25px;
 }
 
 .email {
