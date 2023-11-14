@@ -567,6 +567,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                           dateFormat="MM/dd/yyyy"
                                           placeholderText="From-Date"
                                           className="start-date"
+                                          minDate={new Date()}
                                         />
                                       </div>
                                       <div className="date-picker">
