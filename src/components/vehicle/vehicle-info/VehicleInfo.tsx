@@ -82,7 +82,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [otpResend, setOtpResend] = useState<boolean>(false);
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
-  const [timer, setTimer] = useState<number>(180); // 180 seconds = 3 minutes;
+  const [timer, setTimer] = useState<number>(60); // 180 seconds = 3 minutes;
 
   //Form Validation State Variables
   const [firstNameValid, setFirstNameValid] = useState<boolean>(true);
@@ -101,8 +101,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+  //State Variables for Snackbar
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
+
+  //State Variable for phone number change
+  const [phoneNumberChange, setPhoneNumberChange] = useState(false);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -263,7 +267,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
       if (timer <= 0) {
         setResendDisabled(false);
         clearInterval(interval);
-        setTimer(180);
+        setTimer(60);
       }
     }
     return () => {
@@ -304,6 +308,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     }
     setVerifySnackbarOpen(false);
   };
+
+  {/* Phone Number Change */ }
+  const changePhoneNumber = () => {
+    setOtpSent(false);
+  }
 
   return (
     <>
@@ -570,6 +579,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         }
                                       />
                                     </div>
+
                                     {/* {(!phoneNumberValid ||
                                       !phoneNumberValidation(phoneNumber)) && (
                                         <div className="error-message">
@@ -620,55 +630,61 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                     </div>
                                   </div>
                                 }
+                                {otpSent && (
+                                  <p onClick={changePhoneNumber} className="change-phone-number">Change Phone Number</p>
+                                )
+                                }
                                 {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                                 {otpSent && !otpVerified && (
-                                  <div className="form-group otp-group">
-                                    {/* OTP */}
-                                    <div className="otp-container d-flex">
-                                      <input
-                                        type="password"
-                                        name="otp"
-                                        className="form-control otp"
-                                        placeholder="OTP"
-                                        value={otp}
-                                        onChange={(e) => setOtp(e.target.value)}
-                                        style={{ width: "60%" }}
-                                      />
-                                      {/*  Verify OTP */}
-                                      <button
-                                        type="button"
-                                        className="btn btn-info btn-round verify-otp-button"
-                                        onClick={verifyOTP}
-                                        style={{ width: "50%" }}
-                                      >
-                                        Verify
-                                      </button>
+                                  <>
+                                    <div className="form-group otp-group">
+                                      {/* OTP */}
+                                      <div className="otp-container d-flex">
+                                        <input
+                                          type="password"
+                                          name="otp"
+                                          className="form-control otp"
+                                          placeholder="OTP"
+                                          value={otp}
+                                          onChange={(e) => setOtp(e.target.value)}
+                                          style={{ width: "60%" }}
+                                        />
+                                        {/*  Verify OTP */}
+                                        <button
+                                          type="button"
+                                          className="btn btn-info btn-round verify-otp-button"
+                                          onClick={verifyOTP}
+                                          style={{ width: "50%" }}
+                                        >
+                                          Verify
+                                        </button>
+                                      </div>
+                                      <div className="resend-container">
+                                        <p className="header-5-custom">
+                                          {resendDisabled ? (
+                                            <span className="timer-custom">
+                                              resend otp in{" "}
+                                              <span className="min-sec">
+                                                {minutes}:{seconds}
+                                              </span>{" "}
+                                            </span>
+                                          ) : (
+                                            <span className="not-received">
+                                              Not received otp?
+                                            </span>
+                                          )}
+                                          {!resendDisabled && (
+                                            <a
+                                              className="resend-link"
+                                              onClick={ResendOTP}
+                                            >
+                                              Resend
+                                            </a>
+                                          )}
+                                        </p>
+                                      </div>
                                     </div>
-                                    <div className="resend-container">
-                                      <p className="header-5-custom">
-                                        {resendDisabled ? (
-                                          <span className="timer-custom">
-                                            resend otp in{" "}
-                                            <span className="min-sec">
-                                              {minutes}:{seconds}
-                                            </span>{" "}
-                                          </span>
-                                        ) : (
-                                          <span className="not-received">
-                                            Not received otp?
-                                          </span>
-                                        )}
-                                        {!resendDisabled && (
-                                          <a
-                                            className="resend-link"
-                                            onClick={ResendOTP}
-                                          >
-                                            Resend
-                                          </a>
-                                        )}
-                                      </p>
-                                    </div>
-                                  </div>
+                                  </>
                                 )}
                                 {/* Send  OTP */}
                                 {!otpSent && (
