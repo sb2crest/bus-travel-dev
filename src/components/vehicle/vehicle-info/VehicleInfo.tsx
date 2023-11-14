@@ -15,10 +15,17 @@ import { toDate } from "date-fns";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
 
 interface Image {
   url: string;
 }
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 interface State {
   vehicleData: IVehicleData;
@@ -94,6 +101,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
+
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
   //Email Validation
@@ -135,6 +145,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
           console.log("OTP Sent!");
+          setOtpSent(true);
+          setSnackbarOpen(true);
         } else {
           console.log("Failed to send OTP.");
         }
@@ -143,8 +155,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         console.error("Error sending OTP:", error);
         console.log("An error occurred while sending OTP.");
       });
-    setOtpSent(true);
   };
+
 
   { /*OTP Verification Function*/ }
   const verifyOTP = () => {
@@ -161,6 +173,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         if (response.data) {
           setState({ ...state });
           console.log("OTP Verified!");
+          setVerifySnackbarOpen(true);
           setOtpVerified(true);
         } else {
           console.log("OTP Verification Failed!");
@@ -181,6 +194,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
           console.log("OTP Sent!");
+          setSnackbarOpen(true);
         } else {
           console.log("Failed to send OTP.");
         }
@@ -270,6 +284,27 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
   };
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
+  const handleVerifyClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setVerifySnackbarOpen(false);
+  };
+
   return (
     <>
       {/* Vehicle Info */}
@@ -638,13 +673,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 )}
                                 {/* Send  OTP */}
                                 {!otpSent && (
-                                  <button
-                                    type="button"
-                                    className="btn btn-info send-otp-button"
-                                    onClick={sendOTP}
-                                  >
-                                    Send OTP
-                                  </button>
+                                  <>
+                                    <button
+                                      type="button"
+                                      className="btn btn-info send-otp-button"
+                                      onClick={sendOTP}
+                                    >
+                                      Send OTP
+                                    </button>
+                                  </>
                                 )}
                                 {/* Email */}
                                 <div className="form-group">
@@ -697,6 +734,26 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 {/* Warning pop-up */}
                                 {showWarning && <Warning onClose={closeWarning} />}
                               </form>
+                              <Snackbar
+                                open={snackbarOpen}
+                                autoHideDuration={7000}
+                                onClose={handleSnackbarClose}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                              >
+                                <Alert onClose={handleSnackbarClose} severity="success">
+                                  OTP Sent successfully!
+                                </Alert>
+                              </Snackbar>
+                              <Snackbar
+                                open={verifySnackbarOpen}
+                                autoHideDuration={7000}
+                                onClose={handleVerifyClose}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                              >
+                                <Alert onClose={handleVerifyClose} severity="success">
+                                  Validation successful!
+                                </Alert>
+                              </Snackbar>
                             </div>
                           </div>
                         </div>
@@ -706,8 +763,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
               </>
             </div>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 };
