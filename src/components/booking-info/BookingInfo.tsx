@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './BookingInfo.scss';
-import asideImage from '../../assets/images/Aside Image.png';
-import dataService from '../../services/data.service';
-import Warning from '../warning/Warning';
-import BookingDetails from './booking-details/BookingDetails';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import "./BookingInfo.scss";
+import asideImage from "../../assets/images/Aside Image.png";
+import dataService from "../../services/data.service";
+import Warning from "../warning/Warning";
+import BookingDetails from "./booking-details/BookingDetails";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 interface State {
   phoneNumber: string;
@@ -22,48 +22,45 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
 
 const BookingInfo = () => {
   const [state, setState] = useState<State>({
-    phoneNumber: '',
-    otp: '',
+    phoneNumber: "",
+    otp: "",
     otpVerified: false,
     sentOtp: null,
   });
-  const [phoneValid, setPhoneValid] = useState(false); // New state variable
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [verify, setVerify] = useState(false);
-  const [otpResend, setOtpResend] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [bookingDetails, setBookingDetails] = useState<any>(null);
   const [ShowDetailsButton, setShowDetailsButton] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [otpVerified, setOtpVerified] = useState<boolean>(false);
+  const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
 
   const validationSchema = Yup.object({
     phoneNumber: Yup.string()
-      .matches(/^[0-9]*$/, 'Phone number must contain only digits')
-      .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits')
-      .required('Phone number is required'),
+      .matches(/^[0-9]*$/, "Phone number must contain only digits")
+      .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
+      .required("Phone number is required"),
     otp: Yup.lazy((value) => {
       return value?.otpSent
-        ? Yup.string().required('OTP is required')
+        ? Yup.string().required("OTP is required")
         : Yup.string();
     }),
   });
-  
-  
+
   const formik = useFormik({
     initialValues: {
-      phoneNumber: '',
-      otp: '',
+      phoneNumber: "",
+      otp: "",
       otpSent: false,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (values.otpSent) {
-        verifyOTP();
+        // verifyOTP();
       } else {
-        sendOTP();
+        console.log(values);
       }
     },
   });
@@ -79,23 +76,26 @@ const BookingInfo = () => {
   /*--------------------------------- API Integration------------------------------------------ */
 
   const sendOTP = async () => {
-    try {
-      let mobile = values.phoneNumber;
-      const response = await dataService.sendOTP(mobile);
-  
-      if (response.status === 200) {
-        setState({ ...state, sentOtp: response.data.sentOtp });
-        formik.setFieldValue('otpSent', true);
-        setSnackbarOpen(true); // Open Snackbar on OTP send
-      } else {
-        console.log('Failed to send OTP.');
-      }
-    } catch (error) {
-      console.error('Error sending OTP:', error);
-      console.log('An error occurred while sending OTP.');
-    }
+    let mobile = values.phoneNumber;
+    dataService
+      .sendOTP(mobile)
+      .then((response: any) => {
+        if (response.data) {
+          setState({ ...state, sentOtp: response.data.sentOtp });
+          console.log("OTP Sent!");
+          setOtpSent(true);
+          setSnackbarOpen(true);
+          setVerify(true);
+        } else {
+          console.log("Failed to send OTP.");
+        }
+      })
+      .catch((error: any) => {
+        console.error("Error sending OTP:", error);
+        console.log("An error occurred while sending OTP.");
+      });
   };
-  
+
   const verifyOTP = async () => {
     try {
       let requestBody = {
@@ -103,18 +103,24 @@ const BookingInfo = () => {
         otp: values.otp,
       };
       const response = await dataService.verifyOTP(requestBody);
-  
+
       if (response.data) {
         setState({ ...state, otpVerified: true });
         setShowDetailsButton(true);
-        console.log('OTP Verified!');
+        setVerifySnackbarOpen(true);
+        setVerify(false);
+        setOtpVerified(true);
+
+        console.log("OTP Verified!");
       } else {
-        console.log('OTP Verification Failed!');
+        console.log("OTP Verification Failed!");
+        setOtpVerified(false);
       }
     } catch (error) {
-      console.error('Error validating OTP:', error);
+      console.error("Error validating OTP:", error);
+      setOtpVerified(false);
     } finally {
-      formik.setFieldValue('otpSent', false);
+      formik.setFieldValue("otpSent", false);
     }
   };
   /*--------------------------------------------------------------------------------------------- */
@@ -123,11 +129,12 @@ const BookingInfo = () => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setSnackbarOpen(false);
+    setVerifySnackbarOpen(false);
   };
 
   const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -136,21 +143,19 @@ const BookingInfo = () => {
     dataService
       .sendOTP(mobile)
       .then((response) => {
-        if (response.status==200) {
+        if (response.status == 200) {
           setState({ ...state, sentOtp: response.data.sentOtp });
-          console.log('OTP Resent!');
+          console.log("OTP Resent!");
         } else {
-          console.log('Failed to send OTP.');
+          console.log("Failed to send OTP.");
         }
       })
       .catch((error: any) => {
-        console.error('Error sending OTP:', error);
-        console.log('An error occurred while sending OTP.');
+        console.error("Error sending OTP:", error);
+        console.log("An error occurred while sending OTP.");
       });
-    formik.setFieldValue('otpSent', true);
+    formik.setFieldValue("otpSent", true);
   };
-
-  
 
   const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -162,16 +167,16 @@ const BookingInfo = () => {
         .bookingInfo(mobile)
         .then((response) => {
           if (response.data) {
-            console.log('Booking Info Retrieved:', response.data);
+            console.log("Booking Info Retrieved:", response.data);
             setBookingDetails(response.data);
             setShowDetails(true);
           } else {
-            console.log('Failed to retrieve booking info.');
+            console.log("Failed to retrieve booking info.");
           }
         })
         .catch((error) => {
-          console.error('Error fetching booking info:', error);
-          console.log('An error occurred while retrieving booking info.');
+          console.error("Error fetching booking info:", error);
+          console.log("An error occurred while retrieving booking info.");
         });
     }
   };
@@ -195,15 +200,17 @@ const BookingInfo = () => {
                 name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={handleChange}
-                onBlur={() => setFieldTouched('phoneNumber', true)}
+                onBlur={() => setFieldTouched("phoneNumber", true)}
                 className="input-phone"
               />
               {touched.phoneNumber && errors.phoneNumber && (
-                <div className="error" style={{color:'red'}}>{errors.phoneNumber}</div>
+                <div className="error" style={{ color: "red" }}>
+                  {errors.phoneNumber}
+                </div>
               )}
             </div>
             <div className="send-otp">
-              {values.otpSent ? (
+              {values.otpSent || verify ? (
                 <>
                   <div className="otp">
                     <input
@@ -212,11 +219,13 @@ const BookingInfo = () => {
                       name="otp"
                       value={values.otp}
                       onChange={handleChange}
-                      onBlur={() => setFieldTouched('otp', true)}
+                      onBlur={() => setFieldTouched("otp", true)}
                       className="input-otp"
                     />
                     {touched.otp && errors.otp && (
-                      <div className="error" style={{color:'red'}}>{errors.otp}</div>
+                      <div className="error" style={{ color: "red" }}>
+                        {errors.otp}
+                      </div>
                     )}
                   </div>
                   <div className="verify-resend">
@@ -230,11 +239,12 @@ const BookingInfo = () => {
                     </div>
                   </div>
                 </>
-              ) : !verify ? (
-                <button className="button-send-otp" onClick={sendOTP}>
-                  Send OTP
-                </button>
-              ) : null}
+             ) : !verify && !otpVerified ? (
+              // Render "Send OTP" button only if OTP verification is not successful
+              <button className="button-send-otp" onClick={sendOTP}>
+                Send OTP
+              </button>
+            ) : null}
             </div>
             {ShowDetailsButton && (
               <div className="show-details">
@@ -253,11 +263,22 @@ const BookingInfo = () => {
           </div>
           <Snackbar
             open={snackbarOpen}
-            autoHideDuration={7000}
+            autoHideDuration={5000}
             onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <Alert onClose={handleSnackbarClose} severity="success">
               OTP Sent successfully!
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={verifySnackbarOpen}
+            autoHideDuration={5000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <Alert onClose={handleSnackbarClose} severity="success">
+              Verification Successful
             </Alert>
           </Snackbar>
         </div>

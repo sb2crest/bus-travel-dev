@@ -35,12 +35,13 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="video-container">
-        <video autoPlay loop muted>
+        <video autoPlay loop muted aria-label="video">
           <source src={Video} type="video/mp4" />
         </video>
       </div>
+
       <Slide left>
-        <div className="card_banner">
+        <div className="card_banner" data-testid="card-banner">
           <div className="card_banner_content">
             <div className="card_banner_content_one">
               <Icon className="fa-solid fa-code-compare fa-2xl"></Icon>

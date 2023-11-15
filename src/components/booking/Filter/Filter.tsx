@@ -162,7 +162,7 @@ const Filter: React.FC = () => {
                                                 selectsEnd
                                                 startDate={startDate}
                                                 endDate={endDate}
-                                                minDate={startDate}
+                                                minDate={startDate || new Date()}
                                                 dateFormat="MM/dd/yyyy"
                                                 placeholderText="To-Date"
                                                 className="end-date"
