@@ -18,7 +18,6 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
-
 interface Image {
   url: string;
 }
@@ -101,8 +100,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+  //State Variables for Snackbar
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
+  const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
+
+  //State Variable for phone number change
+  const [phoneNumberChange, setPhoneNumberChange] = useState(false);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -119,7 +123,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
 
   //Phone Number Validation
   const phoneNumberValidation = (phone: string) => {
-    return phone.trim() !== "" && /^[0-9]{10}/.test(phone);
+    return /^\d{10}$/.test(phone);
   };
 
 
@@ -157,7 +161,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
       });
   };
 
-
   { /*OTP Verification Function*/ }
   const verifyOTP = () => {
     if (otp.trim() === "") {
@@ -173,8 +176,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         if (response.data) {
           setState({ ...state });
           console.log("OTP Verified!");
-          setVerifySnackbarOpen(true);
           setOtpVerified(true);
+          setVerifySnackbarOpen(true);
         } else {
           console.log("OTP Verification Failed!");
           setOtpVerified(false);
@@ -211,7 +214,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
   {/* Book Now Function */ }
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!firstName || !lastName || !phoneNumber || !otp || !email) {
+    if (!firstName || !lastName || !phoneNumber || !otp || !email || !startDate || !endDate) {
       setShowWarning(true);
     }
     else {
@@ -243,6 +246,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           }
           else {
             console.log(" Booking failed");
+            if (response.data.message === 'Slots already Booked') {
+              setSlotsBookedSnackbarOpen(true);
+            }
           }
         })
         .catch((error: any) => {
@@ -263,7 +269,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
       if (timer <= 0) {
         setResendDisabled(false);
         clearInterval(interval);
-        setTimer(180);
+        setTimer(60);
       }
     }
     return () => {
@@ -304,6 +310,19 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     }
     setVerifySnackbarOpen(false);
   };
+
+  const handleSlotsSnackbarClose = (event?: React.SyntheticEvent | Event,
+    reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSlotsBookedSnackbarOpen(false);
+  }
+
+  {/* Phone Number Change */ }
+  const changePhoneNumber = () => {
+    setOtpSent(false);
+  }
 
   return (
     <>
@@ -570,24 +589,25 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                         }
                                       />
                                     </div>
-                                    {/* {(!phoneNumberValid ||
+                                    {(!phoneNumberValid ||
                                       !phoneNumberValidation(phoneNumber)) && (
                                         <div className="error-message">
-                                          {!phoneNumberValid &&
+                                          {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
                                               <FaExclamationTriangle className="error-icon" />
                                               This field is required
                                             </>
-                                          ) : !phoneNumberValid ? (
+                                          ) :  */}
+                                          {!phoneNumberValid && (
                                             <>
-                                              <FaExclamationTriangle className="error-icon" />
-                                              Please enter a valid mobile number
+                                              {/* <FaExclamationTriangle className="error-icon" /> */}
+                                              <span className="phone-warning">Please enter a valid mobile number</span>
                                             </>
-                                          ) : null}
+                                          )}
                                         </div>
                                       )
-                                    } */}
+                                    }
                                   </div>
                                   :
                                   <div className="calendar">
@@ -620,6 +640,11 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                       </div>
                                     </div>
                                   </div>
+                                }
+                                {/* Change Phone Number */}
+                                {otpSent && !otpVerified && (
+                                  <p onClick={changePhoneNumber} className="change-phone-number">Change Phone Number</p>
+                                )
                                 }
                                 {/* Conditonal Rendering For Verify OTP and Send OTP*/}
                                 {otpSent && !otpVerified && (
@@ -673,15 +698,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 )}
                                 {/* Send  OTP */}
                                 {!otpSent && (
-                                  <>
-                                    <button
-                                      type="button"
-                                      className="btn btn-info send-otp-button"
-                                      onClick={sendOTP}
-                                    >
-                                      Send OTP
-                                    </button>
-                                  </>
+                                  <button
+                                    type="button"
+                                    className="btn btn-info send-otp-button"
+                                    onClick={sendOTP}
+                                  >
+                                    Send OTP
+                                  </button>
                                 )}
                                 {/* Email */}
                                 <div className="form-group">
@@ -754,6 +777,16 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                   Validation successful!
                                 </Alert>
                               </Snackbar>
+                              <Snackbar
+                                open={slotsBookedSnackbarOpen}
+                                autoHideDuration={7000}
+                                onClose={handleSlotsSnackbarClose}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                              >
+                                <Alert onClose={handleSlotsSnackbarClose} severity="error">
+                                  Slots are Already Booked!
+                                </Alert>
+                              </Snackbar>
                             </div>
                           </div>
                         </div>
@@ -763,8 +796,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
               </>
             </div>
           </div>
-        </div >
-      </div >
+        </div>
+      </div>
     </>
   );
 };
