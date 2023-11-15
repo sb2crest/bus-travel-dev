@@ -6,6 +6,8 @@ import Warning from '../warning/Warning';
 import BookingDetails from './booking-details/BookingDetails';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 interface State {
   phoneNumber: string;
@@ -25,6 +27,7 @@ const BookingInfo = () => {
     otpVerified: false,
     sentOtp: null,
   });
+  const [phoneValid, setPhoneValid] = useState(false); // New state variable
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
@@ -36,29 +39,84 @@ const BookingInfo = () => {
   const [showWarning, setShowWarning] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
+  const validationSchema = Yup.object({
+    phoneNumber: Yup.string()
+      .matches(/^[0-9]*$/, 'Phone number must contain only digits')
+      .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits')
+      .required('Phone number is required'),
+    otp: Yup.lazy((value) => {
+      return value?.otpSent
+        ? Yup.string().required('OTP is required')
+        : Yup.string();
+    }),
+  });
+  
+  
+  const formik = useFormik({
+    initialValues: {
+      phoneNumber: '',
+      otp: '',
+      otpSent: false,
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      if (values.otpSent) {
+        verifyOTP();
+      } else {
+        sendOTP();
+      }
+    },
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    setFieldTouched,
+  } = formik;
   /*--------------------------------- API Integration------------------------------------------ */
 
-  const sendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    let mobile = phoneNumber;
-    dataService
-      .sendOTP(mobile)
-      .then((response) => {
-        if (response.data) {
-          setState({ ...state, sentOtp: response.data.sentOtp });
-          console.log('OTP Sent!');
-          setOtpSent(true);
-          setSnackbarOpen(true); // Open Snackbar on OTP send
-        } else {
-          console.log('Failed to send OTP.');
-        }
-      })
-      .catch((error: any) => {
-        console.error('Error sending OTP:', error);
-        console.log('An error occurred while sending OTP.');
-      });
+  const sendOTP = async () => {
+    try {
+      let mobile = values.phoneNumber;
+      const response = await dataService.sendOTP(mobile);
+  
+      if (response.status === 200) {
+        setState({ ...state, sentOtp: response.data.sentOtp });
+        formik.setFieldValue('otpSent', true);
+        setSnackbarOpen(true); // Open Snackbar on OTP send
+      } else {
+        console.log('Failed to send OTP.');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      console.log('An error occurred while sending OTP.');
+    }
   };
-
+  
+  const verifyOTP = async () => {
+    try {
+      let requestBody = {
+        mobile: values.phoneNumber,
+        otp: values.otp,
+      };
+      const response = await dataService.verifyOTP(requestBody);
+  
+      if (response.data) {
+        setState({ ...state, otpVerified: true });
+        setShowDetailsButton(true);
+        console.log('OTP Verified!');
+      } else {
+        console.log('OTP Verification Failed!');
+      }
+    } catch (error) {
+      console.error('Error validating OTP:', error);
+    } finally {
+      formik.setFieldValue('otpSent', false);
+    }
+  };
   /*--------------------------------------------------------------------------------------------- */
 
   const handleSnackbarClose = (
@@ -74,11 +132,11 @@ const BookingInfo = () => {
 
   const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let mobile = phoneNumber;
+    let mobile = values.phoneNumber;
     dataService
       .sendOTP(mobile)
       .then((response) => {
-        if (response.data) {
+        if (response.status==200) {
           setState({ ...state, sentOtp: response.data.sentOtp });
           console.log('OTP Resent!');
         } else {
@@ -89,40 +147,17 @@ const BookingInfo = () => {
         console.error('Error sending OTP:', error);
         console.log('An error occurred while sending OTP.');
       });
-    setOtpSent(true);
-    setOtpResend(true);
+    formik.setFieldValue('otpSent', true);
   };
 
-  const verifyOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    let requestBody = {
-      mobile: phoneNumber,
-      otp: otp,
-    };
-    dataService
-      .verifyOTP(requestBody)
-      .then((response) => {
-        if (response.data) {
-          setState({ ...state, otpVerified: true });
-          setShowDetailsButton(true);
-          console.log('OTP Verified!');
-        } else {
-          console.log('OTP Verification Failed!');
-        }
-      })
-      .catch((error: any) => {
-        console.error('Error validating OTP:', error);
-      });
-    setVerify(true);
-    setOtpSent(false);
-  };
+  
 
   const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!phoneNumber || (!otpSent && !otp)) {
+    if (!values.phoneNumber || (!values.otpSent && !values.otp)) {
       setShowWarning(true);
     } else {
-      let mobile = phoneNumber;
+      let mobile = values.phoneNumber;
       dataService
         .bookingInfo(mobile)
         .then((response) => {
@@ -149,30 +184,40 @@ const BookingInfo = () => {
     <div className="booking-info">
       {!showDetails ? (
         <div className="booking-info-container">
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <div className="header-custom">
               <p className="header">Booking Details</p>
             </div>
             <div className="phone">
               <input
                 placeholder="Phone Number"
-                type="text"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                type="number"
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChange={handleChange}
+                onBlur={() => setFieldTouched('phoneNumber', true)}
                 className="input-phone"
               />
+              {touched.phoneNumber && errors.phoneNumber && (
+                <div className="error" style={{color:'red'}}>{errors.phoneNumber}</div>
+              )}
             </div>
             <div className="send-otp">
-              {otpSent ? (
+              {values.otpSent ? (
                 <>
                   <div className="otp">
                     <input
                       placeholder="OTP"
                       type="password"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
+                      name="otp"
+                      value={values.otp}
+                      onChange={handleChange}
+                      onBlur={() => setFieldTouched('otp', true)}
                       className="input-otp"
                     />
+                    {touched.otp && errors.otp && (
+                      <div className="error" style={{color:'red'}}>{errors.otp}</div>
+                    )}
                   </div>
                   <div className="verify-resend">
                     <div className="verify-resend-01">
