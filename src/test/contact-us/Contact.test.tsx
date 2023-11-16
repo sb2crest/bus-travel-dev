@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Map from '../../components/contact/Map';
 import Contact from '../../components/contact/Contact';
 import Form from '../../components/contact/Form';
@@ -32,7 +32,16 @@ test("renders contact cards", () => {
 })
 
 {/* Form */ }
+jest.mock('../../services/data.service', () => ({
+    __esModule: true,
+    default: {
+        getInTouch: jest.fn(),
+    },
+}));
 describe("Testing Form Component", () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
     it("renders form elements", () => {
         render(<Form />)
         const writeHere = screen.getByText(/write here/i);
@@ -49,4 +58,13 @@ describe("Testing Form Component", () => {
         expect(getInTouchButton).toBeInTheDocument();
     })
 
+    it("submits the form and opens confirmation popup", async () => {
+        require('../../services/data.service').default.getInTouch.mockResolvedValue({ data: {} });
+        render(<Form />);
+        fireEvent.change(screen.getByLabelText(/Enter your name/i), { target: { value: 'Kavya' } });
+        fireEvent.change(screen.getByLabelText(/Enter your email/i), { target: { value: 'kavya@example.com' } });
+        fireEvent.change(screen.getByLabelText(/Enter your message/i), { target: { value: 'Hello, this is a test message.' } });
+        fireEvent.click(screen.getByText(/Get In Touch/i));
+        await screen.findByText(/Thank You!/i);
+    })
 })
