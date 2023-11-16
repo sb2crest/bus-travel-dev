@@ -1,6 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import VehicleInfo from '../../components/vehicle/vehicle-info/VehicleInfo';
 import userEvent from '@testing-library/user-event';
+import { verify } from 'crypto';
 
 {/* Render Form Elements */ }
 test('rendering form elements, excluding conditionally rendered elements', () => {
@@ -24,13 +25,43 @@ test('rendering form elements, excluding conditionally rendered elements', () =>
 });
 
 {/* Renders OTP text-field when sentotp is true */ }
-// test('renders OTP text-field when sentotp is true', async () => {
+interface RenderOTPFieldProps {
+    otpSent?: boolean;
+    otpVerified?: boolean;
+}
+
+// function renderOTPField({otpSent,otpVerified}:RenderOTPFieldProps) {
 //     render(<VehicleInfo images={[]} />)
-//     const sendOTP = screen.getByRole('button');
-//     userEvent.click(sendOTP);
-//     await waitFor(() => {
-//         const otp = screen.getByPlaceholderText('OTP')
-//         expect(otp).toBeInTheDocument();
+//     return {
+//         sendOtp: screen.getByText('Send OTP'),
+//         otp: {
+//             get otpInput() {
+//                 return screen.getByPlaceholderText('OTP');
+//             }
+//             // get verify() {
+//             //     return screen.queryByText('Verify');
+//             // }
+//         }
+//     }
+// }
+// it("renders OTP input field otpSent is true ", ({}) => {
+//     const { sendOtp, otp } = renderOTPField({ otpSent: true, otpVerified: false });
+//     fireEvent.click(sendOtp);
+//     expect(otp).toBeInTheDocument();
+// })
+
+
+// describe("Testing the behavior of form in VehicleInfo", () => {
+//     it("renders OTP input and verify button when otpSent is true and otpVerified is false", async () => {
+//         const { otp, verifyOtp } = renderOTPField({ otpSent: true, otpVerified: false });
+//         await waitFor(() => {
+//             expect(otp).toBeInTheDocument();
+//             expect(verifyOtp).toBeInTheDocument();
+//         });
 //     })
-// });
+//     it('renders Send OTP button when otpSent is false', () => {
+//         const { sendOtp } = renderOTPField({ otpSent: false });
+//         expect(sendOtp).toBeInTheDocument();
+//     });
+// })
 
