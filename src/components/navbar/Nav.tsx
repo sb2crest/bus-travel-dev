@@ -36,13 +36,13 @@ const Navbar = () => {
           <div className="logo">
             <img src={logo} alt="Logo" width={60} />
           </div>
-          <div className="menu-icon" onClick={handleClick}>
+          <div className="menu-icon" onClick={handleClick} data-testid="menu-icon">
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
           </div>
           <div className="ul">
-            <ul className={clicked ? "menu-list" : "menu-list close"}>
+            <ul className={clicked ? "menu-list" : "menu-list close"} data-testid="menu-list">
               {menuList}
-              <li className="hidecontact" onClick={() => setClicked(false)}>
+              <li className="hidecontact" onClick={() => setClicked(false)} data-testid="hidecontact">
                 <NavLink to={"/contactus"}>Contact Us</NavLink>
               </li>
 

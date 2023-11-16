@@ -45,28 +45,28 @@ const AboutUs = () => {
               </p>
               <div className="key_points">
                 <div className="key_points_one">
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Passionate about travel
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Years of expertise
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Personalized journeys
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
@@ -75,28 +75,28 @@ const AboutUs = () => {
                   </p>
                 </div>
                 <div className="key_points_two">
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Expert guidance
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Confidence in your travels
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
                     ></i>
                     &nbsp;&nbsp;Team of passionate travelers
                   </p>
-                  <p>
+                  <p  data-testid="key-point">
                     <i
                       className="fa-solid fa-check fa-sm"
                       style={{ color: "#0f7bab" }}
@@ -122,7 +122,7 @@ const AboutUs = () => {
         <div className="aboutus_container_values">
           <div className="aboutus_container_values_section">
           <Bounce right>
-            <div className="aboutus_container_values_section_mission">
+            <div className="aboutus_container_values_section_mission" data-testid="mission-content">
               <h4>
                 <b>Our Mission</b>
               </h4>
@@ -141,7 +141,7 @@ const AboutUs = () => {
             </div>
             </Bounce>
           <Bounce left>
-            <div className="aboutus_container_values_section_vision">
+            <div className="aboutus_container_values_section_vision" data-testid="vision-content">
               <h4>
                 <b>Our Vision</b>
               </h4>
@@ -171,7 +171,7 @@ const AboutUs = () => {
                 <div className="services_img">
                   <img
                     src={schooltrip}
-                    alt=""
+                    alt="School & College Trips" 
                   />
                   <h3>School & College Trips</h3>
                 </div>
@@ -180,14 +180,14 @@ const AboutUs = () => {
                 <div className="services_img">
                   <img
                     src={wedding}
-                    alt=""
+                    alt="Weddings"
                   />
                   <h3>Weddings</h3>
                 </div>
                 </Fade >
               <Fade top>
                 <div className="services_img">
-                  <img src={trips} alt="" />
+                  <img src={trips} alt="Corporate Trips" />
                   <h3>Corporate Trips</h3>
                 </div>
                 </Fade >
@@ -195,7 +195,7 @@ const AboutUs = () => {
                 <div className="services_img">
                   <img
                     src={privatetrip}
-                    alt=""
+                    alt="Private Trips"
                   />
                   <h3>Private Trips</h3>
                 </div>
@@ -204,7 +204,7 @@ const AboutUs = () => {
                 <div className="services_img">
                   <img
                     src={sportsevent}
-                    alt=""
+                    alt="Sports Events"
                   />
                   <h3>Sports Events</h3>
                 </div>
