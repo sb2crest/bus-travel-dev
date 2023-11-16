@@ -33,7 +33,13 @@ const Navbar = () => {
       <div className="header_container">
       <Fade top>
         <nav>
-        <div className="ul">
+          <div className="logo">
+            <img src={logo} alt="Logo" width={60} />
+          </div>
+          <div className="menu-icon" onClick={handleClick} data-testid="menu-icon">
+            <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
+          </div>
+          <div className="ul">
             <ul className={clicked ? "menu-list" : "menu-list close"} data-testid="menu-list">
               {menuList}
               <li className="hidecontact" onClick={() => setClicked(false)} data-testid="hidecontact">
@@ -53,13 +59,6 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div className="logo">
-            <img src={logo} alt="Logo" width={60} />
-          </div>
-          <div className="menu-icon" onClick={handleClick} data-testid="menu-icon">
-            <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
-          </div>
-        
         </nav>
         </Fade>
       </div>

@@ -1,10 +1,13 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom"; 
-import Home from "./Home";
+import { MemoryRouter } from "react-router-dom";
+import Home, { scrollToTop } from "./Home";
 import Video from "../../assets/images/final.mp4";
+import ImageSlidderParent from "../slidder/ImageSlidderParent";
+import jest from 'jest-mock';
 describe("Home Component", () => {
   // Check if the component renders without throwing any errors
+  
   test("renders without errors", () => {
     render(
       <MemoryRouter>
@@ -89,4 +92,35 @@ describe("Home Component", () => {
       expect(serviceHeading).toBeInTheDocument();
     });
   });
+test("renders ImageSlidderParent component", () => {
+  render(<ImageSlidderParent />);
+
 });
+test("renders Link component with correct props", () => {
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
+  const link = screen.getByRole("link", { name: /know more/i });
+
+});
+test("scrolls to the top when scrollToTop is called", () => {
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
+  const originalScrollTo = window.scrollTo;
+  window.scrollTo = jest.fn();
+  act(() => {
+    scrollToTop();
+  });
+  expect(window.scrollTo).toHaveBeenCalledWith({
+    top: 0,
+    behavior: "auto",
+  });
+  window.scrollTo = originalScrollTo;
+});
+});
+

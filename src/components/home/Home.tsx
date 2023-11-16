@@ -25,13 +25,14 @@ const Icon = styled.i`
     transition: all 0.3s;
   }
 `;
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "auto",
+  });
+};
 const Home: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-  };
+
   return (
     <>
       <div className="video-container">
