@@ -19,7 +19,6 @@ const Contact = () => {
               <i className="fas fa-envelope fa-2xl" style={{ ...blueIconStyle, marginTop: '1px' }}></i>
               <h5 className="card-title mt-3">Email</h5>
               <a href="mailto: info@seabed2crest.com" className="card-text">info@seabed2crest.com</a> 
-
             </div>
           </div>
         </div>
