@@ -4,8 +4,9 @@ import { MemoryRouter } from "react-router-dom";
 import nock from 'nock';
 import BookingInfo from "./BookingInfo";
 
+
 describe('Booking Info', () => {
-    it('checks if the "Send OTP" button triggers the API call and shows success message', async () => {
+    test('checks if the "Send OTP" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
@@ -28,7 +29,7 @@ describe('Booking Info', () => {
         });
     });
 
-    it('checks if the "Verify OTP" button triggers the API call and shows success message', async () => {
+    test('checks if the "Verify OTP" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
@@ -57,7 +58,7 @@ describe('Booking Info', () => {
         });
     });
 
-    it('checks if the "Resend" button triggers the API call and shows success message', async () => {
+    test('checks if the "Resend" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
