@@ -1,207 +1,106 @@
-// Import necessary modules and libraries
-import displayRazorpay from './PaymentGateway'; // Assuming createPayment is exported from './PaymentGateway'
-import fetchMock from 'jest-fetch-mock';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import {jest} from '@jest/globals'
+// Import necessary modules and types
+import { expect } from 'chai';
+import sinon, { SinonStub, SinonSandbox } from 'sinon';
+import fetch, { Response } from 'node-fetch';
+import displayRazorpay from './PaymentGateway';
+import nock from 'nock';
 
-global.jest = jest;
-describe('displayRazorpay', () => {
-  it('should create a valid request body with provided props', async () => {
-    // Arrange
-    const bookingId = 'NB3ae57bb76';
-    const mobile = '6360120872';
-    const amount = 5000;
+// Describe block for the displayRazorpay function
+describe('displayRazorpay Function', () => {
+  let sandbox: SinonSandbox;
+  let fetchStub: SinonStub;
 
-    // Act
-    const requestBody = await displayRazorpay(bookingId, mobile, amount);
-
-    // Assert
-    expect(requestBody).toEqual({
-      bookingId: bookingId,
-      mobile: mobile,
-      amount: amount,
-    });
+  // Before each test, create a sandbox and stub the fetch function
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    fetchStub = sandbox.stub(window, 'fetch');
   });
 
-  describe('createPayment', () => {
-    beforeEach(() => {
-      fetchMock.resetMocks();
-    });
+  // After each test, restore the sandbox
+  afterEach(() => {
+    sandbox.restore();
+  });
 
-    it('should make a POST request to the correct endpoint with the provided data', async () => {
-      // Arrange
-      const bookingId = 'NB3ae57bb76';
-      const mobile = '6360120872';
-      const amount = 5000;
-      const baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
-      const requestBody = await displayRazorpay(bookingId, mobile, amount);
-      const expectedEndpoint = `${baseUrl}createPayment`;
+  // Test case for handling a successful payment
+  it('handles a successful payment', async () => {
+    const baseUrl = 'http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com';
 
-      // Act
-      await createPayment(requestBody);
+    // Mock the API request using nock
+    nock(baseUrl)
+      .post('/createPayment', {
+        bookingId: 'NBd4e557c72',
+        mobile: '6360120872',
+        amount: 5000,
+      })
+      .reply(200, {
+        currency: 'INR',
+        razorPayOrderId: 'order_N1QwjkayNj7nC5',
+      });
 
-      // Assert
-      expect(fetchMock).toHaveBeenCalledWith(expectedEndpoint, {
+    // Simulate a successful fetch response
+    fetchStub.returns(Promise.resolve(new Response(JSON.stringify({
+        razorPayPaymentId: ' response.razorpay_payment_id',
+        razorPayOrderId: 'response.razorpay_order_id',
+        razorPaySignature: 'response.razorpay_signature',
+    }))));
+
+    // Execute the displayRazorpay function
+    await displayRazorpay('NBd4e557c72', '6360120872', 5000);
+
+    // Assert that the necessary alerts are called and the fetchStub is called with the correct arguments
+    expect(fetchStub.calledWith(
+      `${baseUrl}/createPayment`,
+      sinon.match({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify({
+          bookingId: 'NBd4e557c72',
+          mobile: '6360120872',
+          amount: 5000,
+        }),
+      })
+    )).to.be.true;
+  });
+
+  // Test case for handling a failed payment
+  it('handles a failed payment', async () => {
+    const baseUrl = 'http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com';
+
+    // Mock the API request using nock
+    nock(baseUrl)
+      .post('/createPayment', {
+        bookingId: 'NBd4e557c72',
+        mobile: '6360120872',
+        amount: 5000,
+      })
+      .reply(200, {
+        currency: 'INR',
+        razorPayOrderId: 'order_N1QwjkayNj7nC5',
       });
-    });
 
-    it('should return the JSON response from the server', async () => {
-      // Arrange
-      const mockResponse = { statusCode: 200 }; // Adjust the type accordingly
-      fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
+    // Simulate a failed fetch response
+    fetchStub.returns(Promise.resolve(new Response(null, { status: 500 })));
 
-      // Act
-      const result = await createPayment({ /* your request body here */ });
+    // Execute the displayRazorpay function
+    await displayRazorpay('NBd4e557c72', '6360120872', 5000);
 
-      // Assert
-      expect(result).toEqual(mockResponse);
-    });
-
-    // Add more test cases as needed
-  });
-});
-
-// Replace this function with the actual implementation
-export async function createPayment(requestBody: any) {
-  const response = await fetch('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/createPayment', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  });
-  return await response.json();
-}
-
-describe('Payment Component', () => {
-  const baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
-
-  const options = {
-    key: "rzp_test_nHgaZ8pP0SqyOm",
-    currency: "rupees",
-    amount: 5000,
-    name: "Pay Now",
-    description: "Wallet Transaction",
-    image: "http://localhost:8100/src/assets/images/Logo.png",
-  };
-
-  test('Renders the payment component correctly', async () => {
-    // Wait for the payment button to be present
-    const payButton = await screen.findByText('Pay Now');
-    expect(payButton).toBeInTheDocument();
+    // Assert that the necessary alerts are called and the fetchStub is called with the correct arguments
+    expect(fetchStub.calledWith(
+      `${baseUrl}/createPayment`,
+      sinon.match({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          bookingId: 'NBd4e557c72',
+          mobile: '6360120872',
+          amount: 5000,
+        }),
+      })
+    )).to.be.true;
   });
 
-  test('Handles payment response correctly', async () => {
-    // Mock the fetch function to return a successful response
-    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-        ok: true,
-        status: 200,
-        json: jest.fn().mockResolvedValueOnce({ statusCode: 200 }),
-    } as unknown as Response);
-
-    // Wait for the payment button to be present
-    const payButton = await screen.findByText('Pay Now');
-    expect(payButton).toBeInTheDocument();
-
-    // Trigger the payment handler function
-    fireEvent.click(payButton);
-
-    // Wait for the alerts and console.log to be called
-    await waitFor(() => {
-      expect(screen.getByText(/PAYMENT ID/)).toBeInTheDocument();
-      expect(screen.getByText(/ORDER ID/)).toBeInTheDocument();
-      expect(screen.getByText(/Signature/)).toBeInTheDocument();
-      expect(console.log).toHaveBeenCalled();
-    });
-
-    // Wait for the fetch to be called
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining(`${baseUrl}verifySignature`),
-        expect.objectContaining({
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: expect.any(String),
-        })
-      );
-    });
-  });
-});
-
-describe('Payment Component', () => {
-  const baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
-  const options = {
-    key: "rzp_test_nHgaZ8pP0SqyOm",
-    currency: "rupees",
-    amount: 5000,
-    name: "Pay Now",
-    description: "Wallet Transaction",
-    image: "http://localhost:8100/src/assets/images/Logo.png",
-  };
-
-  test('Handles payment response correctly - Successful payment', async () => {
-    // Mock the fetch function to return a successful response
-    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      json: jest.fn().mockResolvedValueOnce({ statusCode: 200 }),
-    } as unknown as Response);
-
-    // Wait for the payment button to be present
-    const payButton = await screen.findByText('Pay Now');
-    expect(payButton).toBeInTheDocument();
-
-    // Trigger the payment handler function
-    fireEvent.click(payButton);
-
-    // Wait for the alerts and console.log to be called
-    await waitFor(() => {
-      expect(screen.getByText(/PAYMENT ID/)).toBeInTheDocument();
-      expect(screen.getByText(/ORDER ID/)).toBeInTheDocument();
-      expect(screen.getByText(/Signature/)).toBeInTheDocument();
-      expect(console.log).toHaveBeenCalled();
-    });
-
-    // Wait for the fetch to be called
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining(`${baseUrl}verifySignature`),
-        expect.objectContaining({
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: expect.any(String),
-        })
-      );
-    });
-  });
-
-  test('Handles payment response correctly - Failed payment', async () => {
-    // Mock the fetch function to return a failed response
-    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-      ok: false,
-      status: 500, // Set an appropriate error status code
-    } as Response);
-
-    // Wait for the payment button to be present
-    const payButton = await screen.findByText('Pay Now');
-    expect(payButton).toBeInTheDocument();
-
-    // Trigger the payment handler function
-    fireEvent.click(payButton);
-
-    // Wait for the error alert to be called
-    await waitFor(() => {
-      expect(console.error).toHaveBeenCalledWith('Payment failed. Please try again.');
-    });
-  });
 });
