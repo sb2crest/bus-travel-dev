@@ -230,7 +230,7 @@ const BookingInfo = () => {
                   </div>
                   <div className="verify-resend">
                     <div className="verify-resend-01">
-                      <button className="verify" onClick={verifyOTP}>
+                      <button className="verify" role="button" onClick={verifyOTP}>
                         Verify OTP
                       </button>
                       <button className="resend" onClick={resendOTP}>
