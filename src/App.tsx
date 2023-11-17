@@ -7,7 +7,6 @@ import image3 from './assets/images/img_3.jpg';
 import image4 from './assets/images/img_4.jpg';
 import Home from './components/home/Home';
 import ContactUs from './components/contact/ContactUs';
-import Vehicle from './components/vehicle/Vehicle';
 import Footer from './components/footer/Footer';
 import AboutUs from './components/about/AboutUs';
 import Navbar from './components/navbar/Navbar';
@@ -15,7 +14,6 @@ import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
 import Booking from './components/booking/Booking';
 import BookingInfo from './components/booking-info/BookingInfo';
-// import VehicleInfo from './components/VehicleInfoDel';
 import VehiclesList from './components/vehicle/vehicle-list/VehicleList';
 import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
@@ -55,7 +53,6 @@ const App = () => {
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />
-            <Route path="/vehicles/:id" component={Vehicle} />
             <Route exact path="/bookVehicle" component={BookVehicle} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/aboutus" component={AboutUs} />
