@@ -8,7 +8,7 @@ describe("Booking Details component", () => {
   test("renders without errors", () => {
     render(
       <MemoryRouter>
-        {/* <BookingDetails /> */}
+        <BookingDetails bookingDetails= ""/>
       </MemoryRouter>
     );
 

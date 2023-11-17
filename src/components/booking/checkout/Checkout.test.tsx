@@ -8,7 +8,7 @@ describe("Checkout component", () => {
   test("renders without errors", () => {
     render(
       <MemoryRouter>
-        {/* <Checkout /> */}
+        <Checkout bookingId="cx1212" phoneNumber= "9999999999" fromDate={new Date()} toDate={new Date()} />
       </MemoryRouter>
     );
 

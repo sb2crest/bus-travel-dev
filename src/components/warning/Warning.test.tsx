@@ -9,7 +9,7 @@ describe("Booking component", () => {
   test("renders without errors", () => {
     render(
       <MemoryRouter>
-        {/* <Warning /> */}
+        <Warning onClose= ""/>
       </MemoryRouter>
     );
 
