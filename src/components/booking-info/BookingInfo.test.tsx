@@ -4,34 +4,9 @@ import { MemoryRouter } from "react-router-dom";
 import nock from 'nock';
 import BookingInfo from "./BookingInfo";
 
-<<<<<<< HEAD
-describe("Booking Info component", () => {
-    test("renders without errors", () => {
-      render(
-        <MemoryRouter>
-          <BookingInfo />
-        </MemoryRouter>
-      );
-  
-     });
-    });
-
-// describe('expectedData', () => {
-//     it('checks if returned data from API rendered into component', async () => {
-//         render(<BookingInfo />);
-
-//         await waitFor(() => {
-//             expect(screen.getByText("/value from the api")).toBeInTheDocument();
-//         });
-//     });
-// });
 
 describe('Booking Info', () => {
-    test('checks if returned data from OTP API rendered into component', async () => {
-=======
-describe('Booking Info', () => {
-    it('checks if the "Send OTP" button triggers the API call and shows success message', async () => {
->>>>>>> de10fce71b9aeb2921be068a849c6969365073a3
+    test('checks if the "Send OTP" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
@@ -54,7 +29,7 @@ describe('Booking Info', () => {
         });
     });
 
-    it('checks if the "Verify OTP" button triggers the API call and shows success message', async () => {
+    test('checks if the "Verify OTP" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
@@ -83,7 +58,7 @@ describe('Booking Info', () => {
         });
     });
 
-    it('checks if the "Resend" button triggers the API call and shows success message', async () => {
+    test('checks if the "Resend" button triggers the API call and shows success message', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
