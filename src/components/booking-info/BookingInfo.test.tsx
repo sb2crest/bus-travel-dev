@@ -9,6 +9,17 @@ import jest from 'jest-mock';
 import nock from 'nock';
 import BookingInfo from "./BookingInfo";
 
+describe("Booking Info component", () => {
+    test("renders without errors", () => {
+      render(
+        <MemoryRouter>
+          <BookingInfo />
+        </MemoryRouter>
+      );
+  
+     });
+    });
+
 // describe('expectedData', () => {
 //     it('checks if returned data from API rendered into component', async () => {
 //         render(<BookingInfo />);
@@ -20,7 +31,7 @@ import BookingInfo from "./BookingInfo";
 // });
 
 describe('Booking Info', () => {
-    it('checks if returned data from OTP API rendered into component', async () => {
+    test('checks if returned data from OTP API rendered into component', async () => {
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
