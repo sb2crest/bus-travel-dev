@@ -10,6 +10,10 @@ describe("Booking component", () => {
         <Map />
       </MemoryRouter>
     );
-
-   });
   });
+  test("renders Google Map", () => {
+    render(<Map />)
+    const googleMapIframe = screen.getByTitle('Google Map');
+    expect(googleMapIframe).toBeInTheDocument();
+  })
+});
