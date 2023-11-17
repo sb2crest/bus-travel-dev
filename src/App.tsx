@@ -10,7 +10,7 @@ import ContactUs from './components/contact/ContactUs';
 import Vehicle from './components/vehicle/Vehicle';
 import Footer from './components/footer/Footer';
 import AboutUs from './components/about/AboutUs';
-import Navbar from './components/navbar/Nav';
+import Navbar from './components/navbar/Navbar';
 import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
 import Booking from './components/booking/Booking';

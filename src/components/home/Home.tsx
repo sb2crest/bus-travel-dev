@@ -3,7 +3,6 @@ import styled from "styled-components";
 import img1 from "../../assets/images/aboutus_image.jpg";
 import img2 from "../../assets/images/aboutus_image2.jpg";
 import "./Home.scss";
-import ImageSlidderParent from "../../components/slidder/ImageSlidderParent";
 import { Link } from "react-router-dom";
 import Video from "../../assets/images/final.mp4";
 import schooltrip from "../../assets/images/schooltrip.jpg";
@@ -14,6 +13,7 @@ import sportsevent from "../../assets/images/sportsevent.jpg";
 import Cards from "../cards/Cards";
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
+import ImageSliderParent from "../slider/ImageSliderParent";
 const Icon = styled.i`
   font-size: 2rem; /* Set the initial size of the icon */
   color: #0f7bab;
@@ -205,7 +205,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <ImageSlidderParent />
+        <ImageSliderParent />
       </div>
     </>
   );
