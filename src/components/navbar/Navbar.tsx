@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="header">
+    <div className="header" data-testid="navbar">
       <div className="header_container">
       <Fade top>
         <nav>

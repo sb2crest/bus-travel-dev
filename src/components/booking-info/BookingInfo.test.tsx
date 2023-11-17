@@ -1,14 +1,10 @@
 import { render, screen, act, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
-import Video from "../../assets/images/final.mp4";
-
-import jest from 'jest-mock';
-
-
 import nock from 'nock';
 import BookingInfo from "./BookingInfo";
 
+<<<<<<< HEAD
 describe("Booking Info component", () => {
     test("renders without errors", () => {
       render(
@@ -32,6 +28,10 @@ describe("Booking Info component", () => {
 
 describe('Booking Info', () => {
     test('checks if returned data from OTP API rendered into component', async () => {
+=======
+describe('Booking Info', () => {
+    it('checks if the "Send OTP" button triggers the API call and shows success message', async () => {
+>>>>>>> de10fce71b9aeb2921be068a849c6969365073a3
         nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
             .defaultReplyHeaders({
                 'access-control-allow-origin': '*',
@@ -39,17 +39,76 @@ describe('Booking Info', () => {
             .post('/sendOTP?mobile=9999999999')
             .reply(200, { "message": "OTP sent successfully.", "statusCode": 200 });
 
-        render(<BookingInfo />);
+        render(<BookingInfo />, { wrapper: MemoryRouter });
 
+        const sendOTPButton = screen.getByText('Send OTP');
+
+        await act(async () => {
+            sendOTPButton.click();
+        });
+
+        // Add assertions to check if the success message is displayed
         await waitFor(() => {
-            const verifyOTP = screen.getByRole('button');
-            // console.log('1111', verifyOTP);
-            expect(
-                verifyOTP
-            ).toBeInTheDocument();
+            const successMessage = screen.getByText('OTP Sent successfully!');
+            expect(successMessage).toBeInTheDocument();
+        });
+    });
+
+    it('checks if the "Verify OTP" button triggers the API call and shows success message', async () => {
+        nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
+            .defaultReplyHeaders({
+                'access-control-allow-origin': '*',
+            })
+            .post('/verifyOTP')
+            .reply(200, { "message": "OTP verified successfully.", "statusCode": 200 });
+
+        render(<BookingInfo />, { wrapper: MemoryRouter });
+
+        // Simulate sending OTP first
+        const sendOTPButton = screen.getByText('Send OTP');
+        await act(async () => {
+            sendOTPButton.click();
+        });
+
+        // Simulate entering OTP and verifying
+        const verifyOTPButton = screen.getByText('Verify OTP');
+        await act(async () => {
+            verifyOTPButton.click();
+        });
+
+        // Add assertions to check if the success message is displayed
+        await waitFor(() => {
+            const successMessage = screen.getByText('Verification Successful');
+            expect(successMessage).toBeInTheDocument();
+        });
+    });
+
+    it('checks if the "Resend" button triggers the API call and shows success message', async () => {
+        nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
+            .defaultReplyHeaders({
+                'access-control-allow-origin': '*',
+            })
+            .post('/sendOTP?mobile=9999999999')
+            .reply(200, { "message": "OTP resent successfully.", "statusCode": 200 });
+
+        render(<BookingInfo />, { wrapper: MemoryRouter });
+
+        // Simulate sending OTP first
+        const sendOTPButton = screen.getByText('Send OTP');
+        await act(async () => {
+            sendOTPButton.click();
+        });
+
+        // Simulate clicking the "Resend" button
+        const resendButton = screen.getByText('Resend');
+        await act(async () => {
+            resendButton.click();
+        });
+
+        // Add assertions to check if the success message is displayed
+        await waitFor(() => {
+            const successMessage = screen.getByText('OTP Resent!');
+            expect(successMessage).toBeInTheDocument();
         });
     });
 });
-
-// Ref - https://refine.dev/blog/mocking-api-calls-in-react/#nock-installation-and-configuration
-// Ref - https://github.com/nock/nock
