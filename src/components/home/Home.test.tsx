@@ -3,8 +3,9 @@ import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import Home, { scrollToTop } from "./Home";
 import Video from "../../assets/images/final.mp4";
-import ImageSlidderParent from "../slidder/ImageSlidderParent";
 import jest from 'jest-mock';
+import ImageSliderParent from "../slider/ImageSliderParent";
+
 describe("Home Component", () => {
   // Check if the component renders without throwing any errors
   
@@ -92,8 +93,8 @@ describe("Home Component", () => {
       expect(serviceHeading).toBeInTheDocument();
     });
   });
-test("renders ImageSlidderParent component", () => {
-  render(<ImageSlidderParent />);
+test("renders ImageSliderParent component", () => {
+  render(<ImageSliderParent />);
 
 });
 test("renders Link component with correct props", () => {

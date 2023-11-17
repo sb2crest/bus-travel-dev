@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Navitems } from "./Navitems";
-import "./Nav.scss";
+import { Navitems } from "./NavItems";
+import "./Navbar.scss";
 import logo from "../../assets/images/Logo.png";
 import Fade from 'react-reveal/Fade';
 const Navbar = () => {
@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="header">
+    <div className="header" data-testid="navbar">
       <div className="header_container">
       <Fade top>
         <nav>
