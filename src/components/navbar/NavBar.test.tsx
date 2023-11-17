@@ -1,8 +1,8 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Navbar from "./Nav";
-import { Navitems } from "./Navitems";
+import Navbar from "./Navbar";
+import { Navitems } from "./NavItems";
 
 describe("Navbar component", () => {
   test("renders correctly", () => {

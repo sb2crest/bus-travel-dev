@@ -8,7 +8,7 @@ interface Slide {
   title: string;
 }
 
-interface ImageSlidderProps {
+interface ImageSliderProps {
   slides: Slide[]; 
 }
 
@@ -23,7 +23,7 @@ function Arrow(props: { className: any; style: any; onClick: any; }) {
   );
 }
 
-const ImageSlidder: React.FC<ImageSlidderProps> = ({ slides }) => {
+const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
   var settings = {
     dots: true,
     infinite: true,
@@ -78,4 +78,4 @@ const ImageSlidder: React.FC<ImageSlidderProps> = ({ slides }) => {
   );
 };
 
-export default ImageSlidder;
+export default ImageSlider;
