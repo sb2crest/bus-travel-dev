@@ -64,6 +64,9 @@ const Booking: React.FC = () => {
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index) => (
                 <div className="buses" key={index}>
+                   {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
+                <img src={vehicle.s3ImageUrl[0]} alt={`Bus ${index}`} className="busOne_img" />
+              )}
                   {/* Render vehicle details here */}
                   <h2>{vehicle.vehicleNumber}</h2>
                   <p>Seat Capacity: {vehicle.seatCapacity}</p>
