@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import VehicleInfo from '../../components/vehicle/vehicle-info/VehicleInfo';
+import VehicleInfo from '../VehicleInfo';
 import userEvent from '@testing-library/user-event';
 import { verify } from 'crypto';
 

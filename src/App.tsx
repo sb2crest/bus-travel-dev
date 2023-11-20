@@ -15,7 +15,6 @@ import { useState, useEffect } from 'react'
 import Preloader from './components/preloader/Preloader';
 import Booking from './components/booking/Booking';
 import BookingInfo from './components/booking-info/BookingInfo';
-// import VehicleInfo from './components/VehicleInfoDel';
 import VehiclesList from './components/vehicle/vehicle-list/VehicleList';
 import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
@@ -55,7 +54,6 @@ const App = () => {
             <Route exact path="/vehicleinfo" render={(props) => (<VehicleInfo {...props} images={images} />
             )}
             />
-            <Route path="/vehicles/:id" component={Vehicle} />
             <Route exact path="/bookVehicle" component={BookVehicle} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/aboutus" component={AboutUs} />

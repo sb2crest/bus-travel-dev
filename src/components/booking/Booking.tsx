@@ -58,7 +58,9 @@ const Booking: React.FC = () => {
                 destinations.
               </p>
             </Fade>
-            <Filter />
+            <div data-testid="filter-component">
+              <Filter />
+            </div>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index) => (
                 <div className="buses" key={index}>
@@ -75,7 +77,7 @@ const Booking: React.FC = () => {
                   </Link>
                 </div>
               ))}
-              <Fade left>
+              {/* <Fade left>
                 <div className="buses">
                   <div className="busOne_img">
                     <img
@@ -218,7 +220,7 @@ const Booking: React.FC = () => {
                     </Link>
                   </div>
                 </div>
-              </Fade>
+              </Fade> */}
             </div>
           </div>
         </div>

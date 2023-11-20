@@ -456,7 +456,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                   (
                     <div
                       className={`modal ${showModal ? "show" : ""}`}
-                      id="loginModal"
+                      data-testid="loginModal"
                       tabIndex={-1}
                       role="dialog"
                       aria-labelledby="exampleModalLabel"

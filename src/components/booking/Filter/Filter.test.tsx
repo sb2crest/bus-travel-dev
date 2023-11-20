@@ -11,5 +11,5 @@ describe("Filter component", () => {
       </MemoryRouter>
     );
 
-   });
   });
+});
