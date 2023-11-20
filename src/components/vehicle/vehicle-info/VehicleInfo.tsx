@@ -342,16 +342,16 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
         </div>
         <div className="vehicleInfo_container">
           <div className="image-gallery">
-            {/* <h1>Bus Details</h1> */}
-            {/* <div className="parent-image">
+            <h1>Bus Details</h1>
+            <div className="parent-image">
               <img
                 src={selectedImage.url}
                 alt="Selected"
                 width={700}
                 height={350}
               />
-            </div> */}
-            {/* <div className="child-images">
+            </div>
+            <div className="child-images">
               {images.map((image, index) => (
                 <img
                   key={index}
@@ -362,7 +362,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                   height={100}
                 />
               ))}
-            </div> */}
+            </div>
           </div>
           <div className="bus_details">
             <div className="inclusions">

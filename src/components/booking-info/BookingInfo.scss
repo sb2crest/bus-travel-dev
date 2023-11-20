@@ -3,10 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // width: 70%;
     padding: 20px;
     border-radius: 10px;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: white;
     text-align: center;
     margin-right: -12vw;
@@ -68,9 +66,10 @@
       }
 
       .send-otp {
+        text-align: left;
+
         .button-send-otp {
           margin-top: 5px;
-          margin-left: 78%;
           width: 50%;
           height: 35px;
           font-size: 16px;

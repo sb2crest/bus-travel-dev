@@ -7,6 +7,7 @@ import image3 from './assets/images/img_3.jpg';
 import image4 from './assets/images/img_4.jpg';
 import Home from './components/home/Home';
 import ContactUs from './components/contact/ContactUs';
+import Vehicle from './components/vehicle/vehicle-info/VehicleInfo';
 import Footer from './components/footer/Footer';
 import AboutUs from './components/about/AboutUs';
 import Navbar from './components/navbar/Navbar';
