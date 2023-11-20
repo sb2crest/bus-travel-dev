@@ -14,6 +14,7 @@ interface State {
   otp: string;
   sentOtp: string | null;
   otpVerified: boolean;
+  phoneNumberLocked: boolean;
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -26,6 +27,7 @@ const BookingInfo = () => {
     otp: "",
     otpVerified: false,
     sentOtp: null,
+    phoneNumberLocked: false,
   });
   const [otpSent, setOtpSent] = useState(false);
   const [verify, setVerify] = useState(false);
@@ -36,6 +38,7 @@ const BookingInfo = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
+  const [failedSnackbarOpen, setFailedSnackbarOpen] = useState(false);
 
   const validationSchema = Yup.object({
     phoneNumber: Yup.string()
@@ -44,7 +47,9 @@ const BookingInfo = () => {
       .required("Phone number is required"),
     otp: Yup.lazy((value) => {
       return value?.otpSent
-        ? Yup.string().required("OTP is required")
+        ? Yup.string()
+            .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
+            .required("OTP is required")
         : Yup.string();
     }),
   });
@@ -105,20 +110,21 @@ const BookingInfo = () => {
       const response = await dataService.verifyOTP(requestBody);
 
       if (response.data) {
-        setState({ ...state, otpVerified: true });
+        setState({ ...state, otpVerified: true, phoneNumberLocked: true, });
         setShowDetailsButton(true);
         setVerifySnackbarOpen(true);
         setVerify(false);
         setOtpVerified(true);
-
         console.log("OTP Verified!");
       } else {
         console.log("OTP Verification Failed!");
         setOtpVerified(false);
+        setFailedSnackbarOpen(true)
       }
     } catch (error) {
       console.error("Error validating OTP:", error);
       setOtpVerified(false);
+      setFailedSnackbarOpen(true)
     } finally {
       formik.setFieldValue("otpSent", false);
     }
@@ -132,7 +138,7 @@ const BookingInfo = () => {
     if (reason === "clickaway") {
       return;
     }
-
+    setFailedSnackbarOpen(false)
     setSnackbarOpen(false);
     setVerifySnackbarOpen(false);
   };
@@ -145,6 +151,7 @@ const BookingInfo = () => {
       .then((response) => {
         if (response.status == 200) {
           setState({ ...state, sentOtp: response.data.sentOtp });
+          setSnackbarOpen(true);
           console.log("OTP Resent!");
         } else {
           console.log("Failed to send OTP.");
@@ -202,9 +209,10 @@ const BookingInfo = () => {
                 onChange={handleChange}
                 onBlur={() => setFieldTouched("phoneNumber", true)}
                 className="input-phone"
+                disabled={state.phoneNumberLocked}
               />
               {touched.phoneNumber && errors.phoneNumber && (
-                <div className="error" style={{ color: "red" }}>
+                <div className="error" style={{ color: "red",textAlign:"left" }}>
                   {errors.phoneNumber}
                 </div>
               )}
@@ -221,9 +229,10 @@ const BookingInfo = () => {
                       onChange={handleChange}
                       onBlur={() => setFieldTouched("otp", true)}
                       className="input-otp"
+                      maxLength={6}
                     />
                     {touched.otp && errors.otp && (
-                      <div className="error" style={{ color: "red" }}>
+                      <div className="error" style={{ color: "red",textAlign:"left" }}>
                         {errors.otp}
                       </div>
                     )}
@@ -263,7 +272,7 @@ const BookingInfo = () => {
           </div>
           <Snackbar
             open={snackbarOpen}
-            autoHideDuration={5000}
+            autoHideDuration={2000}
             onClose={handleSnackbarClose}
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
@@ -273,12 +282,22 @@ const BookingInfo = () => {
           </Snackbar>
           <Snackbar
             open={verifySnackbarOpen}
-            autoHideDuration={5000}
+            autoHideDuration={2000}
             onClose={handleSnackbarClose}
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <Alert onClose={handleSnackbarClose} severity="success">
               Verification Successful
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={failedSnackbarOpen}
+            autoHideDuration={2000}
+            onClose={handleSnackbarClose}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          >
+            <Alert onClose={handleSnackbarClose} severity="error">
+              Verification failed!!
             </Alert>
           </Snackbar>
         </div>
