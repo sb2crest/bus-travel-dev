@@ -99,6 +99,7 @@ const Form: React.FC = () => {
               type="submit"
               name="submit-form"
               onClick={getInTouch}
+              data-testid="submit-button"
             >
               <span className="btn-title">Get In Touch</span>
             </button>{" "}
@@ -106,6 +107,7 @@ const Form: React.FC = () => {
         </form>
         <ConfirmationPopup
           isOpen={isConfirmationOpen}
+          data-testid="confirmation-popup"
           content={[
             <>
               {/* <div className="close-icon close custom" onClick={handleCancel}>
@@ -121,7 +123,7 @@ const Form: React.FC = () => {
               </div>
               <div className="get-back">
                 <p>We will get back to you shortly</p>
-                <button className="done" onClick={handleCancel}>Done</button>
+                <button className="done" onClick={handleCancel} data-testid="confirmation-popup">Done</button>
               </div>
             </>,
           ]}

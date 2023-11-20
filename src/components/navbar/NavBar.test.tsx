@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Navbar from './Nav';
+import Navbar from './Navbar';
 import { BrowserRouter as Router } from 'react-router-dom'; 
-import { Navitems } from "./Navitems";
+import { Navitems } from "./NavItems";
 describe('Navbar Component', () => {
   test('renders Navbar component', () => {
     render(

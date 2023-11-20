@@ -10,6 +10,5 @@ describe("Booking component", () => {
         <Form />
       </MemoryRouter>
     );
-
    });
   });
