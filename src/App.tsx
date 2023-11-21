@@ -52,7 +52,7 @@ const App = () => {
             <Route exact path="/booking" component={Booking} />
             <Route exact path="/bookinginfo" component={BookingInfo} />
             {/* <Route path='/bookinginfo' component={BookingDetails} /> */}
-            <Route exact path="/vehicleinfo" component={PropTesting}
+            <Route exact path="/vehicleinfo" component={VehicleInfo}
             />
             <Route exact path="/bookVehicle" component={BookVehicle} />
             <Route exact path="/contactus" component={ContactUs} />
