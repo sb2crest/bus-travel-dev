@@ -19,7 +19,6 @@ import VehiclesList from './components/vehicle/vehicle-list/VehicleList';
 import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
 import BookingDetails from './components/booking-info/booking-details/BookingDetails';
-import PropTesting from './components/vehicle/PropTesting';
 
 const images = [
   { url: image1 },
