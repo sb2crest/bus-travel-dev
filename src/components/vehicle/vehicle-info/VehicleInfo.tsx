@@ -50,6 +50,8 @@ const initialVehicleData: IVehicleData = {
 
 interface VehicleInfoProps {
   images: Image[];
+  otpSent: boolean;
+  otpVerified: boolean
 }
 
 const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
@@ -134,7 +136,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
     setLastName("");
     setPhoneNumber("");
     setEmail("");
-    setOtp("");
     setStartDate(null);
     setEndDate(null);
   };
@@ -344,15 +345,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
           <div className="image-gallery">
             <h1>Bus Details</h1>
             <div className="parent-image">
-              <img
+              {/* <img
                 src={selectedImage.url}
                 alt="Selected"
                 width={700}
                 height={350}
-              />
+              /> */}
             </div>
             <div className="child-images">
-              {images.map((image, index) => (
+              {/* {images.map((image, index) => (
                 <img
                   key={index}
                   src={image.url}
@@ -361,7 +362,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                   width={150}
                   height={100}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="bus_details">
@@ -764,8 +765,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = ({ images }) => {
                                 autoHideDuration={7000}
                                 onClose={handleSnackbarClose}
                                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                data-testid="my-snackbar"
                               >
-                                <Alert onClose={handleSnackbarClose} severity="success">
+                                <Alert onClose={handleSnackbarClose} severity="success" >
                                   OTP Sent successfully!
                                 </Alert>
                               </Snackbar>
