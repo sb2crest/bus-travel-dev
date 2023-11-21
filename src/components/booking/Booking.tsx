@@ -8,8 +8,9 @@ import arrow from "../../assets/images/arrow.png";
 import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
-import Fade from 'react-reveal/Fade';
+import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
+import PropTesting from "../vehicle/PropTesting";
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
@@ -19,14 +20,17 @@ const Booking: React.FC = () => {
   };
 
   const listVehicles = () => {
-    dataService.listVehicles().then((response) => {
-      const vehicles: ListVehicles[] = response.data;
-      setVehicles(vehicles);
-      console.log("Fetched vehicles:", vehicles);
-    }).catch((error) => {
-      console.error("Error in fetching data:", error);
-    })
-  }
+    dataService
+      .listVehicles()
+      .then((response) => {
+        const vehicles: ListVehicles[] = response.data;
+        setVehicles(vehicles);
+        console.log("Fetched vehicles:", vehicles);
+      })
+      .catch((error) => {
+        console.error("Error in fetching data:", error);
+      });
+  };
 
   useEffect(() => {
     listVehicles();
@@ -64,166 +68,53 @@ const Booking: React.FC = () => {
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index) => (
                 <div className="buses" key={index}>
-                   {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
-                <img src={vehicle.s3ImageUrl[0]} alt={`Bus ${index}`} className="busOne_img" />
-              )}
+                  {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
+                    <img
+                      src={vehicle.s3ImageUrl[0]}
+                      alt={`Bus ${index}`}
+                      className="busOne_img"
+                    />
+                  )}
                   {/* Render vehicle details here */}
-                  <h2>{vehicle.vehicleNumber}</h2>
-                  <p>Seat Capacity: {vehicle.seatCapacity}</p>
-                  <p>AC: {vehicle.isVehicleAC ? "Yes" : "No"}</p>
-                  <p>Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}</p>
-                  {/* Render other vehicle details */}
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>
-                      View Details
-                    </button>
-                  </Link>
+                  <div className="busOne_details">
+                    <h2>{vehicle.vehicleNumber}</h2>
+                    <p>
+                      <i
+                        className="fa-solid fa-user-group fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      Seat Capacity: {vehicle.seatCapacity}
+                    </p>
+                    <p>
+                      {" "}
+                      <i
+                        className="fa-solid fa-fan fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      AC: {vehicle.isVehicleAC ? "Yes" : "No"}
+                    </p>
+                    <p>
+                      {" "}
+                      <i
+                        className="fa-solid fa-bed fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}
+                    </p>
+                    {/* Render other vehicle details */}
+                    <Link
+  to={{
+    pathname: '/vehicleinfo',
+    state: { images: vehicle.s3ImageUrl || [] },
+  }}
+>
+  <button className="button-53" onClick={scrollToTop}>
+    View Details
+  </button>
+</Link>
+                  </div>
                 </div>
               ))}
-              {/* <Fade left>
-                <div className="buses">
-                  <div className="busOne_img">
-                    <img
-                      src={busImage_1}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busOne_details">
-                    <h2>Bus Name1</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade>
-              <Fade bottom>
-                <div className="buses">
-                  <div className="busTwo_img">
-                    <img
-                      src={busImage_2}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busTwo_details">
-                    <h2>Bus Name2</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade>
-              <Fade right>
-                <div className="buses">
-                  <div className="busThree_img">
-                    <img
-                      src={busImage_3}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busThree_details">
-                    <h2>Bus Name3</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade> */}
             </div>
           </div>
         </div>
@@ -235,24 +126,14 @@ const Booking: React.FC = () => {
             </div>
           </Fade>
           <div className="howitworks_cards">
-            <img
-              className="img1"
-              src={arrow}
-              width={70}
-              alt=""
-            />
+            <img className="img1" src={arrow} width={70} alt="" />
             {/* <img
               className="img3"
               src={arrow}
               width={70}
               alt=""
             /> */}
-            <img
-              className="img2"
-              src={arrow2}
-              width={60}
-              alt=""
-            />
+            <img className="img2" src={arrow2} width={60} alt="" />
             <Fade left>
               <div className="howitworks_cards_one">
                 <i
@@ -261,8 +142,8 @@ const Booking: React.FC = () => {
                 ></i>
                 <h3>Select Your Bus</h3>
                 <p>
-                  Choose from a range of available buses, considering factors like
-                  destination, departure time, and seating preferences.
+                  Choose from a range of available buses, considering factors
+                  like destination, departure time, and seating preferences.
                 </p>
               </div>
             </Fade>
@@ -311,6 +192,6 @@ const Booking: React.FC = () => {
       </div>
     </>
   );
-}
+};
 
 export default Booking;

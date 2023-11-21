@@ -14,26 +14,25 @@ const Form: React.FC = () => {
     setEmail("");
     setMessage("");
   };
-  const getInTouch=(e: React.FormEvent)=>{
+  const getInTouch = async (e: React.FormEvent) => {
     e.preventDefault();
-    const  requestBody={
-      name:name ,
-      email:email ,
-      message: message
-    }
-    console.log({requestBody})
-    dataService
-    .getInTouch (requestBody)
-    .then((response: { data: any }) => {
+  
+    const requestBody = {
+      name: name,
+      email: email,
+      message: message,
+    };
+  
+    try {
+      console.log({ requestBody });
+      const response = await dataService.getInTouch(requestBody);
       console.log(response);
-      setIsConfirmationOpen(true); 
-      resetForm()
-    })
-    .catch((error) => {
+      setIsConfirmationOpen(true);
+      resetForm();
+    } catch (error) {
       console.error('Error:', error);
-    });
-  }
-
+    }
+  };
   const handleCancel = () => {
     setIsConfirmationOpen(false);
   };
