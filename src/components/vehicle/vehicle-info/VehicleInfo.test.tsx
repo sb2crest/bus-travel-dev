@@ -114,47 +114,54 @@ describe("Vehicle Info component", () => {
     expect(emailInput.value).toBe('');
   })
 
-  // test('renders OTP text field when otpSent is true and otpVerified is false', async () => {
-  //  const view= render(
-  //     <MemoryRouter>
-  //       <VehicleInfo images={[]} otpSent={true} otpVerified={false} />
-  //     </MemoryRouter>
-  //   );
-  //   logRoles(view.container);
+  {/* TODO: Vijay */ }
+  test('renders OTP text field when otpSent is true and otpVerified is false', async () => {
+    render(
+      <MemoryRouter>
+        <VehicleInfo images={[]} otpSent={false} otpVerified={false} />
+      </MemoryRouter>
+    );
 
-  //   const sendOTPButton = screen.getByText('Send OTP');
-  //   fireEvent.click(sendOTPButton);
+    const sendOTPButton = screen.getByText('Send OTP');
+    fireEvent.click(sendOTPButton);
 
-  //   await waitFor(() => {
-  //     const otpInput = screen.getByPlaceholderText('OTP') as HTMLInputElement;
-  //     expect(otpInput).toBeInTheDocument();
-  //   });
-  // })
+    render(
+      <MemoryRouter>
+        <VehicleInfo images={[]} otpSent={true} otpVerified={false} />
+      </MemoryRouter>
+    );
 
-  // test("triggers sendOTP function when send OTP button is clicked", async () => {
-  //   nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
-  //     .defaultReplyHeaders({
-  //       'access-control-allow-origin': '*',
-  //     })
-  //     .post('/sendOTP')
-  //     .reply(200,
-  //       { "message": "OTP sent successfully.", "statusCode": 200 });
-        
-  //   render(<VehicleInfo images={[]} otpSent={false} otpVerified={false} />, { wrapper: MemoryRouter });
+    await waitFor(() => {
+      const otpInput = screen.getByPlaceholderText('OTP') as HTMLInputElement;
+      expect(otpInput).toBeInTheDocument();
+    });
+  })
 
-  //   const sendOTP = screen.getByText('Send OTP');
+  {/* TODO: Vijay */ }
+  test("triggers sendOTP function when send OTP button is clicked", async () => {
+    nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+      })
+      .post('/sendOTP')
+      .reply(200,
+        { "message": "OTP sent successfully.", "statusCode": 200 });
 
-  //   await act(async () => {
-  //     sendOTP.click();
-  //   });
+    render(<VehicleInfo images={[]} otpSent={false} otpVerified={false} />, { wrapper: MemoryRouter });
 
-  //   await waitFor(() => {
-  //      const snackbar = screen.getByTestId('my-snackbar');
-  //      expect(snackbar).toBeInTheDocument();
-  //     // const successMessage = within(snackbar).getByRole('alert');
-  //     // expect(successMessage).toBeInTheDocument();
-  //     // const success = screen.getByText('OTP Sent successfully!');
-  //     // expect(success).toBeInTheDocument();
-  //   });
-  // })
+    const sendOTP = screen.getByText('Send OTP');
+
+    await act(async () => {
+      sendOTP.click();
+    });
+
+    await waitFor(() => {
+      const snackbar = screen.getByTestId('my-snackbar');
+      expect(snackbar).toBeInTheDocument();
+      // const successMessage = within(snackbar).getByRole('alert');
+      // expect(successMessage).toBeInTheDocument();
+      // const success = screen.getByText('OTP Sent successfully!');
+      // expect(success).toBeInTheDocument();
+    });
+  });
 });
