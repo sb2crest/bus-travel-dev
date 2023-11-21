@@ -10,6 +10,7 @@ import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
+import PropTesting from "../vehicle/PropTesting";
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
@@ -76,184 +77,44 @@ const Booking: React.FC = () => {
                   )}
                   {/* Render vehicle details here */}
                   <div className="busOne_details">
-                  <h2>{vehicle.vehicleNumber}</h2>
-                  <p>
-                    <i
-                      className="fa-solid fa-user-group fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Seat Capacity: {vehicle.seatCapacity}
-                  </p>
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-fan fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    AC: {vehicle.isVehicleAC ? "Yes" : "No"}
-                  </p>
-                  <p>
-                    {" "}
-                    <i
-                      className="fa-solid fa-bed fa-lg"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}
-                  </p>
-                  {/* Render other vehicle details */}
-                  <Link to={"/vehicleinfo"}>
-                    <button className="button-53" onClick={scrollToTop}>
-                      View Details
-                    </button>
-                  </Link>
-
-                </div>
+                    <h2>{vehicle.vehicleNumber}</h2>
+                    <p>
+                      <i
+                        className="fa-solid fa-user-group fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      Seat Capacity: {vehicle.seatCapacity}
+                    </p>
+                    <p>
+                      {" "}
+                      <i
+                        className="fa-solid fa-fan fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      AC: {vehicle.isVehicleAC ? "Yes" : "No"}
+                    </p>
+                    <p>
+                      {" "}
+                      <i
+                        className="fa-solid fa-bed fa-lg"
+                        style={{ color: "#0f7bab" }}
+                      ></i>
+                      Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}
+                    </p>
+                    {/* Render other vehicle details */}
+                    <Link
+  to={{
+    pathname: '/vehicleinfo',
+    state: { images: vehicle.s3ImageUrl || [] },
+  }}
+>
+  <button className="button-53" onClick={scrollToTop}>
+    View Details
+  </button>
+</Link>
+                  </div>
                 </div>
               ))}
-              {/* <Fade left>
-                <div className="buses">
-                  <div className="busOne_img">
-                    <img
-                      src={busImage_1}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busOne_details">
-                    <h2>Bus Name1</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade>
-              <Fade bottom>
-                <div className="buses">
-                  <div className="busTwo_img">
-                    <img
-                      src={busImage_2}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busTwo_details">
-                    <h2>Bus Name2</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade>
-              <Fade right>
-                <div className="buses">
-                  <div className="busThree_img">
-                    <img
-                      src={busImage_3}
-                      alt=""
-                    />
-                  </div>
-                  <div className="busThree_details">
-                    <h2>Bus Name3</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      60 Seat
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      2 driver staff
-                    </p>
-                    <br />
-                    <p>
-                      <i
-                        className="fa-solid fa-gears fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Manual
-                    </p>
-                    <br />
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Ac/Non Ac
-                    </p>
-                    <Link to={"/vehicleinfo"}>
-                      <button className="button-53" onClick={scrollToTop}>View Details</button>
-                    </Link>
-                  </div>
-                </div>
-              </Fade> */}
             </div>
           </div>
         </div>
