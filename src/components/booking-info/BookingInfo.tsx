@@ -48,8 +48,8 @@ const BookingInfo = () => {
     otp: Yup.lazy((value) => {
       return value?.otpSent
         ? Yup.string()
-            .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
-            .required("OTP is required")
+          .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
+          .required("OTP is required")
         : Yup.string();
     }),
   });
@@ -212,7 +212,7 @@ const BookingInfo = () => {
                 disabled={state.phoneNumberLocked}
               />
               {touched.phoneNumber && errors.phoneNumber && (
-                <div className="error" style={{ color: "red",textAlign:"left" }}>
+                <div className="error" style={{ color: "red", textAlign: "left" }}>
                   {errors.phoneNumber}
                 </div>
               )}
@@ -232,7 +232,7 @@ const BookingInfo = () => {
                       maxLength={6}
                     />
                     {touched.otp && errors.otp && (
-                      <div className="error" style={{ color: "red",textAlign:"left" }}>
+                      <div className="error" style={{ color: "red", textAlign: "left" }}>
                         {errors.otp}
                       </div>
                     )}
@@ -248,12 +248,12 @@ const BookingInfo = () => {
                     </div>
                   </div>
                 </>
-             ) : !verify && !otpVerified ? (
-              // Render "Send OTP" button only if OTP verification is not successful
-              <button className="button-send-otp" onClick={sendOTP}>
-                Send OTP
-              </button>
-            ) : null}
+              ) : !verify && !otpVerified ? (
+                // Render "Send OTP" button only if OTP verification is not successful
+                <button className="button-send-otp" onClick={sendOTP}>
+                  Send OTP
+                </button>
+              ) : null}
             </div>
             {ShowDetailsButton && (
               <div className="show-details">
@@ -270,16 +270,18 @@ const BookingInfo = () => {
               <img src={asideImage} alt="Image" className="image-class" />
             </div>
           </div>
-          <Snackbar
-            open={snackbarOpen}
-            autoHideDuration={2000}
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <Alert onClose={handleSnackbarClose} severity="success">
-              OTP Sent successfully!
-            </Alert>
-          </Snackbar>
+          <div data-testid="snackbar">
+            <Snackbar
+              open={snackbarOpen}
+              autoHideDuration={2000}
+              onClose={handleSnackbarClose}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+              <Alert onClose={handleSnackbarClose} severity="success">
+                OTP Sent successfully!
+              </Alert>
+            </Snackbar>
+          </div>
           <Snackbar
             open={verifySnackbarOpen}
             autoHideDuration={2000}
