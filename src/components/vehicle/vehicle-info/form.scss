@@ -369,16 +369,31 @@ input[type="text" i] {
   padding-inline: 2px;
 }
 
-.change-phone-number{
+.change-phone-number {
   color: #17a2b8;
   text-decoration: underline;
   line-height: 0.5;
   text-align: center;
 }
 
-.phone-warning{
+.phone-warning {
   color: red;
   margin-right: 25px;
+}
+
+.first-name-warning {
+  color: red;
+  margin-right: 160px;
+}
+
+.last-name-warning {
+  color: red;
+  margin-right: 160px;
+}
+
+.email-warning {
+  color: red;
+  margin-right: 180px;
 }
 
 .email {
