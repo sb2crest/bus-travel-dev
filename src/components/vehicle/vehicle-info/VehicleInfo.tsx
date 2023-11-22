@@ -113,9 +113,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
   const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
-
-  //State Variable for phone number change
-  const [phoneNumberChange, setPhoneNumberChange] = useState(false);
+  const [validationFailureSnackbarOpen, setValidationFailureSnackbarOpen] = useState(false);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -190,12 +188,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
         }
       })
       .catch((error: any) => {
+        if (error == "Error: Request failed with status code 400") {
+          setValidationFailureSnackbarOpen(true);
+        }
         console.error("Error validating OTP:", error);
         setOtpVerified(false);
       });
   };
 
-  /*Resend OTP Function*/
+  /* Resend OTP Function */
   const ResendOTP = (): void => {
     dataService
       .sendOTP(phoneNumber)
@@ -249,7 +250,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
           toDate: endDate ? endDate.toISOString().split("T")[0] : "",
         },
       };
-      console.log("vehicle number:", vehicleNumber);
       dataService
         .bookNow(requestBody)
         .then((response: { data: any }) => {
@@ -271,10 +271,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     }
   };
   /*-----------------------------------------------------------------------------------------------------------------------*/
-
-  {
-    /* Resend Timer  */
-  }
+  /* Resend Timer  */
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (resendDisabled) {
@@ -298,9 +295,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-  {
-    /* Function to Close Warning  */
-  }
+  /* Function to Close Warning  */
   const closeWarning = () => {
     setShowWarning(false);
   };
@@ -311,6 +306,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSelectedImage(newImages);
   };
 
+  /* OTP successfully sent */
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -321,6 +317,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSnackbarOpen(false);
   };
 
+  /* OTP Validation success  */
   const handleVerifyClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -341,9 +338,17 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSlotsBookedSnackbarOpen(false);
   };
 
-  {
-    /* Phone Number Change */
-  }
+  const handleValidationFailure = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setValidationFailureSnackbarOpen(false);
+  };
+
+  /* Phone Number Change */
   const changePhoneNumber = () => {
     setOtpSent(false);
   };
@@ -817,6 +822,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 <Warning onClose={closeWarning} />
                               )}
                             </form>
+                            {/* OTP success snackbar */}
                             <Snackbar
                               open={snackbarOpen}
                               autoHideDuration={7000}
@@ -834,6 +840,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 OTP Sent successfully!
                               </Alert>
                             </Snackbar>
+                            {/*  Validation successful snackbar */}
                             <Snackbar
                               open={verifySnackbarOpen}
                               autoHideDuration={7000}
@@ -850,6 +857,24 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 Validation successful!
                               </Alert>
                             </Snackbar>
+                            {/*  Validation unsuccessful snackbar */}
+                            <Snackbar
+                              open={validationFailureSnackbarOpen}
+                              autoHideDuration={7000}
+                              onClose={handleValidationFailure}
+                              anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                              }}
+                            >
+                              <Alert
+                                onClose={handleValidationFailure}
+                                severity="error"
+                              >
+                                Validation unsuccessful!
+                              </Alert>
+                            </Snackbar>
+                            {/*  Slots booked snackbar */}
                             <Snackbar
                               open={slotsBookedSnackbarOpen}
                               autoHideDuration={7000}
@@ -880,5 +905,4 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     </>
   );
 };
-
 export default VehicleInfo;
