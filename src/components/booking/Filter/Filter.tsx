@@ -6,55 +6,193 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./BookingCalendar.scss";
 import IFilterRequest from "../../../types/filter/request.type";
 import dataService from "../../../services/data.service";
-
-const filterRequest: IFilterRequest = {
-  fromDate: "",
-  toDate: "",
-  isAC: false,
-  isSleeper: false,
-};
+import { format } from 'date-fns';
 
 const Filter: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [isACClicked, setIsACClicked] = useState(false);
-  const [isNonACClicked, setNonACClicked] = useState(false);
   const [isSleeperClicked, setIsSleeperClicked] = useState(false);
-  const [isNonSleeperClicked, setIsNonSleeperClicked] = useState(false);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  // State variables for AC checkboxes
+  const [isACAllChecked, setIsACAllChecked] = useState(false);
+  const [isACChecked, setIsACChecked] = useState(false);
+  const [isNonACChecked, setIsNonACChecked] = useState(false);
 
-  {
-    /* Function to  Close POP-Up*/
-  }
-  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowModal(false);
+  // State variables for Sleeper checkboxes
+  const [isSleeperAllChecked, setIsSleeperAllChecked] = useState(false);
+  const [isSleeperChecked, setIsSleeperChecked] = useState(false);
+  const [isSemiSleeperChecked, setIsSemiSleeperChecked] = useState(false);
+  const [isNonSleeperChecked, setIsNonSleeperChecked] = useState(false);
+
+  // State variables for fromDate and toDate
+  const [fromDate, setFromDate] = useState<Date | null>(null);
+  const [toDate, setToDate] = useState<Date | null>(null);
+
+  // State variable to store filter results
+  const [filterResults, setFilterResults] = useState<any>(null);
+
+  // Function to handle AC "All" checkbox change
+  const handleACAllChange = () => {
+    setIsACAllChecked(!isACAllChecked);
+    setIsACChecked(!isACAllChecked);
+    setIsNonACChecked(!isACAllChecked);
   };
 
-  {
-    /* Function to Clear Filter*/
-  }
+  // Function to handle Sleeper "All" checkbox change
+  const handleSleeperAllChange = () => {
+    setIsSleeperAllChecked(!isSleeperAllChecked);
+    setIsSleeperChecked(!isSleeperAllChecked);
+    setIsSemiSleeperChecked(!isSleeperAllChecked);
+    setIsNonSleeperChecked(!isSleeperAllChecked);
+  };
+
+  // Function to handle AC checkbox change
+  const handleACChange = () => {
+    setIsACChecked(!isACChecked);
+    // Check if all individual checkboxes are selected
+    if (isNonACChecked && !isACChecked) {
+      setIsACAllChecked(true);
+    } else {
+      setIsACAllChecked(false);
+    }
+  };
+
+  // Function to handle Non-AC checkbox change
+  const handleNonACChange = () => {
+    setIsNonACChecked(!isNonACChecked);
+    // Check if all individual checkboxes are selected
+    if (isACChecked && !isNonACChecked) {
+      setIsACAllChecked(true);
+    } else {
+      setIsACAllChecked(false);
+    }
+  };
+
+  // Function to handle Sleeper checkbox change
+  const handleSleeperChange = () => {
+    setIsSleeperChecked(!isSleeperChecked);
+    // Check if all individual checkboxes are selected
+    if (!isSleeperChecked && isSemiSleeperChecked && isNonSleeperChecked) {
+      setIsSleeperAllChecked(true);
+    } else {
+      setIsSleeperAllChecked(false);
+    }
+  };
+
+  // Function to handle Semi-Sleeper checkbox change
+  const handleSemiSleeperChange = () => {
+    setIsSemiSleeperChecked(!isSemiSleeperChecked);
+    // Check if all individual checkboxes are selected
+    if (isSleeperChecked && !isSemiSleeperChecked && isNonSleeperChecked) {
+      setIsSleeperAllChecked(true);
+    } else {
+      setIsSleeperAllChecked(false);
+    }
+  };
+
+  // Function to handle Non-Sleeper checkbox change
+  const handleNonSleeperChange = () => {
+    setIsNonSleeperChecked(!isNonSleeperChecked);
+    // Check if all individual checkboxes are selected
+    if (isSleeperChecked && isSemiSleeperChecked && !isNonSleeperChecked) {
+      setIsSleeperAllChecked(true);
+    } else {
+      setIsSleeperAllChecked(false);
+    }
+  };
+
+  const handleClose = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    // Collect selected options for AC
+    const acOptions = [];
+    if (isACChecked) {
+      acOptions.push("AC");
+    }
+    if (isNonACChecked) {
+      acOptions.push("NA");
+    }
+    if (!isACChecked && !isNonACChecked) {
+      acOptions.push("ALL");
+    }
+
+    // Collect selected options for Sleeper
+    const sleeperOptions = [];
+    if (isSleeperChecked) {
+      sleeperOptions.push("FS");
+    }
+    if (isSemiSleeperChecked) {
+      sleeperOptions.push("SS");
+    }
+    if (isNonSleeperChecked) {
+      sleeperOptions.push("NS");
+    }
+    if (!isSleeperChecked && !isSemiSleeperChecked && !isNonSleeperChecked) {
+      sleeperOptions.push("ALL");
+    }
+
+    // Create a string with '/' between AC and Sleeper options
+    const filter =
+      acOptions.join(",") +
+      (acOptions.length > 0 && sleeperOptions.length > 0 ? "/" : "") +
+      sleeperOptions.join(",");
+    console.log("filter:", filter);
+
+    // Store fromDate and toDate in variables
+    const selectedFromDate = fromDate ? format(fromDate, 'dd-MM-yyyy') : null;
+    const selectedToDate = toDate ? format(toDate, 'dd-MM-yyyy') : null;
+    console.log("selectedFromDate:", selectedFromDate);
+    console.log("selectedToDate:", selectedToDate);
+
+    // Fetch data from the API with the selected filters using Axios
+    try {
+    let requestBody={    filter: filter,
+        fromDate: selectedFromDate,
+        toDate: selectedToDate,
+      
+      };
+const response = await dataService.filter(requestBody)
+      // Assuming your API response is in JSON format
+      const responseData = response.data;
+console.log(responseData)
+      // Store the filter results in state
+      setFilterResults(responseData);
+
+      // Close the modal
+      setShowModal(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleFromDateChange = (date: Date | null) => {
+    setFromDate(date);
+  };
+
+  const handleToDateChange = (date: Date | null) => {
+    setToDate(date);
+  };
+
+  // Function to Clear Filter
   const handleClearFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsACClicked(false);
-    setNonACClicked(false);
-    setIsSleeperClicked(false);
-    setIsNonSleeperClicked(false);
-    setStartDate(null);
-    setEndDate(null);
+    setIsNonACChecked(false);
+    setIsACChecked(false);
+    setIsACAllChecked(false);
+    setIsSleeperAllChecked(false);
+    setIsSleeperChecked(false);
+    setIsSemiSleeperChecked(false);
+    setIsNonSleeperChecked(false);
+    setFromDate(null);
+    setToDate(null);
   };
 
-  {
-    /* Function for AC Filters */
-  }
+  // Function for AC Filters
   const handleACClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsACClicked(!isACClicked);
   };
 
-  {
-    /* Function for Sleeper Filters */
-  }
+  // Function for Sleeper Filters
   const handleSleeperClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsSleeperClicked(!isSleeperClicked);
@@ -149,11 +287,26 @@ const Filter: React.FC = () => {
                   {isACClicked && (
                     <>
                       <div className="checkbox-section-01">
-                        <input type="checkbox" className="input-all" />
+                        <input
+                          type="checkbox"
+                          className="input-all"
+                          checked={isACAllChecked}
+                          onChange={handleACAllChange}
+                        />
                         <label className="label-all">All</label>
-                        <input type="checkbox" className="input-ac" />
+                        <input
+                          type="checkbox"
+                          className="input-ac"
+                          checked={isACChecked}
+                          onChange={handleACChange}
+                        />
                         <label className="label-ac">AC</label>
-                        <input type="checkbox" className="input-non-ac" />
+                        <input
+                          type="checkbox"
+                          className="input-non-ac"
+                          checked={isNonACChecked}
+                          onChange={handleNonACChange}
+                        />
                         <label className="label-non-ac">Non-AC</label>
                       </div>
                     </>
@@ -213,15 +366,35 @@ const Filter: React.FC = () => {
                   {isSleeperClicked && (
                     <>
                       <div className="checkbox-section-02">
-                        <input className="input-all" type="checkbox" />
+                        <input
+                          className="input-all"
+                          type="checkbox"
+                          checked={isSleeperAllChecked}
+                          onChange={handleSleeperAllChange}
+                        />
                         <label className="label-all">All</label>
-                        <input className="input-sleeper" type="checkbox" />
+                        <input
+                          className="input-sleeper"
+                          type="checkbox"
+                          checked={isSleeperChecked}
+                          onChange={handleSleeperChange}
+                        />
                         <label className="label-sleeper">Sleeper</label>
-                        <input className="input-semi-sleeper" type="checkbox" />
+                        <input
+                          className="input-semi-sleeper"
+                          type="checkbox"
+                          checked={isSemiSleeperChecked}
+                          onChange={handleSemiSleeperChange}
+                        />
                         <label className="label-semi-sleeper">
                           Semi-Sleeper
                         </label>
-                        <input className="input-non-sleeper" type="checkbox" />
+                        <input
+                          className="input-non-sleeper"
+                          type="checkbox"
+                          checked={isNonSleeperChecked}
+                          onChange={handleNonSleeperChange}
+                        />
                         <label className="label-non-sleeper">
                           Non-Sleeper{" "}
                         </label>
@@ -233,12 +406,12 @@ const Filter: React.FC = () => {
                   <div className="from-to-date-container">
                     <div className="date-picker">
                       <DatePicker
-                        selected={startDate}
-                        onChange={(date: Date) => setStartDate(date)}
+                        selected={fromDate}
+                        onChange={handleFromDateChange}
                         selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                        dateFormat="yyyy/MM/dd"
+                        startDate={fromDate}
+                        endDate={toDate}
+                        dateFormat="dd-MM-yyyy"
                         placeholderText="From-Date"
                         className="start-date"
                         minDate={new Date()}
@@ -246,13 +419,13 @@ const Filter: React.FC = () => {
                     </div>
                     <div className="date-picker">
                       <DatePicker
-                        selected={endDate}
-                        onChange={(date: Date) => setEndDate(date)}
+                        selected={toDate}
+                        onChange={handleToDateChange}
                         selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        minDate={startDate || new Date()}
-                        dateFormat="yyyy/MM/dd"
+                        startDate={fromDate}
+                        endDate={toDate}
+                        minDate={fromDate || new Date()}
+                        dateFormat="dd-MM-yyyy"
                         placeholderText="To-Date"
                         className="end-date"
                       />

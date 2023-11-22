@@ -104,19 +104,23 @@
             margin-left: 5px;
           }
           .checkbox-section-01 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+
             .label-ac,
-            .label-non-ac {
+            .label-non-ac,.label-all {
               color: #444;
               font-weight: 600;
             }
 
-            .input-ac {
+             .input-all{
               margin-left: 2px;
               margin-right: 5px;
               width: 16px;
               height: 16px;
             }
-            .input-non-ac {
+            .input-non-ac,.input-ac {
               margin-right: 5px;
               margin-left: 18px;
               width: 16px;
@@ -151,19 +155,22 @@
             margin-left: 5px;
           }
           .checkbox-section-02 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
             .label-semi-sleeper,
-            .label-non-sleeper {
+            .label-non-sleeper,.label-all,.label-sleeper {
               color: #444;
               font-weight: 600;
             }
 
-            .input-semi-sleeper {
+             .input-all{
               margin-left: 2px;
               margin-right: 5px;
               width: 16px;
               height: 16px;
             }
-            .input-non-sleeper {
+            .input-non-sleeper,.input-semi-sleeper,.input-sleeper {
               margin-right: 5px;
               margin-left: 18px;
               width: 16px;
@@ -637,7 +644,7 @@
     &-button-custom {
       .filter-button {
         margin-bottom: 20px;
-        width: 75px;
+        width: 88px;
         height: 30px;
         padding-left: 15px;
       }
@@ -655,7 +662,7 @@
         left: 25%;
         top: 5%;
         width: 50%;
-        height: 90%;
+        height: 50%;
         .modal-header {
           padding-top: 0 !important;
           padding-right: 10px;
@@ -844,7 +851,7 @@
               display: flex;
               align-items: center;
               .label-ac,
-              .label-non-ac {
+              .label-non-ac{
                 color: #444;
                 font-weight: 600;
                 font-size: 17px;
@@ -947,3 +954,4 @@
     }
   }
 }
+
