@@ -1,5 +1,5 @@
 import "./VehicleInfo.scss";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
 import React, { useState, useEffect, FormEvent } from "react";
 import "./form.scss";
 import { FaExclamationTriangle } from "react-icons/fa";
@@ -17,12 +17,12 @@ import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { useLocation } from "react-router-dom";
 
 interface Image {
   url: string;
 }
 interface LocationState {
+  vehicleNumber: any;
   images?: string[];
 }
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -52,8 +52,8 @@ const initialVehicleData: IVehicleData = {
 };
 
 interface VehicleInfoProps {
-  otpSent: boolean;
-  otpVerified: boolean;
+  // otpSent: boolean;
+  // otpVerified: boolean;
 }
 
 const VehicleInfo: React.FC<VehicleInfoProps> = () => {
@@ -82,6 +82,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+
+
 
   //OTP State Variables
   const [otpSent, setOtpSent] = useState<boolean>(false);
@@ -145,10 +147,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   };
 
   /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
-
-  {
-    /*OTP Generation Function*/
-  }
+  /*OTP Generation Function*/
   const sendOTP = () => {
     dataService
       .sendOTP(phoneNumber)
@@ -168,9 +167,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
       });
   };
 
-  {
-    /*OTP Verification Function*/
-  }
+  /*OTP Verification Function*/
   const verifyOTP = () => {
     if (otp.trim() === "") {
       return;
@@ -198,9 +195,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
       });
   };
 
-  {
-    /*Resend OTP Function*/
-  }
+  /*Resend OTP Function*/
   const ResendOTP = (): void => {
     dataService
       .sendOTP(phoneNumber)
@@ -222,11 +217,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setResendDisabled(true);
   };
 
-  {
-    /* Book Now Function */
-  }
+  /* Book Now Function */
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const vehicleNumber = location.state?.vehicleNumber;
     if (
       !firstName ||
       !lastName ||
@@ -239,7 +233,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
       setShowWarning(true);
     } else {
       let requestBody = {
-        vehicleNumber: "KA09EQ1234",
+        vehicleNumber: vehicleNumber,
         fromDate: startDate ? startDate.toISOString().split("T")[0] : "",
         toDate: endDate ? endDate.toISOString().split("T")[0] : "",
         user: {
@@ -250,11 +244,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
           email: email,
         },
         slot: {
-          vehicleNumber: "KA09EQ1234",
+          vehicleNumber: vehicleNumber,
           fromDate: startDate ? startDate.toISOString().split("T")[0] : "",
           toDate: endDate ? endDate.toISOString().split("T")[0] : "",
         },
       };
+      console.log("vehicle number:", vehicleNumber);
       dataService
         .bookNow(requestBody)
         .then((response: { data: any }) => {
@@ -536,15 +531,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                             <form>
                               {/* First Name*/}
                               <div
-                                className={`form-group ${
-                                  !firstNameValid ? "has-error" : ""
-                                }`}
+                                className={`form-group ${!firstNameValid ? "has-error" : ""
+                                  }`}
                               >
                                 <input
                                   type="text"
-                                  className={`form-control first-name ${
-                                    !firstNameValid ? "error-border" : ""
-                                  }`}
+                                  className={`form-control first-name ${!firstNameValid ? "error-border" : ""
+                                    }`}
                                   id="firstname"
                                   value={firstName}
                                   placeholder="First Name"
@@ -590,9 +583,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               <div className="form-group">
                                 <input
                                   type="text"
-                                  className={`form-control last-name ${
-                                    !lastNameValid ? "error-border" : ""
-                                  }`}
+                                  className={`form-control last-name ${!lastNameValid ? "error-border" : ""
+                                    }`}
                                   id="lastname"
                                   value={lastName}
                                   placeholder="Last Name"
@@ -631,9 +623,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     {/* Phone Number */}
                                     <input
                                       type="tel"
-                                      className={`form-control col-sm-10  ${
-                                        !phoneNumberValid ? "error-border" : ""
-                                      }`}
+                                      className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
+                                        }`}
                                       id="phone-number"
                                       value={phoneNumber}
                                       onChange={(e) =>
@@ -649,24 +640,24 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   </div>
                                   {(!phoneNumberValid ||
                                     !phoneNumberValidation(phoneNumber)) && (
-                                    <div className="error-message">
-                                      {/* {!phoneNumberValid &&
+                                      <div className="error-message">
+                                        {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
                                               <FaExclamationTriangle className="error-icon" />
                                               This field is required
                                             </>
                                           ) :  */}
-                                      {!phoneNumberValid && (
-                                        <>
-                                          {/* <FaExclamationTriangle className="error-icon" /> */}
-                                          <span className="phone-warning">
-                                            Please enter a valid mobile number
-                                          </span>
-                                        </>
-                                      )}
-                                    </div>
-                                  )}
+                                        {!phoneNumberValid && (
+                                          <>
+                                            {/* <FaExclamationTriangle className="error-icon" /> */}
+                                            <span className="phone-warning">
+                                              Please enter a valid mobile number
+                                            </span>
+                                          </>
+                                        )}
+                                      </div>
+                                    )}
                                 </div>
                               ) : (
                                 <div className="calendar">
