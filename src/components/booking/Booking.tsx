@@ -10,10 +10,11 @@ import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
-import PropTesting from "../vehicle/PropTesting";
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
+  const [selectedVehicleNumber, setSelectedVehicleNumber] = useState<string | null>(null);
+
 
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
@@ -103,15 +104,21 @@ const Booking: React.FC = () => {
                     </p>
                     {/* Render other vehicle details */}
                     <Link
-  to={{
-    pathname: '/vehicleinfo',
-    state: { images: vehicle.s3ImageUrl || [] },
-  }}
->
-  <button className="button-53" onClick={scrollToTop}>
-    View Details
-  </button>
-</Link>
+                      to={{
+                        pathname: '/vehicleinfo',
+                        state: { images: vehicle.s3ImageUrl || [], vehicleNumber: vehicle.vehicleNumber },
+                      }}
+                    >
+                      <button
+                        className="button-53"
+                        onClick={() => {
+                          setSelectedVehicleNumber(vehicle.vehicleNumber);
+                          scrollToTop();
+                        }}
+                      >
+                        View Details
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ))}
