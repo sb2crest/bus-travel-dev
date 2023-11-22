@@ -100,8 +100,8 @@
                     color: rgb(15, 123, 171);
                     font-size: 22px;
                     font-weight: bold;
-                    font-family: Inter, sans-serif;
-                    margin-bottom: 0vh;
+                    font-family: "Courier New", monospace;
+                    margin-bottom: 1vh;
                 }
 
                 .operator-icon-and-text {
@@ -112,6 +112,11 @@
                 .operator-icon-and-text p {
                     margin-left: 10px;
                 }
+
+                .inclusion-02{
+                    margin-top: 1vh;
+                    margin-bottom: 1vh;
+                }
             }
 
             .exclusions {
@@ -119,7 +124,7 @@
                     color: rgb(15, 123, 171);
                     font-size: 22px;
                     font-weight: bold;
-                    font-family: Inter, sans-serif;
+                    font-family: "Courier New", monospace;
                     margin-bottom: 0vh;
                 }
 
@@ -164,17 +169,16 @@
             //         color: #1446a0;
             //     }
             // }
-            .amenities{
+            .amenities {
                 line-height: 10px;
                 margin-bottom: 5vh;
-                
             }
 
             h3 {
                 color: rgb(15, 123, 171);
                 font-size: 22px;
                 font-weight: bold;
-                font-family: Inter, sans-serif;
+                font-family: "Courier New", monospace;
             }
 
             .facility_icons {
