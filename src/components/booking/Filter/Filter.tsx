@@ -149,8 +149,8 @@ const Filter: React.FC = () => {
                   {isACClicked && (
                     <>
                       <div className="checkbox-section-01">
-                        <input type="checkbox" className="input-ac" />
-                        <label className="label-ac">All</label>
+                        <input type="checkbox" className="input-all" />
+                        <label className="label-all">All</label>
                         <input type="checkbox" className="input-ac" />
                         <label className="label-ac">AC</label>
                         <input type="checkbox" className="input-non-ac" />
@@ -213,10 +213,10 @@ const Filter: React.FC = () => {
                   {isSleeperClicked && (
                     <>
                       <div className="checkbox-section-02">
-                        <input className="input-semi-sleeper" type="checkbox" />
-                        <label className="label-semi-sleeper">All</label>
-                        <input className="input-semi-sleeper" type="checkbox" />
-                        <label className="label-semi-sleeper">Sleeper</label>
+                        <input className="input-all" type="checkbox" />
+                        <label className="label-all">All</label>
+                        <input className="input-sleeper" type="checkbox" />
+                        <label className="label-sleeper">Sleeper</label>
                         <input className="input-semi-sleeper" type="checkbox" />
                         <label className="label-semi-sleeper">
                           Semi-Sleeper
