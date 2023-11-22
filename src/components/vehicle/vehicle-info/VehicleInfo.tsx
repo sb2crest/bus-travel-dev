@@ -563,23 +563,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                {/* {(!firstNameValid ||
-                                    !nameValidation(firstName)) && (
-                                      <div className="error-message">
-                                        {!firstNameValid &&
-                                          firstName.trim() === "" ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            This field is required
-                                          </>
-                                        ) : !firstNameValid ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            Please enter a valid first name
-                                          </>
-                                        ) : null}
-                                      </div>
-                                    )} */}
+                                <div className="error-message">
+                                  {!firstNameValid && (
+                                    <>
+                                      <span className="first-name-warning">
+                                        Please enter a valid first name
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               {/* Middle Name*/}
                               <div className="form-group">
@@ -610,24 +602,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                {/* {(!lastNameValid ||
-                                    !nameValidation(lastName)) && (
-                                      <div className="error-message">
-                                        {!lastNameValid &&
-                                          lastName.trim() === "" ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            This field is required
-                                          </>
-                                        ) : !lastNameValid ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            Please enter a valid last name
-                                          </>
-                                        ) : null}
-                                      </div>
-                                    )
-                                  } */}
+                                <div className="error-message">
+                                  {!lastNameValid && (
+                                    <>
+                                      <span className="last-name-warning">
+                                        Please enter a valid last name
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               {!otpVerified ? (
                                 <div className="form-group">
@@ -794,12 +777,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   }
                                   placeholder="Email"
                                 />
-                                {/* {!emailValid && (
-                                    <div className="error-message">
-                                      <FaExclamationTriangle />
-                                      Please enter a valid email address
-                                    </div>
-                                  )} */}
+                                <div className="error-message">
+                                  {!emailValid && (
+                                    <>
+                                      <span className="email-warning">
+                                        Please enter a valid email
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               <div className="form-group">
                                 <div className="form-group">
