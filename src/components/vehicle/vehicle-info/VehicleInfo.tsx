@@ -147,22 +147,32 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
   /*OTP Generation Function*/
   const sendOTP = () => {
-    dataService
-      .sendOTP(phoneNumber)
-      .then((response: any) => {
-        if (response.data) {
-          setState({ ...state, sentOtp: response.data.sentOtp });
-          console.log("OTP Sent!");
-          setOtpSent(true);
-          setSnackbarOpen(true);
-        } else {
-          console.log("Failed to send OTP.");
-        }
-      })
-      .catch((error: any) => {
-        console.error("Error sending OTP:", error);
-        console.log("An error occurred while sending OTP.");
-      });
+    const isValidPhoneNumber = validatePhoneNumber(phoneNumber);
+    if (isValidPhoneNumber) {
+      dataService
+        .sendOTP(phoneNumber)
+        .then((response: any) => {
+          if (response.data) {
+            setState({ ...state, sentOtp: response.data.sentOtp });
+            console.log("OTP Sent!");
+            setOtpSent(true);
+            setSnackbarOpen(true);
+          } else {
+            console.log("Failed to send OTP.");
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error sending OTP:", error);
+          console.log("An error occurred while sending OTP.");
+        });
+    } else {
+      console.log("Invalid phone number. Please enter a valid phone number.");
+    }
+  };
+
+  const validatePhoneNumber = (phoneNumber: string) => {
+    const phoneRegex = /^[0-9]*$/;
+    return phoneRegex.test(phoneNumber);
   };
 
   /*OTP Verification Function*/
@@ -643,26 +653,26 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                       }
                                     />
                                   </div>
-                                  {(!phoneNumberValid ||
-                                    !phoneNumberValidation(phoneNumber)) && (
-                                      <div className="error-message">
-                                        {/* {!phoneNumberValid &&
+                                  {/* {(!phoneNumberValid || */}
+                                  {/* !phoneNumberValidation(phoneNumber)) && ( */}
+                                  <div className="error-message">
+                                    {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
                                               <FaExclamationTriangle className="error-icon" />
                                               This field is required
                                             </>
                                           ) :  */}
-                                        {!phoneNumberValid && (
-                                          <>
-                                            {/* <FaExclamationTriangle className="error-icon" /> */}
-                                            <span className="phone-warning">
-                                              Please enter a valid mobile number
-                                            </span>
-                                          </>
-                                        )}
-                                      </div>
+                                    {!phoneNumberValid && (
+                                      <>
+                                        {/* <FaExclamationTriangle className="error-icon" /> */}
+                                        <span className="phone-warning">
+                                          Please enter a valid mobile number
+                                        </span>
+                                      </>
                                     )}
+                                  </div>
+                                  {/* )} */}
                                 </div>
                               ) : (
                                 <div className="calendar">
