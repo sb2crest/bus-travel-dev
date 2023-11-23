@@ -1,14 +1,18 @@
 import "./Filter.scss";
 import filterIcon from "../../../assets/images/filter.png";
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./BookingCalendar.scss";
 import IFilterRequest from "../../../types/filter/request.type";
 import dataService from "../../../services/data.service";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import ListVehicles from "../../../types/list.type";
 
-const Filter: React.FC = () => {
+interface FilterProps {
+    setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
+  }
+const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
   const [showModal, setShowModal] = useState(false);
   const [isACClicked, setIsACClicked] = useState(false);
   const [isSleeperClicked, setIsSleeperClicked] = useState(false);
@@ -138,25 +142,25 @@ const Filter: React.FC = () => {
     console.log("filter:", filter);
 
     // Store fromDate and toDate in variables
-    const selectedFromDate = fromDate ? format(fromDate, 'dd-MM-yyyy') : null;
-    const selectedToDate = toDate ? format(toDate, 'dd-MM-yyyy') : null;
+    const selectedFromDate = fromDate ? format(fromDate, "dd-MM-yyyy") : null;
+    const selectedToDate = toDate ? format(toDate, "dd-MM-yyyy") : null;
     console.log("selectedFromDate:", selectedFromDate);
     console.log("selectedToDate:", selectedToDate);
 
     // Fetch data from the API with the selected filters using Axios
     try {
-    let requestBody={    filter: filter,
+      let requestBody = {
+        filter: filter,
         fromDate: selectedFromDate,
         toDate: selectedToDate,
-      
       };
-const response = await dataService.filter(requestBody)
+      const response = await dataService.filter(requestBody);
       // Assuming your API response is in JSON format
       const responseData = response.data;
-console.log(responseData)
+      console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
-
+      setVehicles(responseData)
       // Close the modal
       setShowModal(false);
     } catch (error) {
