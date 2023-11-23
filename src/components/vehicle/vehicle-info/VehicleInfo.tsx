@@ -59,7 +59,6 @@ interface VehicleInfoProps {
 const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const location = useLocation<LocationState>();
   const initialImages = location.state?.images || [];
-  // const [images, setImages] = useState(initialImages);
   const [state, setState] = useState<State>({
     vehicleData: initialVehicleData,
     vehicleAdded: false,

@@ -50,7 +50,7 @@ class DataService {
   }
 
   // filter 
-  filter(data: IBookingInfoRequest) {
+  filter(data: IFilterRequest) {
     return http.post<IFilterRequest>("getVehicleAvailability", data);
   }
 
