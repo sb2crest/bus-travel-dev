@@ -10,6 +10,8 @@ import Filter from "./Filter/Filter";
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
+  const [selectedVehicleNumber, setSelectedVehicleNumber] = useState<string | null>(null);
+
 
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });

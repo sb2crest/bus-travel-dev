@@ -1,5 +1,5 @@
 import "./VehicleInfo.scss";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
 import React, { useState, useEffect, FormEvent } from "react";
 import "./form.scss";
 import { FaExclamationTriangle } from "react-icons/fa";
@@ -17,12 +17,12 @@ import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { useLocation } from "react-router-dom";
 
 interface Image {
   url: string;
 }
 interface LocationState {
+  vehicleNumber: any;
   images?: string[];
 }
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
@@ -52,8 +52,8 @@ const initialVehicleData: IVehicleData = {
 };
 
 interface VehicleInfoProps {
-  otpSent: boolean;
-  otpVerified: boolean;
+  // otpSent: boolean;
+  // otpVerified: boolean;
 }
 
 const VehicleInfo: React.FC<VehicleInfoProps> = () => {
@@ -81,6 +81,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+
+
 
   //OTP State Variables
   const [otpSent, setOtpSent] = useState<boolean>(false);
@@ -110,9 +112,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
   const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
-
-  //State Variable for phone number change
-  const [phoneNumberChange, setPhoneNumberChange] = useState(false);
+  const [validationFailureSnackbarOpen, setValidationFailureSnackbarOpen] = useState(false);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -144,32 +144,37 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   };
 
   /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
-
-  {
-    /*OTP Generation Function*/
-  }
+  /*OTP Generation Function*/
   const sendOTP = () => {
-    dataService
-      .sendOTP(phoneNumber)
-      .then((response: any) => {
-        if (response.data) {
-          setState({ ...state, sentOtp: response.data.sentOtp });
-          console.log("OTP Sent!");
-          setOtpSent(true);
-          setSnackbarOpen(true);
-        } else {
-          console.log("Failed to send OTP.");
-        }
-      })
-      .catch((error: any) => {
-        console.error("Error sending OTP:", error);
-        console.log("An error occurred while sending OTP.");
-      });
+    const isValidPhoneNumber = validatePhoneNumber(phoneNumber);
+    if (isValidPhoneNumber) {
+      dataService
+        .sendOTP(phoneNumber)
+        .then((response: any) => {
+          if (response.data) {
+            setState({ ...state, sentOtp: response.data.sentOtp });
+            console.log("OTP Sent!");
+            setOtpSent(true);
+            setSnackbarOpen(true);
+          } else {
+            console.log("Failed to send OTP.");
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error sending OTP:", error);
+          console.log("An error occurred while sending OTP.");
+        });
+    } else {
+      console.log("Invalid phone number. Please enter a valid phone number.");
+    }
   };
 
-  {
-    /*OTP Verification Function*/
-  }
+  const validatePhoneNumber = (phoneNumber: string) => {
+    const phoneRegex = /^[0-9]*$/;
+    return phoneRegex.test(phoneNumber);
+  };
+
+  /*OTP Verification Function*/
   const verifyOTP = () => {
     if (otp.trim() === "") {
       return;
@@ -192,14 +197,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
         }
       })
       .catch((error: any) => {
+        if (error == "Error: Request failed with status code 400") {
+          setValidationFailureSnackbarOpen(true);
+        }
         console.error("Error validating OTP:", error);
         setOtpVerified(false);
       });
   };
 
-  {
-    /*Resend OTP Function*/
-  }
+  /* Resend OTP Function */
   const ResendOTP = (): void => {
     dataService
       .sendOTP(phoneNumber)
@@ -221,11 +227,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setResendDisabled(true);
   };
 
-  {
-    /* Book Now Function */
-  }
+  /* Book Now Function */
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const vehicleNumber = location.state?.vehicleNumber;
     if (
       !firstName ||
       !lastName ||
@@ -238,7 +243,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
       setShowWarning(true);
     } else {
       let requestBody = {
-        vehicleNumber: "KA09EQ1234",
+        vehicleNumber: vehicleNumber,
         fromDate: startDate ? startDate.toISOString().split("T")[0] : "",
         toDate: endDate ? endDate.toISOString().split("T")[0] : "",
         user: {
@@ -249,7 +254,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
           email: email,
         },
         slot: {
-          vehicleNumber: "KA09EQ1234",
+          vehicleNumber: vehicleNumber,
           fromDate: startDate ? startDate.toISOString().split("T")[0] : "",
           toDate: endDate ? endDate.toISOString().split("T")[0] : "",
         },
@@ -275,10 +280,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     }
   };
   /*-----------------------------------------------------------------------------------------------------------------------*/
-
-  {
-    /* Resend Timer  */
-  }
+  /* Resend Timer  */
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (resendDisabled) {
@@ -302,9 +304,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-  {
-    /* Function to Close Warning  */
-  }
+  /* Function to Close Warning  */
   const closeWarning = () => {
     setShowWarning(false);
   };
@@ -315,6 +315,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSelectedImage(newImages);
   };
 
+  /* OTP successfully sent */
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -325,6 +326,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSnackbarOpen(false);
   };
 
+  /* OTP Validation success  */
   const handleVerifyClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -345,9 +347,17 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     setSlotsBookedSnackbarOpen(false);
   };
 
-  {
-    /* Phone Number Change */
-  }
+  const handleValidationFailure = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setValidationFailureSnackbarOpen(false);
+  };
+
+  /* Phone Number Change */
   const changePhoneNumber = () => {
     setOtpSent(false);
   };
@@ -407,7 +417,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                   icon={faMapMarkerAlt}
                   style={{ color: "#0f7bab" }}
                 />
-                <p>Extra usage at Rs. 15/KM to be paid to the operator</p>
+                <p className="inclusion-02">Extra usage at Rs. 15/KM to be paid to the operator</p>
               </div>
             </div>
             <div className="exclusions">
@@ -535,15 +545,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                             <form>
                               {/* First Name*/}
                               <div
-                                className={`form-group ${
-                                  !firstNameValid ? "has-error" : ""
-                                }`}
+                                className={`form-group ${!firstNameValid ? "has-error" : ""
+                                  }`}
                               >
                                 <input
                                   type="text"
-                                  className={`form-control first-name ${
-                                    !firstNameValid ? "error-border" : ""
-                                  }`}
+                                  className={`form-control first-name ${!firstNameValid ? "error-border" : ""
+                                    }`}
                                   id="firstname"
                                   value={firstName}
                                   placeholder="First Name"
@@ -554,23 +562,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                {/* {(!firstNameValid ||
-                                    !nameValidation(firstName)) && (
-                                      <div className="error-message">
-                                        {!firstNameValid &&
-                                          firstName.trim() === "" ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            This field is required
-                                          </>
-                                        ) : !firstNameValid ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            Please enter a valid first name
-                                          </>
-                                        ) : null}
-                                      </div>
-                                    )} */}
+                                <div className="error-message">
+                                  {!firstNameValid && (
+                                    <>
+                                      <span className="first-name-warning">
+                                        Please enter a valid first name
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               {/* Middle Name*/}
                               <div className="form-group">
@@ -589,9 +589,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               <div className="form-group">
                                 <input
                                   type="text"
-                                  className={`form-control last-name ${
-                                    !lastNameValid ? "error-border" : ""
-                                  }`}
+                                  className={`form-control last-name ${!lastNameValid ? "error-border" : ""
+                                    }`}
                                   id="lastname"
                                   value={lastName}
                                   placeholder="Last Name"
@@ -602,24 +601,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                {/* {(!lastNameValid ||
-                                    !nameValidation(lastName)) && (
-                                      <div className="error-message">
-                                        {!lastNameValid &&
-                                          lastName.trim() === "" ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            This field is required
-                                          </>
-                                        ) : !lastNameValid ? (
-                                          <>
-                                            <FaExclamationTriangle className="error-icon" />
-                                            Please enter a valid last name
-                                          </>
-                                        ) : null}
-                                      </div>
-                                    )
-                                  } */}
+                                <div className="error-message">
+                                  {!lastNameValid && (
+                                    <>
+                                      <span className="last-name-warning">
+                                        Please enter a valid last name
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               {!otpVerified ? (
                                 <div className="form-group">
@@ -630,9 +620,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     {/* Phone Number */}
                                     <input
                                       type="tel"
-                                      className={`form-control col-sm-10  ${
-                                        !phoneNumberValid ? "error-border" : ""
-                                      }`}
+                                      className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
+                                        }`}
                                       id="phone-number"
                                       value={phoneNumber}
                                       onChange={(e) =>
@@ -646,26 +635,26 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                       }
                                     />
                                   </div>
-                                  {(!phoneNumberValid ||
-                                    !phoneNumberValidation(phoneNumber)) && (
-                                    <div className="error-message">
-                                      {/* {!phoneNumberValid &&
+                                  {/* {(!phoneNumberValid || */}
+                                  {/* !phoneNumberValidation(phoneNumber)) && ( */}
+                                  <div className="error-message">
+                                    {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
                                               <FaExclamationTriangle className="error-icon" />
                                               This field is required
                                             </>
                                           ) :  */}
-                                      {!phoneNumberValid && (
-                                        <>
-                                          {/* <FaExclamationTriangle className="error-icon" /> */}
-                                          <span className="phone-warning">
-                                            Please enter a valid mobile number
-                                          </span>
-                                        </>
-                                      )}
-                                    </div>
-                                  )}
+                                    {!phoneNumberValid && (
+                                      <>
+                                        {/* <FaExclamationTriangle className="error-icon" /> */}
+                                        <span className="phone-warning">
+                                          Please enter a valid mobile number
+                                        </span>
+                                      </>
+                                    )}
+                                  </div>
+                                  {/* )} */}
                                 </div>
                               ) : (
                                 <div className="calendar">
@@ -787,12 +776,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   }
                                   placeholder="Email"
                                 />
-                                {/* {!emailValid && (
-                                    <div className="error-message">
-                                      <FaExclamationTriangle />
-                                      Please enter a valid email address
-                                    </div>
-                                  )} */}
+                                <div className="error-message">
+                                  {!emailValid && (
+                                    <>
+                                      <span className="email-warning">
+                                        Please enter a valid email
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </div>
                               <div className="form-group">
                                 <div className="form-group">
@@ -825,6 +817,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 <Warning onClose={closeWarning} />
                               )}
                             </form>
+                            {/* OTP success snackbar */}
                             <Snackbar
                               open={snackbarOpen}
                               autoHideDuration={7000}
@@ -842,6 +835,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 OTP Sent successfully!
                               </Alert>
                             </Snackbar>
+                            {/*  Validation successful snackbar */}
                             <Snackbar
                               open={verifySnackbarOpen}
                               autoHideDuration={7000}
@@ -858,6 +852,24 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                 Validation successful!
                               </Alert>
                             </Snackbar>
+                            {/*  Validation unsuccessful snackbar */}
+                            <Snackbar
+                              open={validationFailureSnackbarOpen}
+                              autoHideDuration={7000}
+                              onClose={handleValidationFailure}
+                              anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                              }}
+                            >
+                              <Alert
+                                onClose={handleValidationFailure}
+                                severity="error"
+                              >
+                                Validation unsuccessful!
+                              </Alert>
+                            </Snackbar>
+                            {/*  Slots booked snackbar */}
                             <Snackbar
                               open={slotsBookedSnackbarOpen}
                               autoHideDuration={7000}
@@ -888,5 +900,4 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
     </>
   );
 };
-
 export default VehicleInfo;
