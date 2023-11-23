@@ -61,7 +61,7 @@ const Booking: React.FC = () => {
               </p>
             </Fade>
             <div data-testid="filter-component">
-              <Filter />
+              <Filter setVehicles={setVehicles}/>
             </div>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index) => (
@@ -89,7 +89,7 @@ const Booking: React.FC = () => {
                         className="fa-solid fa-fan fa-lg"
                         style={{ color: "#0f7bab" }}
                       ></i>
-                      AC: {vehicle.isVehicleAC ? "Yes" : "No"}
+                      AC: {vehicle.vehicleAC}
                     </p>
                     <p>
                       {" "}
@@ -97,7 +97,7 @@ const Booking: React.FC = () => {
                         className="fa-solid fa-bed fa-lg"
                         style={{ color: "#0f7bab" }}
                       ></i>
-                      Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}
+                      Sleeper: {vehicle.sleeper}
                     </p>
                     {/* Render other vehicle details */}
                     <Link
