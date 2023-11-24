@@ -8,7 +8,7 @@ export const Navitems: { title: string; url?: string; imgSrc?: string }[] = [
     url: "/booking",
   },
   {
-    title: "", // Add a title for the third object
+    title: "", 
     imgSrc: "../../assets/images/Logo.png",
   },
   {
