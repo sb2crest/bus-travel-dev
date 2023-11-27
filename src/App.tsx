@@ -20,12 +20,6 @@ import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
 import BookingDetails from './components/booking-info/booking-details/BookingDetails';
 
-const images = [
-  { url: image1 },
-  { url: image2 },
-  { url: image3 },
-  { url: image4 },
-];
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
