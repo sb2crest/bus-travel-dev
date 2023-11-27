@@ -10,6 +10,7 @@ export default async function displayRazorpay(
   };
 
   let baseUrl = "http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com/";
+  // let baseUrl = "http://localhost:8085/";
 
   try {
     const response = await fetch(`${baseUrl}createPayment`, {
