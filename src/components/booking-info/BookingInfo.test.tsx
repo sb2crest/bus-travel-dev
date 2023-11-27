@@ -108,6 +108,37 @@ describe('Booking Info', () => {
     const sendOTPButton = screen.getByText('Send OTP');
     expect(sendOTPButton).toBeInTheDocument();
   });
+
+  test('renders Show Details button and calls bookingInfo on click', async () => {
+    render(<BookingInfo />);
+
+    const showDetails = screen.getByRole('button');
+
+    fireEvent.click(showDetails);
+
+    await waitFor(() => {
+      expect(screen.getByText('Booking Details')).toBeInTheDocument();
+    });
+  });
+
+  test('triggers resend function resend button is clicked', async () => {
+    nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+      })
+      .post('/sendOTP?mobile=9999999999')
+      .reply(200, { "message": "OTP sent successfully.", "statusCode": 200 });
+
+    render(<BookingInfo />)
+
+    await waitFor(() => {
+      const snackbarElement = screen.queryByTestId('snackbar');
+      expect(
+        snackbarElement
+      ).toBeInTheDocument();
+    });
+
+  });
 });
 // Ref - https://refine.dev/blog/mocking-api-calls-in-react/#nock-installation-and-configuration
 // Ref - https://github.com/nock/nock

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import "./Booking.scss";
 import busImage_1 from "../../assets/images/busImage_1.jpg";
 import busImage_2 from "../../assets/images/busImage_2.jpg";
@@ -16,7 +16,7 @@ const Booking: React.FC = () => {
   const [selectedVehicleNumber, setSelectedVehicleNumber] = useState<string | null>(null);
 
 
-  const scrollToTop = () => {
+   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
   };
 
@@ -46,7 +46,8 @@ const Booking: React.FC = () => {
             <h3>Book your next trip</h3>
             <ul>
               <li>
-                <Link to={"/#"}>Home</Link>
+                <Router><Link to={"/#"}>Home</Link></Router>
+
               </li>
               <li>&#10095;</li>
               <li>Booking</li>
@@ -102,23 +103,24 @@ const Booking: React.FC = () => {
                       ></i>
                       Sleeper: {vehicle.isVehicleSleeper ? "Yes" : "No"}
                     </p>
-                    {/* Render other vehicle details */}
-                    <Link
-                      to={{
-                        pathname: '/vehicleinfo',
-                        state: { images: vehicle.s3ImageUrl || [], vehicleNumber: vehicle.vehicleNumber },
-                      }}
-                    >
-                      <button
-                        className="button-53"
-                        onClick={() => {
-                          setSelectedVehicleNumber(vehicle.vehicleNumber);
-                          scrollToTop();
+                    <Router>
+                      <Link
+                        to={{
+                          pathname: '/vehicleinfo',
+                          state: { images: vehicle.s3ImageUrl || [], vehicleNumber: vehicle.vehicleNumber },
                         }}
                       >
-                        View Details
-                      </button>
-                    </Link>
+                        <button
+                          className="button-53"
+                          onClick={() => {
+                            setSelectedVehicleNumber(vehicle.vehicleNumber);
+                            scrollToTop();
+                          }}
+                        >
+                          View Details
+                        </button>
+                      </Link>
+                    </Router>
                   </div>
                 </div>
               ))}

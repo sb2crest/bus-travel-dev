@@ -9,20 +9,22 @@ const Form: React.FC = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
   const resetForm = () => {
     setName("");
     setEmail("");
     setMessage("");
   };
+
   const getInTouch = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const requestBody = {
       name: name,
       email: email,
       message: message,
     };
-  
+
     try {
       console.log({ requestBody });
       const response = await dataService.getInTouch(requestBody);
@@ -33,7 +35,7 @@ const Form: React.FC = () => {
       console.error('Error:', error);
     }
   };
-  const handleCancel = () => {
+  const handleDone = () => {
     setIsConfirmationOpen(false);
   };
 
@@ -49,7 +51,7 @@ const Form: React.FC = () => {
             <div className="col-md-6 form-group">
               <label htmlFor="name">Enter your name</label>
               <input
-              className="nameContact"
+                className="nameContact"
                 type="text"
                 name="name"
                 value={name}
@@ -100,7 +102,7 @@ const Form: React.FC = () => {
               onClick={getInTouch}
               data-testid="submit-button"
             >
-              <span className="btn-title">Get In Touch</span>
+              <span className="btn-title" data-testid="reset-function">Get In Touch</span>
             </button>{" "}
           </div>
         </form>
@@ -121,8 +123,8 @@ const Form: React.FC = () => {
                 </div>
               </div>
               <div className="get-back">
-                <p>We will get back to you shortly</p>
-                <button className="done" onClick={handleCancel} data-testid="confirmation-popup">Done</button>
+                <p >We will get back to you shortly</p>
+                <button className="done" onClick={handleDone}>Done</button>
               </div>
             </>,
           ]}

@@ -39,6 +39,11 @@ class DataService {
     return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
   }
 
+  // Resend OTP
+  resendOTP(mobile: string) {
+    return http.post<IVehicleData>('sendOTP?mobile=' + mobile);
+  }
+
   // Verify OTP
   verifyOTP(data: any) {
     return http.post<IVehicleData>("validateOTP", data);

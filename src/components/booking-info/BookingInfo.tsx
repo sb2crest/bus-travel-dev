@@ -147,7 +147,7 @@ const BookingInfo = () => {
     e.preventDefault();
     let mobile = values.phoneNumber;
     dataService
-      .sendOTP(mobile)
+      .resendOTP(mobile)
       .then((response) => {
         if (response.status == 200) {
           setState({ ...state, sentOtp: response.data.sentOtp });

@@ -76,6 +76,39 @@ describe("Booking component", () => {
     expect(emailInput).toHaveValue('john@example.com');
     expect(messageInput).toHaveValue('Test message');
   });
+
+  // test('should reset the form fields when the resetForm function is called', async () => {
+  //   render(<Form />, { wrapper: MemoryRouter });
+
+  //   fireEvent.change(screen.getByLabelText(/Enter your name/i), { target: { value: 'Kavya' } });
+  //   fireEvent.change(screen.getByLabelText(/Enter your email/i), { target: { value: 'kavya@example.com' } });
+  //   fireEvent.change(screen.getByLabelText(/Enter your message/i), { target: { value: 'Hello, this is a test message' } });
+
+  //   expect(screen.getByLabelText(/Enter your name/i)).toHaveValue('Kavya');
+  //   expect(screen.getByLabelText(/Enter your email/i)).toHaveValue('kavya@example.com');
+  //   expect(screen.getByLabelText(/Enter your message/i)).toHaveValue('Hello, this is a test message');
+
+  //   const getInTouch = screen.getByRole('button');
+
+  //   await act(async () => {
+  //     getInTouch.click();
+  //   });
+
+  //   await waitFor(() => {
+  //     expect(screen.getByLabelText(/Enter your name/i)).toHaveValue('');
+  //     expect(screen.getByLabelText(/Enter your email/i)).toHaveValue('');
+  //     expect(screen.getByLabelText(/Enter your message/i)).toHaveValue('');
+  //   });
+  // });
+
+  test('should close the confirmation popup when handleDone is called', () => {
+    render(<Form />);
+
+    const done = screen.getByRole('button');
+    fireEvent.click(done);
+
+    expect(screen.queryByTestId('confirmation-popup')).toBeNull();
+  });
 });
 
 

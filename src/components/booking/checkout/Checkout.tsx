@@ -22,6 +22,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, t
     const hideDetails = () => {
         setShowFareDetails(false);
     }
+    
     const loadScript = (src: any) => {
         return new Promise((resolve) => {
             const script = document.createElement("script");
