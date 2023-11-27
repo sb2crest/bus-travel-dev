@@ -3,7 +3,6 @@ import { MemoryRouter } from "react-router-dom";
 import VehicleInfo from "./VehicleInfo";
 import nock from "nock";
 import Checkout from "../../booking/checkout/Checkout";
-import userEvent from "@testing-library/user-event";
 
 describe("Vehicle Info component", () => {
   test("renders without errors", () => {
