@@ -120,7 +120,7 @@ nav {
   .menu-icon {
     display: block;
     color: #000;
-    margin-left: -40%;
+    margin-left: -75%;
   }
   .menu-list {
     flex-direction: column;
@@ -154,7 +154,7 @@ nav {
   }
   .menu-list.close {
     right: -101%;
-    transition: all 0.5s ease-in-out;
+    transition: right 0.5s ease-in-out;
   }
   .button-89 {
     display: none;

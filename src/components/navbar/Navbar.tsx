@@ -4,7 +4,7 @@ import { Navitems } from "./NavItems";
 import "./Navbar.scss";
 import logo from "../../assets/images/Logo.png";
 import Fade from 'react-reveal/Fade';
-const Navbar = () => {
+const Navbar = React.memo(() => {
   const [clicked, setClicked] = useState(false);
   const menuList = Navitems.map(({ url, title, imgSrc }, index) => {
     const isUrlDefined = typeof url === "string";
@@ -18,6 +18,7 @@ const Navbar = () => {
           <span>{title}</span>
         )}
         {imgSrc && (
+          
           <img src={logo} alt="Menu Image" width={90} className="hideimg" height={90}/>
         )}
       </li>
@@ -34,13 +35,15 @@ const Navbar = () => {
       <Fade top>
         <nav>
           <div className="logo">
+          <NavLink to={"/"} >
             <img src={logo} alt="Logo" width={60} />
+            </NavLink>
           </div>
           <div className="menu-icon" onClick={handleClick} data-testid="menu-icon">
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
           </div>
           <div className="ul">
-            <ul className={clicked ? "menu-list" : "menu-list close"} data-testid="menu-list">
+          <ul className={clicked ? "menu-list" : "menu-list close"} data-testid="menu-list">
               {menuList}
               <li className="hidecontact" onClick={() => setClicked(false)} data-testid="hidecontact">
                 <NavLink to={"/contactus"}>Contact Us</NavLink>
@@ -64,6 +67,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Navbar;

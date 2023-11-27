@@ -10,9 +10,9 @@ import { format } from "date-fns";
 import ListVehicles from "../../../types/list.type";
 
 interface FilterProps {
-    setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
-  }
-const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
+  setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
+}
+const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
   const [showModal, setShowModal] = useState(false);
   const [isACClicked, setIsACClicked] = useState(false);
   const [isSleeperClicked, setIsSleeperClicked] = useState(false);
@@ -160,7 +160,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
       console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
-      setVehicles(responseData)
+      setVehicles(responseData);
       // Close the modal
       setShowModal(false);
     } catch (error) {
@@ -293,25 +293,34 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
                       <div className="checkbox-section-01">
                         <input
                           type="checkbox"
+                          id="allCheckbox"
                           className="input-all"
                           checked={isACAllChecked}
                           onChange={handleACAllChange}
                         />
-                        <label className="label-all">All</label>
+                        <label className="label-all" htmlFor="allCheckbox">
+                          All
+                        </label>
                         <input
                           type="checkbox"
+                          id="acCheckbox"
                           className="input-ac"
                           checked={isACChecked}
                           onChange={handleACChange}
                         />
-                        <label className="label-ac">AC</label>
+                        <label className="label-ac" htmlFor="acCheckbox">
+                          AC
+                        </label>
                         <input
                           type="checkbox"
+                          id="nonACCheckbox"
                           className="input-non-ac"
                           checked={isNonACChecked}
                           onChange={handleNonACChange}
                         />
-                        <label className="label-non-ac">Non-AC</label>
+                        <label className="label-non-ac" htmlFor="nonACCheckbox">
+                          Non-AC
+                        </label>
                       </div>
                     </>
                   )}
@@ -330,6 +339,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
                         width="14"
                         height="14"
                         viewBox="0 0 12 12"
+                        data-testid="minus-icon-sleeper"
                       >
                         <line
                           x1="1"
@@ -371,35 +381,52 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
                     <>
                       <div className="checkbox-section-02">
                         <input
+                          id="allCheckbox"
                           className="input-all"
                           type="checkbox"
                           checked={isSleeperAllChecked}
                           onChange={handleSleeperAllChange}
                         />
-                        <label className="label-all">All</label>
+                        <label className="label-all" htmlFor="allCheckbox">
+                          All
+                        </label>
                         <input
                           className="input-sleeper"
+                          id="sleeperCheckbox"
                           type="checkbox"
                           checked={isSleeperChecked}
                           onChange={handleSleeperChange}
                         />
-                        <label className="label-sleeper">Sleeper</label>
+                        <label
+                          className="label-sleeper"
+                          htmlFor="sleeperCheckbox"
+                        >
+                          Sleeper
+                        </label>
                         <input
                           className="input-semi-sleeper"
+                          id="semiSleeperCheckbox"
                           type="checkbox"
                           checked={isSemiSleeperChecked}
                           onChange={handleSemiSleeperChange}
                         />
-                        <label className="label-semi-sleeper">
+                        <label
+                          className="label-semi-sleeper"
+                          htmlFor="semiSleeperCheckbox"
+                        >
                           Semi-Sleeper
                         </label>
                         <input
                           className="input-non-sleeper"
+                          id="nonSleeperCheckbox"
                           type="checkbox"
                           checked={isNonSleeperChecked}
                           onChange={handleNonSleeperChange}
                         />
-                        <label className="label-non-sleeper">
+                        <label
+                          className="label-non-sleeper"
+                          htmlFor="nonSleeperCheckbox"
+                        >
                           Non-Sleeper{" "}
                         </label>
                       </div>
@@ -419,6 +446,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps)=> {
                         placeholderText="From-Date"
                         className="start-date"
                         minDate={new Date()}
+                        data-testid="date-item-1"
                       />
                     </div>
                     <div className="date-picker">

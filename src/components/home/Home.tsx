@@ -36,7 +36,7 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="video-container">
-        <video autoPlay loop muted aria-label="video">
+        <video autoPlay loop muted aria-label="video" playsInline>
           <source src={Video} type="video/mp4" />
         </video>
       </div>
