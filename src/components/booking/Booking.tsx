@@ -102,7 +102,6 @@ const Booking: React.FC = () => {
                       Sleeper: {vehicle.sleeper}
                     </p>
                     {/* Render other vehicle details */}
-                    <Router>
                       <Link
                         to={{
                           pathname: "/vehicleinfo",
@@ -116,7 +115,6 @@ const Booking: React.FC = () => {
                           View Details
                         </button>
                       </Link>
-                    </Router>
                   </div>
                 </div>
               ))}
