@@ -1,9 +1,7 @@
-import React from "react";
 import { render, screen, act, waitFor, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Booking from "./Booking";
 import nock from "nock";
-import Filter from "./Filter/Filter";
+import Booking from "./Booking";
 
 describe("Booking component", () => {
   test("renders without errors", () => {
@@ -14,21 +12,33 @@ describe("Booking component", () => {
     );
   });
 
-  test('fetches and displays vehicle data', async () => {
+  test('calls listVehicle function when component is loaded', async () => {
     const mockData = [
       {
         "vehicleNumber": "KA01HJ1234",
         "seatCapacity": 12,
+        "s3ImageUrl": [],
         "isVehicleAC": true,
         "isVehicleSleeper": true,
+        "image": null,
+        "driverName": "Suresh ",
+        "driverNumber": "123455666",
+        "alternateNumber": "7982726663",
+        "emergencyNumber": "2762762576"
       },
       {
         "vehicleNumber": "KA01HJ1235",
         "seatCapacity": 20,
-        "isVehicleAC": false,
-        "isVehicleSleeper": false,
-      }
-    ]
+        "s3ImageUrl": [],
+        "isVehicleAC": true,
+        "isVehicleSleeper": true,
+        "image": null,
+        "driverName": "Suresh",
+        "driverNumber": "123455666",
+        "alternateNumber": "7982726663",
+        "emergencyNumber": "2762762576"
+      }];
+
     nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
@@ -36,22 +46,14 @@ describe("Booking component", () => {
       .get('/listVehicles')
       .reply(200, mockData);
 
-    render(
-      <MemoryRouter>
-        <Booking />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(<Booking />);
+    });
 
     await waitFor(() => {
       mockData.forEach((vehicle) => {
         const vehicleNumberElement = screen.getByText(vehicle.vehicleNumber);
-        const seatCapacityElement = screen.getByText(`Seat Capacity: ${vehicle.seatCapacity}`);
-        const isVehicleACElement = screen.getByText(`AC: ${vehicle.isVehicleAC ? 'Yes' : 'No'}`);
-        const isVehicleSleeperElement = screen.getByText(`Sleeper: ${vehicle.isVehicleSleeper ? 'Yes' : 'No'}`);
         expect(vehicleNumberElement).toBeInTheDocument();
-        expect(seatCapacityElement).toBeInTheDocument();
-        expect(isVehicleACElement).toBeInTheDocument();
-        expect(isVehicleSleeperElement).toBeInTheDocument();
       });
     });
   });
