@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import "./Booking.scss";
 import arrow from "../../assets/images/arrow.png";
 import arrow2 from "../../assets/images/arrow2.png";
@@ -43,7 +43,9 @@ const Booking: React.FC = () => {
             <h3>Book your next trip</h3>
             <ul>
               <li>
-                <Link to={"/#"}>Home</Link>
+                <Router>
+                  <Link to={"/#"}>Home</Link>
+                </Router>
               </li>
               <li>&#10095;</li>
               <li>Booking</li>
@@ -61,7 +63,7 @@ const Booking: React.FC = () => {
               </p>
             </Fade>
             <div data-testid="filter-component">
-              <Filter setVehicles={setVehicles}/>
+              <Filter setVehicles={setVehicles} />
             </div>
             <div className="booking_container_busDetails_section">
               {vehicles.map((vehicle, index) => (
@@ -100,19 +102,19 @@ const Booking: React.FC = () => {
                       Sleeper: {vehicle.sleeper}
                     </p>
                     {/* Render other vehicle details */}
-                    <Link
-                      to={{
-                        pathname: "/vehicleinfo",
-                        state: {
-                          images: vehicle.s3ImageUrl || [],
-                          vehicleNumber: vehicle.vehicleNumber,
-                        },
-                      }}
-                    >
-                      <button className="button-53" onClick={scrollToTop}>
-                        View Details
-                      </button>
-                    </Link>
+                      <Link
+                        to={{
+                          pathname: "/vehicleinfo",
+                          state: {
+                            images: vehicle.s3ImageUrl || [],
+                            vehicleNumber: vehicle.vehicleNumber,
+                          },
+                        }}
+                      >
+                        <button className="button-53" onClick={scrollToTop}>
+                          View Details
+                        </button>
+                      </Link>
                   </div>
                 </div>
               ))}

@@ -3,13 +3,12 @@ import './Checkout.scss';
 import { Link } from 'react-router-dom';
 import VehicleImage from '../../../assets/images/booking-summary-dummy-image.webp';
 import displayRazorpay from '../payment/PaymentGateway';
-import Confirmation from '../booking-confirmation/Confirmation';
 
 interface CheckoutProps {
     bookingId: string;
     phoneNumber: string;
     fromDate: Date;
-    toDate: Date
+    toDate: Date;
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, toDate }) => {
@@ -22,6 +21,7 @@ const Checkout: React.FC<CheckoutProps> = ({ bookingId, phoneNumber, fromDate, t
     const hideDetails = () => {
         setShowFareDetails(false);
     }
+
     const loadScript = (src: any) => {
         return new Promise((resolve) => {
             const script = document.createElement("script");
