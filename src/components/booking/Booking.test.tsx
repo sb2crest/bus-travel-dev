@@ -67,4 +67,3 @@ describe("Booking component", () => {
     const filterComponent = screen.getByTestId("filter-component");
     expect(filterComponent).toBeInTheDocument();
   });
-});

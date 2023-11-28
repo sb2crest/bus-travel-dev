@@ -43,9 +43,7 @@ const Booking: React.FC = () => {
             <h3>Book your next trip</h3>
             <ul>
               <li>
-                <Router>
-                  <Link to={"/#"}>Home</Link>
-                </Router>
+                  <Link to={"/"}>Home</Link>
               </li>
               <li>&#10095;</li>
               <li>Booking</li>
