@@ -553,6 +553,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   className={`form-control first-name ${!firstNameValid ? "error-border" : ""
                                     }`}
                                   id="firstname"
+                                  data-testid="firstname-input"
                                   value={firstName}
                                   placeholder="First Name"
                                   onChange={(e) => setFirstName(e.target.value)}
@@ -562,7 +563,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                <div className="error-message">
+                                <div className="error-message" data-testid='firstname-warning'>
                                   {!firstNameValid && (
                                     <>
                                       <span className="first-name-warning">
@@ -601,10 +602,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                <div className="error-message">
+                                <div className="error-message" data-testid='lastname-warning'>
                                   {!lastNameValid && (
                                     <>
-                                      <span className="last-name-warning">
+                                      <span className="last-name-warning" >
                                         Please enter a valid last name
                                       </span>
                                     </>
@@ -637,7 +638,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   </div>
                                   {/* {(!phoneNumberValid || */}
                                   {/* !phoneNumberValidation(phoneNumber)) && ( */}
-                                  <div className="error-message">
+                                  <div className="error-message" data-testid='phone-warning'>
                                     {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
@@ -776,7 +777,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   }
                                   placeholder="Email"
                                 />
-                                <div className="error-message">
+                                <div className="error-message" data-testid='email-warning'>
                                   {!emailValid && (
                                     <>
                                       <span className="email-warning">
@@ -818,23 +819,24 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               )}
                             </form>
                             {/* OTP success snackbar */}
-                            <Snackbar
-                              open={snackbarOpen}
-                              autoHideDuration={7000}
-                              onClose={handleSnackbarClose}
-                              anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                              }}
-                              data-testid="my-snackbar"
-                            >
-                              <Alert
+                            <div data-testid='send-otp-snackbar'>
+                              <Snackbar
+                                open={snackbarOpen}
+                                autoHideDuration={7000}
                                 onClose={handleSnackbarClose}
-                                severity="success"
+                                anchorOrigin={{
+                                  vertical: "top",
+                                  horizontal: "right",
+                                }}
                               >
-                                OTP Sent successfully!
-                              </Alert>
-                            </Snackbar>
+                                <Alert
+                                  onClose={handleSnackbarClose}
+                                  severity="success"
+                                >
+                                  OTP Sent successfully!
+                                </Alert>
+                              </Snackbar>
+                            </div>
                             {/*  Validation successful snackbar */}
                             <Snackbar
                               open={verifySnackbarOpen}
