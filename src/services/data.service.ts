@@ -70,9 +70,9 @@ class DataService {
   }
 
   // updateVehicle
-  updateVehicle(data: IVehicleData, id: any) {
-    return http.put<any>(`updateVehicle/${id}`, data);
-  }
+  // updateVehicle(data: IVehicleData, id: any) {
+  //   return http.put<any>(`updateVehicle/${id}`, data);
+  // }
 }
 
 export default new DataService();
