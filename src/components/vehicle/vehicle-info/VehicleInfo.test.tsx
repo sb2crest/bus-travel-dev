@@ -180,6 +180,91 @@ describe("Vehicle Info component", () => {
     });
   });
 
+  test('Conditionally rendering verify button', async () => {
+    render(
+      <MemoryRouter>
+        <VehicleInfo />
+      </MemoryRouter>
+    );
+
+    const sendOTP = screen.getByText('Send OTP');
+
+    await act(async () => {
+      sendOTP.click();
+    });
+
+    await waitFor(() => {
+      const verifyOTP = screen.getByRole('button');
+      expect(
+        verifyOTP
+      ).toBeInTheDocument();
+    });
+    const resendOTP = screen.getByRole('link');
+    expect(
+      resendOTP
+    ).toBeInTheDocument();
+  });
+
+  test('timer is rendered when resend is clicked', async () => {
+    render(
+      <MemoryRouter>
+        <VehicleInfo />
+      </MemoryRouter>
+    );
+
+    const sendOTP = screen.getByText('Send OTP');
+
+    await act(async () => {
+      sendOTP.click();
+    });
+
+    const resendOTP = screen.getByRole('link');
+    await waitFor(() => {
+      expect(
+        resendOTP
+      ).toBeInTheDocument();
+    });
+
+    await act(async () => {
+      resendOTP.click();
+    });
+
+    expect(screen.getByTestId('send-otp-snackbar')).toBeInTheDocument();
+  });
+
+  test('triggers verifyOTP function when verify OTP button is clicked', async () => {
+    nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
+      .defaultReplyHeaders({
+        'access-control-allow-origin': '*',
+      })
+      .post('/validateOTP')
+      .reply(200, { "message": "Successfully validated", "statusCode": 200 });
+
+    render(
+      <MemoryRouter>
+        <VehicleInfo />
+      </MemoryRouter>
+    );
+
+    const sendOTP = screen.getByText('Send OTP');
+
+    await act(async () => {
+      sendOTP.click();
+    });
+
+    const verifyOTP = screen.getByRole('button');
+
+    expect(verifyOTP).toBeInTheDocument();
+
+    await act(async () => {
+      verifyOTP.click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('send-otp-snackbar')).toBeInTheDocument();
+    });
+  });
+
   test('triggers bookNow function when Book Now is clicked', async () => {
     nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
       .defaultReplyHeaders({
@@ -236,46 +321,4 @@ describe("Vehicle Info component", () => {
     expect(phoneNumberInput.value).toBe('');
     expect(emailInput.value).toBe('');
   });
-
-  // {/* TODO: Vijay */ }
-  // test('renders OTP text field when otpSent is true and otpVerified is false', async () => {
-  //   render(
-  //     <MemoryRouter>
-  //       <VehicleInfo  otpSent={false} otpVerified={false} />
-  //     </MemoryRouter>
-  //   );
-
-  //   const sendOTPButton = screen.getByText('Send OTP');
-  //   fireEvent.click(sendOTPButton);
-
-  //   render(
-  //     <MemoryRouter>
-  //       <VehicleInfo  otpSent={true} otpVerified={false} />
-  //     </MemoryRouter>
-  //   );
-
-  //   await waitFor(() => {
-  //     const otpInput = screen.getByPlaceholderText('OTP') as HTMLInputElement;
-  //     expect(otpInput).toBeInTheDocument();
-  //   });
-  // })
-
-
-  // it('checks if returned data from OTP API rendered into component', async () => {
-  //   nock('http://app-vehicle-lb-1832405950.ap-south-1.elb.amazonaws.com')
-  //     .defaultReplyHeaders({
-  //       'access-control-allow-origin': '*',
-  //     })
-  //     .post('/sendOTP?mobile=9999999999')
-  //     .reply(200, { "message": "OTP sent successfully.", "statusCode": 200 });
-
-  //   render(<VehicleInfo/>);
-
-  //   await waitFor(() => {
-  //     const verifyOTP = screen.getByRole('button');
-  //     expect(
-  //       verifyOTP
-  //     ).toBeInTheDocument();
-  //   });
-  // });
 });
