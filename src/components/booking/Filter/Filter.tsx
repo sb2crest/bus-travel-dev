@@ -160,7 +160,10 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
       console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
+
       // setVehicles(responseData);
+      // setVehicles(responseData);
+
       // Close the modal
       setShowModal(false);
     } catch (error) {
