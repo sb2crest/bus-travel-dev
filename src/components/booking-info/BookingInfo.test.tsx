@@ -228,4 +228,36 @@ describe("BookingInfo Component", () => {
       expect(successMessageElement).toBeInTheDocument();
     });
   });
+  it("verifies OTP successfully and displays success message with Snackbar", async () => {
+  render(<BookingInfo />);
+  
+  // Mock the API call for sending OTP
+  nock(API_BASE_URL)
+    .post("/sendOTP?mobile=6360120872")
+    .reply(200, mockSendOTPResponse);
+
+  // Enter a valid phone number and click on "Send OTP" button
+  fireEvent.change(screen.getByPlaceholderText("Phone Number"), {
+    target: { value: "6360120872" },
+  });
+  fireEvent.click(screen.getByText("Send OTP"));
+
+  // Wait for the OTP input field to be visible
+  await waitFor(() => {
+    expect(screen.getByPlaceholderText("OTP")).toBeInTheDocument();
+  });
+
+  // Enter the mocked OTP and trigger the verify OTP function
+  fireEvent.change(screen.getByPlaceholderText("OTP"), {
+    target: { value: mockSendOTPResponse.otp },
+  });
+  fireEvent.click(screen.getByText("Verify OTP"));
+
+  // Wait for the success message Snackbar to appear
+  await waitFor(() => {
+    const successMessageElement = screen.getByTestId("snackbar");
+    expect(successMessageElement).toBeInTheDocument();
+  });
+});
+
 });

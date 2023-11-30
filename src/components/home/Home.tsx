@@ -14,6 +14,7 @@ import Cards from "../cards/Cards";
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
 import ImageSliderParent from "../slider/ImageSliderParent";
+
 const Icon = styled.i`
   font-size: 2rem; /* Set the initial size of the icon */
   color: #0f7bab;
@@ -32,7 +33,6 @@ export const scrollToTop = () => {
   });
 };
 const Home: React.FC = () => {
-
   return (
     <>
       <div className="video-container">
@@ -69,7 +69,6 @@ const Home: React.FC = () => {
       </Slide>
       <div className="our_services">
         <div className="our_services_heading">
-          <Slide left></Slide>
           <Fade bottom>
             <h1>
               We Provide <span className="underline">Best Services</span> For
@@ -161,9 +160,28 @@ const Home: React.FC = () => {
               </div>
               <Link to={"/aboutus"} onClick={scrollToTop}>
                 {" "}
-                <button className="button-71" role="button">
-                  Know more
-                </button>
+                <div className="btn-container">
+                  <button className="Knowmore">
+                    <span className="text">Know more</span>
+                    <div className="icon-container">
+                      <div className="icon icon--left">
+                        <svg>
+                          <use href="#arrow-right"></use>
+                        </svg>
+                      </div>
+                      <div className="icon icon--right">
+                        <svg>
+                          <use href="#arrow-right"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                <svg style={{ display: "none" }}>
+                  <symbol id="arrow-right" viewBox="0 0 20 10">
+                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+                  </symbol>
+                </svg>
               </Link>
             </div>
           </Slide>
@@ -179,7 +197,17 @@ const Home: React.FC = () => {
         <div className="aboutus_container_services">
           <div className="aboutus_container_services_section">
             <div className="aboutus_container_services_section_images">
-              <h1>Our Services</h1>
+              <Fade bottom>
+                <div className="aboutus_container_services_section_images_heading">
+                  <h1>Our Services</h1>
+                  <p>
+                    Facilitating memorable School & College Trips, elegant
+                    Weddings, efficient Corporate Trips, exclusive Private
+                    Trips, and hassle-free travel to Sports Events. Book with us
+                    for unparalleled service and comfort.
+                  </p>
+                </div>
+              </Fade>
               <div className="aboutus_container_services_section_images_one">
                 <div className="services_img">
                   <img src={schooltrip} alt="" />
