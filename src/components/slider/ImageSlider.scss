@@ -163,4 +163,18 @@
   .slick-dots {
     display: none !important;
   }
+  .slick-next {
+    width: 30px !important;
+    height: 30px !important;
+  &::before{
+    font-size: 22px !important;
+  }
+  }
+  .slick-prev {
+    width: 30px !important;
+    height: 30px !important;
+  &::before{
+    font-size: 22px !important;
+  }
+  }
 }
