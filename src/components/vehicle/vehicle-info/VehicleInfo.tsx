@@ -2,7 +2,9 @@ import "./VehicleInfo.scss";
 import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
 import React, { useState, useEffect, FormEvent } from "react";
 import "./form.scss";
+import { FaExclamationTriangle } from "react-icons/fa";
 import IVehicleData from "../../../types/vehicle.type";
+import BookingCalendar from "../../booking-calendar/BookingCalendar";
 import DatePicker from "react-datepicker";
 import "../../booking-calendar/BookingCalendar.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -727,13 +729,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   <div className="resend-container">
                                     <p className="header-5-custom">
                                       {resendDisabled ? (
-                                                                                  <span className="timer-custom">
-                                            resend otp in{" "}
-                                            <span className="min-sec">
-                                              {minutes}:{seconds}
-                                            </span>{" "}
-                                          </span>
-                                                                              ) : (
+                                        <span className="timer-custom">
+                                          resend otp in{" "}
+                                          <span className="min-sec">
+                                            {minutes}:{seconds}
+                                          </span>{" "}
+                                        </span>
+                                      ) : (
                                         <span className="not-received">
                                           Not received otp?
                                         </span>
@@ -742,7 +744,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                         <a
                                           className="resend-link"
                                           onClick={ResendOTP}
-                                          aria-role="link"
                                         >
                                           Resend
                                         </a>
@@ -837,43 +838,39 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               </Snackbar>
                             </div>
                             {/*  Validation successful snackbar */}
-                            <div data-testid='verify-otp-snackbar'>
-                              <Snackbar
-                                open={verifySnackbarOpen}
-                                autoHideDuration={7000}
+                            <Snackbar
+                              open={verifySnackbarOpen}
+                              autoHideDuration={7000}
+                              onClose={handleVerifyClose}
+                              anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                              }}
+                            >
+                              <Alert
                                 onClose={handleVerifyClose}
-                                anchorOrigin={{
-                                  vertical: "top",
-                                  horizontal: "right",
-                                }}
+                                severity="success"
                               >
-                                <Alert
-                                  onClose={handleVerifyClose}
-                                  severity="success"
-                                >
-                                  Validation successful!
-                                </Alert>
-                              </Snackbar>
-                            </div>
+                                Validation successful!
+                              </Alert>
+                            </Snackbar>
                             {/*  Validation unsuccessful snackbar */}
-                            <div>
-                              <Snackbar
-                                open={validationFailureSnackbarOpen}
-                                autoHideDuration={7000}
+                            <Snackbar
+                              open={validationFailureSnackbarOpen}
+                              autoHideDuration={7000}
+                              onClose={handleValidationFailure}
+                              anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                              }}
+                            >
+                              <Alert
                                 onClose={handleValidationFailure}
-                                anchorOrigin={{
-                                  vertical: "top",
-                                  horizontal: "right",
-                                }}
+                                severity="error"
                               >
-                                <Alert
-                                  onClose={handleValidationFailure}
-                                  severity="error"
-                                >
-                                  Validation unsuccessful!
-                                </Alert>
-                              </Snackbar>
-                            </div>
+                                Validation unsuccessful!
+                              </Alert>
+                            </Snackbar>
                             {/*  Slots booked snackbar */}
                             <Snackbar
                               open={slotsBookedSnackbarOpen}

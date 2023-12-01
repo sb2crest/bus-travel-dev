@@ -100,19 +100,19 @@ const Booking: React.FC = () => {
                       Sleeper: {vehicle.sleeper}
                     </p>
                     {/* Render other vehicle details */}
-                    <Link
-                      to={{
-                        pathname: "/vehicleinfo",
-                        state: {
-                          images: vehicle.s3ImageUrl || [],
-                          vehicleNumber: vehicle.vehicleNumber,
-                        },
-                      }}
-                    >
-                      <button className="button-53" onClick={scrollToTop}>
-                        View Details
-                      </button>
-                    </Link>
+                      <Link
+                        to={{
+                          pathname: "/vehicleinfo",
+                          state: {
+                            images: vehicle.s3ImageUrl || [],
+                            vehicleNumber: vehicle.vehicleNumber,
+                          },
+                        }}
+                      >
+                        <button className="button-53" onClick={scrollToTop}>
+                          View Details
+                        </button>
+                      </Link>
                   </div>
                 </div>
               ))}
