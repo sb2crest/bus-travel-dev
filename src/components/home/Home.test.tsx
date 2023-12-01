@@ -7,7 +7,6 @@ import jest from 'jest-mock';
 import ImageSliderParent from "../slider/ImageSliderParent";
 
 describe("Home Component", () => {
-  // Check if the component renders without throwing any errors
   
   test("renders without errors", () => {
     render(

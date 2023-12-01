@@ -51,7 +51,10 @@ describe("Booking component", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('KA01HJ1234')).toBeInTheDocument();
+      mockData.forEach((vehicle) => {
+        const vehicleNumberElement = screen.getByText(vehicle.vehicleNumber);
+        expect(vehicleNumberElement).toBeInTheDocument();
+      });
     });
   });
 
@@ -64,4 +67,4 @@ describe("Booking component", () => {
     const filterComponent = screen.getByTestId("filter-component");
     expect(filterComponent).toBeInTheDocument();
   });
-});
+  });

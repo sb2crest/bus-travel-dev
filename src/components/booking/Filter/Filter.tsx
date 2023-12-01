@@ -8,7 +8,7 @@ import IFilterRequest from "../../../types/filter/request.type";
 import dataService from "../../../services/data.service";
 import { format } from "date-fns";
 import ListVehicles from "../../../types/list.type";
-
+import TuneIcon from '@mui/icons-material/Tune';
 interface FilterProps {
   setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
 }
@@ -160,7 +160,10 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
       console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
-      setVehicles(responseData);
+
+      // setVehicles(responseData);
+      // setVehicles(responseData);
+
       // Close the modal
       setShowModal(false);
     } catch (error) {
@@ -209,7 +212,8 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
         <div className="filter-container-button-custom">
           <button className="filter-button" onClick={() => setShowModal(true)}>
             Filter
-            <img src={filterIcon} className="filter-icon" />
+            <TuneIcon  sx={{ fontSize: 18 }}  />
+            {/* <img src={filterIcon} className="filter-icon" /> */}
           </button>
         </div>
         {/* POP-Up Page */}
