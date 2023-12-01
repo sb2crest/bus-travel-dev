@@ -8,10 +8,9 @@
       z-index: 1;
       margin-bottom: 30px;
       border-radius: 25px;
-      width: 110px;
-      height: 38px;
+      width: 95px;
+      height: 35px;
       text-align: left;
-      padding-left: 20px;
       position: relative;
       color: #0f2454;
       border: 0.2px solid grey;
@@ -20,6 +19,7 @@
       display: flex;
       align-items: center;
       background-color: #ffffff;
+      justify-content: space-around;
     }
 
     .filter-icon {
