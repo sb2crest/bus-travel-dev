@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 interface Slide {
+  content: string;
   url: string;
   title: string;
 }
@@ -69,6 +70,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
           <div className="slider_container_index_images">
             <img src={slide.url} alt="" width={250} height={150}/>
             <h4>{slide.title}</h4>
+            <div className="slider_container_index_images_hover">
+              <h4>{slide.content}</h4>
+            </div>
           </div>
         </div>
       ))}
