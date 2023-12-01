@@ -50,11 +50,8 @@ describe("Booking component", () => {
       render(<Booking />);
     });
 
-    // await waitFor(() => {
-    //   mockData.forEach((vehicle) => {
-    //     const vehicleNumberElement = screen.getByText(vehicle.vehicleNumber);
-    //     expect(vehicleNumberElement).toBeInTheDocument();
-    //   });
+    await waitFor(() => {
+      expect(screen.getByText('KA01HJ1234')).toBeInTheDocument();
     });
   });
 
