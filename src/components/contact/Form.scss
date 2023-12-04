@@ -20,6 +20,9 @@
       line-height: 1.1em;
       font-weight: 700;
       text-transform: capitalize;
+      background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
   .contact-form {
@@ -42,6 +45,7 @@
             margin-bottom: 15px;
             font-size: 16px;
             font-weight: 700;
+            color: #0f2454;
           }
           input[type="text"],
           input[type="email"] {
@@ -143,7 +147,7 @@
             input[type="email"] {
               width: 98%;
             }
-            i{
+            i {
               right: 0px;
             }
           }
@@ -181,7 +185,7 @@
           flex-direction: column;
           .form-group {
             width: 95%;
-            i{
+            i {
               right: 5%;
             }
           }
@@ -190,7 +194,7 @@
           width: 88%;
         }
         i {
-          right:10%;
+          right: 10%;
           top: 62px;
         }
         button {

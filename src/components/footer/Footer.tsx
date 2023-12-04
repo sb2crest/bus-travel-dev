@@ -40,7 +40,7 @@ const Footer = () => {
                 <span>Corporates Office</span>
                 <p>
                   ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School, Hesaraghatta hobli, Rajanukunte,
-                  Yelahanka Taluk Bangalore North Karnataka - 560064
+                  Yelahanka Taluk Bangalore North, Karnataka - 560064
                 </p>
               </div>
               <div className="footer_container_left_email">
@@ -80,6 +80,9 @@ const Footer = () => {
               <div className="footer_container_right_one">
                 <div className="footer_container_right_one_services">
                   <p id="heading">Quick Links</p>
+                  <Link to={"/"} onClick={scrollToTop}>
+                    <p>Home</p>
+                  </Link>
                   <Link to={"/aboutus"} onClick={scrollToTop}>
                     <p>About Us</p>
                   </Link>
@@ -95,7 +98,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="footer_container_right_technologies">
-                <p id="heading">Join on Social Media</p>
+                <p id="heading">Keep in touch</p>
                 <span>
                   <i
                     className="fa-brands fa-facebook fa-2xl"

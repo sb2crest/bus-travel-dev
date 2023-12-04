@@ -239,7 +239,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                 aria-label="Close"
                 onClick={() => setShowModal(false)}
               >
-                <span aria-hidden="true">x</span>
+                <span aria-hidden="true">×</span>
               </button>
             </div>
             <form>

@@ -3,7 +3,6 @@
   display: flex;
   justify-content: flex-end;
   width: 95%;
-  margin-bottom: 3vw;
   &-button-custom {
     .filter-button {
       z-index: 1;
@@ -14,12 +13,12 @@
       text-align: left;
       position: relative;
       color: #0f2454;
-      border: 0.2px solid grey;
+      border: 0.2px solid #0f2454;
       font-weight: 640;
       cursor: pointer;
       display: flex;
       align-items: center;
-      background-color: #ffffff;
+      background-color: #e1f0ee;
       justify-content: space-around;
     }
 
