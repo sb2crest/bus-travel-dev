@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Contact from './Contact'
 import Form from './Form'
 import Map from './Map'
-import './ContactUs.scss'
+import './Contactus.scss'
 
 const ContactUs = () => {
   return (
