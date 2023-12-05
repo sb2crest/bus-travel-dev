@@ -506,7 +506,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                 </button>
                 {/*  Checkout Component */}
                 {checkout ? (
-                  <Checkout />
+                  <Checkout bookingId={""} phoneNumber={""} fromDate={new Date()} toDate={new Date()} />
                 ) : (
                   <div
                     className={`modal ${showModal ? "show" : ""}`}
