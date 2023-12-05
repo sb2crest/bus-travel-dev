@@ -6,7 +6,9 @@
   margin-top: 3vw;
 
   h1 {
-    color: #0f7bab;
+    background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .row {
     display: grid;
@@ -38,6 +40,12 @@
           a{
             text-decoration: none;
             color: inherit;
+          }
+        }
+        &-body{
+
+          h5{
+            color: #0f2454;
           }
         }
       }

@@ -163,7 +163,7 @@ const Home: React.FC = () => {
                 <div className="btn-container">
                   <button className="Knowmore">
                     <span className="text">Know more</span>
-                    <div className="icon-container">
+                    <div className="icon_container">
                       <div className="icon icon--left">
                         <svg>
                           <use href="#arrow-right"></use>

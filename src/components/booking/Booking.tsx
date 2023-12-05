@@ -1,17 +1,98 @@
 import React, { useEffect, useState } from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import "./Booking.scss";
-import arrow from "../../assets/images/arrow.png";
-import arrow2 from "../../assets/images/arrow2.png";
 import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
+import divimg from "../../assets/images/divimage.svg";
+import { styled } from "@mui/system";
+import {
+  Stack,
+  Stepper,
+  Step,
+  StepLabel,
+  StepConnector,
+  StepIconProps,
+} from "@mui/material";
+import { stepConnectorClasses } from "@mui/material/StepConnector";
+import { DirectionsBus, Note, AttachMoney, Map } from "@mui/icons-material";
+
+const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 22,
+  },
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage: "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
+    },
+  },
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage: "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
+    },
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    height: 3,
+    border: 0,
+    backgroundColor:
+      theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+    borderRadius: 1,
+  },
+}));
+
+const ColorlibStepIconRoot = styled("div")<{
+  ownerState: { completed?: boolean; active?: boolean };
+}>(({ theme, ownerState }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark" ? theme.palette.grey[700] : "#ccc",
+  zIndex: 1,
+  color: "#fff",
+  width: 50,
+  height: 50,
+  display: "flex",
+  borderRadius: "50%",
+  justifyContent: "center",
+  alignItems: "center",
+  ...(ownerState.active && {
+    backgroundImage: "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
+    boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
+  }),
+  ...(ownerState.completed && {
+    backgroundImage: "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
+  }),
+}));
+
+function ColorlibStepIcon(props: StepIconProps) {
+  const { active, completed, className } = props;
+
+  const icons: { [index: string]: React.ReactElement } = {
+    1: <DirectionsBus />,
+    2: <Note />,
+    3: <AttachMoney />,
+    4: <Map />,
+  };
+
+  return (
+    <ColorlibStepIconRoot
+      ownerState={{ completed, active }}
+      className={className}
+    >
+      {icons[String(props.icon)]}
+    </ColorlibStepIconRoot>
+  );
+}
+
+const steps = [
+  "Step 1: Select Your Bus",
+  "Step 2: Booking Details",
+  "Step 3: Booking Payment",
+  "Step 4: Start Your Roadtrip",
+];
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
-  const [selectedVehicleNumber, setSelectedVehicleNumber] = useState<string | null>(null);
-
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
@@ -43,7 +124,7 @@ const Booking: React.FC = () => {
             <h3>Book your next trip</h3>
             <ul>
               <li>
-                  <Link to={"/"}>Home</Link>
+                <Link to={"/"}>Home</Link>
               </li>
               <li>&#10095;</li>
               <li>Booking</li>
@@ -60,46 +141,34 @@ const Booking: React.FC = () => {
                 destinations.
               </p>
             </Fade>
-            <div data-testid="filter-component">
-              <Filter setVehicles={setVehicles} />
-            </div>
-            <div className="booking_container_busDetails_section">
-              {vehicles.map((vehicle, index) => (
-                <div className="buses" key={index}>
-                  {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
-                    <img
-                      src={vehicle.s3ImageUrl[0]}
-                      alt={`Bus ${index}`}
-                      className="busOne_img"
-                    />
-                  )}
-                  {/* Render vehicle details here */}
-                  <div className="busOne_details">
-                    <h2>{vehicle.vehicleNumber}</h2>
-                    <p>
-                      <i
-                        className="fa-solid fa-user-group fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Seat Capacity: {vehicle.seatCapacity}
-                    </p>
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-fan fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      AC: {vehicle.vehicleAC}
-                    </p>
-                    <p>
-                      {" "}
-                      <i
-                        className="fa-solid fa-bed fa-lg"
-                        style={{ color: "#0f7bab" }}
-                      ></i>
-                      Sleeper: {vehicle.sleeper}
-                    </p>
-                    {/* Render other vehicle details */}
+            <img src={divimg} alt="curvedimg" />
+            <div className="curvedimg">
+              <div data-testid="filter-component" className="filterAlign">
+                <Filter setVehicles={setVehicles} />
+              </div>
+              <div className="booking_container_busDetails_section">
+                {vehicles.map((vehicle, index) => (
+                  <div className="buses" key={index}>
+                    {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
+                      <img
+                        src={vehicle.s3ImageUrl[0]}
+                        alt={`Bus ${index}`}
+                        className="busOne_img"
+                      />
+                    )}
+                    {/* Render vehicle details here */}
+                    <div className="busOne_details">
+                      <h2>
+                        ({vehicle.vehicleAC} {vehicle.sleeper})
+                      </h2>
+
+                      <p>
+                        <span className="material-symbols-outlined">
+                          airline_seat_recline_extra
+                        </span>
+                        Seat Capacity: {vehicle.seatCapacity}
+                      </p>
+                      {/* Render other vehicle details */}
                       <Link
                         to={{
                           pathname: "/vehicleinfo",
@@ -113,9 +182,10 @@ const Booking: React.FC = () => {
                           View Details
                         </button>
                       </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -123,23 +193,33 @@ const Booking: React.FC = () => {
           <Fade top>
             <div className="howitworks_header">
               <h2>How It Works</h2>
-              <h1>3 Steps To Booking a Bus On NandhuBus</h1>
+              <h1>4 Steps To Booking a Bus On NandhuBus</h1>
             </div>
           </Fade>
+          <Stack sx={{ width: "100%" }} spacing={4}>
+            <Stepper
+              alternativeLabel
+              activeStep={3}
+              connector={<ColorlibConnector />}
+            >
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel StepIconComponent={ColorlibStepIcon}>
+                    {label}
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Stack>
           <div className="howitworks_cards">
-            <img className="img1" src={arrow} width={70} alt="" />
-            {/* <img
-              className="img3"
-              src={arrow}
-              width={70}
-              alt=""
-            /> */}
-            <img className="img2" src={arrow2} width={60} alt="" />
             <Fade left>
               <div className="howitworks_cards_one">
                 <i
                   className="fa-solid fa-bus fa-2xl"
-                  style={{ color: "#0f7bab" }}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(#0f7bab 0%, #0f2454 100%)",
+                  }}
                 ></i>
                 <h3>Select Your Bus</h3>
                 <p>
@@ -154,7 +234,7 @@ const Booking: React.FC = () => {
                   className="fa-solid fa-file fa-2xl"
                   style={{ color: "#0f7bab" }}
                 ></i>
-                <h3>Booking & Confirm</h3>
+                <h3>Booking Details</h3>
                 <p>
                   {" "}
                   Enter your trip details, personal information, and review
@@ -162,7 +242,7 @@ const Booking: React.FC = () => {
                 </p>
               </div>
             </Fade>
-            {/* <div className="howitworks_cards_three">
+            <div className="howitworks_cards_three">
               <i
                 className="fa-solid fa-money-check-dollar fa-2xl"
                 style={{ color: "#0f7bab" }}
@@ -170,10 +250,10 @@ const Booking: React.FC = () => {
               <h3>Booking Payment</h3>
               <p>
                 {" "}
-                Complete the payment process securely, ensuring your seat is
+                Complete the payment process securely, ensuring your bus is
                 reserved for the upcoming journey.
               </p>
-            </div> */}
+            </div>
             <Fade right>
               <div className="howitworks_cards_four">
                 <i

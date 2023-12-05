@@ -11,7 +11,6 @@ import whatsets from "../../assets/images/whatsets.jpeg";
 import whatsets2 from "../../assets/images/whatsets2.jpeg";
 import Flip from 'react-reveal/Flip';
 import Bounce from 'react-reveal/Bounce';
-import Tada from 'react-reveal/Tada';
 import Fade from 'react-reveal/Fade';
 const AboutUs = () => {
   return (
