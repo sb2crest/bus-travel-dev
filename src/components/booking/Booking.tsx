@@ -7,6 +7,7 @@ import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
 import divimg from "../../assets/images/divimage.svg";
 import { styled } from "@mui/system";
+import bus from '../../assets/images/busImage_1.jpg'
 import {
   Stack,
   Stepper,
@@ -132,7 +133,7 @@ const Booking: React.FC = () => {
           </div>
           <div className="booking_container_busDetails">
             <Fade top>
-              <h2>our buses</h2>
+              <h3>our buses</h3>
               <h1 className="header_content">Our Bus Collection</h1>
               <p className="content">
                 Discover affordable and reliable bus travel services with
@@ -141,21 +142,22 @@ const Booking: React.FC = () => {
                 destinations.
               </p>
             </Fade>
-            <img src={divimg} alt="curvedimg" />
-            <div className="curvedimg">
+            <img src={divimg} alt="curvedimg" className="curvedimg"/>
+            <div className="curvedimgsection">
               <div data-testid="filter-component" className="filterAlign">
                 <Filter setVehicles={setVehicles} />
               </div>
               <div className="booking_container_busDetails_section">
                 {vehicles.map((vehicle, index) => (
                   <div className="buses" key={index}>
-                    {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && (
+                    {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
                       <img
-                        src={vehicle.s3ImageUrl[0]}
+                        src={bus}
+                        // src={vehicle.s3ImageUrl[0]}
                         alt={`Bus ${index}`}
                         className="busOne_img"
                       />
-                    )}
+                    {/* )} */}
                     {/* Render vehicle details here */}
                     <div className="busOne_details">
                       <h2>
@@ -217,8 +219,7 @@ const Booking: React.FC = () => {
                 <i
                   className="fa-solid fa-bus fa-2xl"
                   style={{
-                    backgroundImage:
-                      "linear-gradient(#0f7bab 0%, #0f2454 100%)",
+                   color:"#0f7bab"
                   }}
                 ></i>
                 <h3>Select Your Bus</h3>
