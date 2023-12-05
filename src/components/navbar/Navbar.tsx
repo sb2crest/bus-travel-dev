@@ -39,7 +39,7 @@ const Navbar = React.memo(() => {
             <img src={logo} alt="Logo" width={60} />
             </NavLink>
           </div>
-          <div className="menu-icon" onClick={handleClick} data-testid="menu-icon">
+          <div className="menu-icon" onTouchStart={handleClick}  data-testid="menu-icon">
             <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
           </div>
           <div className="ul">

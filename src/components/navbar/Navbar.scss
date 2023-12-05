@@ -18,7 +18,10 @@ nav {
 }
 .menu-icon {
   display: none;
-  font-size: 20px;
+  font-size: 25px;
+  i {
+    color: #0f7bab;
+  }
 }
 .menu-icon .fa-times {
   transform: rotate(360deg);
@@ -120,7 +123,7 @@ nav {
   .menu-icon {
     display: block;
     color: #000;
-    margin-left: -85%;
+    margin-left: -100%;
   }
   .menu-list {
     flex-direction: column;
@@ -137,6 +140,7 @@ nav {
     margin-bottom: 20px;
     width: 100%;
     text-align: center;
+    font-size: 15px;
   }
   .menu-list li:nth-child(3) {
     margin-top: -5vw;
@@ -170,7 +174,7 @@ nav {
     li {
       margin: 0 1.5vw;
       font-size: 12px;
-      img{
+      img {
         height: 75px;
       }
     }
