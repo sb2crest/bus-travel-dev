@@ -3,14 +3,14 @@ const centerVideoStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh', // Make the container take up the full viewport height
-    background: '#fff', // Set a background color if needed
+    height: '100vh', 
+    background: '#fff',
   };
   
   const videoStyle = {
     maxWidth: '100%',
     maxHeight: '100%',
-    width: '50%',
+    width: '80%',
     height: 'auto',
   };
 
