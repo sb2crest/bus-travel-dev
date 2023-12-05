@@ -162,35 +162,48 @@ const AboutUs = () => {
             </Bounce>
           </div>
         </div>
-        <div className="aboutus_container_services">
-          <div className="aboutus_container_services_section">
-            <div className="aboutus_container_services_section_images">
-              <h1>Our Services</h1>
-              <div className="aboutus_container_services_section_images_one">
-                <div className="services_img">
-                  <img src={schooltrip} alt="School & College Trips" />
-                  <h3>School & College Trips</h3>
-                </div>
-                <div className="services_img">
-                  <img src={wedding} alt="Weddings" />
-                  <h3>Weddings</h3>
-                </div>
-                <div className="services_img">
-                  <img src={trips} alt="Corporate Trips" />
-                  <h3>Corporate Trips</h3>
-                </div>
-                <div className="services_img">
-                  <img src={privatetrip} alt="Private Trips" />
-                  <h3>Private Trips</h3>
-                </div>
-                <div className="services_img">
-                  <img src={sportsevent} alt="Sports Events" />
-                  <h3>Sports Events</h3>
+        <div className="lastcontainer">
+          <div className="aboutus_container_services">
+            <div className="aboutus_container_services_section">
+              <div className="aboutus_container_services_section_images">
+                <Fade bottom>
+                  <div className="aboutus_container_services_section_images_heading">
+                    <h1>Our Services</h1>
+                    <p>
+                      Facilitating memorable School & College Trips, elegant
+                      Weddings, efficient Corporate Trips, exclusive Private
+                      Trips, and hassle-free travel to Sports Events. Book with
+                      us for unparalleled service and comfort.
+                    </p>
+                  </div>
+                </Fade>
+                <div className="aboutus_container_services_section_images_one">
+                  <div className="services_img">
+                    <img src={schooltrip} alt="" />
+                    <h3>School & College Trips</h3>
+                  </div>
+                  <div className="services_img">
+                    <img src={wedding} alt="" />
+                    <h3>Weddings</h3>
+                  </div>
+                  <div className="services_img">
+                    <img src={trips} alt="" />
+                    <h3>Corporate Trips</h3>
+                  </div>
+                  <div className="services_img">
+                    <img src={privatetrip} alt="" />
+                    <h3>Private Trips</h3>
+                  </div>
+                  <div className="services_img">
+                    <img src={sportsevent} alt="" />
+                    <h3>Sports Events</h3>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="aboutus_container_apart">
           <div className="aboutus_container_apart_section">
             <Fade left>
