@@ -147,7 +147,6 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
     console.log("selectedFromDate:", selectedFromDate);
     console.log("selectedToDate:", selectedToDate);
 
-    // Fetch data from the API with the selected filters using Axios
     try {
       let requestBody = {
         filter: filter,
@@ -155,13 +154,10 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
         toDate: selectedToDate,
       };
       const response = await dataService.filter(requestBody);
-      // Assuming your API response is in JSON format
       const responseData = response.data;
       console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
-
-      // setVehicles(responseData);
       // setVehicles(responseData);
 
       // Close the modal
@@ -239,7 +235,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                 aria-label="Close"
                 onClick={() => setShowModal(false)}
               >
-                <span aria-hidden="true">x</span>
+                <span aria-hidden="true">×</span>
               </button>
             </div>
             <form>

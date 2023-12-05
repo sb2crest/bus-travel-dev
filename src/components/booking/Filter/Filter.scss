@@ -8,18 +8,18 @@
       z-index: 1;
       margin-bottom: 30px;
       border-radius: 25px;
-      width: 110px;
-      height: 38px;
+      width: 95px;
+      height: 35px;
       text-align: left;
-      padding-left: 20px;
       position: relative;
       color: #0f2454;
-      border: 0.2px solid grey;
+      border: 0.2px solid #0f2454;
       font-weight: 640;
       cursor: pointer;
       display: flex;
       align-items: center;
-      background-color: #ffffff;
+      background-color: #e1f0ee;
+      justify-content: space-around;
     }
 
     .filter-icon {

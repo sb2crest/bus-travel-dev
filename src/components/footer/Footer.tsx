@@ -14,7 +14,7 @@ const Footer = () => {
         {/* <img src={star1} alt="" className="star1" />
         <img src={star2} alt="" className="star2" /> */}
         <div className="footer_pic">
-          <img src={logo} alt="" width={150} height={80} />
+          <img src={logo} alt="" width={130} height={80} />
         </div>
 
         <div className="footer_content_width">
@@ -34,13 +34,13 @@ const Footer = () => {
                 <span>
                   <i
                     className="fa-solid fa-location-dot fa-lg"
-                    style={{ color: "#0f7bab"  }}
+                    style={{ color: "#0f7bab" }}
                   ></i>
                 </span>
                 <span>Corporates Office</span>
                 <p>
-                  ⇢ 102, 1st floor, AjjeGowdru Nilaya, 7th A Cross Rd, Yelahanka
-                  Satellite Town, Yelahanka, Bengaluru, Karnataka 560064
+                  ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School, Hesaraghatta hobli, Rajanukunte,
+                  Yelahanka Taluk Bangalore North, Karnataka - 560064
                 </p>
               </div>
               <div className="footer_container_left_email">
@@ -48,12 +48,14 @@ const Footer = () => {
                   {" "}
                   <i
                     className="fa-solid fa-envelope fa-lg"
-                    style={{ color: "#0f7bab"  }}
+                    style={{ color: "#0f7bab" }}
                   ></i>
                 </span>
                 <span>Email</span>
-                <p >
-                <a href="mailto: info@seabed2crest.com">info@seabed2crest.com</a> 
+                <p>
+                  <a href="mailto: info@seabed2crest.com">
+                    info@seabed2crest.com
+                  </a>
                 </p>
               </div>
               <div className="footer_container_left_number">
@@ -64,8 +66,13 @@ const Footer = () => {
                   ></i>
                 </span>
                 <span>Phone Number</span>
-               <p> <a href="tel:+91 7349368311" >+91 7349368311</a></p>
-               <p > <a href="tel:+91 7979699428" >+91 7979699428</a>
+                <p>
+                  {" "}
+                  <a href="tel:+91 7349368311">+91 7349368311</a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="tel:+91 7979699428">+91 7979699428</a>
                 </p>
               </div>
             </div>
@@ -73,14 +80,25 @@ const Footer = () => {
               <div className="footer_container_right_one">
                 <div className="footer_container_right_one_services">
                   <p id="heading">Quick Links</p>
-                  <Link to={"/aboutus"} onClick={scrollToTop}><p>About Us</p></Link>
-                  <Link to={"/booking"} onClick={scrollToTop}><p>Booking</p></Link>
-                  <Link to={"/bookinginfo"} onClick={scrollToTop}><p>Booking Info</p></Link>
-                  <Link to={"/contactus"} onClick={scrollToTop}><p>Contact Us</p></Link>
+                  <Link to={"/"} onClick={scrollToTop}>
+                    <p>Home</p>
+                  </Link>
+                  <Link to={"/aboutus"} onClick={scrollToTop}>
+                    <p>About Us</p>
+                  </Link>
+                  <Link to={"/booking"} onClick={scrollToTop}>
+                    <p>Booking</p>
+                  </Link>
+                  <Link to={"/bookinginfo"} onClick={scrollToTop}>
+                    <p>Booking Info</p>
+                  </Link>
+                  <Link to={"/contactus"} onClick={scrollToTop}>
+                    <p>Contact Us</p>
+                  </Link>
                 </div>
               </div>
               <div className="footer_container_right_technologies">
-                <p id="heading">Join on Social Media</p>
+                <p id="heading">Keep in touch</p>
                 <span>
                   <i
                     className="fa-brands fa-facebook fa-2xl"
