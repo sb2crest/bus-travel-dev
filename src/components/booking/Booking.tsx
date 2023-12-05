@@ -24,14 +24,12 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
+      backgroundImage: "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
+      backgroundImage: "linear-gradient( 95deg,#0f7bab 0%, #0f2454 100%)",
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -57,13 +55,11 @@ const ColorlibStepIconRoot = styled("div")<{
   justifyContent: "center",
   alignItems: "center",
   ...(ownerState.active && {
-    backgroundImage:
-      "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
+    backgroundImage: "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
     boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
   }),
   ...(ownerState.completed && {
-    backgroundImage:
-      "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
+    backgroundImage: "linear-gradient( 136deg,#0f7bab 0%, #0f2454 100%)",
   }),
 }));
 
@@ -97,7 +93,6 @@ const steps = [
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
   const [activeStep, setActiveStep] = useState<number>(0);
-
 
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
@@ -221,7 +216,10 @@ const Booking: React.FC = () => {
               <div className="howitworks_cards_one">
                 <i
                   className="fa-solid fa-bus fa-2xl"
-                  style={{ color: "#0f7bab" }}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(#0f7bab 0%, #0f2454 100%)",
+                  }}
                 ></i>
                 <h3>Select Your Bus</h3>
                 <p>

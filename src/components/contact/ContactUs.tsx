@@ -12,7 +12,7 @@ const ContactUs = () => {
           <h3>From Inquiries to Adventures, We're with You</h3>
           <ul>
             <li>
-              <Link to={"/#"}>Home</Link>
+              <Link to={"/"}>Home</Link>
             </li>
             <li>&#10095;</li>
             <li>Contact Us</li>

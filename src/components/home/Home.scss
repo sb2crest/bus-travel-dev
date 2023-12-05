@@ -107,6 +107,7 @@
       display: inline-block;
       background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     p {
@@ -137,6 +138,7 @@
       h1 {
         background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .key_points {
@@ -313,6 +315,7 @@ a {
         display: inline-block;
         background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .services_img {
