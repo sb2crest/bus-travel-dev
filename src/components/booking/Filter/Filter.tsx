@@ -3,7 +3,7 @@ import filterIcon from "../../../assets/images/filter.png";
 import React, { useState, Dispatch, SetStateAction } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./BookingCalendar.scss";
+import "../../booking-calendar/BookingCalendar.scss";
 import IFilterRequest from "../../../types/filter/request.type";
 import dataService from "../../../services/data.service";
 import { format } from "date-fns";
