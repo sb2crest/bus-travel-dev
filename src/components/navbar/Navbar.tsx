@@ -4,6 +4,23 @@ import { Navitems } from "./NavItems";
 import "./Navbar.scss";
 import logo from "../../assets/images/Logo.png";
 import Fade from 'react-reveal/Fade';
+
+export const scrollToTop = () => {
+  let scrollToPercentage;
+
+  if (window.innerWidth >= 1200) {
+    scrollToPercentage = 80;
+  } else if (window.innerWidth >= 768) {
+    scrollToPercentage = 68;
+  } else {
+    scrollToPercentage = 51;
+  }
+  const windowHeight = window.innerHeight;
+  window.scrollTo({
+    top: (windowHeight * scrollToPercentage) / 100,
+    behavior: "smooth",
+  });
+};
 const Navbar = React.memo(() => {
   const [clicked, setClicked] = useState(false);
   const menuList = Navitems.map(({ url, title, imgSrc }, index) => {
@@ -11,7 +28,7 @@ const Navbar = React.memo(() => {
     return (
       <li key={index} onClick={() => setClicked(false)}>
         {isUrlDefined ? (
-          <NavLink exact to={url!} activeClassName="active">
+          <NavLink exact to={url!} activeClassName="active" onClick={scrollToTop}>
             {title}
           </NavLink>
         ) : (
@@ -46,11 +63,11 @@ const Navbar = React.memo(() => {
           <ul className={clicked ? "menu-list" : "menu-list close"} data-testid="menu-list">
               {menuList}
               <li className="hidecontact" onClick={() => setClicked(false)} data-testid="hidecontact">
-                <NavLink to={"/contactus"}>Contact Us</NavLink>
+                <NavLink to={"/contactus"} onClick={scrollToTop}>Contact Us</NavLink>
               </li>
 
               <li>
-                <NavLink to={"/contactus"} >
+                <NavLink to={"/contactus"} onClick={scrollToTop}>
                   <button className="button-89" role="button">
                     <i
                       className="fa-solid fa-phone fa-md"
