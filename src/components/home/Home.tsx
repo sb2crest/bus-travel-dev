@@ -27,9 +27,12 @@ const Icon = styled.i`
   }
 `;
 export const scrollToTop = () => {
+  const windowHeight = window.innerHeight;
+  const scrollToPercentage = 50; 
+
   window.scrollTo({
-    top: 0,
-    behavior: "auto",
+    top: (windowHeight * scrollToPercentage) / 100,
+    behavior: "smooth",
   });
 };
 const Home: React.FC = () => {
