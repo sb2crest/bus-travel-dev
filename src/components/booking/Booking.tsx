@@ -243,6 +243,7 @@ const Booking: React.FC = () => {
                 </p>
               </div>
             </Fade>
+            <Fade bottom>
             <div className="howitworks_cards_three">
               <i
                 className="fa-solid fa-money-check-dollar fa-2xl"
@@ -255,6 +256,7 @@ const Booking: React.FC = () => {
                 reserved for the upcoming journey.
               </p>
             </div>
+            </Fade>
             <Fade right>
               <div className="howitworks_cards_four">
                 <i
