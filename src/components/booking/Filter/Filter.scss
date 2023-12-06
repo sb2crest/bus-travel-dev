@@ -21,15 +21,6 @@
       background-color: #e1f0ee;
       justify-content: space-around;
     }
-
-    .filter-icon {
-      position: absolute;
-      left: 77px;
-      top: 55%;
-      width: 18px;
-      height: 18px;
-      transform: translateY(-50%);
-    }
   }
 
   .modal {
@@ -52,12 +43,12 @@
     .modal-container {
       left: 31%;
       top: 12%;
-      width: 38.5%;
-      height: 72%;
-      position: absolute;
+      width: auto;
+      height: auto;
+      position: fixed;
       background-color: white;
       border-radius: 10px;
-      padding-left: 20px;
+      padding: 0px 0px 20px 20px;
       .modal-header {
         display: flex;
         align-items: baseline;
@@ -74,6 +65,7 @@
         background-color: #ffffff;
         font-size: 25px;
         font-weight: 500;
+        border-radius: 10px;
       }
 
       .form-content {
@@ -109,20 +101,21 @@
             margin-bottom: 5px;
 
             .label-ac,
-            .label-non-ac,.label-all {
+            .label-non-ac,
+            .label-all {
               color: #444;
               font-weight: 600;
             }
 
-             .input-all{
+            .input-all {
               margin-left: 2px;
               margin-right: 5px;
               width: 16px;
               height: 16px;
             }
-            .input-non-ac,.input-ac {
+            .input-non-ac,
+            .input-ac {
               margin-right: 5px;
-              margin-left: 18px;
               width: 16px;
               height: 16px;
             }
@@ -159,20 +152,23 @@
             align-items: center;
             margin-bottom: 5px;
             .label-semi-sleeper,
-            .label-non-sleeper,.label-all,.label-sleeper {
+            .label-non-sleeper,
+            .label-all,
+            .label-sleeper {
               color: #444;
               font-weight: 600;
             }
 
-             .input-all{
+            .input-all {
               margin-left: 2px;
               margin-right: 5px;
               width: 16px;
               height: 16px;
             }
-            .input-non-sleeper,.input-semi-sleeper,.input-sleeper {
-              margin-right: 5px;
-              margin-left: 18px;
+            .input-non-sleeper,
+            .input-semi-sleeper,
+            .input-sleeper {
+              margin-right: 5px; 
               width: 16px;
               height: 16px;
             }
@@ -192,100 +188,14 @@
             overflow: hidden;
           }
         }
-
-        .amenities-section {
-          .amenities-filter-button {
-            background-color: #eee;
-            color: #0f2454;
-            font-weight: 650;
-            cursor: pointer;
-            padding: 18px;
-            width: 90%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            margin-top: 11px;
-            margin-bottom: 15px;
-          }
-
-          .plus-icon-amenities,
-          .minus-icon-amenities {
-            width: 14px;
-            float: right;
-            height: 12px;
-            margin-left: 5px;
-          }
-
-          .section-1 {
-            margin-bottom: 18px;
-
-            .wifi {
-              border: 1px solid grey;
-              background-color: white;
-              padding: 7px 20px 7px 25px;
-              border-radius: 20px;
-              display: inline;
-              cursor: pointer;
-              color: grey;
-              font-weight: 700;
-              overflow: hidden;
-              margin-left: 10px;
-            }
-
-            .wifi-clicked {
-              color: #0f2454;
-            }
-
-            .charge {
-              margin-left: 20px;
-              border: 1px solid grey;
-              background-color: white;
-              padding: 6px 20px 6px 20px;
-              border-radius: 20px;
-              display: inline;
-              cursor: pointer;
-              color: grey;
-              font-weight: 700;
-              overflow: hidden;
-            }
-
-            .charge-clicked {
-              color: #0f2454;
-            }
-
-            .charge-icon {
-              padding-right: 2px;
-            }
-
-            .movie {
-              margin-left: 10px;
-              border: 1px solid grey;
-              background-color: white;
-              padding: 6px 20px 6px 20px;
-              border-radius: 20px;
-              display: inline;
-              cursor: pointer;
-              color: grey;
-              font-weight: 700;
-              overflow: hidden;
-            }
-
-            .movie-Clicked {
-              color: #0f2454;
-            }
-
-            .movie-icon {
-              padding-right: 3px;
-            }
-          }
-        }
       }
     }
-
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-right: 2.5vh;
+    }
     .button-close-clear {
-      margin-top: 50px;
-
       .button-close,
       .button-clear {
         margin-left: 6px;
@@ -321,27 +231,17 @@
         height: 30px;
         padding-left: 15px;
       }
-
-      .filter-icon {
-        left: 60px;
-        top: 55%;
-        width: 15px;
-        height: 16px;
-      }
     }
 
     .modal {
       .modal-container {
-        left: 10%;
+        left: 20%;
         top: 5%;
-        width: 80%;
-        height: 90%;
         .modal-header {
-          padding-top: 0 !important;
-          padding-right: 10px;
+          padding: 0 !important;
         }
         .form-content {
-          margin-left: 15px;
+          margin-left: 0px;
 
           .ac-section {
             .ac-filter-button {
@@ -358,22 +258,25 @@
             }
             .checkbox-section-01 {
               display: flex;
-              align-items: center;
+              align-items: baseline;
+              flex-direction: column;
               .label-ac,
               .label-non-ac {
                 color: #444;
                 font-weight: 600;
                 font-size: 13px;
               }
-
-              .input-ac {
-                margin-left: 2px;
-                width: 15px;
-                height: 13px;
+              .checkbox {
+                display: flex;
+                align-items: center;
+                padding-bottom: 1vh;
               }
-              .input-non-ac {
-                width: 15px;
-                height: 13px;
+              .input-ac,
+              .input-non-ac,
+              .input-all {
+                width: 18px;
+                height: 14px;
+                margin-left: 0;
               }
             }
           }
@@ -393,20 +296,25 @@
             }
             .checkbox-section-02 {
               display: flex;
-              align-items: center;
+              align-items: baseline;
+              flex-direction: column;
               .label-semi-sleeper,
               .label-non-sleeper {
                 font-size: 13px;
               }
 
-              .input-semi-sleeper {
-                margin-left: 2px;
-                width: 15px;
-                height: 13px;
+              .input-semi-sleeper,
+              .input-non-sleeper,
+              .input-sleeper,
+              .input-all {
+                width: 18px;
+                height: 14px;
+                margin-left: 0;
               }
-              .input-non-sleeper {
-                width: 15px;
-                height: 13px;
+              .checkbox {
+                display: flex;
+                align-items: center;
+                padding-bottom: 1vh;
               }
             }
           }
@@ -424,37 +332,11 @@
               width: 12px;
               height: 10px;
             }
-
-            .section-1 {
-              margin-bottom: 0px;
-              display: flex;
-              flex-wrap: wrap;
-              .wifi {
-                padding: 7px 20px 7px 25px;
-                margin-left: 4px;
-                margin-right: 5px;
-              }
-              .charge {
-                margin-left: 0px;
-              }
-              .charge-icon {
-                padding-right: 2px;
-              }
-
-              .movie {
-                margin-left: 4px;
-                margin-top: 0;
-              }
-              .movie-icon {
-                padding-right: 3px;
-              }
-            }
           }
         }
       }
 
       .button-close-clear {
-        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -462,13 +344,14 @@
         .button-close,
         .button-clear {
           margin-left: 6px;
-          width: 60px;
-          height: 30px;
+          width: 50px;
+          height: 25px;
+          font-size: 12px;
         }
 
         .button-clear {
-          width: 85px;
-          height: 30px;
+          width: 75px;
+          height: 25px;
         }
       }
     }
@@ -485,21 +368,12 @@
         height: 30px;
         padding-left: 15px;
       }
-
-      .filter-icon {
-        left: 60px;
-        top: 55%;
-        width: 15px;
-        height: 16px;
-      }
     }
 
     .modal {
       .modal-container {
         left: 18%;
         top: 5%;
-        width: 60%;
-        height: 90%;
         .modal-header {
           padding-top: 0 !important;
           padding-right: 10px;
@@ -617,7 +491,6 @@
       }
 
       .button-close-clear {
-        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -648,21 +521,12 @@
         height: 30px;
         padding-left: 15px;
       }
-  
-      .filter-icon {
-        left: 60px;
-        top: 55%;
-        width: 15px;
-        height: 16px;
-      }
     }
 
     .modal {
       .modal-container {
         left: 25%;
         top: 5%;
-        width: 50%;
-        height: 50%;
         .modal-header {
           padding-top: 0 !important;
           padding-right: 10px;
@@ -781,7 +645,6 @@
       }
 
       .button-close-clear {
-        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -812,21 +675,12 @@
         height: 35px;
         padding-left: 15px;
       }
-
-      .filter-icon {
-        left: 60px;
-        top: 55%;
-        width: 15px;
-        height: 16px;
-      }
     }
 
     .modal {
       .modal-container {
         left: 25%;
         top: 5%;
-        width: 50%;
-        height: 80%;
         .modal-header {
           padding-top: 10px !important;
           padding-right: 10px;
@@ -851,7 +705,7 @@
               display: flex;
               align-items: center;
               .label-ac,
-              .label-non-ac{
+              .label-non-ac {
                 color: #444;
                 font-weight: 600;
                 font-size: 17px;
@@ -945,7 +799,6 @@
       }
 
       .button-close-clear {
-        margin-top: 5vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -954,4 +807,3 @@
     }
   }
 }
-

@@ -27,9 +27,12 @@ const Icon = styled.i`
   }
 `;
 export const scrollToTop = () => {
+  const windowHeight = window.innerHeight;
+  const scrollToPercentage = 50; 
+
   window.scrollTo({
-    top: 0,
-    behavior: "auto",
+    top: (windowHeight * scrollToPercentage) / 100,
+    behavior: "smooth",
   });
 };
 const Home: React.FC = () => {
@@ -158,9 +161,9 @@ const Home: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <Link to={"/aboutus"} onClick={scrollToTop}>
                 {" "}
                 <div className="btn-container">
+              <Link to={"/aboutus"} onClick={scrollToTop}>
                   <button className="Knowmore">
                     <span className="text">Know more</span>
                     <div className="icon_container">
@@ -176,13 +179,14 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                   </button>
+              </Link>
+
                 </div>
                 <svg style={{ display: "none" }}>
                   <symbol id="arrow-right" viewBox="0 0 20 10">
                     <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
                   </symbol>
                 </svg>
-              </Link>
             </div>
           </Slide>
           <Slide right>
