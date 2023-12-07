@@ -2,13 +2,6 @@ body {
   overflow-x: hidden;
   margin: 0;
 }
-body.menu-open {
-  overflow: hidden;
-}
-body.menu-list.close {
-  overflow: hidden;
-  display: none;
-}
 nav {
   display: flex;
   justify-content: center;
@@ -41,12 +34,19 @@ nav {
 .logo {
   display: none;
 }
+.menu-list.active {
+  max-height: 1000px; 
+}
 .menu-list {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 !important;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, max-height 0.7s ease;
+  max-height: 0;
+  overflow: hidden;
+  
   li {
     margin: 0 2.2vw;
   }
@@ -132,7 +132,7 @@ nav {
     color: #000;
     margin-left: -100%;
   }
-  .menu-list {
+  .menu-list{
     flex-direction: column;
     width: 100%;
     position: absolute;
@@ -141,7 +141,11 @@ nav {
     top: 48px;
     padding: 0 !important;
     padding-top: 5vw !important;
-    transition: all 0.3s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.7s ease;
   }
   .menu-list li {
     margin-bottom: 20px;
@@ -164,14 +168,23 @@ nav {
     color: white;
   }
   .menu-list.close {
-    right: -101%;
     transition: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+
   }
   .button-89 {
     display: none;
   }
   .hidecontact {
     display: block;
+  }
+  .menu-list.active {
+    max-height: 1000px; 
+    top:48px;
+    right: 0;
+    transition: all 0.7s ease ;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1023px) {
