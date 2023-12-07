@@ -1,4 +1,49 @@
 .booking-info {
+  &_banner {
+    width: -webkit-fill-available;
+    height: 60vh;
+    background: url(../../assets/images/banner.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font-size: 6vw;
+      color: #0f7bab;
+      background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.3px #fff;
+    }
+
+    h3 {
+      margin-top: -4.5vw;
+      font-size: 2.3vw;
+      color: #05f867;
+    }
+
+    ul {
+      margin-top: -2vw;
+      list-style: none;
+      display: flex;
+      color: #fff;
+      padding-inline-start: 0px;
+      align-items: center;
+
+      li {
+        margin-left: 10px;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+    }
+  }
   .booking-info-container {
     display: flex;
     align-items: center;
@@ -6,11 +51,14 @@
     padding: 20px;
     border-radius: 10px;
     background-color: white;
-    text-align: center;
-    margin-right: -12vw;
 
     .form {
       margin-left: 20px;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -33,7 +81,7 @@
       .booking-id {
         .input-booking-id {
           margin-top: 5px;
-          width: 120%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -51,9 +99,12 @@
 
       .phone {
         margin-top: 5px;
-
+        width: 50%;
+        .error {
+          margin-top: 5px;
+        }
         .input-phone {
-          width: 120%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -70,8 +121,8 @@
       }
 
       .send-otp {
+        width: 50%;
         text-align: left;
-
         .button-send-otp {
           margin-top: 5px;
           width: 50%;
@@ -169,7 +220,7 @@
 
       .image-class {
         margin-top: 50px;
-        width: 55%;
+        width: 75%;
         height: auto;
       }
     }
@@ -179,7 +230,13 @@
 @media only screen and (max-width: 480px) {
   .booking-info {
     align-items: center;
-
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 14vw;
+      }
+    }
     .booking-info-container {
       flex-direction: column;
       background-color: #a2e0fd;
@@ -189,11 +246,11 @@
 
       .form {
         margin-left: 0px;
-
+        width: 100%;
         .header-custom {
           .header {
-            font-size: 35px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 600;
           }
         }
 
@@ -207,15 +264,17 @@
 
         .phone {
           margin-top: 10px;
-
+          width: 70%;
           .input-phone {
             width: 100%;
           }
         }
 
         .send-otp {
+          width: 70%;
+
           .button-send-otp {
-            width: 30%;
+            width: 60%;
           }
         }
 
@@ -252,7 +311,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
@@ -268,6 +329,13 @@
   .booking-info {
     align-items: center;
     display: block !important;
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 12vw;
+      }
+    }
 
     .booking-info-container {
       flex-direction: column;
@@ -278,11 +346,12 @@
 
       .form {
         margin-left: 0px;
+        width: 100%;
 
         .header-custom {
           .header {
             font-size: 35px;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
 
@@ -296,6 +365,7 @@
 
         .phone {
           margin-top: 10px;
+          width: 50%;
 
           .input-phone {
             width: 100%;
@@ -303,8 +373,10 @@
         }
 
         .send-otp {
+          width: 50%;
+
           .button-send-otp {
-            width: 30%;
+            width: 50%;
           }
         }
 
@@ -341,7 +413,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
@@ -357,6 +431,13 @@
   .booking-info {
     align-items: center;
     display: block !important;
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 7vw;
+      }
+    }
 
     .booking-info-container {
       flex-direction: column;
@@ -367,11 +448,12 @@
 
       .form {
         margin-left: 0px;
+        width: 100%;
 
         .header-custom {
           .header {
             font-size: 35px;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
 
@@ -385,15 +467,16 @@
 
         .phone {
           margin-top: 10px;
-
+          width: 40%;
           .input-phone {
-            width: 100%;
+            width: 90%;
           }
         }
 
         .send-otp {
+          width: 40%;
           .button-send-otp {
-            width: 30%;
+            width: 40%;
           }
         }
 
@@ -430,7 +513,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
