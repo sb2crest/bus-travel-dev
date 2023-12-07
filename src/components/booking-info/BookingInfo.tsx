@@ -194,7 +194,7 @@ const BookingInfo = () => {
   };
 
   return (
-    <><div className="vehicleInfo_banner">
+    <><div className="booking-info_banner">
       <h1>Booking Info</h1>
       <ul>
         <li>

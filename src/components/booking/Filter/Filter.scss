@@ -235,7 +235,7 @@
 
     .modal {
       .modal-container {
-        left: 20%;
+        left: 0%;
         top: 5%;
         .modal-header {
           padding: 0 !important;
@@ -317,21 +317,7 @@
                 padding-bottom: 1vh;
               }
             }
-          }
-          .amenities-section {
-            .amenities-filter-button {
-              height: 40px;
-              padding: 10px;
-              width: 87.5%;
-              margin-top: 10px;
-              margin-bottom: 0px;
-            }
-
-            .plus-icon-amenities,
-            .minus-icon-amenities {
-              width: 12px;
-              height: 10px;
-            }
+          
           }
         }
       }
@@ -344,14 +330,14 @@
         .button-close,
         .button-clear {
           margin-left: 6px;
-          width: 50px;
-          height: 25px;
-          font-size: 12px;
+          width: 60px;
+          height: 30px;
+          font-size: 13px;
         }
 
         .button-clear {
-          width: 75px;
-          height: 25px;
+          width: 85px;
+          height: 30px;
         }
       }
     }

@@ -93,18 +93,16 @@
     width: 88%;
 
     .from-to-date-container {
-      flex-direction: column;
       .date-picker {
         .start-date {
-          width: 70%;
-          height: 30px;
+          width: 80%;
+          height: 35px;
           margin-left: 0vh;
-          margin-bottom: 1vh;
         }
 
         .end-date {
-          width: 70%;
-          height: 30px;
+          width: 80%;
+          height: 35px;
           margin-left: 0vh;
         }
 
