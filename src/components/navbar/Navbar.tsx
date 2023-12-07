@@ -44,6 +44,7 @@ const Navbar = React.memo(() => {
 
   const handleClick = () => {
     setClicked(!clicked);
+    document.body.classList.toggle("menu-open", !clicked);
   };
 
   return (

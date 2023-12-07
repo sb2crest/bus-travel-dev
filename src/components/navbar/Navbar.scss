@@ -2,6 +2,13 @@ body {
   overflow-x: hidden;
   margin: 0;
 }
+body.menu-open {
+  overflow: hidden;
+}
+body.menu-list.close {
+  overflow: hidden;
+  display: none;
+}
 nav {
   display: flex;
   justify-content: center;
