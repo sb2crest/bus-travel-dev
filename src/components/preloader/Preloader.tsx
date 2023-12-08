@@ -17,9 +17,10 @@ const centerVideoStyle = {
 const Preloader = () => {
   return (
     <div className="loaderStyles" style={centerVideoStyle}>
-    <video autoPlay loop muted style={videoStyle}>
-      <source src={preloader} type="video/mp4"/>
-    </video>
+   <video autoPlay loop muted playsInline style={videoStyle}>
+  <source src={preloader} type="video/mp4"/>
+</video>
+
   </div>
   )
 }
