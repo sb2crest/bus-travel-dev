@@ -49,6 +49,10 @@ footer {
         margin-left: 1px;
         &_corporates {
           margin-bottom: 7vh;
+          a{
+            text-decoration: none;
+            
+          }
           p {
             color: var(--white, #fff);
             font-family: "Poppins", sans-serif;
@@ -61,6 +65,11 @@ footer {
             margin-left: 40px;
             margin-top: 1vh;
             text-decoration: none;
+            a{
+              text-decoration: none !important;
+            color: var(--white, #fff);
+
+            }
 
           }
           span {
