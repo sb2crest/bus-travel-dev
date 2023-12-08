@@ -138,10 +138,11 @@
 
       .otp {
         padding: 0 !important;
+        width: 100%;
 
         .input-otp {
           margin-top: 5px;
-          width: 125%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -160,9 +161,9 @@
       .verify-resend {
         .verify-resend-01 {
           .verify {
-            margin-left: 20%;
+            margin-left: 5%;
             margin-top: 5px;
-            width: 35%;
+            width: 45%;
             font-size: 16px;
             background-color: #0f7bab;
             color: white;
@@ -176,7 +177,7 @@
           .resend {
             margin-top: 5px;
             margin-left: 15px;
-            width: 35%;
+            width: 45%;
             font-size: 16px;
             background-color: #0f7bab;
             color: white;
@@ -190,6 +191,7 @@
       }
 
       .show-details {
+        width: 50%;
         .show-details-01 {
           text-align: center;
           display: flex;
@@ -197,9 +199,8 @@
           text-decoration: none;
 
           .button-show-details {
-            margin-left: 25%;
             margin-top: 5px;
-            width: 105%;
+            width: 60%;
             height: 35px;
             font-size: 16px;
             background-color: #0f7bab;
@@ -281,27 +282,27 @@
         .otp {
           padding: 0 !important;
           text-align: justify;
-
-          .input-otp {
-            width: 103%;
-          }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 10%;
+              width: 40%;
+              font-size: 12px;
+            }
+            .resend {
+              width: 40%;
+              font-size: 12px;
             }
           }
         }
 
         .show-details {
+          width: 70%;
           .show-details-01 {
-            .anchor-custom {
-              .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+            .button-show-details {
+              width: 65%;
             }
           }
         }
@@ -383,27 +384,27 @@
         .otp {
           padding: 0 !important;
           text-align: justify;
-
-          .input-otp {
-            width: 103%;
-          }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 10%;
+              width: 40%;
+              font-size: 15px;
+            }
+            .resend {
+              width: 40%;
+              font-size: 15px;
             }
           }
         }
 
         .show-details {
           .show-details-01 {
-            .anchor-custom {
               .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+                width: 70%;
+              
             }
           }
         }
@@ -485,25 +486,28 @@
           text-align: justify;
 
           .input-otp {
-            width: 103%;
+            width: 90%;
           }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 6%;
+              width: 40%;
+            }
+            .resend {
+              width: 40%;
             }
           }
         }
 
         .show-details {
+          width: 40%;
           .show-details-01 {
-            .anchor-custom {
               .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+                width: 70%;
+              
             }
           }
         }
@@ -521,6 +525,25 @@
           width: 55%;
           height: auto;
           mix-blend-mode: multiply;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1023px) and (max-width: 1279px) {
+  .booking-info {
+    .booking-info-container {
+      .form {
+        .verify-resend {
+          .verify-resend-01 {
+            .verify {
+              margin-left: 8%;
+              width: 45%;
+            }
+            .resend {
+              width: 40%;
+            }
+          }
         }
       }
     }
