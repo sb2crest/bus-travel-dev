@@ -235,8 +235,9 @@
 
     .modal {
       .modal-container {
-        left: 0%;
+        left: 5%;
         top: 5%;
+        right: 5%;
         .modal-header {
           padding: 0 !important;
         }
@@ -358,8 +359,9 @@
 
     .modal {
       .modal-container {
-        left: 18%;
+        left: 10%;
         top: 5%;
+        right: 10%;
         .modal-header {
           padding-top: 0 !important;
           padding-right: 10px;
@@ -512,6 +514,7 @@
     .modal {
       .modal-container {
         left: 25%;
+        right: 25%;
         top: 5%;
         .modal-header {
           padding-top: 0 !important;
@@ -666,6 +669,7 @@
     .modal {
       .modal-container {
         left: 25%;
+        right: 25%;
         top: 5%;
         .modal-header {
           padding-top: 10px !important;

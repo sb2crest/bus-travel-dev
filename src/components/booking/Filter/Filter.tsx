@@ -9,6 +9,7 @@ import dataService from "../../../services/data.service";
 import { format } from "date-fns";
 import ListVehicles from "../../../types/list.type";
 import TuneIcon from "@mui/icons-material/Tune";
+import { FaCalendar } from "react-icons/fa";
 
 interface FilterProps {
   setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
@@ -399,55 +400,58 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                             checked={isSleeperAllChecked}
                             onChange={handleSleeperAllChange}
                           />
-                          <label className="label-all" htmlFor="allCheckboxsleeper">
+                          <label
+                            className="label-all"
+                            htmlFor="allCheckboxsleeper"
+                          >
                             All
                           </label>
                         </div>
                         <div className="checkbox">
-                        <input
-                          className="input-sleeper"
-                          id="sleeperCheckbox"
-                          type="checkbox"
-                          checked={isSleeperChecked}
-                          onChange={handleSleeperChange}
-                        />
-                        <label
-                          className="label-sleeper"
-                          htmlFor="sleeperCheckbox"
-                        >
-                          Sleeper
-                        </label>
+                          <input
+                            className="input-sleeper"
+                            id="sleeperCheckbox"
+                            type="checkbox"
+                            checked={isSleeperChecked}
+                            onChange={handleSleeperChange}
+                          />
+                          <label
+                            className="label-sleeper"
+                            htmlFor="sleeperCheckbox"
+                          >
+                            Sleeper
+                          </label>
                         </div>
                         <div className="checkbox">
-                        <input
-                          className="input-semi-sleeper"
-                          id="semiSleeperCheckbox"
-                          type="checkbox"
-                          checked={isSemiSleeperChecked}
-                          onChange={handleSemiSleeperChange}
-                        />
-                        <label
-                          className="label-semi-sleeper"
-                          htmlFor="semiSleeperCheckbox"
-                        >
-                          Semi-Sleeper
-                        </label>
+                          <input
+                            className="input-semi-sleeper"
+                            id="semiSleeperCheckbox"
+                            type="checkbox"
+                            checked={isSemiSleeperChecked}
+                            onChange={handleSemiSleeperChange}
+                          />
+                          <label
+                            className="label-semi-sleeper"
+                            htmlFor="semiSleeperCheckbox"
+                          >
+                            Semi-Sleeper
+                          </label>
                         </div>
                         <div className="checkbox">
-                        <input
-                          className="input-non-sleeper"
-                          id="nonSleeperCheckbox"
-                          type="checkbox"
-                          checked={isNonSleeperChecked}
-                          onChange={handleNonSleeperChange}
-                        />
-                        <label
-                          className="label-non-sleeper"
-                          htmlFor="nonSleeperCheckbox"
-                        >
-                          Non-Sleeper{" "}
-                        </label>
-                      </div>
+                          <input
+                            className="input-non-sleeper"
+                            id="nonSleeperCheckbox"
+                            type="checkbox"
+                            checked={isNonSleeperChecked}
+                            onChange={handleNonSleeperChange}
+                          />
+                          <label
+                            className="label-non-sleeper"
+                            htmlFor="nonSleeperCheckbox"
+                          >
+                            Non-Sleeper{" "}
+                          </label>
+                        </div>
                       </div>
                     </>
                   )}
@@ -467,6 +471,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                         minDate={new Date()}
                         data-testid="date-item-1"
                       />
+                      <FaCalendar className="from-icon-calendar" />
                     </div>
                     <div className="date-picker">
                       <DatePicker
@@ -480,6 +485,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                         placeholderText="To-Date"
                         className="end-date"
                       />
+                      <FaCalendar className="to-icon-calendar" />
                     </div>
                   </div>
                 </div>
