@@ -41,8 +41,9 @@
     opacity: 1;
 
     .modal-container {
-      left: 31%;
-      top: 12%;
+      left: 30%;
+      right: 30%;
+      top: 15%;
       width: auto;
       height: auto;
       position: fixed;
@@ -668,8 +669,8 @@
 
     .modal {
       .modal-container {
-        left: 25%;
-        right: 25%;
+        left: 20%;
+        right: 20%;
         top: 5%;
         .modal-header {
           padding-top: 10px !important;

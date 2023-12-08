@@ -1,36 +1,36 @@
 .calendar-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
   width: 90%;
   .from-to-date-container {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     background-color: #eee;
     padding: 12px;
-    width: auto;
+    width: 95%;
 
     .date-picker {
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: start;
-
+      justify-content: space-around;
+      width: 45%;
       .start-date {
-        width: 80%;
+        width: 90%;
         height: 35px;
-        margin-left: 2vh;
       }
 
       .end-date {
-        width: 80%;
+        width: 90%;
         height: 35px;
-        margin-left: 5vh;
       }
 
-      .react-datepicker-wrapper {
-        width: 100%;
-      }
+      // .react-datepicker-wrapper {
+      //   width: 100%;
+      // }
 
       .react-datepicker__input-container input::placeholder {
         color: #0f2454;
@@ -40,11 +40,15 @@
       .react-datepicker__input-container input {
         border: 0px solid #ffffff;
         border-radius: 6px;
-        text-align: center;
         color: #0f2454;
         font-weight: 600;
       }
-
+      .from-icon-calendar,
+      .to-icon-calendar {
+        position: absolute;
+        right: 20%;
+        color: #0f2454;
+      }
       .react-datepicker__input-container input:focus {
         border-color: rgb(15, 123, 171);
         outline: none;
@@ -95,15 +99,18 @@
     .from-to-date-container {
       .date-picker {
         .start-date {
-          width: 80%;
-          height: 35px;
-          margin-left: 0vh;
+          font-size: 12px;
+          width: 100%;
         }
-
+        .from-icon-calendar,
+        .to-icon-calendar {
+          font-size: 12px;
+          right: 5%;
+        }
         .end-date {
-          width: 80%;
-          height: 35px;
-          margin-left: 0vh;
+          font-size: 12px;
+          width: 100%;
+
         }
 
         .react-datepicker__input-container input {
@@ -120,16 +127,16 @@
 }
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .calendar-container {
-  width: 88%;
+    width: 88%;
   }
 }
 @media only screen and (min-width: 767px) and (max-width: 1023px) {
   .calendar-container {
-  width: 93%;
+    width: 93%;
   }
 }
 @media only screen and (min-width: 1023px) and (max-width: 1279px) {
   .calendar-container {
-  width: 93%;
+    width: 93%;
   }
 }
