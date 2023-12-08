@@ -10,14 +10,7 @@ CMD [ "ionic", "serve" ]
 
 # Second stage: Serve the application using Nginx
 FROM nginx:1.23-alpine
-
-# Remove the default Nginx configuration
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy your custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/
-
-# Copy the built React app
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
 COPY --from=nodework /app/dist /usr/share/nginx/html
-
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
