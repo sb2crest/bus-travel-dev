@@ -7,7 +7,7 @@ import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
 import divimg from "../../assets/images/divimage.svg";
 import { styled } from "@mui/system";
-import bus from '../../assets/images/busImage_1.jpg'
+import bus from "../../assets/images/busImage_1.jpg";
 import {
   Stack,
   Stepper,
@@ -142,7 +142,7 @@ const Booking: React.FC = () => {
                 destinations.
               </p>
             </Fade>
-            <img src={divimg} alt="curvedimg" className="curvedimg"/>
+            <img src={divimg} alt="curvedimg" className="curvedimg" />
             <div className="curvedimgsection">
               <div data-testid="filter-component" className="filterAlign">
                 <Filter setVehicles={setVehicles} />
@@ -151,13 +151,15 @@ const Booking: React.FC = () => {
                 {vehicles.map((vehicle, index) => (
                   <div className="buses" key={index}>
                     {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
-                      <img
-                        src={bus}
-                        // src={vehicle.s3ImageUrl[0]}
-                        alt={`Bus ${index}`}
-                        className="busOne_img"
-                      />
+                    <img
+                      src={bus}
+                      // src={vehicle.s3ImageUrl[0]}
+                      alt={`Bus ${index}`}
+                      className="busOne_img"
+                    />
                     {/* )} */}
+              {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
+
                     {/* Render vehicle details here */}
                     <div className="busOne_details">
                       <h2>
@@ -219,7 +221,7 @@ const Booking: React.FC = () => {
                 <i
                   className="fa-solid fa-bus fa-2xl"
                   style={{
-                   color:"#0f7bab"
+                    color: "#0f7bab",
                   }}
                 ></i>
                 <h3>Select Your Bus</h3>
@@ -244,18 +246,18 @@ const Booking: React.FC = () => {
               </div>
             </Fade>
             <Fade bottom>
-            <div className="howitworks_cards_three">
-              <i
-                className="fa-solid fa-money-check-dollar fa-2xl"
-                style={{ color: "#0f7bab" }}
-              ></i>
-              <h3>Booking Payment</h3>
-              <p>
-                {" "}
-                Complete the payment process securely, ensuring your bus is
-                reserved for the upcoming journey.
-              </p>
-            </div>
+              <div className="howitworks_cards_three">
+                <i
+                  className="fa-solid fa-money-check-dollar fa-2xl"
+                  style={{ color: "#0f7bab" }}
+                ></i>
+                <h3>Booking Payment</h3>
+                <p>
+                  {" "}
+                  Complete the payment process securely, ensuring your bus is
+                  reserved for the upcoming journey.
+                </p>
+              </div>
             </Fade>
             <Fade right>
               <div className="howitworks_cards_four">
