@@ -1,49 +1,5 @@
 .booking-info {
-  &_banner {
-    width: -webkit-fill-available;
-    height: 60vh;
-    background: url(../../assets/images/banner.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    h1 {
-      font-size: 6vw;
-      color: #0f7bab;
-      background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 0.3px #fff;
-    }
-
-    h3 {
-      margin-top: -4.5vw;
-      font-size: 2.3vw;
-      color: #05f867;
-    }
-
-    ul {
-      margin-top: -2vw;
-      list-style: none;
-      display: flex;
-      color: #fff;
-      padding-inline-start: 0px;
-      align-items: center;
-
-      li {
-        margin-left: 10px;
-
-        a {
-          text-decoration: none;
-          color: #fff;
-        }
-      }
-    }
-  }
+ 
   .booking-info-container {
     display: flex;
     align-items: center;
