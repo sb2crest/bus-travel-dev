@@ -1,9 +1,12 @@
 export  default interface ListVehicle {
-    [x: string]: any;
-    seatCapacity: number;
-    vehicleNumber: string;
-    imageUrl: string;
-    isVehicleAC: boolean;
-    isVehicleSleeper: boolean;
-  }
-  
+  vehicleNumber: string;
+  seatCapacity: number;
+  s3ImageUrl: string[];
+  vehicleAC: string;
+  sleeper: string;
+  image: string | null;
+  driverName: string | null;
+  driverNumber: string | null;
+  alternateNumber: string | null;
+  emergencyNumber: string | null;
+}

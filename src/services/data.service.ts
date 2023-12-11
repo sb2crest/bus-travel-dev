@@ -8,6 +8,7 @@ import IVerifyPayment from "../types/payment/VerifyPayment.type";
 import IFilterRequest from "../types/filter/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IBookingInfoRequest from "../types/BookingInfo/request.type";
+import IFilterResponse from "../types/filter/response.type";
 class DataService {
 
   // Book now
@@ -51,7 +52,7 @@ class DataService {
 
   // filter 
   filter(data: IFilterRequest) {
-    return http.post<IFilterRequest>("getVehicleAvailability", data);
+    return http.post<IFilterResponse[]>("getVehicleAvailability", data);
   }
 
   // deleteVehicle
