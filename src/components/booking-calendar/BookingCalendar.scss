@@ -140,3 +140,8 @@
     width: 93%;
   }
 }
+@media only screen and (max-width: 320px) {
+  .from-icon-calendar,.to-icon-calendar{
+    display: none;
+  }
+}
