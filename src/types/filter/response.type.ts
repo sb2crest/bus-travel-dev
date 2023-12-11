@@ -1,7 +1,12 @@
 export default interface IFilterResponse {
-    vehicleNumber: string,
-    seatCapacity: number,
-    imageUrl: string;
-    isAC: boolean,
-    isSleeper: boolean
+    vehicleNumber: string;
+    seatCapacity: number;
+    s3ImageUrl: string[];
+    vehicleAC: string;
+    sleeper: string;
+    image: string | null;
+    driverName: string | null;
+    driverNumber: string | null;
+    alternateNumber: string | null;
+    emergencyNumber: string | null;
 }
