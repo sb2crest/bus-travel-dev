@@ -82,8 +82,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
 
-
-
   //OTP State Variables
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
@@ -266,6 +264,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
             const bookingId = response.data;
             setCheckout(true);
             setBookingId(response.data.bookingId);
+            console.log("booking-id:" + response.data.bookingId);
+            console.log("phonenumber:" + phoneNumber);
             console.log("Booking successful! Booking ID: " + response.data);
           } else {
             console.log(" Booking failed");
@@ -506,7 +506,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                 </button>
                 {/*  Checkout Component */}
                 {checkout ? (
-                  <Checkout bookingId={""} phoneNumber={""} fromDate={new Date()} toDate={new Date()} />
+                  <Checkout bookingId={bookingId} phoneNumber={phoneNumber} fromDate={startDate as Date} toDate={endDate as Date} />
                 ) : (
                   <div
                     className={`modal ${showModal ? "show" : ""}`}
