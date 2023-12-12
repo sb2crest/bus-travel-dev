@@ -194,16 +194,7 @@ const BookingInfo = () => {
   };
 
   return (
-    <><div className="booking-info_banner">
-      <h1>Booking Info</h1>
-      <ul>
-        <li>
-            <Link to={"/"}>Home</Link>
-        </li>
-        <li>&#10095;</li>
-        <li>Booking Info</li>
-      </ul>
-    </div><div className="booking-info">
+    <div className="booking-info">
         {!showDetails ? (
           <div className="booking-info-container">
             <form className="form" onSubmit={handleSubmit}>
@@ -315,7 +306,7 @@ const BookingInfo = () => {
           bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
         )}
         {showWarning && <Warning onClose={closeWarning} />}
-      </div></>
+      </div>
   );
 };
 
