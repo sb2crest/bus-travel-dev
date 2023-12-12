@@ -90,7 +90,7 @@ const Navbar = React.memo(() => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/termsconditions"} onClick={scrollToTop}>
+                  <NavLink to={"/contactus"} onClick={scrollToTop}>
                     <button className="button-89" role="button">
                       <i
                         className="fa-solid fa-phone fa-md"

@@ -3,6 +3,8 @@ import logo from "../../assets/images/Logo.png";
 import "./Footer.scss";
 import { Link } from "react-router-dom";
 
+
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
@@ -39,7 +41,10 @@ const Footer = () => {
                 </span>
                 <span>Corporates Office</span>
                 <p>
-                  <a href="https://maps.app.goo.gl/QUzokAf5EQ1aUYip8" target="_blank">
+                  <a
+                    href="https://maps.app.goo.gl/QUzokAf5EQ1aUYip8"
+                    target="_blank"
+                  >
                     ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School,
                     Hesaraghatta hobli, Rajanukunte, Yelahanka Taluk Bangalore
                     North, Karnataka - 560064
@@ -137,6 +142,18 @@ const Footer = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="footer_tnc">
+        <div className="footer_tnc_section">
+          <div className="copyright">
+            <p>© 2023 NanduBus All Rights Reserved.</p>
+          </div>
+          <div className="tnc">
+            <Link to={"/termsConditions"} onClick={scrollToTop}>
+              <p>Terms and Conditions.</p>
+            </Link>
+          </div>
+        </div>
         </div>
       </footer>
     </div>
