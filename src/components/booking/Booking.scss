@@ -261,7 +261,10 @@
   left: 2px;
 }
 .css-1hv8oq8-MuiStepLabel-label.MuiStepLabel-alternativeLabel {
-  color: #0f7bab;
+  background: -webkit-linear-gradient(#0f7bab 40%, #0f2454) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent !important;
 }
 @media only screen and (max-width: 480px) {
   .booking {
