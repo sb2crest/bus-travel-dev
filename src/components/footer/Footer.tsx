@@ -118,7 +118,7 @@ const Footer = () => {
                     ></i>
                   </span>
                 </a>
-                <a href="https://www.instagram.com/nandu_bus/">
+                <a href="">
                   <span>
                     <i
                       className="fa-brands fa-linkedin-in fa-2xl"
