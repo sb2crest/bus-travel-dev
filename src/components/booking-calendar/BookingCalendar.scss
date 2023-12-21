@@ -1,4 +1,32 @@
 .calendar-container {
+  // display: flex;
+  // align-items: center;
+  // margin-bottom: 20px;
+
+  .from-to-date-container {
+    // display: flex;
+    // align-items: center;
+    // background-color: #eee;
+    // padding: 12px;
+    // width: 85%;
+
+    .date-picker {
+      // position: relative;
+      // display: flex;
+      // align-items: center;
+      // justify-content: start;
+
+      .start-date {
+        // width: 80%;
+        // height: 35px;
+        // margin-left: 2vh;
+      }
+
+      .end-date {
+        // width: 80%;
+        // height: 35px;
+        // margin-left: 5vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +68,8 @@
       .react-datepicker__input-container input {
         border: 0px solid #ffffff;
         border-radius: 6px;
-        color: #0f2454;
+        text-align: center;
+        color: red;
         font-weight: 600;
       }
       .from-icon-calendar,

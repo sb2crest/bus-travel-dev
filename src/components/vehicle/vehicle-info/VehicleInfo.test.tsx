@@ -2,7 +2,7 @@ import { act, fireEvent, logRoles, render, screen, waitFor, within } from "@test
 import { MemoryRouter, BrowserRouter as Router } from "react-router-dom";
 import VehicleInfo from "./VehicleInfo";
 import nock from "nock";
-import Checkout from "../../booking/checkout/Checkout";
+import Checkout from "../../progress bar/ProgressBar";
 
 describe("Vehicle Info component", () => {
   test('renders component and triggers modal on button click', () => {
