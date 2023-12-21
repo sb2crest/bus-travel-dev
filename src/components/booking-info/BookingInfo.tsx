@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./BookingInfo.scss";
-import asideImage from "../../assets/images/Aside Image.png";
+import asideImage from '../../assets/images/Aside.png'
 import dataService from "../../services/data.service";
 import Warning from "../warning/Warning";
 import BookingDetails from "./booking-details/BookingDetails";
