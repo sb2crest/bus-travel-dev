@@ -1,31 +1,31 @@
 .calendar-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  // display: flex;
+  // align-items: center;
+  // margin-bottom: 20px;
 
   .from-to-date-container {
-    display: flex;
-    align-items: center;
-    background-color: #eee;
-    padding: 12px;
-    width: 85%;
+    // display: flex;
+    // align-items: center;
+    // background-color: #eee;
+    // padding: 12px;
+    // width: 85%;
 
     .date-picker {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: start;
+      // position: relative;
+      // display: flex;
+      // align-items: center;
+      // justify-content: start;
 
       .start-date {
-        width: 80%;
-        height: 35px;
-        margin-left: 2vh;
+        // width: 80%;
+        // height: 35px;
+        // margin-left: 2vh;
       }
 
       .end-date {
-        width: 80%;
-        height: 35px;
-        margin-left: 5vh;
+        // width: 80%;
+        // height: 35px;
+        // margin-left: 5vh;
       }
 
       .react-datepicker-wrapper {
@@ -42,7 +42,7 @@
         border: 0px solid #ffffff;
         border-radius: 6px;
         text-align: center;
-        color: #0f2454;
+        color: red;
         font-weight: 600;
       }
 
