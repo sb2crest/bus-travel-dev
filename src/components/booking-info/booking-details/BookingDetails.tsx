@@ -354,12 +354,12 @@ const history = Array.isArray(bookingDetails.history)
                         <Row
                           key={index}
                           row={createData(
-                            booking.bookingID,
-                            booking.username,
+                            booking.bookingId,
+                            booking.userName,
                             booking.fromDate,
                             booking.toDate,
                             booking.amount,
-                            booking.status,
+                            booking.bookingStatus,
                             booking.bookingDate,
                             booking.driverName,
                             booking.driverNumber,

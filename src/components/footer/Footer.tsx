@@ -3,6 +3,8 @@ import logo from "../../assets/images/Logo.png";
 import "./Footer.scss";
 import { Link } from "react-router-dom";
 
+
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
@@ -39,8 +41,14 @@ const Footer = () => {
                 </span>
                 <span>Corporates Office</span>
                 <p>
-                  ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School, Hesaraghatta hobli, Rajanukunte,
-                  Yelahanka Taluk Bangalore North, Karnataka - 560064
+                  <a
+                    href="https://maps.app.goo.gl/QUzokAf5EQ1aUYip8"
+                    target="_blank"
+                  >
+                    ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School,
+                    Hesaraghatta hobli, Rajanukunte, Yelahanka Taluk Bangalore
+                    North, Karnataka - 560064
+                  </a>
                 </p>
               </div>
               <div className="footer_container_left_email">
@@ -99,33 +107,53 @@ const Footer = () => {
               </div>
               <div className="footer_container_right_technologies">
                 <p id="heading">Keep in touch</p>
-                <span>
-                  <i
-                    className="fa-brands fa-facebook fa-2xl"
-                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
-                  ></i>
-                </span>
-                <span>
-                  <i
-                    className="fa-brands fa-instagram fa-2xl"
-                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
-                  ></i>
-                </span>
-                <span>
-                  <i
-                    className="fa-brands fa-linkedin-in fa-2xl"
-                    style={{ color: "#0f7bab", marginRight: "1.7vw" }}
-                  ></i>
-                </span>
-                <span>
-                  <i
-                    className="fa-brands fa-x-twitter fa-2xl"
-                    style={{ color: "#0f7bab" }}
-                  ></i>
-                </span>
+                <a href="https://www.facebook.com/profile.php?id=61553225352683">
+                  <span>
+                    <i
+                      className="fa-brands fa-facebook fa-2xl"
+                      style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                    ></i>
+                  </span>
+                </a>
+                <a href="https://www.instagram.com/nandu_bus/">
+                  <span>
+                    <i
+                      className="fa-brands fa-instagram fa-2xl"
+                      style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                    ></i>
+                  </span>
+                </a>
+                <a href="">
+                  <span>
+                    <i
+                      className="fa-brands fa-linkedin-in fa-2xl"
+                      style={{ color: "#0f7bab", marginRight: "1.7vw" }}
+                    ></i>
+                  </span>
+                </a>
+                <a href="https://twitter.com/NanduBus">
+                  <span>
+                    <i
+                      className="fa-brands fa-x-twitter fa-2xl"
+                      style={{ color: "#0f7bab" }}
+                    ></i>
+                  </span>
+                </a>
               </div>
             </div>
           </div>
+        </div>
+        <div className="footer_tnc">
+        <div className="footer_tnc_section">
+          <div className="copyright">
+            <p>© 2023 NanduBus All Rights Reserved.</p>
+          </div>
+          <div className="tnc">
+            <Link to={"/termsConditions"} onClick={scrollToTop}>
+              <p>Terms and Conditions.</p>
+            </Link>
+          </div>
+        </div>
         </div>
       </footer>
     </div>

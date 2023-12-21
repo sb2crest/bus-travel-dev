@@ -5,6 +5,7 @@
     .sub-title {
       background-color: #0f7bab;
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       font-size: 16px;
       font-weight: 700;
@@ -22,6 +23,7 @@
       text-transform: capitalize;
       background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   }
@@ -38,8 +40,9 @@
         .form-group {
           width: 45%;
           position: relative;
-          padding: 0 10px;
+          padding: 0 10px !important;
           margin-bottom: 20px;
+          
           label {
             position: relative;
             margin-bottom: 15px;
@@ -70,6 +73,7 @@
             font-size: 18px;
             background-color: #0f7bab;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
           }
           .nameContact {
@@ -108,6 +112,7 @@
         font-size: 18px;
         background-color: #0f7bab;
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       button {
@@ -146,14 +151,20 @@
             input[type="text"],
             input[type="email"] {
               width: 98%;
+              
             }
+            
             i {
               right: 0px;
             }
           }
         }
+        .col-md-12{
+          padding-left: 10px !important;
+        }
         textarea {
           width: 82.5%;
+         
         }
         i {
           right: 16%;
@@ -253,7 +264,7 @@
             width: 45%;
             input[type="text"],
             input[type="email"] {
-              width: 90%;
+              width: 93%;
             }
             i {
               right: 25px;
@@ -261,7 +272,7 @@
           }
         }
         textarea {
-          width: 92.5%;
+          width: 94.5%;
         }
         i {
           right: 57px;

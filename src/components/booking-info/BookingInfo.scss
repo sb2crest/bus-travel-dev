@@ -1,4 +1,5 @@
 .booking-info {
+ 
   .booking-info-container {
     display: flex;
     align-items: center;
@@ -6,11 +7,14 @@
     padding: 20px;
     border-radius: 10px;
     background-color: white;
-    text-align: center;
-    margin-right: -12vw;
 
     .form {
       margin-left: 20px;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -22,14 +26,18 @@
           font-size: 30px;
           text-transform: uppercase;
           color: #0f7bab;
-          font-weight: 450;
+          font-weight: 600;
+          background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
       }
 
       .booking-id {
         .input-booking-id {
           margin-top: 5px;
-          width: 120%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -47,9 +55,12 @@
 
       .phone {
         margin-top: 5px;
-
+        width: 50%;
+        .error {
+          margin-top: 5px;
+        }
         .input-phone {
-          width: 120%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -66,8 +77,8 @@
       }
 
       .send-otp {
+        width: 50%;
         text-align: left;
-
         .button-send-otp {
           margin-top: 5px;
           width: 50%;
@@ -83,10 +94,11 @@
 
       .otp {
         padding: 0 !important;
+        width: 100%;
 
         .input-otp {
           margin-top: 5px;
-          width: 125%;
+          width: 100%;
           padding: 10px;
           font-size: 16px;
           border: 1px solid #ccc;
@@ -105,9 +117,9 @@
       .verify-resend {
         .verify-resend-01 {
           .verify {
-            margin-left: 20%;
+            margin-left: 5%;
             margin-top: 5px;
-            width: 35%;
+            width: 45%;
             font-size: 16px;
             background-color: #0f7bab;
             color: white;
@@ -121,7 +133,7 @@
           .resend {
             margin-top: 5px;
             margin-left: 15px;
-            width: 35%;
+            width: 45%;
             font-size: 16px;
             background-color: #0f7bab;
             color: white;
@@ -135,6 +147,7 @@
       }
 
       .show-details {
+        width: 50%;
         .show-details-01 {
           text-align: center;
           display: flex;
@@ -142,9 +155,8 @@
           text-decoration: none;
 
           .button-show-details {
-            margin-left: 25%;
             margin-top: 5px;
-            width: 105%;
+            width: 60%;
             height: 35px;
             font-size: 16px;
             background-color: #0f7bab;
@@ -165,7 +177,7 @@
 
       .image-class {
         margin-top: 50px;
-        width: 55%;
+        width: 75%;
         height: auto;
       }
     }
@@ -175,7 +187,13 @@
 @media only screen and (max-width: 480px) {
   .booking-info {
     align-items: center;
-
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 14vw;
+      }
+    }
     .booking-info-container {
       flex-direction: column;
       background-color: #a2e0fd;
@@ -185,11 +203,11 @@
 
       .form {
         margin-left: 0px;
-
+        width: 100%;
         .header-custom {
           .header {
-            font-size: 35px;
-            font-weight: 500;
+            font-size: 26px;
+            font-weight: 600;
           }
         }
 
@@ -203,42 +221,44 @@
 
         .phone {
           margin-top: 10px;
-
+          width: 70%;
           .input-phone {
             width: 100%;
           }
         }
 
         .send-otp {
+          width: 70%;
+
           .button-send-otp {
-            width: 30%;
+            width: 60%;
           }
         }
 
         .otp {
           padding: 0 !important;
           text-align: justify;
-
-          .input-otp {
-            width: 103%;
-          }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 10%;
+              width: 40%;
+              font-size: 12px;
+            }
+            .resend {
+              width: 40%;
+              font-size: 12px;
             }
           }
         }
 
         .show-details {
+          width: 70%;
           .show-details-01 {
-            .anchor-custom {
-              .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+            .button-show-details {
+              width: 65%;
             }
           }
         }
@@ -248,7 +268,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
@@ -264,6 +286,13 @@
   .booking-info {
     align-items: center;
     display: block !important;
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 12vw;
+      }
+    }
 
     .booking-info-container {
       flex-direction: column;
@@ -274,11 +303,12 @@
 
       .form {
         margin-left: 0px;
+        width: 100%;
 
         .header-custom {
           .header {
             font-size: 35px;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
 
@@ -292,6 +322,7 @@
 
         .phone {
           margin-top: 10px;
+          width: 50%;
 
           .input-phone {
             width: 100%;
@@ -299,35 +330,37 @@
         }
 
         .send-otp {
+          width: 50%;
+
           .button-send-otp {
-            width: 30%;
+            width: 50%;
           }
         }
 
         .otp {
           padding: 0 !important;
           text-align: justify;
-
-          .input-otp {
-            width: 103%;
-          }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 10%;
+              width: 40%;
+              font-size: 15px;
+            }
+            .resend {
+              width: 40%;
+              font-size: 15px;
             }
           }
         }
 
         .show-details {
           .show-details-01 {
-            .anchor-custom {
               .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+                width: 70%;
+              
             }
           }
         }
@@ -337,7 +370,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
@@ -353,6 +388,13 @@
   .booking-info {
     align-items: center;
     display: block !important;
+    margin-bottom: -3vw;
+    &_banner {
+      height: 40vh;
+      h1 {
+        font-size: 7vw;
+      }
+    }
 
     .booking-info-container {
       flex-direction: column;
@@ -363,11 +405,12 @@
 
       .form {
         margin-left: 0px;
+        width: 100%;
 
         .header-custom {
           .header {
             font-size: 35px;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
 
@@ -381,15 +424,16 @@
 
         .phone {
           margin-top: 10px;
-
+          width: 40%;
           .input-phone {
-            width: 100%;
+            width: 90%;
           }
         }
 
         .send-otp {
+          width: 40%;
           .button-send-otp {
-            width: 30%;
+            width: 40%;
           }
         }
 
@@ -398,25 +442,28 @@
           text-align: justify;
 
           .input-otp {
-            width: 103%;
+            width: 90%;
           }
         }
 
         .verify-resend {
           .verify-resend-01 {
             .verify {
-              margin-left: 16%;
+              margin-left: 6%;
+              width: 40%;
+            }
+            .resend {
+              width: 40%;
             }
           }
         }
 
         .show-details {
+          width: 40%;
           .show-details-01 {
-            .anchor-custom {
               .button-show-details {
-                margin-left: 35%;
-                width: 40%;
-              }
+                width: 70%;
+              
             }
           }
         }
@@ -426,12 +473,33 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+        .image-wrapper {
+          text-align: center;
+        }
         .image-class {
           margin-top: 50px;
           width: 55%;
           height: auto;
           mix-blend-mode: multiply;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1023px) and (max-width: 1279px) {
+  .booking-info {
+    .booking-info-container {
+      .form {
+        .verify-resend {
+          .verify-resend-01 {
+            .verify {
+              margin-left: 8%;
+              width: 45%;
+            }
+            .resend {
+              width: 40%;
+            }
+          }
         }
       }
     }

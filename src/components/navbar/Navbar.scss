@@ -18,7 +18,10 @@ nav {
 }
 .menu-icon {
   display: none;
-  font-size: 20px;
+  font-size: 25px;
+  i {
+    color: #0f7bab;
+  }
 }
 .menu-icon .fa-times {
   transform: rotate(360deg);
@@ -31,12 +34,16 @@ nav {
 .logo {
   display: none;
 }
+.menu-list.active {
+  max-height: 100%; 
+}
 .menu-list {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 !important;
+  
   li {
     margin: 0 2.2vw;
   }
@@ -108,35 +115,40 @@ nav {
   }
   .logo {
     display: block;
-    margin-left: 5%;
+    // margin-left: 4%;
   }
   nav {
     display: grid;
     grid-template-columns: 1fr 0fr;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
+    width: 85%;
   }
   .menu-icon {
     display: block;
     color: #000;
-    margin-left: -85%;
+    // margin-left: -100%;
   }
-  .menu-list {
+  .menu-list{
     flex-direction: column;
-    width: 100%;
-    position: absolute;
+    width: 100vw;
+    position: fixed;
     background: rgba(0, 0, 0, 0.7);
-    right: 0;
+    left: -8.9%;
     top: 48px;
     padding: 0 !important;
     padding-top: 5vw !important;
-    transition: all 0.5s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.7s ease;
   }
   .menu-list li {
     margin-bottom: 20px;
     width: 100%;
     text-align: center;
+    font-size: 15px;
   }
   .menu-list li:nth-child(3) {
     margin-top: -5vw;
@@ -153,14 +165,23 @@ nav {
     color: white;
   }
   .menu-list.close {
-    right: -101%;
-    transition: right 0.5s ease-in-out;
+    transition: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(100%);
+
   }
   .button-89 {
     display: none;
   }
   .hidecontact {
     display: block;
+  }
+  .menu-list.active {
+    max-height: 1000px; 
+    top:48px;
+    right: 0;
+    transition: all 0.7s ease ;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -170,7 +191,7 @@ nav {
     li {
       margin: 0 1.5vw;
       font-size: 12px;
-      img{
+      img {
         height: 75px;
       }
     }

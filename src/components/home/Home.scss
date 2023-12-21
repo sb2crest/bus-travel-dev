@@ -211,14 +211,16 @@ a {
   color: #fff;
   font-family: "Montserrat";
   font-weight: bold;
-  background: aliceblue;
   cursor: pointer;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 1rem;
-
+  background: var(--btn-bg);
+&:hover{
+  background: aliceblue;
+}
   .text,
   .icon_container {
     position: relative;
@@ -262,7 +264,8 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: var(--btn-bg);
+  background: #0f7bab;
+
     border-radius: var(--height);
     z-index: 1;
     transition: transform 500ms ease;
@@ -272,6 +275,7 @@ a {
     color: #0f7bab;
     &::after {
       transform: translateX(68%);
+      background: #0f7bab;
     }
 
     .icon_container {
@@ -519,7 +523,6 @@ a {
       top: 0;
       width: 100%;
       height: 100%;
-      background: var(--btn-bg);
       border-radius: var(--height);
       z-index: 1;
       transition: transform 500ms ease;
@@ -905,7 +908,7 @@ a {
     &_section {
       &_images {
         img {
-          width: 170px !important;
+          width: 200px !important;
           height: 20vh !important;
         }
         h1 {

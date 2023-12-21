@@ -3,12 +3,14 @@ import filterIcon from "../../../assets/images/filter.png";
 import React, { useState, Dispatch, SetStateAction } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./BookingCalendar.scss";
+import "../../booking-calendar/BookingCalendar.scss";
 import IFilterRequest from "../../../types/filter/request.type";
 import dataService from "../../../services/data.service";
 import { format } from "date-fns";
 import ListVehicles from "../../../types/list.type";
-import TuneIcon from '@mui/icons-material/Tune';
+import TuneIcon from "@mui/icons-material/Tune";
+import { FaCalendar } from "react-icons/fa";
+
 interface FilterProps {
   setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
 }
@@ -158,7 +160,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
       console.log(responseData);
       // Store the filter results in state
       setFilterResults(responseData);
-      // setVehicles(responseData);
+      setVehicles(responseData);
 
       // Close the modal
       setShowModal(false);
@@ -208,11 +210,11 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
         <div className="filter-container-button-custom">
           <button className="filter-button" onClick={() => setShowModal(true)}>
             Filter
-            <TuneIcon  sx={{ fontSize: 18 }}  />
-            {/* <img src={filterIcon} className="filter-icon" /> */}
+            <TuneIcon sx={{ fontSize: 18 }} />
           </button>
         </div>
         {/* POP-Up Page */}
+
         <div
           className={`modal ${showModal ? "show" : ""}`}
           id="FilterModal"
@@ -291,36 +293,45 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                   {isACClicked && (
                     <>
                       <div className="checkbox-section-01">
-                        <input
-                          type="checkbox"
-                          id="allCheckbox"
-                          className="input-all"
-                          checked={isACAllChecked}
-                          onChange={handleACAllChange}
-                        />
-                        <label className="label-all" htmlFor="allCheckbox">
-                          All
-                        </label>
-                        <input
-                          type="checkbox"
-                          id="acCheckbox"
-                          className="input-ac"
-                          checked={isACChecked}
-                          onChange={handleACChange}
-                        />
-                        <label className="label-ac" htmlFor="acCheckbox">
-                          AC
-                        </label>
-                        <input
-                          type="checkbox"
-                          id="nonACCheckbox"
-                          className="input-non-ac"
-                          checked={isNonACChecked}
-                          onChange={handleNonACChange}
-                        />
-                        <label className="label-non-ac" htmlFor="nonACCheckbox">
-                          Non-AC
-                        </label>
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            id="allCheckbox"
+                            className="input-all"
+                            checked={isACAllChecked}
+                            onChange={handleACAllChange}
+                          />
+                          <label className="label-all" htmlFor="allCheckbox">
+                            All
+                          </label>
+                        </div>
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            id="acCheckbox"
+                            className="input-ac"
+                            checked={isACChecked}
+                            onChange={handleACChange}
+                          />
+                          <label className="label-ac" htmlFor="acCheckbox">
+                            AC
+                          </label>
+                        </div>
+                        <div className="checkbox">
+                          <input
+                            type="checkbox"
+                            id="nonACCheckbox"
+                            className="input-non-ac"
+                            checked={isNonACChecked}
+                            onChange={handleNonACChange}
+                          />
+                          <label
+                            className="label-non-ac"
+                            htmlFor="nonACCheckbox"
+                          >
+                            Non-AC
+                          </label>
+                        </div>
                       </div>
                     </>
                   )}
@@ -380,55 +391,67 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                   {isSleeperClicked && (
                     <>
                       <div className="checkbox-section-02">
-                        <input
-                          id="allCheckbox"
-                          className="input-all"
-                          type="checkbox"
-                          checked={isSleeperAllChecked}
-                          onChange={handleSleeperAllChange}
-                        />
-                        <label className="label-all" htmlFor="allCheckbox">
-                          All
-                        </label>
-                        <input
-                          className="input-sleeper"
-                          id="sleeperCheckbox"
-                          type="checkbox"
-                          checked={isSleeperChecked}
-                          onChange={handleSleeperChange}
-                        />
-                        <label
-                          className="label-sleeper"
-                          htmlFor="sleeperCheckbox"
-                        >
-                          Sleeper
-                        </label>
-                        <input
-                          className="input-semi-sleeper"
-                          id="semiSleeperCheckbox"
-                          type="checkbox"
-                          checked={isSemiSleeperChecked}
-                          onChange={handleSemiSleeperChange}
-                        />
-                        <label
-                          className="label-semi-sleeper"
-                          htmlFor="semiSleeperCheckbox"
-                        >
-                          Semi-Sleeper
-                        </label>
-                        <input
-                          className="input-non-sleeper"
-                          id="nonSleeperCheckbox"
-                          type="checkbox"
-                          checked={isNonSleeperChecked}
-                          onChange={handleNonSleeperChange}
-                        />
-                        <label
-                          className="label-non-sleeper"
-                          htmlFor="nonSleeperCheckbox"
-                        >
-                          Non-Sleeper{" "}
-                        </label>
+                        <div className="checkbox">
+                          {" "}
+                          <input
+                            id="allCheckbox"
+                            className="input-all"
+                            type="checkbox"
+                            checked={isSleeperAllChecked}
+                            onChange={handleSleeperAllChange}
+                          />
+                          <label
+                            className="label-all"
+                            htmlFor="allCheckboxsleeper"
+                          >
+                            All
+                          </label>
+                        </div>
+                        <div className="checkbox">
+                          <input
+                            className="input-sleeper"
+                            id="sleeperCheckbox"
+                            type="checkbox"
+                            checked={isSleeperChecked}
+                            onChange={handleSleeperChange}
+                          />
+                          <label
+                            className="label-sleeper"
+                            htmlFor="sleeperCheckbox"
+                          >
+                            Sleeper
+                          </label>
+                        </div>
+                        <div className="checkbox">
+                          <input
+                            className="input-semi-sleeper"
+                            id="semiSleeperCheckbox"
+                            type="checkbox"
+                            checked={isSemiSleeperChecked}
+                            onChange={handleSemiSleeperChange}
+                          />
+                          <label
+                            className="label-semi-sleeper"
+                            htmlFor="semiSleeperCheckbox"
+                          >
+                            Semi-Sleeper
+                          </label>
+                        </div>
+                        <div className="checkbox">
+                          <input
+                            className="input-non-sleeper"
+                            id="nonSleeperCheckbox"
+                            type="checkbox"
+                            checked={isNonSleeperChecked}
+                            onChange={handleNonSleeperChange}
+                          />
+                          <label
+                            className="label-non-sleeper"
+                            htmlFor="nonSleeperCheckbox"
+                          >
+                            Non-Sleeper{" "}
+                          </label>
+                        </div>
                       </div>
                     </>
                   )}
@@ -448,6 +471,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                         minDate={new Date()}
                         data-testid="date-item-1"
                       />
+                      <FaCalendar className="from-icon-calendar" />
                     </div>
                     <div className="date-picker">
                       <DatePicker
@@ -461,6 +485,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                         placeholderText="To-Date"
                         className="end-date"
                       />
+                      <FaCalendar className="to-icon-calendar" />
                     </div>
                   </div>
                 </div>

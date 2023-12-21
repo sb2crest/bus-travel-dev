@@ -8,6 +8,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 interface State {
   phoneNumber: string;
@@ -194,120 +195,118 @@ const BookingInfo = () => {
 
   return (
     <div className="booking-info">
-      {!showDetails ? (
-        <div className="booking-info-container">
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="header-custom">
-              <p className="header">Booking Details</p>
-            </div>
-            <div className="phone">
-              <input
-                placeholder="Phone Number"
-                type="number"
-                name="phoneNumber"
-                value={values.phoneNumber}
-                onChange={handleChange}
-                onBlur={() => setFieldTouched("phoneNumber", true)}
-                className="input-phone"
-                disabled={state.phoneNumberLocked}
-              />
-              {touched.phoneNumber && errors.phoneNumber && (
-                <div className="error" style={{ color: "red", textAlign: "left" }}>
-                  {errors.phoneNumber}
+        {!showDetails ? (
+          <div className="booking-info-container">
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="header-custom">
+                <p className="header">Booking Details</p>
+              </div>
+              <div className="phone">
+                <input
+                  placeholder="Phone Number"
+                  type="number"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={handleChange}
+                  onBlur={() => setFieldTouched("phoneNumber", true)}
+                  className="input-phone"
+                  disabled={state.phoneNumberLocked} />
+                {touched.phoneNumber && errors.phoneNumber && (
+                  <div className="error" style={{ color: "red", textAlign: "left" }}>
+                    {errors.phoneNumber}
+                  </div>
+                )}
+              </div>
+              <div className="send-otp">
+                {values.otpSent || verify ? (
+                  <>
+                    <div className="otp">
+                      <input
+                        placeholder="OTP"
+                        type="password"
+                        name="otp"
+                        value={values.otp}
+                        onChange={handleChange}
+                        onBlur={() => setFieldTouched("otp", true)}
+                        className="input-otp"
+                        maxLength={6} />
+                      {touched.otp && errors.otp && (
+                        <div className="error" style={{ color: "red", textAlign: "left" }}>
+                          {errors.otp}
+                        </div>
+                      )}
+                    </div>
+                    <div className="verify-resend">
+                      <div className="verify-resend-01">
+                        <button className="verify" role="button" onClick={verifyOTP}>
+                          Verify OTP
+                        </button>
+                        <button className="resend" onClick={resendOTP}>
+                          Resend
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                ) : !verify && !otpVerified ? (
+                  // Render "Send OTP" button only if OTP verification is not successful
+                  <button className="button-send-otp" onClick={sendOTP}>
+                    Send OTP
+                  </button>
+                ) : null}
+              </div>
+              {ShowDetailsButton && (
+                <div className="show-details">
+                  <div className="show-details-01">
+                    <button className="button-show-details" onClick={bookingInfo}>
+                      Show Details
+                    </button>
+                  </div>
                 </div>
               )}
-            </div>
-            <div className="send-otp">
-              {values.otpSent || verify ? (
-                <>
-                  <div className="otp">
-                    <input
-                      placeholder="OTP"
-                      type="password"
-                      name="otp"
-                      value={values.otp}
-                      onChange={handleChange}
-                      onBlur={() => setFieldTouched("otp", true)}
-                      className="input-otp"
-                      maxLength={6}
-                    />
-                    {touched.otp && errors.otp && (
-                      <div className="error" style={{ color: "red", textAlign: "left" }}>
-                        {errors.otp}
-                      </div>
-                    )}
-                  </div>
-                  <div className="verify-resend">
-                    <div className="verify-resend-01">
-                      <button className="verify" role="button" onClick={verifyOTP}>
-                        Verify OTP
-                      </button>
-                      <button className="resend" onClick={resendOTP}>
-                        Resend
-                      </button>
-                    </div>
-                  </div>
-                </>
-              ) : !verify && !otpVerified ? (
-                // Render "Send OTP" button only if OTP verification is not successful
-                <button className="button-send-otp" onClick={sendOTP}>
-                  Send OTP
-                </button>
-              ) : null}
-            </div>
-            {ShowDetailsButton && (
-              <div className="show-details">
-                <div className="show-details-01">
-                  <button className="button-show-details" onClick={bookingInfo}>
-                    Show Details
-                  </button>
-                </div>
+            </form>
+            <div className="image-container">
+              <div className="image-wrapper">
+                <img src={asideImage} alt="Image" className="image-class" />
               </div>
-            )}
-          </form>
-          <div className="image-container">
-            <div className="image-wrapper">
-              <img src={asideImage} alt="Image" className="image-class" />
             </div>
-          </div>
-          <div data-testid="snackbar">
+            <div data-testid="snackbar">
+              <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              >
+                <Alert onClose={handleSnackbarClose} severity="success">
+                  OTP Sent successfully!
+                </Alert>
+              </Snackbar>
+            </div>
             <Snackbar
-              open={snackbarOpen}
+              open={verifySnackbarOpen}
               autoHideDuration={2000}
               onClose={handleSnackbarClose}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
               <Alert onClose={handleSnackbarClose} severity="success">
-                OTP Sent successfully!
+                Verification Successful
+              </Alert>
+            </Snackbar>
+            <Snackbar
+              open={failedSnackbarOpen}
+              autoHideDuration={2000}
+              onClose={handleSnackbarClose}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+              <Alert onClose={handleSnackbarClose} severity="error">
+                Verification failed!!
               </Alert>
             </Snackbar>
           </div>
-          <Snackbar
-            open={verifySnackbarOpen}
-            autoHideDuration={2000}
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <Alert onClose={handleSnackbarClose} severity="success">
-              Verification Successful
-            </Alert>
-          </Snackbar>
-          <Snackbar
-            open={failedSnackbarOpen}
-            autoHideDuration={2000}
-            onClose={handleSnackbarClose}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          >
-            <Alert onClose={handleSnackbarClose} severity="error">
-              Verification failed!!
-            </Alert>
-          </Snackbar>
-        </div>
-      ) : (
-        bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
-      )}
-      {showWarning && <Warning onClose={closeWarning} />}
-    </div>
+        ) : (
+          bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
+        )}
+        {showWarning && <Warning onClose={closeWarning} />}
+      </div>
   );
 };
 
