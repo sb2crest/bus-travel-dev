@@ -18,7 +18,9 @@ import BookingInfo from './components/booking-info/BookingInfo';
 import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
 import BookingDetails from './components/booking-info/booking-details/BookingDetails';
-import TermsConditions from './components/terms & condition/TermsConditions'
+import TermsConditions from './components/terms & condition/TermsConditions';
+import ProgressBar from './components/progress bar/ProgressBar';
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,6 +50,7 @@ const App = () => {
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/termsConditions" component={TermsConditions} />
             <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/progressbar" component={ProgressBar} />
           </Switch>
         </div>
         <Footer />
