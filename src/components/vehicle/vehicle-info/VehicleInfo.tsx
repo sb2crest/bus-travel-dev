@@ -1,26 +1,21 @@
 import "./VehicleInfo.scss";
-import { BrowserRouter as Router, Link, useHistory, useLocation } from "react-router-dom";
-import React, { useState, useEffect, FormEvent } from "react";
+import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import "./form.scss";
-import { FaExclamationTriangle } from "react-icons/fa";
 import IVehicleData from "../../../types/vehicle.type";
-import BookingCalendar from "../../booking-calendar/BookingCalendar";
 import DatePicker from "react-datepicker";
 import "../../booking-calendar/BookingCalendar.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import Warning from "../../warning/Warning";
 import Checkout from "../../booking/checkout/Checkout";
 import dataService from "../../../services/data.service";
-import { toDate } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import PlacesDate from "../vehicle-info/eventChecker/PlacesDate";
 
-interface Image {
-  url: string;
-}
 interface LocationState {
   vehicleNumber: any;
   images?: string[];
@@ -110,7 +105,8 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
   const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
-  const [validationFailureSnackbarOpen, setValidationFailureSnackbarOpen] = useState(false);
+  const [validationFailureSnackbarOpen, setValidationFailureSnackbarOpen] =
+    useState(false);
 
   /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
 
@@ -417,7 +413,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                   icon={faMapMarkerAlt}
                   style={{ color: "#0f7bab" }}
                 />
-                <p className="inclusion-02">Extra usage at Rs. 15/KM to be paid to the operator</p>
+                <p className="inclusion-02">
+                  Extra usage at Rs. 15/KM to be paid to the operator
+                </p>
               </div>
             </div>
             <div className="exclusions">
@@ -496,17 +494,23 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                 </div>
               </div>
             </div>
+
             <div className="containers">
               <>
-                <button
+                {/* <button
                   className="button-53"
                   onClick={() => setShowModal(true)}
                 >
                   Book Now
-                </button>
+                </button> */}
                 {/*  Checkout Component */}
                 {checkout ? (
-                  <Checkout bookingId={bookingId} phoneNumber={phoneNumber} fromDate={startDate as Date} toDate={endDate as Date} />
+                  <Checkout
+                    bookingId={bookingId}
+                    phoneNumber={phoneNumber}
+                    fromDate={startDate as Date}
+                    toDate={endDate as Date}
+                  />
                 ) : (
                   <div
                     className={`modal ${showModal ? "show" : ""}`}
@@ -540,13 +544,15 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                             <form>
                               {/* First Name*/}
                               <div
-                                className={`form-group ${!firstNameValid ? "has-error" : ""
-                                  }`}
+                                className={`form-group ${
+                                  !firstNameValid ? "has-error" : ""
+                                }`}
                               >
                                 <input
                                   type="text"
-                                  className={`form-control first-name ${!firstNameValid ? "error-border" : ""
-                                    }`}
+                                  className={`form-control first-name ${
+                                    !firstNameValid ? "error-border" : ""
+                                  }`}
                                   id="firstname"
                                   data-testid="firstname-input"
                                   value={firstName}
@@ -558,7 +564,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                <div className="error-message" data-testid='firstname-warning'>
+                                <div
+                                  className="error-message"
+                                  data-testid="firstname-warning"
+                                >
                                   {!firstNameValid && (
                                     <>
                                       <span className="first-name-warning">
@@ -585,8 +594,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               <div className="form-group">
                                 <input
                                   type="text"
-                                  className={`form-control last-name ${!lastNameValid ? "error-border" : ""
-                                    }`}
+                                  className={`form-control last-name ${
+                                    !lastNameValid ? "error-border" : ""
+                                  }`}
                                   id="lastname"
                                   value={lastName}
                                   placeholder="Last Name"
@@ -597,10 +607,13 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     )
                                   }
                                 />
-                                <div className="error-message" data-testid='lastname-warning'>
+                                <div
+                                  className="error-message"
+                                  data-testid="lastname-warning"
+                                >
                                   {!lastNameValid && (
                                     <>
-                                      <span className="last-name-warning" >
+                                      <span className="last-name-warning">
                                         Please enter a valid last name
                                       </span>
                                     </>
@@ -616,8 +629,9 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                     {/* Phone Number */}
                                     <input
                                       type="tel"
-                                      className={`form-control col-sm-10  ${!phoneNumberValid ? "error-border" : ""
-                                        }`}
+                                      className={`form-control col-sm-10  ${
+                                        !phoneNumberValid ? "error-border" : ""
+                                      }`}
                                       id="phone-number"
                                       value={phoneNumber}
                                       onChange={(e) =>
@@ -633,7 +647,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   </div>
                                   {/* {(!phoneNumberValid || */}
                                   {/* !phoneNumberValidation(phoneNumber)) && ( */}
-                                  <div className="error-message" data-testid='phone-warning'>
+                                  <div
+                                    className="error-message"
+                                    data-testid="phone-warning"
+                                  >
                                     {/* {!phoneNumberValid &&
                                             phoneNumber.trim() === "" ? (
                                             <>
@@ -772,7 +789,10 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                                   }
                                   placeholder="Email"
                                 />
-                                <div className="error-message" data-testid='email-warning'>
+                                <div
+                                  className="error-message"
+                                  data-testid="email-warning"
+                                >
                                   {!emailValid && (
                                     <>
                                       <span className="email-warning">
@@ -814,7 +834,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
                               )}
                             </form>
                             {/* OTP success snackbar */}
-                            <div data-testid='send-otp-snackbar'>
+                            <div data-testid="send-otp-snackbar">
                               <Snackbar
                                 open={snackbarOpen}
                                 autoHideDuration={7000}
@@ -893,6 +913,7 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
             </div>
           </div>
         </div>
+        <PlacesDate vehicleNumber={location.state?.vehicleNumber} />
       </div>
     </>
   );
