@@ -12,6 +12,7 @@ interface LocationState {
 
 const VehicleInfo: React.FC = () => {
   const location = useLocation<LocationState>();
+  const { vehicleNumber, images } = location.state;
   const initialImages = location.state?.images || [];
   const [selectedImage, setSelectedImage] = useState(initialImages);
   const [progressBar, setProgressBar] = useState(false);
@@ -25,6 +26,8 @@ const VehicleInfo: React.FC = () => {
   const showProgressBar = () => {
     setProgressBar(true);
   }
+
+  // console.log("vehicle number:" + vehicleNumber);
 
   return (
     <>
@@ -46,6 +49,7 @@ const VehicleInfo: React.FC = () => {
           <div className="vehicleInfo_container">
             <div className="image-gallery">
               <h1>Bus Details</h1>
+              <p>Vehicle Number: {vehicleNumber}</p>
               <div className="parent-image">
                 {selectedImage.length > 0 && (
                   <img
@@ -162,13 +166,16 @@ const VehicleInfo: React.FC = () => {
                 </div>
               </div>
               <div>
-                <Link to='/progressbar'> Book Now</Link>
-
-              </div>
+                <Link to=
+                  {{ pathname: "/progressbar", 
+                  state:{vehicleNumber},
+                }}
+                > Book Now</Link>
             </div>
           </div>
         </div>
       </div>
+    </div >
     </>
   );
 };

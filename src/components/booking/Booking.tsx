@@ -93,28 +93,46 @@ const steps = [
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
-  const [activeStep, setActiveStep] = useState<number>(0);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 550, behavior: "smooth" });
   };
 
-  const listVehicles = () => {
-    dataService
-      .listVehicles()
-      .then((response) => {
-        const vehicles: ListVehicles[] = response.data;
-        setVehicles(vehicles);
-        console.log("Fetched vehicles:", vehicles);
-      })
-      .catch((error) => {
-        console.error("Error in fetching data:", error);
-      });
-  };
+  // const listVehicles = () => {
+  //   dataService
+  //     .listVehicles()
+  //     .then((response) => {
+  //       const vehicles: ListVehicles[] = response.data;
+  //       setVehicles(vehicles);
+  //       // vehicles.forEach((vehicle, index) => {
+  //       //   const vehicleNumber = vehicle.vehicleNumber;
+  //       //   console.log(`Vehicle ${index + 1} - Vehicle Number: ${vehicleNumber}`);
+  //       // });
+  //       console.log("Fetched vehicles:", vehicles);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error in fetching data:", error);
+  //     });
+  // };
+  // useEffect(() => {
+  //   listVehicles();
+  // }, []);
 
   useEffect(() => {
-    listVehicles();
-  }, []);
+    const listVehicles = async () => {
+      try {
+        const response = await dataService.listVehicles();
+        const fetchedVehicles: ListVehicles[] = response.data;
+        setVehicles(fetchedVehicles);
+        console.log("Fetched vehicles:", fetchedVehicles);
+      } catch (error) {
+        console.error("Error in fetching data:", error);
+      }
+    };
+    if (vehicles.length === 0) {
+      listVehicles();
+    }
+  }, [vehicles]);
 
   return (
     <>
@@ -150,22 +168,16 @@ const Booking: React.FC = () => {
               <div className="booking_container_busDetails_section">
                 {vehicles.map((vehicle, index) => (
                   <div className="buses" key={index}>
-                    {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
                     <img
                       src={bus}
-                      // src={vehicle.s3ImageUrl[0]}
                       alt={`Bus ${index}`}
                       className="busOne_img"
                     />
-                    {/* )} */}
-              {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
-
                     {/* Render vehicle details here */}
                     <div className="busOne_details">
                       <h2>
                         ({vehicle.vehicleAC} {vehicle.sleeper})
                       </h2>
-
                       <p>
                         <span className="material-symbols-outlined">
                           airline_seat_recline_extra
@@ -176,10 +188,7 @@ const Booking: React.FC = () => {
                       <Link
                         to={{
                           pathname: "/vehicleinfo",
-                          state: {
-                            images: vehicle.s3ImageUrl || [],
-                            vehicleNumber: vehicle.vehicleNumber,
-                          },
+                          state: { vehicleNumber: vehicle.vehicleNumber, images: [] },
                         }}
                       >
                         <button className="button-53" onClick={scrollToTop}>

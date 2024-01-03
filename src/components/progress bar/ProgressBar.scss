@@ -14,11 +14,25 @@
     border-radius: 0px;
 
     .progress-content {
-        margin-top: 0vh;
         background-color: #ffff;
+
+        .back-icon {
+            color: #17a2b8;
+            font-size: 25px;
+            float: left;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: -150px;
+        }
+
+        .back{
+          margin-left: 5px;
+          font-size: 15px;
+        }
 
         ul {
             display: flex;
+            margin-top: 45px;
         }
 
         ul li {
@@ -234,7 +248,7 @@
         }
     }
 
-    .image-container{
+    .image-container {
         display: flex;
     }
 

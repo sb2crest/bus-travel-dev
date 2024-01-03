@@ -6,6 +6,9 @@ import DatePicker from "react-datepicker";
 import dataService from "../../services/data.service";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import ISlotsBooked from "../../types/slots/slots.request.type";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -36,10 +39,10 @@ const initialVehicleData: IVehicleData = {
 interface BookingFormProps {
     firstStepProp: (step: boolean) => void;
     onBookingIdUpdate: (bookingId: string, fromDate: Date, toDate: Date, phoneNumber: string) => void;
+    vehicleNumber: string;
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpdate }) => {
-    const location = useLocation<LocationState>();
+const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpdate, vehicleNumber }) => {
     const [state, setState] = useState<State>({
         vehicleData: initialVehicleData,
         vehicleAdded: false,
@@ -50,8 +53,15 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
         isPopupOpen: false,
     });
 
-    const [OTPMessage, setOTPMessage] = useState(false);
+    const validationSchema = Yup.object().shape({
+        firstName: Yup.string().required('First Name is required'),
+        middleName: Yup.string().required('Middle Name is required'),
+        lastName: Yup.string().required('Last Name is required'),
+        phoneNumber: Yup.string().min(10, 'Phone Number must be 10 digits').required('Phone Number is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+    });
 
+    const [OTPMessage, setOTPMessage] = useState(false);
 
     /* First Step Callback to Progress Bar */
     const [firstStepCompleted, setFirstStepCompleted] = useState(false);
@@ -114,25 +124,14 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
         setIsChecked(!isChecked);
     };
 
-    /*------------------------------------------------------ Form Validation------------------------------------------------------------*/
-
-    //Email Validation
-    const emailValidation = (email: string) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    const initialValues = {
+        phoneNumber: '',
+        otp: '',
+        email: '',
+        isChecked: false,
     };
 
-    //Name Validation
-    const nameValidation = (name: string) => {
-        return name.trim() !== "" && /^[A-Za-z\s]+$/.test(name);
-    };
 
-    //Phone Number Validation
-    const phoneNumberValidation = (phone: string) => {
-        return /^\d{10}$/.test(phone);
-    };
-
-    /*-----------------------------------------------------------------API Integration-----------------------------------------------------*/
     /*OTP Generation Function*/
     const sendOTP = () => {
         const isValidPhoneNumber = validatePhoneNumber(phoneNumber);
@@ -233,15 +232,9 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
         setResendDisabled(true);
     };
 
-    interface LocationState {
-        vehicleNumber: any;
-        images?: string[];
-    }
-
     /* Book Now Function */
     const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const vehicleNumber = location.state?.vehicleNumber;
         if (
             !firstName ||
             !lastName ||
@@ -279,6 +272,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
                         const bookingId = response.data.bookingId;
                         console.log("Props from bookingform:" + " " + "bookingid:" + bookingId + " " + "from-date:" + fromDate
                             + " " + "to-date:" + toDate + " " + "phonenumber:" + phoneNumber);
+                        console.log("vehicle number:" + vehicleNumber);
                         onBookingIdUpdate(bookingId, fromDate, toDate, phoneNumber);
                         setCheckout(true);
                     } else {
@@ -293,7 +287,24 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
                 });
         }
     };
-    /*-----------------------------------------------------------------------------------------------------------------------*/
+    /* Slots Function */
+    useEffect(() => {
+        const fetchSlotsData = async () => {
+            try {
+                const response = await dataService.slotsBooked(vehicleNumber);
+                // response.slots.dates.forEach((dateElement, index) => {
+                //     console.log(`Date ${index + 1}:`);
+                //     console.log(`  Date: ${dateElement.date}`);
+                //     console.log(`  isBooked: ${dateElement.isBooked}`);
+                // });
+            } catch (error) {
+                console.error('Error fetching booking data:', error);
+            }
+        };
+
+        fetchSlotsData();
+    }, [vehicleNumber]);
+
     /* Resend Timer  */
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -376,156 +387,121 @@ const BookingForm: React.FC<BookingFormProps> = ({ firstStepProp, onBookingIdUpd
 
     return (
         <div className='form-main-container'>
-            <form>
-                {showContinue ? (
-                    <>
-                        {!otpSent ? (
-                            <div>
+            <Formik
+                initialValues={{firstName: '', email: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    console.log(values);
+                    actions.setSubmitting(false);
+                }}
+            >
+                <form>
+                    {showContinue ? (
+                        <>
+                            {!otpSent ? (
+                                <div>
+                                    <>
+                                        < input id="input"
+                                            type="text" required
+                                            value={phoneNumber}
+                                            onChange={(e) => setPhoneNumber(e.target.value)}
+                                        />
+                                        <label placeholder="Phone Number"></label>
+                                        <button className='send-otp' onClick={sendOTP} type="button">
+                                            Send OTP
+                                        </button>
+                                    </>
+                                </div>
+                            ) : (
                                 <>
-                                    < input id="input"
-                                        type="text" required
-                                        value={phoneNumber}
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                    {OTPMessage &&
+                                        <p className="sent-message">OTP Sent Successfully!</p>
+                                    }
+                                    <input id="input"
+                                        type="password" required
+                                        value={otp}
+                                        onChange={handleOtpChange}
                                     />
-                                    <label placeholder="Phone Number"></label>
-                                    <button className='send-otp' onClick={sendOTP} type="button">
-                                        Send OTP
-                                    </button>
+                                    <label placeholder="OTP"></label>
+                                    {otpVerified &&
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                            <circle className="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                                            <polyline className="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+                                        </svg>
+                                    }
+                                    {resendDisabled ? (
+                                        <span className="timer-custom">
+                                            Resend OTP in{" "}
+                                            <span className="min-sec" style={{ marginLeft: "0.2em" }}>
+                                                {minutes}:{seconds}
+                                            </span>{" "}
+                                        </span>
+                                    ) : (
+                                        <button className='resend-otp' onClick={resendOTP} type="button">
+                                            Not received OTP ? <span className="resend-link">Resend OTP</span>
+                                        </button>
+                                    )
+                                    }
                                 </>
-                            </div>
-                        ) : (
-                            <>
-                                {OTPMessage &&
-                                    <p className="sent-message">OTP Sent Successfully!</p>
-                                }
-                                <input id="input"
-                                    type="password" required
-                                    value={otp}
-                                    onChange={handleOtpChange}
+                            )}
+                            <div>
+                                < input id="input"
+                                    type="text" required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <label placeholder="OTP"></label>
-                                {otpVerified &&
-                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                                        <circle className="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
-                                        <polyline className="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
-                                    </svg>
-                                }
-                                {resendDisabled ? (
-                                    <span className="timer-custom">
-                                        Resend OTP in{" "}
-                                        <span className="min-sec" style={{ marginLeft: "0.2em" }}>
-                                            {minutes}:{seconds}
-                                        </span>{" "}
-                                    </span>
-                                ) : (
-                                    <button className='resend-otp' onClick={resendOTP} type="button">
-                                        Not received OTP ? <span className="resend-link">Resend OTP</span>
-                                    </button>
-                                )
-                                }
-                            </>
-                        )}
-                        <div>
-                            < input id="input"
-                                type="text" required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <label placeholder="Email"></label>
-                        </div>
-                        <div className="terms-container">
-                            <input
-                                type="checkbox"
-                                onChange={handleCheckboxChange}
-                                checked={isChecked}
-                            />
-                            <p>I agree to all the
-                                <Link to='/termsConditions'>
-                                    <span className="conditions">
-                                        Terms and Conditions
-                                    </span>
-                                </Link>
-                            </p>
-                        </div>
-                        <div>
-                            <button className="book-now" onClick={bookVehicle} disabled={!isChecked}>Book Now</button>
-                            <button className="clear-all" onClick={clearAll}>Clear All</button>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <input id="input"
-                            type="text" required
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        <label placeholder="First Name"></label>
-                        <input id="input"
-                            type="text" required
-                            value={middleName}
-                            onChange={(e) => setMiddleName(e.target.value)}
-                        />
-                        <label placeholder="Middle Name"></label>
-                        <input id="input"
-                            type="text" required
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                        <label placeholder="Last Name"></label>
-                        <div className="date-picker">
-                            <DatePicker
-                                selected={fromDate}
-                                onChange={(date: Date) =>
-                                    setFromDate(date)
-                                }
-                                selectsStart
-                                startDate={fromDate}
-                                endDate={toDate}
-                                dateFormat="MM/dd/yyyy"
-                                minDate={new Date()}
-                                placeholderText="From-Date"
-                                className="from-date"
-                            />
-                            <DatePicker
-                                selected={toDate}
-                                onChange={(date: Date) =>
-                                    setToDate(date)
-                                }
-                                selectsEnd
-                                startDate={fromDate}
-                                endDate={toDate}
-                                minDate={fromDate}
-                                dateFormat="MM/dd/yyyy"
-                                className="to-date"
-                                placeholderText="To-Date"
-                            />
-                        </div>
-                        <button className="cssbuttons-io-button" onClick={(e: React.MouseEvent<HTMLButtonElement>
-                        ) => {
-                            e.preventDefault();
-                            setShowContinue(true);
-                        }}>
-                            Continue
-                            <div className="icon">
-                                <svg
-                                    height="24"
-                                    width="24"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="svg-icon"
-                                >
-                                    <path d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                                        fill="currentColor"
-                                    >
-                                    </path>
-                                </svg>
+                                <label placeholder="Email"></label>
                             </div>
-                        </button>
-                    </>
-                )}
-            </form>
+                            <div className="terms-container">
+                                <input
+                                    type="checkbox"
+                                    onChange={handleCheckboxChange}
+                                    checked={isChecked}
+                                />
+                                <p>I agree to all the
+                                    <Link to='/termsConditions'>
+                                        <span className="conditions">
+                                            Terms and Conditions
+                                        </span>
+                                    </Link>
+                                </p>
+                            </div>
+                            <div>
+                                <button className="book-now" onClick={bookVehicle} disabled={!isChecked}>Book Now</button>
+                                <button className="clear-all" onClick={clearAll}>Clear All</button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <input id="input"
+                                type="text" required
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            <label placeholder="First Name"></label>
+                            <input id="input"
+                                type="text" required
+                                value={middleName}
+                                onChange={(e) => setMiddleName(e.target.value)}
+                            />
+                            <label placeholder="Middle Name"></label>
+                            <input id="input"
+                                type="text" required
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                            <label placeholder="Last Name"></label>
+                            <button className="cssbuttons-io-button" onClick={(e: React.MouseEvent<HTMLButtonElement>
+                            ) => {
+                                e.preventDefault();
+                                setShowContinue(true);
+                            }}>
+                                Continue
+                            </button>
+                        </>
+                    )}
+                </form>
+            </Formik>
         </div>
     )
 }

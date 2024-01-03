@@ -9,6 +9,8 @@ form {
     border: 1px solid #eeeeee;
     font-size: 12px;
     padding: 15px;
+    width: 100%;
+    max-width: 400px;
 }
 
 /* Name */
@@ -146,79 +148,8 @@ input[type="password"]+label[placeholder]:before {
     color: green;
 }
 
-svg {
-    width: 20px;
-    height: 20px;
-    display: block;
-    position: absolute;
-    top: 27%;
-    right: 38%;
-}
-
 .tickmark {
     position: relative;
-}
-
-.path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
-
-    &.circle {
-        -webkit-animation: dash .9s ease-in-out;
-        animation: dash .9s ease-in-out;
-    }
-
-    &.line {
-        stroke-dashoffset: 1000;
-        -webkit-animation: dash .9s .35s ease-in-out forwards;
-        animation: dash .9s .35s ease-in-out forwards;
-    }
-
-    &.check {
-        stroke-dashoffset: -100;
-        -webkit-animation: dash-check .9s .35s ease-in-out forwards;
-        animation: dash-check .9s .35s ease-in-out forwards;
-    }
-}
-
-@-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 1000;
-    }
-
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
-@-webkit-keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
-
-    100% {
-        stroke-dashoffset: 900;
-    }
-}
-
-@keyframes dash-check {
-    0% {
-        stroke-dashoffset: -100;
-    }
-
-    100% {
-        stroke-dashoffset: 900;
-    }
 }
 
 .send-otp {
@@ -299,10 +230,10 @@ svg {
     background: #17a2b8;
     color: white;
     font-family: inherit;
-    padding-left: 0.5em;
+    padding-left: 2em;
+    padding-right:0 ;
     font-size: 14px;
     font-weight: 500;
-    border-radius: 0.2em;
     border: none;
     letter-spacing: 0.05em;
     display: flex;
@@ -310,42 +241,9 @@ svg {
     overflow: hidden;
     position: relative;
     height: 2.5em;
-    padding-right: 3em;
+    padding-right: 2em;
     float: right;
     cursor: pointer;
-}
-
-.cssbuttons-io-button .icon {
-    background: white;
-    margin-left: 1em;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 1.9em;
-    width: 2em;
-    border-radius: 0.7em;
-    right: 0.3em;
-    transition: all 0.3s;
-    color: #17a2b8;
-}
-
-.cssbuttons-io-button:hover .icon {
-    width: calc(100% - 0.6em);
-}
-
-.cssbuttons-io-button .icon svg {
-    width: 1.1em;
-    transition: transform 0.3s;
-    color: #17a2b8;
-}
-
-.cssbuttons-io-button:hover .icon svg {
-    transform: translateX(0.1em);
-}
-
-.cssbuttons-io-button:active .icon {
-    transform: scale(0.95);
 }
 
 .terms-container {
@@ -359,3 +257,4 @@ svg {
     padding-left: 0.2em;
     padding-right: 0.2em;
 }
+
