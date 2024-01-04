@@ -48,7 +48,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
   };
 
   const autocompleteOptions: MySearchBoxOptions = {
-    types: ["(cities)"],
+    types: ["geocode"],
     componentRestrictions: { country: "IN" },
   };
 
@@ -107,6 +107,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
             name="multipleDestination"
             checked={isMultipleDestination}
             onClick={handleRadioClick}
+            onChange={handleRadioClick}
           />
           &nbsp;&nbsp;
           <label htmlFor="multipleDestination" className="multipleDestination">
@@ -119,61 +120,58 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
           </span>
           <div className="destination_container_section_input">
             <form>
-              <div className="origin">
-                <LoadScript
-                  googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
-                  libraries={libraries}
-                  region="IN"
-                >
-                  <label htmlFor="from" style={{ display: "inline-flex" }}>
-                    From
-                  </label>
-                  <Autocomplete
-                    onLoad={(ref) => (fromInputRef.current = ref)}
-                    onPlaceChanged={() => handlePlaceChanged(fromInputRef)}
-                    options={
-                      autocompleteOptions as google.maps.places.AutocompleteOptions
-                    }
+              <div className="search_bar">
+                <div className="origin">
+                  <LoadScript
+                    googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
+                    libraries={libraries}
+                    region="IN"
                   >
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ex:Bengaluru"
-                      style={{ fontSize: "16px" }}
-                    />
-                  </Autocomplete>
-                </LoadScript>
-              </div>
-              <span className="material-symbols-outlined swapIcon">
-                sync_alt
-              </span>
-              <div className="destiny">
-                <LoadScript
-                  googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
-                  libraries={libraries}
-                  region="IN"
-                >
-                  <label htmlFor="to">To</label>
+                    <label htmlFor="from" style={{ display: "inline-flex" }}>
+                    Origin
+                    </label>
+                    <Autocomplete
+                      onLoad={(ref) => (fromInputRef.current = ref)}
+                      onPlaceChanged={() => handlePlaceChanged(fromInputRef)}
+                      options={
+                        autocompleteOptions as google.maps.places.AutocompleteOptions
+                      }
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Ex:Bengaluru"
+                      />
+                    </Autocomplete>
+                  </LoadScript>
+                </div>
+                <span className="material-symbols-outlined swapIcon">
+                  sync_alt
+                </span>
+                <div className="destiny">
+                  <LoadScript
+                    googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
+                    libraries={libraries}
+                    region="IN"
+                  >
+                    <label htmlFor="to">Destination</label>
 
-                  <Autocomplete
-                    onLoad={(ref) => (toInputRef.current = ref)}
-                    onPlaceChanged={() => handlePlaceChanged(toInputRef)}
-                    options={
-                      autocompleteOptions as google.maps.places.AutocompleteOptions
-                    }
-                  >
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ex:Dharmasthala"
-                      disabled={isMultipleDestination}
-                      style={{
-                        fontSize: "16px",
-                        marginLeft: "-1vw",
-                      }}
-                    />
-                  </Autocomplete>
-                </LoadScript>
+                    <Autocomplete
+                      onLoad={(ref) => (toInputRef.current = ref)}
+                      onPlaceChanged={() => handlePlaceChanged(toInputRef)}
+                      options={
+                        autocompleteOptions as google.maps.places.AutocompleteOptions
+                      }
+                    >
+                      <input
+                        type="text"
+                        className="form-control To_place"
+                        placeholder="Ex:Dharmasthala"
+                        disabled={isMultipleDestination}
+                      />
+                    </Autocomplete>
+                  </LoadScript>
+                </div>
               </div>
               <div className="from-to-date-container">
                 <div className="from-to-date-container-section">
