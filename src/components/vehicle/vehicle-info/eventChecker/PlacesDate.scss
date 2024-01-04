@@ -38,6 +38,10 @@
         form {
           display: flex;
           align-items: center;
+          input[type="text" i] {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
           .search_bar {
             display: flex;
             align-items: center;

@@ -96,7 +96,7 @@ const Booking: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 550, behavior: "smooth" });
+    window.scrollTo({ top: 450, behavior: "smooth" });
   };
 
   const listVehicles = () => {
@@ -133,7 +133,6 @@ const Booking: React.FC = () => {
           </div>
           <div className="booking_container_busDetails">
             <Fade top>
-              <h3>our buses</h3>
               <h1 className="header_content">Our Bus Collection</h1>
               <p className="content">
                 Discover affordable and reliable bus travel services with

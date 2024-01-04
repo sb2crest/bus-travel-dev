@@ -60,11 +60,10 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
     setEndDate(date);
   };
 
-  const handleRadioClick = () => {
-    setMultipleDestination((prevValue) => {
-      const newValue = !prevValue;
-      return newValue;
-    });
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.checked;
+    setMultipleDestination(newValue);
+    console.log(newValue);
   };
   useEffect(() => {
     const fetchSlots = async () => {
@@ -103,16 +102,15 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
       <div className="destination_container">
         <div className="destination_container_section">
           <input
-            type="radio"
-            name="multipleDestination"
+            type="checkbox"
+            id="multipleDestination"
             checked={isMultipleDestination}
-            onClick={handleRadioClick}
-            onChange={handleRadioClick}
+            onChange={handleCheckboxChange}
           />
           &nbsp;&nbsp;
           <label htmlFor="multipleDestination" className="multipleDestination">
             Multiple Destination
-          </label>{" "}
+          </label>
           &nbsp;&nbsp;
           <span style={{ color: "#0f7bab" }}>
             (<u>Note</u>:&nbsp;Please select this option if you're traveling to
@@ -128,7 +126,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                     region="IN"
                   >
                     <label htmlFor="from" style={{ display: "inline-flex" }}>
-                    Origin
+                      Origin
                     </label>
                     <Autocomplete
                       onLoad={(ref) => (fromInputRef.current = ref)}
