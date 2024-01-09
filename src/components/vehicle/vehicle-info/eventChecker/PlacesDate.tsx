@@ -60,11 +60,10 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
     setEndDate(date);
   };
 
-  const handleRadioClick = () => {
-    setMultipleDestination((prevValue) => {
-      const newValue = !prevValue;
-      return newValue;
-    });
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.checked;
+    setMultipleDestination(newValue);
+    console.log(newValue);
   };
   useEffect(() => {
     const fetchSlots = async () => {
@@ -96,23 +95,26 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
       );
     });
   };
+  const exploreClick = (e: any) => {
+    e.preventDefault();
+  };
+  const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
   return (
     <div className="destination">
-      <h1>Fill the below details to Book</h1>
+      {/* <h1>Fill the below details to Book</h1> */}
       <div className="destination_container">
         <div className="destination_container_section">
           <input
-            type="radio"
-            name="multipleDestination"
+            type="checkbox"
+            id="multipleDestination"
             checked={isMultipleDestination}
-            onClick={handleRadioClick}
-            onChange={handleRadioClick}
+            onChange={handleCheckboxChange}
           />
           &nbsp;&nbsp;
           <label htmlFor="multipleDestination" className="multipleDestination">
             Multiple Destination
-          </label>{" "}
+          </label>
           &nbsp;&nbsp;
           <span style={{ color: "#0f7bab" }}>
             (<u>Note</u>:&nbsp;Please select this option if you're traveling to
@@ -127,9 +129,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                     libraries={libraries}
                     region="IN"
                   >
-                    <label htmlFor="from" style={{ display: "inline-flex" }}>
-                    Origin
-                    </label>
                     <Autocomplete
                       onLoad={(ref) => (fromInputRef.current = ref)}
                       onPlaceChanged={() => handlePlaceChanged(fromInputRef)}
@@ -140,22 +139,21 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Ex:Bengaluru"
+                        placeholder="Origin"
                       />
                     </Autocomplete>
+                    <span className="material-symbols-outlined">near_me</span>
                   </LoadScript>
                 </div>
-                <span className="material-symbols-outlined swapIcon">
+                {/* <span className="material-symbols-outlined swapIcon">
                   sync_alt
-                </span>
+                </span> */}
                 <div className="destiny">
                   <LoadScript
                     googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
                     libraries={libraries}
                     region="IN"
                   >
-                    <label htmlFor="to">Destination</label>
-
                     <Autocomplete
                       onLoad={(ref) => (toInputRef.current = ref)}
                       onPlaceChanged={() => handlePlaceChanged(toInputRef)}
@@ -166,17 +164,20 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                       <input
                         type="text"
                         className="form-control To_place"
-                        placeholder="Ex:Dharmasthala"
+                        placeholder="Destination"
                         disabled={isMultipleDestination}
                       />
                     </Autocomplete>
+                    <i
+                      className="fa-solid fa-location-dot"
+                      style={{ color: "#b3b3b3" }}
+                    ></i>
                   </LoadScript>
                 </div>
               </div>
               <div className="from-to-date-container">
                 <div className="from-to-date-container-section">
                   <div className="From_section">
-                    <label htmlFor="From-Date">From-Date</label>
                     <div className="date-picker">
                       <DatePicker
                         selected={startDate}
@@ -185,7 +186,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                         startDate={startDate}
                         endDate={endDate}
                         dateFormat="dd/MM/yyyy"
-                        placeholderText="DD/MM/YYYY"
+                        placeholderText="From-Date"
                         className="form-control From_date"
                         minDate={new Date()}
                         highlightDates={bookedDates}
@@ -202,7 +203,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                     </div>
                   </div>
                   <div className="To_section">
-                    <label htmlFor="To-Date">To-Date</label>
                     <div className="date-picker">
                       <DatePicker
                         selected={endDate}
@@ -215,7 +215,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                         }
                         disabled={!isFromDateSelected}
                         dateFormat="dd/MM/yyyy"
-                        placeholderText="DD/MM/YYYY"
+                        placeholderText="To-Date"
                         className="form-control To_date"
                       />
                       <i
@@ -226,7 +226,11 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                   </div>
                 </div>
               </div>
-              <button className="bookNow">Book Now</button>
+              <div className="buttonBooknow">
+                <button className="bookNow" onClick={exploreClick}>
+                  Explore
+                </button>
+              </div>
             </form>
           </div>
         </div>

@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { stepConnectorClasses } from "@mui/material/StepConnector";
 import { DirectionsBus, Note, AttachMoney, Map } from "@mui/icons-material";
+import PlacesDate from "../vehicle/vehicle-info/eventChecker/PlacesDate";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -93,10 +94,9 @@ const steps = [
 
 const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
-  const [activeStep, setActiveStep] = useState<number>(0);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 550, behavior: "smooth" });
+    window.scrollTo({ top: 450, behavior: "smooth" });
   };
 
   const listVehicles = () => {
@@ -131,9 +131,10 @@ const Booking: React.FC = () => {
               <li>Booking</li>
             </ul>
           </div>
+    <PlacesDate vehicleNumber={""}/>
+
           <div className="booking_container_busDetails">
             <Fade top>
-              <h3>our buses</h3>
               <h1 className="header_content">Our Bus Collection</h1>
               <p className="content">
                 Discover affordable and reliable bus travel services with

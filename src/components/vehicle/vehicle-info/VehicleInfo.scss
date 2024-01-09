@@ -3,7 +3,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
+  background: url(../../../assets/images/60241.jpg);
+  background-position: right;
+  padding-bottom: 5vw;
+  margin-bottom: -3vw;
   &_banner {
     width: -webkit-fill-available;
     height: 60vh;

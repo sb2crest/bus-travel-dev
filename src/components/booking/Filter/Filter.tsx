@@ -456,7 +456,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                     </>
                   )}
                 </div>
-                <div className="calendar-container">
+                {/* <div className="calendar-container">
                   <div className="from-to-date-container">
                     <div className="date-picker">
                       <DatePicker
@@ -488,7 +488,7 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                       <FaCalendar className="to-icon-calendar" />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* Close Button */}
                 <div className="button-close-clear">
                   <button onClick={handleClose} className="button-close">

@@ -497,12 +497,12 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
 
             <div className="containers">
               <>
-                {/* <button
+                <button
                   className="button-53"
                   onClick={() => setShowModal(true)}
                 >
                   Book Now
-                </button> */}
+                </button>
                 {/*  Checkout Component */}
                 {checkout ? (
                   <Checkout
@@ -913,7 +913,6 @@ const VehicleInfo: React.FC<VehicleInfoProps> = () => {
             </div>
           </div>
         </div>
-        <PlacesDate vehicleNumber={location.state?.vehicleNumber} />
       </div>
     </>
   );
