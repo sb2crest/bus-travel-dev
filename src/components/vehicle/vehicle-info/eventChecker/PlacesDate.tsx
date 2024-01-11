@@ -1,46 +1,53 @@
-import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import React, { useEffect, useRef, useState } from "react";
+import { LoadScript, Autocomplete } from "@react-google-maps/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./PlacesDate.scss";
 import { Library } from "@googlemaps/js-api-loader";
 import dataService from "../../../../services/data.service";
-import ICalendarResponse from "../../../../types/availableSlots/response.type";
 
 interface MySearchBoxOptions {
   types?: string[];
   componentRestrictions?: { country: string };
 }
+
 interface PlacesDateProps {
-  vehicleNumber: string;
+  filterData: string;
+  onResponseDataChange: (responseData: any) => void;
 }
+
 const libraries: Library[] = ["places"];
 
-const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
+const PlacesDate: React.FC<PlacesDateProps> = ({
+  filterData,
+  onResponseDataChange,
+}) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [isMultipleDestination, setMultipleDestination] = useState(false);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [sourceLatitude, setSourceLatitude] = useState(0);
+  const [sourceLongitude, setSourceLongitude] = useState(0);
+  const [destinationLatitude, setDestinationLatitude] = useState(0);
+  const [destinationLongitude, setDestinationLongitude] = useState(0);
   const isFromDateSelected = startDate !== null;
-  const [slots, setSlots] = useState<ICalendarResponse>({
-    slots: {
-      vehicleNumber: "",
-      dates: [],
-    },
-  });
-
   const fromInputRef = useRef<google.maps.places.Autocomplete | null>(null);
   const toInputRef = useRef<google.maps.places.Autocomplete | null>(null);
 
   const handlePlaceChanged = (
-    inputRef: React.MutableRefObject<google.maps.places.Autocomplete | null>
+    inputRef: React.MutableRefObject<google.maps.places.Autocomplete | null>,
+    setLatitude: React.Dispatch<React.SetStateAction<number>>,
+    setLongitude: React.Dispatch<React.SetStateAction<number>>,
+    setAddress: React.Dispatch<React.SetStateAction<string>>
   ) => {
     if (inputRef.current) {
       const places = inputRef.current.getPlace();
 
       if (places && places.geometry && places.geometry.location) {
-        console.log(places.formatted_address);
-        console.log(places.geometry.location.lat());
-        console.log(places.geometry.location.lng());
+        setAddress(places.formatted_address || "");
+        setLatitude(places.geometry.location.lat() || 0);
+        setLongitude(places.geometry.location.lng() || 0);
       } else {
         console.error("Invalid place object:", places);
       }
@@ -65,44 +72,79 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
     setMultipleDestination(newValue);
     console.log(newValue);
   };
+  const sendResponseDataToBooking = (responseData: any) => {
+    console.log("Response data received in PlacesDate:", responseData);
+    if (onResponseDataChange) {
+      onResponseDataChange(responseData);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const formattedStartDate = startDate ? formatDate(startDate) : null;
+      const formattedEndDate = endDate ? formatDate(endDate) : null;
+      const requestBody = {
+        filter: filterData || "ALL/ALL",
+        fromDate: formattedStartDate,
+        toDate: formattedEndDate,
+        distanceRequest: {
+          source: source,
+          destination: destination,
+          sourceLatitude: sourceLatitude,
+          sourceLongitude: sourceLongitude,
+          destinationLatitude: destinationLatitude,
+          destinationLongitude: destinationLongitude,
+          multipleDestination: isMultipleDestination,
+        },
+      };
+      const response = await dataService.filter(requestBody);
+      console.log("API Response", response.data);
+      sendResponseDataToBooking(response.data);
+    } catch (error) {
+      console.error("Error fetching available Vehicles:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchSlots = async () => {
-      try {
-        const response = await dataService.availableSlots(vehicleNumber);
-        const dates = response.data.slots.dates;
-        setSlots((prevSlots) => ({
-          ...prevSlots,
-          slots: { ...prevSlots.slots, dates },
-        }));
-        console.log("Booked dates are", dates);
-      } catch (error) {
-        console.error("Error fetching available slots:", error);
-      }
-    };
+    if (filterData !== null) {
+      fetchData();
+    }
+  }, [filterData]);
+  
 
-    fetchSlots();
-  }, [vehicleNumber]);
-
-  const bookedDates = slots.slots.dates
-    .filter((slot) => slot.isBooked)
-    .map((bookedSlot) => new Date(bookedSlot.date));
-
-  const isDayBlocked = (date: Date) => {
-    return bookedDates.some((bookedDate) => {
-      return (
-        new Date(bookedDate.toDateString()).getTime() ===
-        new Date(date.toDateString()).getTime()
-      );
-    });
-  };
-  const exploreClick = (e: any) => {
+  const exploreClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
+    fetchData();
   };
-  const [focusedInput, setFocusedInput] = useState<string | null>(null);
+  const formatDate = (date: Date): string => {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  const handleOriginPlaceChanged = () => {
+    handlePlaceChanged(
+      fromInputRef,
+      setSourceLatitude,
+      setSourceLongitude,
+      setSource
+    );
+  };
+
+  const handleDestinationPlaceChanged = () => {
+    handlePlaceChanged(
+      toInputRef,
+      setDestinationLatitude,
+      setDestinationLongitude,
+      setDestination
+    );
+  };
 
   return (
     <div className="destination">
-      {/* <h1>Fill the below details to Book</h1> */}
       <div className="destination_container">
         <div className="destination_container_section">
           <input
@@ -131,7 +173,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                   >
                     <Autocomplete
                       onLoad={(ref) => (fromInputRef.current = ref)}
-                      onPlaceChanged={() => handlePlaceChanged(fromInputRef)}
+                      onPlaceChanged={handleOriginPlaceChanged}
                       options={
                         autocompleteOptions as google.maps.places.AutocompleteOptions
                       }
@@ -145,9 +187,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                     <span className="material-symbols-outlined">near_me</span>
                   </LoadScript>
                 </div>
-                {/* <span className="material-symbols-outlined swapIcon">
-                  sync_alt
-                </span> */}
                 <div className="destiny">
                   <LoadScript
                     googleMapsApiKey="AIzaSyBB6-8inLCozBj_SKuhrK0bhuO2Jxw35IU"
@@ -156,7 +195,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                   >
                     <Autocomplete
                       onLoad={(ref) => (toInputRef.current = ref)}
-                      onPlaceChanged={() => handlePlaceChanged(toInputRef)}
+                      onPlaceChanged={handleDestinationPlaceChanged}
                       options={
                         autocompleteOptions as google.maps.places.AutocompleteOptions
                       }
@@ -189,12 +228,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({ vehicleNumber }) => {
                         placeholderText="From-Date"
                         className="form-control From_date"
                         minDate={new Date()}
-                        highlightDates={bookedDates}
-                        wrapperClassName="highlighted"
-                        filterDate={(date: Date) => !isDayBlocked(date)}
-                        dayClassName={(date) =>
-                          isDayBlocked(date) ? "blocked-date" : ""
-                        }
                       />
                       <i
                         className="fa-regular fa-calendar"
