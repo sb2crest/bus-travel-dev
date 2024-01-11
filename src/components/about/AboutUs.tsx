@@ -31,7 +31,7 @@ const AboutUs = () => {
           <div className="aboutus_container_intro_section">
             <Flip top>
               <div className="aboutus_container_intro_section_content">
-                <h5>About Us</h5>
+                <h2>About Us</h2>
                 <p>
                   Welcome to our premier bus rental service! We offer a diverse
                   fleet of top-quality buses for all your transportation needs.

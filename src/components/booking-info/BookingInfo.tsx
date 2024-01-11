@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./BookingInfo.scss";
-import asideImage from "../../assets/images/Aside Image.png";
+import asideImage from '../../assets/images/Aside.png'
 import dataService from "../../services/data.service";
 import Warning from "../warning/Warning";
 import BookingDetails from "./booking-details/BookingDetails";
@@ -194,7 +194,21 @@ const BookingInfo = () => {
   };
 
   return (
-    <div className="booking-info">
+    <><div className="booking-details-main">
+      <div className="booking-details-container">
+        <div className="booking_container_banner">
+          <h1>Booking Info</h1>
+          <h3>Check Your Booking Details here...</h3>
+          <ul>
+            <li>
+              <Link to={"/"}>Home</Link>
+            </li>
+            <li>&#10095;</li>
+            <li>Booking Info</li>
+          </ul>
+        </div>
+      </div>
+    </div><div className="booking-info">
         {!showDetails ? (
           <div className="booking-info-container">
             <form className="form" onSubmit={handleSubmit}>
@@ -306,7 +320,7 @@ const BookingInfo = () => {
           bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
         )}
         {showWarning && <Warning onClose={closeWarning} />}
-      </div>
+      </div></>
   );
 };
 

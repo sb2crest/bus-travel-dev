@@ -76,7 +76,9 @@ const VehicleInfo: React.FC = () => {
                   icon={faMapMarkerAlt}
                   style={{ color: "#0f7bab" }}
                 />
-                <p className="inclusion-02">Extra usage at Rs. 15/KM to be paid to the operator</p>
+                <p className="inclusion-02">
+                  Extra usage at Rs. 15/KM to be paid to the operator
+                </p>
               </div>
             </div>
             <div className="exclusions">
@@ -155,6 +157,7 @@ const VehicleInfo: React.FC = () => {
                 </div>
               </div>
             </div>
+
             <div className="containers">
               <>
                 <Link to="/progressbar" className="button-53">
