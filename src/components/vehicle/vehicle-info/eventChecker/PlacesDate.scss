@@ -5,8 +5,37 @@
   justify-content: center;
   flex-direction: column;
   margin-top: -0.5vw;
-  .focused-icon{
-    color: #0f7bab;
+  .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #fff !important;
+    outline: #fff;
+    box-shadow: none;
+    
+  }
+  input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+  }
+  input[type=text i] {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .form-control {
+    display: block;
+    width:180px;
+    height: 40px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-size: 16px;
   }
   h1 {
     color: rgb(15, 123, 171);

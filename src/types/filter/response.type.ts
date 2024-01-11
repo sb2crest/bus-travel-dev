@@ -9,4 +9,10 @@ export default interface IFilterResponse {
     driverNumber: string | null;
     alternateNumber: string | null;
     emergencyNumber: string | null;
+    totalAmount: number;
+    advanceAmt: number;
+    remainingAmt: number;
+    amtPerKM: number | null; 
+    source: string;
+    destination: string;
 }

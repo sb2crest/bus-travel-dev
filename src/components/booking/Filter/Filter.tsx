@@ -1,20 +1,13 @@
 import "./Filter.scss";
-import filterIcon from "../../../assets/images/filter.png";
-import React, { useState, Dispatch, SetStateAction } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../booking-calendar/BookingCalendar.scss";
-import IFilterRequest from "../../../types/filter/request.type";
-import dataService from "../../../services/data.service";
-import { format } from "date-fns";
-import ListVehicles from "../../../types/list.type";
 import TuneIcon from "@mui/icons-material/Tune";
-import { FaCalendar } from "react-icons/fa";
 
 interface FilterProps {
-  setVehicles: Dispatch<SetStateAction<ListVehicles[]>>;
+  onFilterChange: (filterData: string) => void;
 }
-const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
+const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   const [showModal, setShowModal] = useState(false);
   const [isACClicked, setIsACClicked] = useState(false);
   const [isSleeperClicked, setIsSleeperClicked] = useState(false);
@@ -33,8 +26,6 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const [toDate, setToDate] = useState<Date | null>(null);
 
-  // State variable to store filter results
-  const [filterResults, setFilterResults] = useState<any>(null);
 
   // Function to handle AC "All" checkbox change
   const handleACAllChange = () => {
@@ -142,39 +133,8 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
       (acOptions.length > 0 && sleeperOptions.length > 0 ? "/" : "") +
       sleeperOptions.join(",");
     console.log("filter:", filter);
-
-    // Store fromDate and toDate in variables
-    const selectedFromDate = fromDate ? format(fromDate, "dd-MM-yyyy") : null;
-    const selectedToDate = toDate ? format(toDate, "dd-MM-yyyy") : null;
-    console.log("selectedFromDate:", selectedFromDate);
-    console.log("selectedToDate:", selectedToDate);
-
-    try {
-      let requestBody = {
-        filter: filter,
-        fromDate: selectedFromDate,
-        toDate: selectedToDate,
-      };
-      const response = await dataService.filter(requestBody);
-      const responseData = response.data;
-      console.log(responseData);
-      // Store the filter results in state
-      setFilterResults(responseData);
-      setVehicles(responseData);
-
-      // Close the modal
-      setShowModal(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  const handleFromDateChange = (date: Date | null) => {
-    setFromDate(date);
-  };
-
-  const handleToDateChange = (date: Date | null) => {
-    setToDate(date);
+    onFilterChange(filter);
+    setShowModal(false);
   };
 
   // Function to Clear Filter
@@ -187,8 +147,6 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
     setIsSleeperChecked(false);
     setIsSemiSleeperChecked(false);
     setIsNonSleeperChecked(false);
-    setFromDate(null);
-    setToDate(null);
   };
 
   // Function for AC Filters
@@ -456,39 +414,6 @@ const Filter: React.FC<FilterProps> = ({ setVehicles }: FilterProps) => {
                     </>
                   )}
                 </div>
-                {/* <div className="calendar-container">
-                  <div className="from-to-date-container">
-                    <div className="date-picker">
-                      <DatePicker
-                        selected={fromDate}
-                        onChange={handleFromDateChange}
-                        selectsStart
-                        startDate={fromDate}
-                        endDate={toDate}
-                        dateFormat="dd-MM-yyyy"
-                        placeholderText="From-Date"
-                        className="start-date"
-                        minDate={new Date()}
-                        data-testid="date-item-1"
-                      />
-                      <FaCalendar className="from-icon-calendar" />
-                    </div>
-                    <div className="date-picker">
-                      <DatePicker
-                        selected={toDate}
-                        onChange={handleToDateChange}
-                        selectsEnd
-                        startDate={fromDate}
-                        endDate={toDate}
-                        minDate={fromDate || new Date()}
-                        dateFormat="dd-MM-yyyy"
-                        placeholderText="To-Date"
-                        className="end-date"
-                      />
-                      <FaCalendar className="to-icon-calendar" />
-                    </div>
-                  </div>
-                </div> */}
                 {/* Close Button */}
                 <div className="button-close-clear">
                   <button onClick={handleClose} className="button-close">
