@@ -231,7 +231,7 @@ const history = Array.isArray(bookingDetails.history)
           <h3>Check Your Booking Details here...</h3>
           <ul>
             <li>
-              <Link to={"/#"}>Home</Link>
+              <Link to={"/"}>Home</Link>
             </li>
             <li>&#10095;</li>
             <li>Booking Info</li>

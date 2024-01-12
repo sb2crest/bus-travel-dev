@@ -76,6 +76,10 @@ export default async function displayRazorpay(
         email: mobile,
         contact: mobile,
       },
+      theme: {
+        color: '#0f7bab',
+        height:"60vh"
+    },
     };
 
     const rzp1 = new (window as any).Razorpay(options);
@@ -89,7 +93,6 @@ export default async function displayRazorpay(
       alert(response.error.metadata.order_id);
       alert(response.error.metadata.payment_id);
     });
-
     rzp1.open();
   } catch (error) {
     console.error("An error occurred during the fetch or JSON parsing:", error);

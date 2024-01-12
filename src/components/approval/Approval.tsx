@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Approval.scss';
 import icon from '../../assets/images/blue-tick.jpg';
+
 interface ApprovalProps {
     bookingid: string;
 }

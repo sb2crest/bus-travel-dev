@@ -23,11 +23,7 @@ const VehicleInfo: React.FC = () => {
     setSelectedImage(newImages);
   };
 
-  const showProgressBar = () => {
-    setProgressBar(true);
-  }
-
-  // console.log("vehicle number:" + vehicleNumber);
+  console.log("vehicle number:" + vehicleNumber);
 
   return (
     <>
