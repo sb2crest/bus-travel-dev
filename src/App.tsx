@@ -14,6 +14,8 @@ import BookVehicle from './components/booking/book-vehicle/BookVehicle';
 import VehicleInfo from './components/vehicle/vehicle-info/VehicleInfo';
 import ProgressBar from './components/progress bar/ProgressBar';
 import BookingDetails from './components/booking-info/booking-details/BookingDetails';
+import TermsConditions from './components/terms & condition/TermsConditions';
+import ProgressBar from './components/progress bar/ProgressBar';
 import TermsConditions from './components/terms & condition/TermsConditions'
 
 const App = () => {
