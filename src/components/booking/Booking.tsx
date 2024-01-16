@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import "./Booking.scss";
+import dataService from "../../services/data.service";
 import ListVehicles from "../../types/list.type";
 import Fade from "react-reveal/Fade";
 import Filter from "./Filter/Filter";
@@ -17,7 +18,6 @@ import {
 } from "@mui/material";
 import { stepConnectorClasses } from "@mui/material/StepConnector";
 import { DirectionsBus, Note, AttachMoney, Map } from "@mui/icons-material";
-import PlacesDate from "../vehicle/vehicle-info/eventChecker/PlacesDate";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -85,30 +85,54 @@ function ColorlibStepIcon(props: StepIconProps) {
 }
 
 const steps = [
-  "Step 1: Enter Trip Details & Select Your Bus",
+  "Step 1: Select Your Bus",
   "Step 2: Booking Details",
   "Step 3: Booking Payment",
   "Step 4: Start Your Roadtrip",
 ];
 
-const Booking: React.FC = (props) => {
+const Booking: React.FC = () => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
-  const [filterData, setFilterData] = useState<any>(null);
-  const [shouldRenderBusDetails, setShouldRenderBusDetails] = useState(false);
 
-  const handleFilterChange = (filterData: string) => {
-    setFilterData(filterData);
-    console.log("Filter data received in Booking component:", filterData);
-  };
   const scrollToTop = () => {
-    window.scrollTo({ top: 450, behavior: "smooth" });
+    window.scrollTo({ top: 550, behavior: "smooth" });
   };
-  const handleResponseDataChange = (responseData: any) => {
-    console.log("Response data received in Booking:", responseData);
-    setVehicles(responseData);
-    setShouldRenderBusDetails(true);
 
-  };
+  // const listVehicles = () => {
+  //   dataService
+  //     .listVehicles()
+  //     .then((response) => {
+  //       const vehicles: ListVehicles[] = response.data;
+  //       setVehicles(vehicles);
+  //       // vehicles.forEach((vehicle, index) => {
+  //       //   const vehicleNumber = vehicle.vehicleNumber;
+  //       //   console.log(`Vehicle ${index + 1} - Vehicle Number: ${vehicleNumber}`);
+  //       // });
+  //       console.log("Fetched vehicles:", vehicles);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error in fetching data:", error);
+  //     });
+  // };
+  // useEffect(() => {
+  //   listVehicles();
+  // }, []);
+
+  useEffect(() => {
+    const listVehicles = async () => {
+      try {
+        const response = await dataService.listVehicles();
+        const fetchedVehicles: ListVehicles[] = response.data;
+        setVehicles(fetchedVehicles);
+        console.log("Fetched vehicles:", fetchedVehicles);
+      } catch (error) {
+        console.error("Error in fetching data:", error);
+      }
+    };
+    if (vehicles.length === 0) {
+      listVehicles();
+    }
+  }, [vehicles]);
 
   return (
     <>
@@ -125,14 +149,9 @@ const Booking: React.FC = (props) => {
               <li>Booking</li>
             </ul>
           </div>
-          <PlacesDate
-            filterData={filterData}
-            onResponseDataChange={handleResponseDataChange}
-          />
-   {shouldRenderBusDetails && (
-    <Fade top>
           <div className="booking_container_busDetails">
             <Fade top>
+              <h3>our buses</h3>
               <h1 className="header_content">Our Bus Collection</h1>
               <p className="content">
                 Discover affordable and reliable bus travel services with
@@ -144,27 +163,21 @@ const Booking: React.FC = (props) => {
             <img src={divimg} alt="curvedimg" className="curvedimg" />
             <div className="curvedimgsection">
               <div data-testid="filter-component" className="filterAlign">
-                <Filter onFilterChange={handleFilterChange} />
+                <Filter setVehicles={setVehicles} />
               </div>
               <div className="booking_container_busDetails_section">
                 {vehicles.map((vehicle, index) => (
                   <div className="buses" key={index}>
-                    {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
                     <img
                       src={bus}
-                      // src={vehicle.s3ImageUrl[0]}
                       alt={`Bus ${index}`}
                       className="busOne_img"
                     />
-                    {/* )} */}
-                    {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
-
                     {/* Render vehicle details here */}
                     <div className="busOne_details">
                       <h2>
                         ({vehicle.vehicleAC} {vehicle.sleeper})
                       </h2>
-
                       <p>
                         <span className="material-symbols-outlined">
                           airline_seat_recline_extra
@@ -175,10 +188,7 @@ const Booking: React.FC = (props) => {
                       <Link
                         to={{
                           pathname: "/vehicleinfo",
-                          state: {
-                            images: vehicle.s3ImageUrl || [],
-                            vehicleNumber: vehicle.vehicleNumber,
-                          },
+                          state: { vehicleNumber: vehicle.vehicleNumber, images: [] },
                         }}
                       >
                         <button className="button-53" onClick={scrollToTop}>
@@ -191,8 +201,6 @@ const Booking: React.FC = (props) => {
               </div>
             </div>
           </div>
-          </Fade>
-               )}
         </div>
         <div className="howitworks">
           <Fade top>
@@ -225,7 +233,7 @@ const Booking: React.FC = (props) => {
                     color: "#0f7bab",
                   }}
                 ></i>
-                <h3>Enter Trip Details & Select Your Bus</h3>
+                <h3>Select Your Bus</h3>
                 <p>
                   Choose from a range of available buses, considering factors
                   like destination, departure time, and seating preferences.
