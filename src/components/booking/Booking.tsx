@@ -95,6 +95,13 @@ const Booking: React.FC = (props) => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
   const [filterData, setFilterData] = useState<any>(null);
   const [shouldRenderBusDetails, setShouldRenderBusDetails] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
 
   const handleFilterChange = (filterData: string) => {
     setFilterData(filterData);
@@ -103,9 +110,14 @@ const Booking: React.FC = (props) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 450, behavior: "smooth" });
   };
-  const handleResponseDataChange = (responseData: any) => {
+  const handleResponseDataChange = (
+    responseData: any,
+    selectedDateRange: any
+  ) => {
     console.log("Response data received in Booking:", responseData);
+    console.log("Selected date range received in Booking:", selectedDateRange);
     setVehicles(responseData);
+    setSelectedDateRange(selectedDateRange);
     setShouldRenderBusDetails(true);
   };
 
@@ -177,6 +189,7 @@ const Booking: React.FC = (props) => {
                               state: {
                                 images: vehicle.s3ImageUrl || [],
                                 vehicleNumber: vehicle.vehicleNumber,
+                                selectedDateRange: selectedDateRange,
                               },
                             }}
                           >

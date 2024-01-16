@@ -19,6 +19,7 @@ import PlacesDate from "../vehicle-info/eventChecker/PlacesDate";
 interface LocationState {
   vehicleNumber: any;
   images?: string[];
+  selectedDateRange: any;
 }
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -53,8 +54,9 @@ interface LocationState {
 
 const VehicleInfo: React.FC = () => {
   const location = useLocation<LocationState>();
+  console.log("Location State:", location.state);
   const initialImages = location.state?.images || [];
-  const { vehicleNumber, images } = location.state;
+  const { vehicleNumber, selectedDateRange } = location.state;
 
   const [state, setState] = useState<State>({
     vehicleData: initialVehicleData,
@@ -504,7 +506,7 @@ const VehicleInfo: React.FC = () => {
                 <Link
                   to={{
                     pathname: "/progressbar",
-                    state: { vehicleNumber },
+                    state: { vehicleNumber,selectedDateRange},
                   }}
                 >
                   <button className="button-53">Book Now</button>
