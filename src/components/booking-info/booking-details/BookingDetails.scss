@@ -1,0 +1,23 @@
+.upcoming,.past{
+    color: #0f7bab;
+}
+.thead{
+    background-color: #0f7bab !important;
+}
+.booking_container_banner{
+    // background: url(../../../assets/images/booking_info_banner.jpg);
+    background-position: center;
+}
+.header{
+    h1{
+        color: #0f2454;
+        background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+    }
+}
+.css-1wvnaxz-MuiTableCell-root {
+    padding: 13px !important;
+}

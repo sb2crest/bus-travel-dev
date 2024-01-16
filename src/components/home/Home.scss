@@ -1,0 +1,932 @@
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  margin-top: -0.9vw;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.card_banner {
+  display: flex;
+  justify-content: center;
+
+  &_content {
+    margin-top: -15vw;
+    margin-bottom: 4vw;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1;
+    border-bottom: 5px solid #0f7bab;
+    color: #0f2454;
+
+    &_one {
+      text-align: center;
+      padding-right: 4vw;
+      border-right: 1px solid #72716f;
+      .fa-2xl {
+        color: #0f7bab;
+        cursor: pointer;
+
+        &:hover {
+          transition: all 0.3s;
+          color: #0f2454;
+        }
+      }
+    }
+
+    &_two {
+      margin-left: -4vw;
+      border-right: 1px solid #72716f;
+      padding-right: 4vw;
+      text-align: center;
+
+      .fa-2xl {
+        color: #0f7bab;
+
+        &:hover {
+          transition: all 0.3s;
+          color: #0f2454;
+        }
+      }
+    }
+
+    &_three {
+      margin-left: -4vw;
+      border-right: 1px solid #72716f;
+      padding-right: 4vw;
+      text-align: center;
+
+      .fa-2xl {
+        color: #0f7bab;
+
+        &:hover {
+          transition: all 0.3s;
+          color: #0f2454;
+        }
+      }
+    }
+
+    &_four {
+      margin-left: -4vw;
+      text-align: center;
+
+      .fa-2xl {
+        color: #0f7bab;
+
+        &:hover {
+          transition: all 0.3s;
+          color: #0f2454;
+        }
+      }
+    }
+  }
+}
+
+.our_services {
+  background: aliceblue;
+  &_heading {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      margin-bottom: -0.7vw;
+      position: relative;
+      display: inline-block;
+      background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p {
+      margin-top: 2vw;
+      color: #0d3b66;
+      width: 65%;
+      text-align: center;
+    }
+  }
+}
+
+.aboutUs {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 5vw 0;
+  &_container {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+
+    &_content {
+      h4 {
+        color: #0f7bab;
+      }
+      h1 {
+        background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .key_points {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: left;
+        margin-left: -7vw;
+      }
+    }
+
+    &_image {
+      position: relative;
+
+      #img1 {
+        width: 65%;
+        border-radius: 10px 10px 10px 10px;
+      }
+
+      #img2 {
+        width: 42%;
+        position: absolute;
+        top: 90px;
+        right: 45px;
+        border-style: solid;
+        border-width: 10px 10px 10px 10px;
+        border-color: #fff;
+        border-radius: 20px 20px 20px 20px;
+      }
+    }
+  }
+}
+.lastcontainer {
+  .aboutus_container_services {
+    padding: 1.5vw 0 5vw;
+    margin: 0 !important;
+    background: rgba(134, 167, 189, 0.102);
+    &_section {
+      &_images {
+        .services_img {
+          background: #fff !important;
+        }
+      }
+    }
+  }
+}
+.btn-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  &:nth-child(1) {
+    --btn-bg: #0f7bab;
+    --bg: #0f7bab;
+  }
+}
+a {
+  text-decoration: none;
+}
+.Knowmore {
+  --width: 160px;
+  --height: 50px;
+  border: 0;
+  position: relative;
+  min-width: var(--width);
+  min-height: var(--height);
+  border-radius: var(--height);
+  color: #fff;
+  font-family: "Montserrat";
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+  background: var(--btn-bg);
+&:hover{
+  background: aliceblue;
+}
+  .text,
+  .icon_container {
+    position: relative;
+    text-decoration: none;
+    z-index: 2;
+  }
+
+  .icon_container {
+    --icon-size: 25px;
+    position: relative;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin-left: 15px;
+    transition: transform 500ms ease;
+
+    .icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      transition: transform 500ms ease, opacity 250ms ease;
+
+      &--left {
+        transform: translateX(-200%);
+        opacity: 0;
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: #fff;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  background: #0f7bab;
+
+    border-radius: var(--height);
+    z-index: 1;
+    transition: transform 500ms ease;
+  }
+
+  &:hover {
+    color: #0f7bab;
+    &::after {
+      transform: translateX(68%);
+      background: #0f7bab;
+    }
+
+    .icon_container {
+      transform: translateX(25%);
+      .icon {
+        &--left {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        &--right {
+          transform: translateX(200%);
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+.aboutus_container_services {
+  margin: 5vw 0;
+  &_section {
+    &_images {
+      &_heading {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        p {
+          width: 65%;
+          color: #0d3b66;
+          margin-top: -1vw;
+        }
+      }
+
+      img {
+        width: 225px;
+        height: 30vh;
+      }
+      h1 {
+        color: #0f2454;
+        position: relative;
+        display: inline-block;
+        background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .services_img {
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+          rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+      }
+      &_one {
+        margin-top: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        h3 {
+          color: #0f2454;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+  .card_banner {
+    &_content {
+      width: 75%;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      grid-gap: 20px;
+      padding: 20px 0px;
+      margin-bottom: 0vw;
+      box-shadow: none;
+      background: none;
+      border: none;
+      &_one {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 13.2px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_two {
+        border: none;
+        padding-right: 0;
+        font-size: 14px;
+
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_three {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_four {
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .our_services {
+    margin-top: 0vw;
+    &_heading {
+      flex-direction: column;
+      align-items: center;
+
+      h4 {
+        margin-bottom: 0vw;
+      }
+
+      h1 {
+        margin-bottom: 0vw;
+        font-size: 18px;
+      }
+      p {
+        width: 80%;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      flex-direction: column-reverse;
+      &_content {
+        h1 {
+          font-size: 22px;
+        }
+        p {
+          font-size: 11px;
+          text-align: justify;
+          color: #0f2454;
+          line-height: 1.7;
+        }
+        .key_points {
+          margin-left: -2vw;
+          &_two {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      &_image {
+        display: none;
+      }
+    }
+  }
+  .lastcontainer {
+    .aboutus_container_services {
+      padding: 1.5vw 0 5vw;
+      margin: 0 !important;
+      background: rgba(134, 167, 189, 0.102);
+      &_section {
+        &_images {
+          .services_img {
+            background: #fff !important;
+          }
+          img {
+            width: 250px !important;
+            height: 28vh !important;
+          }
+          &_heading {
+            p {
+              width: 90%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .Knowmore {
+    --width: 120px;
+    --height: 36px;
+    margin: 0 1rem;
+
+    .text,
+    .icon_container {
+      font-size: 14px;
+    }
+
+    .icon_container {
+      --icon-size: 18px;
+      margin-left: 10px;
+
+      .icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--icon-size);
+        height: var(--icon-size);
+        transition: transform 500ms ease, opacity 250ms ease;
+
+        &--left {
+          transform: translateX(-200%);
+          opacity: 0;
+        }
+
+        svg {
+          width: 100%;
+          height: 100%;
+          fill: #fff;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--height);
+      z-index: 1;
+      transition: transform 500ms ease;
+    }
+
+    &:hover {
+      &::after {
+        transform: translateX(70%);
+      }
+
+      .icon_container {
+        transform: translateX(15%);
+      }
+    }
+  }
+
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 255px !important;
+          height: 40vh !important;
+        }
+        h1 {
+          color: #0f2454;
+          font-size: 25px !important;
+        }
+        .services_img {
+          margin-top: 5vw;
+        }
+        &_one {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .card_banner {
+    &_content {
+      width: 75%;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      grid-gap: 20px;
+      padding: 20px 40px;
+      box-shadow: none;
+      background: none;
+      margin-bottom: 0vw;
+      border: none;
+
+      &_one {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_two {
+        border: none;
+        padding-right: 0;
+        font-size: 14px;
+
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_three {
+        border-right: 1px solid #72716f;
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_four {
+        font-size: 14px;
+        .fa-2xl {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .our_services {
+    margin-top: 5vw;
+
+    &_heading {
+      h1 {
+        font-size: 25px;
+      }
+
+      h1 span.underline::after {
+        padding: 3px;
+      }
+
+      p {
+        width: 78%;
+        font-size: 14px;
+      }
+    }
+  }
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      flex-direction: column-reverse;
+      &_content {
+        h1 {
+          font-size: 22px;
+        }
+        p {
+          font-size: 14px;
+          text-align: justify;
+          color: #0f2454;
+          line-height: 1.7;
+        }
+        .key_points {
+          margin-left: 0vw;
+          justify-content: start;
+          &_two {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      &_image {
+        display: none;
+      }
+    }
+  }
+  .button-71 {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .aboutus_container_services {
+    &_section {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: center;
+      &_images {
+        img {
+          width: 255px !important;
+          height: 40vh !important;
+        }
+        h1 {
+          color: #0f2454;
+          font-size: 25px !important;
+        }
+
+        // h1::after {
+        //   content: "";
+        //   width: 94% !important;
+        //   padding: 3px !important;
+        //   bottom: 2px !important;
+        //   left: 2% !important;
+        // }
+        .services_img {
+          margin-top: 5vw;
+        }
+        &_one {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .card_banner {
+    &_content {
+      width: 80%;
+      padding: 30px;
+      margin-bottom: 0vw;
+
+      &_one {
+        padding-right: 2vw;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_two {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_three {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+
+      &_four {
+        margin-left: 0;
+        text-align: center;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .our_services {
+    margin-top: 5vw;
+    &_heading {
+      h1 {
+        font-size: 25px;
+      }
+
+      h1 span.underline::after {
+        padding: 3px;
+      }
+
+      p {
+        width: 80%;
+      }
+    }
+  }
+
+  .aboutUs {
+    margin: 5vw 0;
+
+    &_container {
+      width: 95%;
+      &_content {
+        h1 {
+          font-size: 25px;
+        }
+        p {
+          font-size: 14px;
+          text-align: justify;
+        }
+
+        .key_points {
+          margin-left: -2vw;
+        }
+      }
+
+      &_image {
+        text-align: center;
+        #img1 {
+          width: 60%;
+        }
+
+        #img2 {
+          width: 32%;
+          top: 70px;
+        }
+      }
+    }
+  }
+
+  .button-71 {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 225px;
+          height: 30vh;
+        }
+        h1 {
+          font-size: 25px;
+        }
+
+        // h1::after {
+        //   padding: 3px !important;
+        //   left: 2% !important;
+        //   z-index: -1;
+        // }
+        &_one {
+          margin-top: 3vw;
+          display: grid !important;
+          grid-template-columns: auto auto !important;
+          align-content: center !important ;
+          gap: 40px 0px;
+          h3 {
+            color: #0f2454;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1023px) and (max-width: 1279px) {
+  .card_banner {
+    &_content {
+      width: 75%;
+      padding: 30px;
+
+      &_one {
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_two {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_three {
+        margin-left: 0;
+        padding-right: 2vw;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+
+      &_four {
+        margin-left: 0;
+        text-align: center;
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .aboutus_container_services {
+    &_section {
+      &_images {
+        img {
+          width: 200px !important;
+          height: 20vh !important;
+        }
+        h1 {
+          font-size: 35px;
+        }
+
+        // h1::after {
+        //   padding: 3px !important;
+        //   left: 2% !important;
+        //   z-index: -1;
+        // }
+        &_one {
+          margin-top: 3vw;
+          h3 {
+            color: #0f2454;
+          }
+        }
+      }
+    }
+  }
+}

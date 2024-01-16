@@ -1,0 +1,338 @@
+.vehicleInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: url(../../../assets/images/60241.jpg);
+  background-position: right;
+  padding-bottom: 5vw;
+  margin-bottom: -3vw;
+  &_banner {
+    width: -webkit-fill-available;
+    height: 60vh;
+    background: url(../../../assets/images/banner.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+      font-size: 6vw;
+      color: #0f7bab;
+      background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 0.3px #fff;
+    }
+
+    h3 {
+      margin-top: -4.5vw;
+      font-size: 2.3vw;
+      color: #05f867;
+    }
+
+    ul {
+      margin-top: -2vw;
+      list-style: none;
+      display: flex;
+      color: #fff;
+      padding-inline-start: 0px;
+      align-items: center;
+
+      li {
+        margin-left: 10px;
+
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &_container {
+    margin: 1vw 0;
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    align-items: self-start;
+
+    .image-gallery {
+      text-align: center;
+
+      h1 {
+        color: rgb(15, 123, 171);
+        position: relative;
+        display: inline-block;
+        font-size: xx-large;
+        background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      h1::after {
+        display: inline-block;
+        content: "";
+        // background-color: #0f7bab;
+        width: 95%;
+        padding: 5px;
+        position: absolute;
+        bottom: 2px;
+        left: 0%;
+        z-index: -1;
+      }
+
+      .parent-image {
+        padding: 10px;
+
+        img {
+          border-radius: 10px;
+        }
+      }
+
+      .child-images {
+        img {
+          padding: 10px;
+          border-radius: 15px;
+        }
+      }
+    }
+
+    .bus_details {
+      .inclusions {
+        .inclusion-01 {
+          color: rgb(15, 123, 171);
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 1vh;
+        }
+
+        .operator-icon-and-text {
+          display: flex;
+          align-items: center;
+        }
+
+        .operator-icon-and-text p {
+          margin-left: 10px;
+        }
+
+        .inclusion-02 {
+          margin-top: 1vh;
+          margin-bottom: 1vh;
+        }
+      }
+
+      .exclusions {
+        .exclusion-01 {
+          color: rgb(15, 123, 171);
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 0vh;
+        }
+
+        .exclusion-info {
+          line-height: 5px;
+        }
+
+        .rupee-icon-and-text {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0vh;
+        }
+
+        .rupee-icon-and-text p {
+          margin-left: 10px;
+        }
+
+        .icon-and-text {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+
+        .icon-and-text p {
+          margin-left: 10px;
+        }
+      }
+
+      // .driver-details {
+      //     line-height: 2.5px;
+      //     margin-bottom: 5vh;
+
+      //     h3 {
+      //         color: #1446a0;
+      //         font-size: 22px;
+      //         font-weight: bold;
+      //         font-family: Inter, sans-serif;
+      //         line-height: 1.2;
+      //     }
+
+      //     .details {
+      //         color: #1446a0;
+      //     }
+      // }
+      .amenities {
+        line-height: 10px;
+        margin-bottom: 5vh;
+      }
+
+      h3 {
+        color: rgb(15, 123, 171);
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .facility_icons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_one {
+          text-align: left;
+        }
+
+        &_two {
+          text-align: left;
+          margin-left: 4vw;
+        }
+      }
+
+      .additional_info {
+        display: flex;
+
+        &_one {
+          text-align: left;
+        }
+
+        &_two {
+          text-align: left;
+          margin-left: 4vw;
+        }
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .vehicleInfo {
+    &_banner {
+      height: 40vh;
+
+      h1 {
+        font-size: 10vw;
+      }
+    }
+
+    &_container {
+      margin: 4vw 0;
+      width: 95%;
+      align-items: center;
+      flex-direction: column;
+
+      .image-gallery {
+        .parent-image {
+          img {
+            width: 95%;
+            height: 60vh;
+          }
+        }
+
+        .child-images {
+          img {
+            width: 20%;
+            height: 15vh;
+          }
+        }
+      }
+
+      .bus_details {
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .vehicleInfo {
+    &_banner {
+      height: 40vh;
+
+      h1 {
+        font-size: 10vw;
+      }
+    }
+
+    &_container {
+      margin: 4vw 0;
+      width: 95%;
+      align-items: center;
+      flex-direction: column;
+
+      .image-gallery {
+        .parent-image {
+          img {
+            width: 95%;
+            height: 60vh;
+          }
+        }
+
+        .child-images {
+          img {
+            width: 20%;
+            height: 15vh;
+          }
+        }
+      }
+
+      .bus_details {
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .vehicleInfo {
+    &_banner {
+      height: 50vh;
+
+      h1 {
+        font-size: 8vw;
+      }
+    }
+
+    &_container {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (min-width: 1023px) and (max-width: 1200px) {
+  .vehicleInfo {
+    &_banner {
+      height: 60vh;
+
+      h1 {
+        font-size: 8vw;
+      }
+    }
+
+    &_container {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}
