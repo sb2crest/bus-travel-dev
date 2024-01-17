@@ -7,7 +7,6 @@
   flex-direction: column;
   h1 {
     font-size: 6vw;
-    //   background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -52,16 +51,18 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      padding: 5vw 0;
+      padding: 2vw 0;
     }
     &_items {
-        width: 60%;
-  padding: 3vw;
-        border: 1px dotted gray;
+      width: 60%;
+      padding: 3vw;
+      margin-bottom: 3vw;
+
+      border: 1px dotted gray;
       h3 {
         color: #0f2454;
       }
-      p{
+      p {
         color: #0f7bab;
       }
     }
