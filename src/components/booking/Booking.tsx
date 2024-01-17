@@ -95,6 +95,13 @@ const Booking: React.FC = (props) => {
   const [vehicles, setVehicles] = useState<ListVehicles[]>([]);
   const [filterData, setFilterData] = useState<any>(null);
   const [shouldRenderBusDetails, setShouldRenderBusDetails] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
 
   const handleFilterChange = (filterData: string) => {
     setFilterData(filterData);
@@ -103,11 +110,15 @@ const Booking: React.FC = (props) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 450, behavior: "smooth" });
   };
-  const handleResponseDataChange = (responseData: any) => {
+  const handleResponseDataChange = (
+    responseData: any,
+    selectedDateRange: any
+  ) => {
     console.log("Response data received in Booking:", responseData);
+    console.log("Selected date range received in Booking:", selectedDateRange);
     setVehicles(responseData);
+    setSelectedDateRange(selectedDateRange);
     setShouldRenderBusDetails(true);
-
   };
 
   return (
@@ -129,70 +140,71 @@ const Booking: React.FC = (props) => {
             filterData={filterData}
             onResponseDataChange={handleResponseDataChange}
           />
-   {shouldRenderBusDetails && (
-    <Fade top>
-          <div className="booking_container_busDetails">
+          {shouldRenderBusDetails && (
             <Fade top>
-              <h1 className="header_content">Our Bus Collection</h1>
-              <p className="content">
-                Discover affordable and reliable bus travel services with
-                comfortable amenities, expert drivers, and convenient booking
-                options for a safe and enjoyable journey to your desired
-                destinations.
-              </p>
-            </Fade>
-            <img src={divimg} alt="curvedimg" className="curvedimg" />
-            <div className="curvedimgsection">
-              <div data-testid="filter-component" className="filterAlign">
-                <Filter onFilterChange={handleFilterChange} />
-              </div>
-              <div className="booking_container_busDetails_section">
-                {vehicles.map((vehicle, index) => (
-                  <div className="buses" key={index}>
-                    {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
-                    <img
-                      src={bus}
-                      // src={vehicle.s3ImageUrl[0]}
-                      alt={`Bus ${index}`}
-                      className="busOne_img"
-                    />
-                    {/* )} */}
-                    {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
-
-                    {/* Render vehicle details here */}
-                    <div className="busOne_details">
-                      <h2>
-                        ({vehicle.vehicleAC} {vehicle.sleeper})
-                      </h2>
-
-                      <p>
-                        <span className="material-symbols-outlined">
-                          airline_seat_recline_extra
-                        </span>
-                        Seat Capacity: {vehicle.seatCapacity}
-                      </p>
-                      {/* Render other vehicle details */}
-                      <Link
-                        to={{
-                          pathname: "/vehicleinfo",
-                          state: {
-                            images: vehicle.s3ImageUrl || [],
-                            vehicleNumber: vehicle.vehicleNumber,
-                          },
-                        }}
-                      >
-                        <button className="button-53" onClick={scrollToTop}>
-                          View Details
-                        </button>
-                      </Link>
-                    </div>
+              <div className="booking_container_busDetails">
+                <Fade top>
+                  <h1 className="header_content">Our Bus Collection</h1>
+                  <p className="content">
+                    Discover affordable and reliable bus travel services with
+                    comfortable amenities, expert drivers, and convenient
+                    booking options for a safe and enjoyable journey to your
+                    desired destinations.
+                  </p>
+                </Fade>
+                <img src={divimg} alt="curvedimg" className="curvedimg" />
+                <div className="curvedimgsection">
+                  <div data-testid="filter-component" className="filterAlign">
+                    <Filter onFilterChange={handleFilterChange} />
                   </div>
-                ))}
+                  <div className="booking_container_busDetails_section">
+                    {vehicles.map((vehicle, index) => (
+                      <div className="buses" key={index}>
+                        {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
+                        <img
+                          src={bus}
+                          // src={vehicle.s3ImageUrl[0]}
+                          alt={`Bus ${index}`}
+                          className="busOne_img"
+                        />
+                        {/* )} */}
+                        {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
+
+                        {/* Render vehicle details here */}
+                        <div className="busOne_details">
+                          <h2>
+                            ({vehicle.vehicleAC} {vehicle.sleeper})
+                          </h2>
+
+                          <p>
+                            <span className="material-symbols-outlined">
+                              airline_seat_recline_extra
+                            </span>
+                            Seat Capacity: {vehicle.seatCapacity}
+                          </p>
+                          {/* Render other vehicle details */}
+                          <Link
+                            to={{
+                              pathname: "/vehicleinfo",
+                              state: {
+                                images: vehicle.s3ImageUrl || [],
+                                vehicleNumber: vehicle.vehicleNumber,
+                                selectedDateRange: selectedDateRange,
+                              },
+                            }}
+                          >
+                            <button className="button-53" onClick={scrollToTop}>
+                              View Details
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          </Fade>
-               )}
+            </Fade>
+          )}
         </div>
         <div className="howitworks">
           <Fade top>

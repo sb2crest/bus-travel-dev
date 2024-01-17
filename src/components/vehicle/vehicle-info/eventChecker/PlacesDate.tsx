@@ -13,7 +13,7 @@ interface MySearchBoxOptions {
 
 interface PlacesDateProps {
   filterData: string;
-  onResponseDataChange: (responseData: any) => void;
+  onResponseDataChange: (responseData: any, selectedDateRange: any) => void;
 }
 
 const libraries: Library[] = ["places"];
@@ -34,7 +34,13 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
   const isFromDateSelected = startDate !== null;
   const fromInputRef = useRef<google.maps.places.Autocomplete | null>(null);
   const toInputRef = useRef<google.maps.places.Autocomplete | null>(null);
-
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
   const handlePlaceChanged = (
     inputRef: React.MutableRefObject<google.maps.places.Autocomplete | null>,
     setLatitude: React.Dispatch<React.SetStateAction<number>>,
@@ -61,10 +67,11 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
 
   const handleFromDate = (date: Date | null) => {
     setStartDate(date);
+    setSelectedDateRange((prev) => ({ ...prev, startDate: date }));
   };
-
   const handleToDate = (date: Date | null) => {
     setEndDate(date);
+    setSelectedDateRange((prev) => ({ ...prev, endDate: date }));
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +82,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
   const sendResponseDataToBooking = (responseData: any) => {
     console.log("Response data received in PlacesDate:", responseData);
     if (onResponseDataChange) {
-      onResponseDataChange(responseData);
+      onResponseDataChange(responseData,selectedDateRange );
     }
   };
 
@@ -110,7 +117,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
       fetchData();
     }
   }, [filterData]);
-  
 
   const exploreClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
