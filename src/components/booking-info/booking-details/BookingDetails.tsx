@@ -226,28 +226,8 @@ const history = Array.isArray(bookingDetails.history)
   return (
     <div className="booking-details-main">
       <div className="booking-details-container">
-        <div className="booking_container_banner">
-          <h1>Booking Info</h1>
-          <h3>Check Your Booking Details here...</h3>
-          <ul>
-            <li>
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li>&#10095;</li>
-            <li>Booking Info</li>
-          </ul>
-        </div>
         <div className="header">
           <h1>Booking Details</h1>
-          {/* <ul className="list-group">
-            {bookingDetails.enquiryAndBookedList.map((booking: any, index: number) => (
-              <li
-                key={index}
-              >
-                {booking.bookingId}
-              </li>
-            ))}
-          </ul> */}
           <div>
             <Accordion
               expanded={expanded === "panel1"}
