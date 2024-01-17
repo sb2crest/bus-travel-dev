@@ -115,7 +115,6 @@ nav {
   }
   .logo {
     display: block;
-    // margin-left: 4%;
   }
   nav {
     display: grid;
@@ -127,7 +126,6 @@ nav {
   .menu-icon {
     display: block;
     color: #000;
-    // margin-left: -100%;
   }
   .menu-list{
     flex-direction: column;
@@ -135,7 +133,7 @@ nav {
     position: fixed;
     background: rgba(0, 0, 0, 0.7);
     left: -8.9%;
-    top: 48px;
+      top: 48px;
     padding: 0 !important;
     padding-top: 5vw !important;
     visibility: visible;

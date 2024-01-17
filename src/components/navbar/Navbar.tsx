@@ -5,26 +5,60 @@ import "./Navbar.scss";
 import logo from "../../assets/images/Logo.png";
 import Fade from "react-reveal/Fade";
 
-export const scrollToTop = () => {
+export const scrollToTop: React.MouseEventHandler<HTMLAnchorElement> = (
+  event
+) => {
   let scrollToPercentage;
+  const isHome = event.currentTarget.getAttribute("data-is-home") === "true";
 
-  if (window.innerWidth >= 1200) {
-    scrollToPercentage = 80;
+  if (isHome) {
+    scrollToPercentage = 0;
+  } else if (window.innerWidth >= 1200) {
+    scrollToPercentage = 76;
   } else if (window.innerWidth >= 768) {
     scrollToPercentage = 68;
   } else {
     scrollToPercentage = 51;
   }
+
   const windowHeight = window.innerHeight;
   window.scrollTo({
     top: (windowHeight * scrollToPercentage) / 100,
     behavior: "smooth",
   });
 };
+
+export const scrollToTopBooking: React.MouseEventHandler<HTMLAnchorElement> = (
+  event
+) => {
+  const bookingScrollPercentage =  16;
+  const windowHeight = window.innerHeight;
+  window.scrollTo({
+    top: (windowHeight * bookingScrollPercentage) / 100,
+    behavior: "smooth",
+  });
+};
+
 const Navbar = React.memo(() => {
   const [clicked, setClicked] = useState(false);
+
   const menuList = Navitems.map(({ url, title, imgSrc }, index) => {
     const isUrlDefined = typeof url === "string";
+    const isHome = title === "Home";
+
+    let onClickHandler: React.MouseEventHandler<HTMLAnchorElement>;
+
+    if (isHome) {
+      onClickHandler = scrollToTop;
+    } else if (title === "Booking") {
+      onClickHandler = scrollToTopBooking; 
+    } else {
+      onClickHandler = (event) => {
+        scrollToTop(event); 
+        setClicked(false);
+      };
+    }
+
     return (
       <li key={index} onClick={() => setClicked(false)}>
         {isUrlDefined ? (
@@ -32,7 +66,11 @@ const Navbar = React.memo(() => {
             exact
             to={url!}
             activeClassName="active"
-            onClick={scrollToTop}
+            onClick={(event) => {
+              onClickHandler(event);
+              setClicked(false);
+            }}
+            data-is-home={isHome}
           >
             {title}
           </NavLink>
@@ -78,7 +116,6 @@ const Navbar = React.memo(() => {
                 className={clicked ? "menu-list active" : "menu-list close"}
                 data-testid="menu-list"
               >
-                {" "}
                 {menuList}
                 <li
                   className="hidecontact"
