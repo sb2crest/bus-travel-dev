@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import "./Booking.scss";
 import ListVehicles from "../../types/list.type";
@@ -85,7 +85,7 @@ function ColorlibStepIcon(props: StepIconProps) {
 }
 
 const steps = [
-  "Step 1: Enter Trip Details & Select Your Bus",
+  "Step 1: Trip Details & Select Your Bus",
   "Step 2: Booking Details",
   "Step 3: Booking Payment",
   "Step 4: Start Your Roadtrip",
@@ -237,7 +237,7 @@ const Booking: React.FC = (props) => {
                     color: "#0f7bab",
                   }}
                 ></i>
-                <h3>Enter Trip Details & Select Your Bus</h3>
+                <h3>Trip Details & Select Your Bus</h3>
                 <p>
                   Choose from a range of available buses, considering factors
                   like destination, departure time, and seating preferences.

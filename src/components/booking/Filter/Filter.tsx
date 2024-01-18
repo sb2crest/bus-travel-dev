@@ -365,7 +365,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
                             All
                           </label>
                         </div>
-                        <div className="checkbox">
+                        {/* <div className="checkbox">
                           <input
                             className="input-sleeper"
                             id="sleeperCheckbox"
@@ -379,7 +379,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
                           >
                             Sleeper
                           </label>
-                        </div>
+                        </div> */}
                         <div className="checkbox">
                           <input
                             className="input-semi-sleeper"
@@ -407,7 +407,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
                             className="label-non-sleeper"
                             htmlFor="nonSleeperCheckbox"
                           >
-                            Non-Sleeper{" "}
+                           Seater{" "}
                           </label>
                         </div>
                       </div>
