@@ -186,6 +186,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                     >
                       <input
                         type="text"
+                        name="Origin"
                         className="form-control"
                         placeholder="Origin"
                       />
@@ -208,6 +209,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                     >
                       <input
                         type="text"
+                        name="Destination"
                         className="form-control To_place"
                         placeholder="Destination"
                         disabled={isMultipleDestination}
@@ -234,6 +236,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                         placeholderText="From-Date"
                         className="form-control From_date"
                         minDate={new Date()}
+                        name="From-Date"
                       />
                       <i
                         className="fa-regular fa-calendar"
@@ -256,6 +259,8 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                         dateFormat="dd/MM/yyyy"
                         placeholderText="To-Date"
                         className="form-control To_date"
+                        name="To-Date"
+
                       />
                       <i
                         className="fa-regular fa-calendar"

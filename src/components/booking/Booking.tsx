@@ -120,11 +120,11 @@ const Booking: React.FC = (props) => {
     setSelectedDateRange(selectedDateRange);
     setShouldRenderBusDetails(true);
   };
-
   return (
     <>
       <div className="booking">
         <div className="booking_container">
+          
           <div className="booking_container_banner">
             <h1>Booking</h1>
             <h3>Book your next trip</h3>
@@ -141,70 +141,69 @@ const Booking: React.FC = (props) => {
             onResponseDataChange={handleResponseDataChange}
           />
           {shouldRenderBusDetails && (
-            <Fade top>
-              <div className="booking_container_busDetails">
-                <Fade top>
-                  <h1 className="header_content">Our Bus Collection</h1>
-                  <p className="content">
-                    Discover affordable and reliable bus travel services with
-                    comfortable amenities, expert drivers, and convenient
-                    booking options for a safe and enjoyable journey to your
-                    desired destinations.
-                  </p>
-                </Fade>
-                <img src={divimg} alt="curvedimg" className="curvedimg" />
-                <div className="curvedimgsection">
-                  <div data-testid="filter-component" className="filterAlign">
-                    <Filter onFilterChange={handleFilterChange} />
-                  </div>
-                  <div className="booking_container_busDetails_section">
-                    {vehicles.map((vehicle, index) => (
-                      <div className="buses" key={index}>
-                        {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
-                        <img
-                          src={bus}
-                          // src={vehicle.s3ImageUrl[0]}
-                          alt={`Bus ${index}`}
-                          className="busOne_img"
-                        />
-                        {/* )} */}
-                        {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
+            <><div data-testid="filter-component" className="filterAlign1">
+              <Filter onFilterChange={handleFilterChange} />
+            </div><Fade top>
+                <div className="booking_container_busDetails">
+                  <Fade top>
+                    <h1 className="header_content">Our Bus Collection</h1>
+                    <p className="content">
+                      Discover affordable and reliable bus travel services with
+                      comfortable amenities, expert drivers, and convenient
+                      booking options for a safe and enjoyable journey to your
+                      desired destinations.
+                    </p>
+                  </Fade>
+                  <img src={divimg} alt="curvedimg" className="curvedimg" />
 
-                        {/* Render vehicle details here */}
-                        <div className="busOne_details">
-                          <h2>
-                            ({vehicle.vehicleAC} {vehicle.sleeper})
-                          </h2>
+                  <div className="curvedimgsection">
+                    <div data-testid="filter-component" className="filterAlign2">
+                      <Filter onFilterChange={handleFilterChange} />
+                    </div>
 
-                          <p>
-                            <span className="material-symbols-outlined">
-                              airline_seat_recline_extra
-                            </span>
-                            Seat Capacity: {vehicle.seatCapacity}
-                          </p>
-                          {/* Render other vehicle details */}
-                          <Link
-                            to={{
-                              pathname: "/vehicleinfo",
-                              state: {
-                                images: vehicle.s3ImageUrl || [],
-                                vehicleNumber: vehicle.vehicleNumber,
-                                selectedDateRange: selectedDateRange,
-                              },
-                            }}
-                          >
-                            <button className="button-53" onClick={scrollToTop}>
-                              View Details
-                            </button>
-                          </Link>
+                    <div className="booking_container_busDetails_section">
+                      {vehicles.map((vehicle, index) => (
+                        <div className="buses" key={index}>
+                          {/* {vehicle.s3ImageUrl && vehicle.s3ImageUrl.length > 0 && ( */}
+                          <img
+                            src={bus}
+                            // src={vehicle.s3ImageUrl[0]}
+                            alt={`Bus ${index}`}
+                            className="busOne_img" />
+                          {/* )} */}
+                          {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
+
+                          {/* Render vehicle details here */}
+                          <div className="busOne_details">
+                            <p>
+                              ({vehicle.vehicleAC}/{vehicle.sleeper})&nbsp; Seat
+                              Capacity: {vehicle.seatCapacity}
+                            </p>
+
+                            {/* Render other vehicle details */}
+                            <Link
+                              to={{
+                                pathname: "/vehicleinfo",
+                                state: {
+                                  images: vehicle.s3ImageUrl || [],
+                                  vehicleNumber: vehicle.vehicleNumber,
+                                  selectedDateRange: selectedDateRange,
+                                },
+                              }}
+                            >
+                              <button className="button-53" onClick={scrollToTop}>
+                                View More ➤
+                              </button>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Fade>
+              </Fade></>
           )}
+          
         </div>
         <div className="howitworks">
           <Fade top>
