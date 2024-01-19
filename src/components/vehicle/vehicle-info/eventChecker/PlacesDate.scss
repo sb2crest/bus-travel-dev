@@ -11,19 +11,18 @@
     border-color: #fff !important;
     outline: #fff;
     box-shadow: none;
-    
   }
   input[type="text" i] {
     padding-block: 1px;
     padding-inline: 2px;
   }
-  input[type=text i] {
+  input[type="text" i] {
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
   .form-control {
     display: block;
-    width:180px;
+    width: 180px;
     height: 40px;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
@@ -187,6 +186,9 @@
     background-color: rgb(232, 13, 13);
   }
 }
+.react-datepicker-popper {
+  z-index: 2;
+}
 @media only screen and (max-width: 480px) {
   .destination {
     margin-top: -1.5vw !important;
@@ -232,17 +234,18 @@
               .form-control {
                 font-size: 14px;
                 width: 70vw;
-                border-bottom: 1px solid #0f7bab;
                 border-radius: 0;
               }
               .destiny {
                 margin-right: 0px;
                 border-right: none;
+                border-bottom: 1px solid #0f7bab;
               }
               .origin {
                 border-right: none;
                 margin: 0;
                 padding-left: 0;
+                border-bottom: 1px solid #0f7bab;
               }
             }
             .from-to-date-container {
@@ -255,7 +258,6 @@
                 .form-control {
                   font-size: 14px;
                   width: 70vw;
-                  border-bottom: 1px solid #0f7bab;
                   border-radius: 0;
                 }
                 input::placeholder {
@@ -266,6 +268,7 @@
                   border-right: none;
 
                   .date-picker {
+                    border-bottom: 1px solid #0f7bab;
                     .fa-calendar {
                       top: 15px;
                     }
@@ -275,6 +278,7 @@
                   margin-right: 0px;
                   margin-bottom: 10px;
                   .date-picker {
+                    border-bottom: 1px solid #0f7bab;
                     .fa-calendar {
                       top: 15px;
                     }
@@ -350,17 +354,18 @@
               .form-control {
                 font-size: 14px;
                 width: 70vw;
-                border-bottom: 1px solid #0f7bab;
                 border-radius: 0;
               }
               .destiny {
                 margin-right: 0px;
                 border-right: none;
+                border-bottom: 1px solid #0f7bab;
               }
               .origin {
                 border-right: none;
                 margin: 0;
                 padding-left: 0;
+                border-bottom: 1px solid #0f7bab;
               }
             }
             .from-to-date-container {
@@ -373,7 +378,6 @@
                 .form-control {
                   font-size: 14px;
                   width: 70vw;
-                  border-bottom: 1px solid #0f7bab;
                   border-radius: 0;
                 }
                 input::placeholder {
@@ -383,6 +387,7 @@
                   margin-right: 0px;
                   border: none;
                   .date-picker {
+                    border-bottom: 1px solid #0f7bab;
                     .fa-calendar {
                       top: 15px;
                     }
@@ -391,6 +396,7 @@
                 .To_section {
                   margin-right: 0px;
                   .date-picker {
+                    border-bottom: 1px solid #0f7bab;
                     .fa-calendar {
                       top: 15px;
                     }
@@ -420,13 +426,13 @@
         &_input {
           form {
             .search_bar {
-            .fa-location-dot {
-              top: 18px;
+              .fa-location-dot {
+                top: 18px;
+              }
+              .material-symbols-outlined {
+                top: 18px;
+              }
             }
-            .material-symbols-outlined {
-              top: 18px;
-            }
-          }
             input[type="text" i] {
               padding: 0 0 0 20px !important;
             }
@@ -470,13 +476,13 @@
         &_input {
           form {
             .search_bar {
-            .fa-location-dot {
-              top: 20px;
+              .fa-location-dot {
+                top: 20px;
+              }
+              .material-symbols-outlined {
+                top: 20px;
+              }
             }
-            .material-symbols-outlined {
-              top: 20px;
-            }
-          }
             input[type="text" i] {
               padding: 0 0 0 20px !important;
             }

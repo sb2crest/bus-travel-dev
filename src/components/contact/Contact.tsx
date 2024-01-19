@@ -1,4 +1,3 @@
-import React from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./Contact.scss";
 import Fade from "react-reveal/Fade";
@@ -40,7 +39,7 @@ const Contact = () => {
                   <a href="tel:+91 7349368311">+91 7349368311</a>
                 </p>
                 <p className="card-text">
-                  <a href="tel:+91 7979699428">+91 7979699428</a>
+                  <a href="tel:+91 7979699428">+91 7204641716</a>
                 </p>
               </div>
             </div>
@@ -57,8 +56,8 @@ const Contact = () => {
                 <h5 className="card-title mt-3">Address</h5>
                 <p>
                   <a href="https://maps.app.goo.gl/QUzokAf5EQ1aUYip8" target="_blank">
-                    ⇢ #584 (Seabed2crest Pvt Ltd) near Suryodaya School,
-                    Hesaraghatta hobli, Rajanukunte, Yelahanka Taluk Bangalore
+                    ⇢ #584 (Seabed2Crest Pvt Ltd) near Suryodaya School,
+                    Hesaraghatta hobli, Rajanukunte, Yelahanka Taluk Bengaluru
                     North, Karnataka - 560064
                   </a>
                 </p>

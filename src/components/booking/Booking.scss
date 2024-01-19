@@ -1,5 +1,8 @@
 .booking {
   &_container {
+    .filterAlign1 {
+      display: none;
+    }
     &_banner {
       height: 60vh;
       background: url(../../assets/images/busBackground.jpg) no-repeat;
@@ -44,7 +47,7 @@
       justify-content: center;
       flex-direction: column;
       align-items: center;
- 
+
       .header_content {
         margin-top: -1.5vw;
         color: #0f7bab;
@@ -102,17 +105,16 @@
               margin-bottom: -1.5vw;
               display: flex;
               align-items: center;
+              justify-content: center;
               color: #0f2454;
               font-weight: 600;
-              span {
-                color: #0f7bab;
-              }
+              font-size: 15px;
             }
 
             a {
               text-decoration: none;
               button {
-                color: #0f2454;
+                color: #fff;
               }
             }
           }
@@ -194,27 +196,23 @@
     }
   }
 }
-.filterAlign {
-  display: contents;
-}
 .curvedimg {
   width: -webkit-fill-available;
 }
 .curvedimgsection {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   background: #e1f0ee;
-  margin-top: -3vw;
+  margin-top: -1vw;
 }
 /* CSS */
 .button-53 {
   margin-top: 3vw;
-  background-color: #3dd1e7;
+  background: -webkit-linear-gradient(#0f7bab 20%, #0f2454);
   border: 0 solid #e5e7eb;
   box-sizing: border-box;
-  color: #000000;
+  color: #fff;
   display: flex;
   font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
@@ -265,6 +263,13 @@
 @media only screen and (max-width: 480px) {
   .booking {
     &_container {
+      .filterAlign1 {
+        display: block;
+        position: absolute;
+        right: 18%;
+        z-index: 3;
+        bottom: -25%;
+      }
       &_banner {
         height: 40vh;
         background-position: bottom 60% right !important;
@@ -294,6 +299,8 @@
         &_section {
           width: 95%;
           flex-direction: column;
+          padding-top: 15vw;
+
           .buses {
             width: 85%;
             padding: 12px 0px;
@@ -353,12 +360,24 @@
   }
   .curvedimgsection {
     margin-top: -1vw;
+    flex-direction: column;
+    align-items: center;
+    .filterAlign2 {
+      display: none;
+    }
   }
 }
 
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .booking {
     &_container {
+      .filterAlign1 {
+        display: block;
+        position: absolute;
+        right: 18%;
+        z-index: 3;
+        bottom: -35%;
+      }
       &_banner {
         height: 50vh;
         background-position: bottom 55% right !important;
@@ -385,6 +404,7 @@
         &_section {
           width: 95%;
           flex-direction: column;
+          padding-top: 15vw;
           .buses {
             width: 70%;
             padding: 12px 0px;
@@ -442,11 +462,19 @@
     padding: 0.3rem 1rem;
     font-size: 1rem;
   }
+  .curvedimgsection {
+    .filterAlign2 {
+      display: none;
+    }
+  }
 }
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .booking {
     &_container {
+      .filterAlign1 {
+        display: none;
+      }
       &_banner {
         background-position: bottom 56% right !important;
 

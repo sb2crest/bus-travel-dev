@@ -64,7 +64,6 @@ const BookingInfo = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (values.otpSent) {
-        // verifyOTP();
       } else {
         console.log(values);
       }

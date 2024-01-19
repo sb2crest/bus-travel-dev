@@ -1,5 +1,5 @@
 import "./Filter.scss";
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../booking-calendar/BookingCalendar.scss";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -8,9 +8,6 @@ interface FilterProps {
   onFilterChange: (filterData: string) => void;
 }
 const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
-  const [showModal, setShowModal] = useState(false);
-  const [isACClicked, setIsACClicked] = useState(false);
-  const [isSleeperClicked, setIsSleeperClicked] = useState(false);
   // State variables for AC checkboxes
   const [isACAllChecked, setIsACAllChecked] = useState(false);
   const [isACChecked, setIsACChecked] = useState(false);
@@ -22,10 +19,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   const [isSemiSleeperChecked, setIsSemiSleeperChecked] = useState(false);
   const [isNonSleeperChecked, setIsNonSleeperChecked] = useState(false);
 
-  // State variables for fromDate and toDate
-  const [fromDate, setFromDate] = useState<Date | null>(null);
-  const [toDate, setToDate] = useState<Date | null>(null);
-
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
 
   // Function to handle AC "All" checkbox change
   const handleACAllChange = () => {
@@ -37,15 +31,13 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   // Function to handle Sleeper "All" checkbox change
   const handleSleeperAllChange = () => {
     setIsSleeperAllChecked(!isSleeperAllChecked);
-    setIsSleeperChecked(!isSleeperAllChecked);
+    // setIsSleeperChecked(!isSleeperAllChecked);
     setIsSemiSleeperChecked(!isSleeperAllChecked);
     setIsNonSleeperChecked(!isSleeperAllChecked);
   };
-
   // Function to handle AC checkbox change
   const handleACChange = () => {
-    setIsACChecked(!isACChecked);
-    // Check if all individual checkboxes are selected
+    setIsACChecked((prev) => !prev);
     if (isNonACChecked && !isACChecked) {
       setIsACAllChecked(true);
     } else {
@@ -55,8 +47,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
 
   // Function to handle Non-AC checkbox change
   const handleNonACChange = () => {
-    setIsNonACChecked(!isNonACChecked);
-    // Check if all individual checkboxes are selected
+    setIsNonACChecked((prev) => !prev);
     if (isACChecked && !isNonACChecked) {
       setIsACAllChecked(true);
     } else {
@@ -66,7 +57,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
 
   // Function to handle Sleeper checkbox change
   const handleSleeperChange = () => {
-    setIsSleeperChecked(!isSleeperChecked);
+    setIsSleeperChecked((prev) => !prev);
     // Check if all individual checkboxes are selected
     if (!isSleeperChecked && isSemiSleeperChecked && isNonSleeperChecked) {
       setIsSleeperAllChecked(true);
@@ -77,7 +68,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
 
   // Function to handle Semi-Sleeper checkbox change
   const handleSemiSleeperChange = () => {
-    setIsSemiSleeperChecked(!isSemiSleeperChecked);
+    setIsSemiSleeperChecked((prev) => !prev);
     // Check if all individual checkboxes are selected
     if (isSleeperChecked && !isSemiSleeperChecked && isNonSleeperChecked) {
       setIsSleeperAllChecked(true);
@@ -88,7 +79,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
 
   // Function to handle Non-Sleeper checkbox change
   const handleNonSleeperChange = () => {
-    setIsNonSleeperChecked(!isNonSleeperChecked);
+    setIsNonSleeperChecked((prev) => !prev);
     // Check if all individual checkboxes are selected
     if (isSleeperChecked && isSemiSleeperChecked && !isNonSleeperChecked) {
       setIsSleeperAllChecked(true);
@@ -97,9 +88,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
     }
   };
 
-  const handleClose = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const updateFilter = async () => {
     // Collect selected options for AC
     const acOptions = [];
     if (isACChecked) {
@@ -134,8 +123,22 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
       sleeperOptions.join(",");
     console.log("filter:", filter);
     onFilterChange(filter);
-    setShowModal(false);
   };
+  useEffect(() => {
+    updateFilter();
+    if (isFilterVisible) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [
+    isACChecked,
+    isNonACChecked,
+    isSleeperChecked,
+    isSemiSleeperChecked,
+    isNonSleeperChecked,
+    isFilterVisible,
+  ]);
 
   // Function to Clear Filter
   const handleClearFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -148,284 +151,162 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
     setIsSemiSleeperChecked(false);
     setIsNonSleeperChecked(false);
   };
-
-  // Function for AC Filters
-  const handleACClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsACClicked(!isACClicked);
-  };
-
-  // Function for Sleeper Filters
-  const handleSleeperClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsSleeperClicked(!isSleeperClicked);
+  const handleToggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible);
   };
 
   return (
     <>
-      {/* Filter Button */}
-      <div className="filter-container">
-        <div className="filter-container-button-custom">
-          <button className="filter-button" onClick={() => setShowModal(true)}>
-            Filter
-            <TuneIcon sx={{ fontSize: 18 }} />
-          </button>
-        </div>
-        {/* POP-Up Page */}
-
-        <div
-          className={`modal ${showModal ? "show" : ""}`}
-          id="FilterModal"
-          tabIndex={-1}
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden={!showModal}
-          style={{ display: showModal ? "block" : "none" }}
-        >
-          <div className="modal-container">
-            <div
-              className="modal-header border-bottom-0 "
-              style={{ paddingBottom: "2px", paddingTop: "20px" }}
-            >
-              <p className="filter-modal">FILTERS</p>
-              <button
-                type="button"
-                data-dismiss="modal"
-                className="cross-icon"
-                aria-label="Close"
-                onClick={() => setShowModal(false)}
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <form>
-              <div className="form-content">
-                {/* AC Filter */}
-                <div className="ac-section">
-                  <button className="ac-filter-button" onClick={handleACClick}>
-                    AC
-                    {isACClicked ? (
-                      <svg
-                        className="minus-icon-ac"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 12 12"
-                      >
-                        <line
-                          x1="1"
-                          y1="6"
-                          x2="11"
-                          y2="6"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="plus-icon-ac"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 12 12"
-                      >
-                        <line
-                          x1="1"
-                          y1="6"
-                          x2="11"
-                          y2="6"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                        <line
-                          x1="6"
-                          y1="1"
-                          x2="6"
-                          y2="11"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                  {isACClicked && (
-                    <>
-                      <div className="checkbox-section-01">
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            id="allCheckbox"
-                            className="input-all"
-                            checked={isACAllChecked}
-                            onChange={handleACAllChange}
-                          />
-                          <label className="label-all" htmlFor="allCheckbox">
-                            All
-                          </label>
-                        </div>
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            id="acCheckbox"
-                            className="input-ac"
-                            checked={isACChecked}
-                            onChange={handleACChange}
-                          />
-                          <label className="label-ac" htmlFor="acCheckbox">
-                            AC
-                          </label>
-                        </div>
-                        <div className="checkbox">
-                          <input
-                            type="checkbox"
-                            id="nonACCheckbox"
-                            className="input-non-ac"
-                            checked={isNonACChecked}
-                            onChange={handleNonACChange}
-                          />
-                          <label
-                            className="label-non-ac"
-                            htmlFor="nonACCheckbox"
-                          >
-                            Non-AC
-                          </label>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-                {/* Sleeper Filter */}
-                <div className="sleeper-section">
-                  <button
-                    className="sleeper-filter-button"
-                    onClick={handleSleeperClick}
-                  >
-                    Sleeper
-                    {isSleeperClicked ? (
-                      <svg
-                        className="minus-icon-sleeper"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 12 12"
-                        data-testid="minus-icon-sleeper"
-                      >
-                        <line
-                          x1="1"
-                          y1="6"
-                          x2="11"
-                          y2="6"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="plus-icon-sleeper"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 12 12"
-                      >
-                        <line
-                          x1="1"
-                          y1="6"
-                          x2="11"
-                          y2="6"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                        <line
-                          x1="6"
-                          y1="1"
-                          x2="6"
-                          y2="11"
-                          stroke="#0f2454"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                  {isSleeperClicked && (
-                    <>
-                      <div className="checkbox-section-02">
-                        <div className="checkbox">
-                          {" "}
-                          <input
-                            id="allCheckbox"
-                            className="input-all"
-                            type="checkbox"
-                            checked={isSleeperAllChecked}
-                            onChange={handleSleeperAllChange}
-                          />
-                          <label
-                            className="label-all"
-                            htmlFor="allCheckboxsleeper"
-                          >
-                            All
-                          </label>
-                        </div>
-                        <div className="checkbox">
-                          <input
-                            className="input-sleeper"
-                            id="sleeperCheckbox"
-                            type="checkbox"
-                            checked={isSleeperChecked}
-                            onChange={handleSleeperChange}
-                          />
-                          <label
-                            className="label-sleeper"
-                            htmlFor="sleeperCheckbox"
-                          >
-                            Sleeper
-                          </label>
-                        </div>
-                        <div className="checkbox">
-                          <input
-                            className="input-semi-sleeper"
-                            id="semiSleeperCheckbox"
-                            type="checkbox"
-                            checked={isSemiSleeperChecked}
-                            onChange={handleSemiSleeperChange}
-                          />
-                          <label
-                            className="label-semi-sleeper"
-                            htmlFor="semiSleeperCheckbox"
-                          >
-                            Semi-Sleeper
-                          </label>
-                        </div>
-                        <div className="checkbox">
-                          <input
-                            className="input-non-sleeper"
-                            id="nonSleeperCheckbox"
-                            type="checkbox"
-                            checked={isNonSleeperChecked}
-                            onChange={handleNonSleeperChange}
-                          />
-                          <label
-                            className="label-non-sleeper"
-                            htmlFor="nonSleeperCheckbox"
-                          >
-                            Non-Sleeper{" "}
-                          </label>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-                {/* Close Button */}
-                <div className="button-close-clear">
-                  <button onClick={handleClose} className="button-close">
-                    Done
-                  </button>
-                  <button className="button-clear" onClick={handleClearFilters}>
-                    Clear Filters
-                  </button>
-                </div>
-              </div>
-            </form>
+      <div className="toggle_filter_button">
+        <button onClick={handleToggleFilter}>
+          FILTER &nbsp;
+          <TuneIcon sx={{ fontSize: 15 }} />
+        </button>
+      </div>
+      <div
+        className={`filter_overlay ${isFilterVisible ? "show" : ""}`}
+        onClick={handleToggleFilter}
+      ></div>
+      <div
+        className={`filter_container ${isFilterVisible ? "show" : ""}`}
+        id="FilterModal"
+        tabIndex={-1}
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+      >
+        <div className="filter_container_section">
+          <div className="filter_container_section_heading">
+            <span>
+              FILTERS&nbsp;&nbsp;
+              <TuneIcon sx={{ fontSize: 18 }} />
+            </span>
+            <span onClick={handleToggleFilter}>
+              <i className="fa-solid fa-xmark" style={{ color: "#0f7bab" }}></i>
+            </span>
           </div>
+          <form>
+            <div className="form_content">
+              {/* AC Filter */}
+              <div className="form_content_ac_section">
+                <p>AC Type</p>
+                <>
+                  <div className="form_content_ac_section_checkbox">
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        id="allCheckbox"
+                        className="input-all"
+                        checked={isACAllChecked}
+                        onChange={handleACAllChange}
+                      />
+                      <label className="label-all" htmlFor="allCheckbox">
+                        &nbsp;&nbsp;All
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        id="acCheckbox"
+                        className="input-ac"
+                        checked={isACChecked}
+                        onChange={handleACChange}
+                      />
+                      <label className="label-ac" htmlFor="acCheckbox">
+                        &nbsp;&nbsp;AC
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        id="nonACCheckbox"
+                        className="input-non-ac"
+                        checked={isNonACChecked}
+                        onChange={handleNonACChange}
+                      />
+                      <label className="label-non-ac" htmlFor="nonACCheckbox">
+                        &nbsp;&nbsp;Non-AC
+                      </label>
+                    </div>
+                  </div>
+                </>
+              </div>
+              {/* Sleeper Filter */}
+              <div className="form_content_sleeper_section">
+                <p>Sleeper Type</p>
+                <>
+                  <div className="form_content_sleeper_section_checkbox">
+                    <div className="checkbox">
+                      {" "}
+                      <input
+                        id="allCheckboxsleeper"
+                        className="input-all"
+                        type="checkbox"
+                        checked={isSleeperAllChecked}
+                        onChange={handleSleeperAllChange}
+                      />
+                      <label className="label-all" htmlFor="allCheckboxsleeper">
+                        &nbsp;&nbsp;All
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <input
+                        className="input-sleeper"
+                        id="sleeperCheckbox"
+                        type="checkbox"
+                        checked={isSleeperChecked}
+                        onChange={handleSleeperChange}
+                        disabled
+                      />
+                      <label
+                        className="label-sleeper"
+                        htmlFor="sleeperCheckbox"
+                        style={{ color: "gray" }}
+                      >
+                        &nbsp;&nbsp;Sleeper{" "}
+                        <span style={{ fontSize: "12px" }}>(Coming soon)</span>
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <input
+                        className="input-semi-sleeper"
+                        id="semiSleeperCheckbox"
+                        type="checkbox"
+                        checked={isSemiSleeperChecked}
+                        onChange={handleSemiSleeperChange}
+                      />
+                      <label
+                        className="label-semi-sleeper"
+                        htmlFor="semiSleeperCheckbox"
+                      >
+                        &nbsp;&nbsp;Semi-Sleeper
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <input
+                        className="input-non-sleeper"
+                        id="nonSleeperCheckbox"
+                        type="checkbox"
+                        checked={isNonSleeperChecked}
+                        onChange={handleNonSleeperChange}
+                      />
+                      <label
+                        className="label-non-sleeper"
+                        htmlFor="nonSleeperCheckbox"
+                      >
+                        &nbsp;&nbsp;Seater{" "}
+                      </label>
+                    </div>
+                  </div>
+                </>
+              </div>
+              {/* Close Button */}
+              <div className="clear_button_section">
+                <button className="button-clear" onClick={handleClearFilters}>
+                  CLEAR ALL
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </>

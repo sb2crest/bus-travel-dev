@@ -29,12 +29,6 @@ footer {
       letter-spacing: 0.28px;
     }
   }
-  .footer_line img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-  }
   .footer_container {
     display: flex;
     justify-content: center;
@@ -178,27 +172,6 @@ footer {
             text-decoration: none;
           }
         }
-        &_media {
-          margin-left: 2vw;
-          #heading {
-            color: var(--white, #fff);
-            font-family: "Poppins", sans-serif;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 28px; /* 140% */
-            letter-spacing: 0.4px;
-            opacity: 1;
-          }
-          span {
-            img {
-              border-radius: 10px;
-              background: rgba(255, 255, 255, 0.2);
-              padding: 10px;
-              margin-right: 17px;
-            }
-          }
-        }
       }
       &_technologies {
         #heading {
@@ -256,10 +229,7 @@ footer {
         text-align: justify;
       }
     }
-    .footer_line img {
-      width: 40%;
-      padding-top: 5px;
-    }
+   
     .footer_container {
       &__ {
         flex-direction: column;
@@ -328,18 +298,6 @@ footer {
               font-size: 16px;
             }
           }
-          &_media {
-            #heading {
-              font-size: 12px;
-            }
-            span {
-              img {
-                border-radius: 5px;
-                padding: 5px;
-                margin-right: 10px;
-              }
-            }
-          }
         }
       }
     }
@@ -358,10 +316,6 @@ footer {
         width: 85%;
         text-align: justify;
       }
-    }
-    .footer_line img {
-      width: 40%;
-      padding-top: 5px;
     }
     .footer_container {
       &__ {
@@ -446,9 +400,6 @@ footer {
         text-align: center;
       }
     }
-    .footer_line img {
-      padding-top: 8px;
-    }
     .footer_container {
       &__ {
         margin-top: 5vh;
@@ -507,18 +458,6 @@ footer {
               font-size: 18px;
             }
           }
-          &_media {
-            #heading {
-              font-size: 18px;
-            }
-            span {
-              img {
-                border-radius: 10px;
-                padding: 5px;
-                margin-right: 6px;
-              }
-            }
-          }
         }
       }
     }
@@ -526,19 +465,11 @@ footer {
 }
 @media only screen and (min-width: 1024px) and (max-width: 1279px) {
   footer {
-    .star1 {
-      top: 6vh;
-      left: 7vw;
-    }
-
     .footer_content_width {
       & .footer_content {
         width: 78%;
         text-align: center;
       }
-    }
-    .footer_line img {
-      padding-top: 8px;
     }
     .footer_container {
       &__ {
@@ -576,15 +507,6 @@ footer {
         &_one {
           &_services {
             margin-bottom: 4vh;
-          }
-          &_media {
-            span {
-              img {
-                border-radius: 10px;
-                padding: 5px;
-                margin-right: 5px;
-              }
-            }
           }
         }
       }

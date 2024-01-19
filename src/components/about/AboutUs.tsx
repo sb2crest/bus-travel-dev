@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./AboutUs.scss";
 import aboutUsImage from "../../assets/images/aboutusimg.jpg";
@@ -216,7 +215,7 @@ const AboutUs = () => {
               <div className="aboutus_container_apart_section_right">
                 <h2>What sets us apart</h2>
                 <p>
-                  At <h4>NanduBus</h4> , our commitment to excellence goes
+                  At <span>NanduBus</span> , our commitment to excellence goes
                   beyond transportation. We take pride in offering a wide range
                   of meticulously maintained vehicles, from luxurious coaches to
                   versatile shuttles, ensuring there's a perfect option for
