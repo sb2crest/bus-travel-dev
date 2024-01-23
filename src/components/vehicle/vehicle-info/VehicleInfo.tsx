@@ -13,6 +13,9 @@ interface LocationState {
   vehicleNumber: any;
   images?: string[];
   selectedDateRange: any;
+  TotalAmount:number;
+  AdvanceAmount:number;
+  RemainingAmount:number;
 }
 interface State {
   vehicleData: IVehicleData;
@@ -33,7 +36,7 @@ const VehicleInfo: React.FC = () => {
   const location = useLocation<LocationState>();
   console.log("Location State:", location.state);
   const initialImages = location.state?.images || [];
-  const { vehicleNumber, selectedDateRange } = location.state;
+  const { vehicleNumber, selectedDateRange,TotalAmount,AdvanceAmount,RemainingAmount } = location.state;
 
   console.log("vh:" + vehicleNumber);
 
@@ -187,7 +190,7 @@ const VehicleInfo: React.FC = () => {
                 <Link
                   to={{
                     pathname: "/progressbar",
-                    state: { vehicleNumber, selectedDateRange },
+                    state: { vehicleNumber, selectedDateRange,TotalAmount,AdvanceAmount,RemainingAmount },
                   }}
                 >
                   <button className="button-53">Book Now</button>

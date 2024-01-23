@@ -1,4 +1,7 @@
 export  default interface ListVehicle {
+  totalAmount: number;
+  advanceAmt: number;
+  remainingAmt: number;
   vehicleNumber: string;
   seatCapacity: number;
   s3ImageUrl: string[];
