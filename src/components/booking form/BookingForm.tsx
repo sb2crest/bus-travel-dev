@@ -2,17 +2,10 @@ import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
 import React, { useState, useEffect, FormEvent } from "react";
 import "./form.scss";
 import IVehicleData from "../../types/vehicle.type";
-import DatePicker from "react-datepicker";
 import dataService from "../../services/data.service";
-import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-// import ISlotsBooked from "../../types/slots/slots.request.type";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 interface State {
   vehicleData: IVehicleData;
@@ -42,6 +35,7 @@ interface BookingFormProps {
   vehicleNumber: string;
   fromDate: Date;
   toDate: Date;
+  TotalAmount: number;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
@@ -50,6 +44,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   vehicleNumber,
   fromDate,
   toDate,
+  TotalAmount,
 }) => {
   const [state, setState] = useState<State>({
     vehicleData: initialVehicleData,
@@ -61,13 +56,14 @@ const BookingForm: React.FC<BookingFormProps> = ({
     isPopupOpen: false,
   });
 
-  const validationSchema = Yup.object().shape({
+   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
     middleName: Yup.string().required("Middle Name is required"),
     lastName: Yup.string().required("Last Name is required"),
     phoneNumber: Yup.string()
-      .min(10, "Phone Number must be 10 digits")
-      .required("Phone Number is required"),
+      .matches(/^[0-9]*$/, "Phone number must contain only digits")
+      .matches(/^\d{10}$/, "Phone number must be 10 digits")
+      .required("Phone number is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
   });
 
@@ -99,43 +95,16 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const [otpResend, setOtpResend] = useState<boolean>(false);
   const [resendDisabled, setResendDisabled] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(180); // 180 seconds = 3 minutes;
-  const [showPhoneNumber, setShowPhoneNumber] = useState<boolean>(false);
-
-  //Form Validation State Variables
-  const [firstNameValid, setFirstNameValid] = useState<boolean>(true);
-  const [lastNameValid, setLastNameValid] = useState<boolean>(true);
-  const [phoneNumberValid, setPhoneNumberValid] = useState<boolean>(true);
-  const [emailValid, setEmailValid] = useState<boolean>(true);
 
   //State Variable for continue button
   const [showContinue, setShowContinue] = useState<boolean>(false);
 
-  //State Variable used in showing warning component
-  const [showWarning, setShowWarning] = useState(false);
-
   const [bookingId, setBookingId] = useState<string>("");
-
-  //State Variables for Snackbar
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
-  const [slotsBookedSnackbarOpen, setSlotsBookedSnackbarOpen] = useState(false);
-  const [validationFailureSnackbarOpen, setValidationFailureSnackbarOpen] =
-    useState(false);
-
-  //Date Picker
-  const [checkout, setCheckout] = useState(false);
 
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-  };
-
-  const initialValues = {
-    phoneNumber: "",
-    otp: "",
-    email: "",
-    isChecked: false,
   };
 
   /*OTP Generation Function*/
@@ -153,7 +122,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
             setTimeout(() => {
               setOTPMessage(false);
             }, 2000);
-            setSnackbarOpen(true);
           } else {
             console.log("Failed to send OTP.");
           }
@@ -201,7 +169,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
           setState({ ...state });
           console.log("OTP Verified!");
           setOtpVerified(true);
-          setVerifySnackbarOpen(true);
         } else {
           console.log("OTP Verification Failed!");
           setOtpVerified(false);
@@ -209,7 +176,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
       })
       .catch((error: any) => {
         if (error == "Error: Request failed with status code 400") {
-          setValidationFailureSnackbarOpen(true);
         }
         console.error("Error validating OTP:", error);
         setOtpVerified(false);
@@ -224,7 +190,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
           console.log("OTP Sent!");
-          setSnackbarOpen(true);
         } else {
           console.log("Failed to send OTP.");
         }
@@ -250,7 +215,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
       !fromDate ||
       !toDate
     ) {
-      setShowWarning(true);
     } else {
       let requestBody = {
         vehicleNumber: vehicleNumber,
@@ -268,6 +232,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
           fromDate: fromDate ? fromDate.toISOString().split("T")[0] : "",
           toDate: toDate ? toDate.toISOString().split("T")[0] : "",
         },
+        totalAmount: TotalAmount,
       };
       dataService
         .bookNow(requestBody)
@@ -293,11 +258,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
             );
             console.log("vehicle number:" + vehicleNumber);
             onBookingIdUpdate(bookingId, phoneNumber);
-            setCheckout(true);
           } else {
             console.log(" Booking failed");
             if (response.data.message === "Slots already Booked") {
-              setSlotsBookedSnackbarOpen(true);
             }
           }
         })
@@ -306,24 +269,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
         });
     }
   };
-  /* Slots Function */
-  // useEffect(() => {
-  //     const fetchSlotsData = async () => {
-  //         try {
-  //             const response = await dataService.slotsBooked(vehicleNumber);
-  //             // response.slots.dates.forEach((dateElement, index) => {
-  //             //     console.log(`Date ${index + 1}:`);
-  //             //     console.log(`  Date: ${dateElement.date}`);
-  //             //     console.log(`  isBooked: ${dateElement.isBooked}`);
-  //             // });
-  //         } catch (error) {
-  //             console.error('Error fetching booking data:', error);
-  //         }
-  //     };
-
-  //     fetchSlotsData();
-  // }, [vehicleNumber]);
-
   /* Resend Timer  */
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -348,66 +293,31 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-  const clearAll = () => {
-    setShowContinue(false);
-  };
+const clearAll = () => {
+  setShowContinue(false);
+  setFirstName("");
+  setMiddleName("");
+  setLastName("");
+  setPhoneNumber("");
+  setEmail("");
+  setOtp("");
+  setIsChecked(false);
+  setResendDisabled(false);
+  setOtpSent(false);
+};
 
-  /* Function to Close Warning  */
-  const closeWarning = () => {
-    setShowWarning(false);
-  };
-
-  /* OTP successfully sent */
-  const handleSnackbarClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
-
-  /* OTP Validation success  */
-  const handleVerifyClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setVerifySnackbarOpen(false);
-  };
-
-  const handleSlotsSnackbarClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSlotsBookedSnackbarOpen(false);
-  };
-
-  const handleValidationFailure = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setValidationFailureSnackbarOpen(false);
-  };
-
-  /* Phone Number Change */
-  const changePhoneNumber = () => {
-    setOtpSent(false);
-  };
 
   return (
     <div className="form-main-container">
       <Formik
-        initialValues={{ firstName: "", email: "", password: "" }}
+        initialValues={{
+          firstName: "",
+          middleName: "",
+          lastName: "",
+          phoneNumber: "",
+          email: "",
+          password: "",
+        }}
         validationSchema={validationSchema}
         onSubmit={(values, actions) => {
           console.log(values);
@@ -415,41 +325,43 @@ const BookingForm: React.FC<BookingFormProps> = ({
         }}
       >
         <form>
-          {showContinue ? (
+          {otpSent || showContinue ? (
             <>
-              {!otpSent ? (
-                <div>
-                  <>
-                    <input
-                      id="input"
-                      type="text"
-                      required
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                    <label placeholder="Phone Number"></label>
-                    <button
-                      className="send-otp"
-                      onClick={sendOTP}
-                      type="button"
-                    >
-                      Send OTP
-                    </button>
-                  </>
-                </div>
-              ) : (
-                <>
-                  {OTPMessage && (
-                    <p className="sent-message">OTP Sent Successfully!</p>
-                  )}
+              <div>
+                <input
+                  id="phone"
+                  type="number"
+                  required
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+                <label placeholder="Phone Number" htmlFor="phone"></label>
+                {!otpSent && (
+                  <button className="send-otp" onClick={sendOTP} type="button">
+                    Send OTP
+                  </button>
+                )}
+              </div>
+              {OTPMessage && (
+                <span className="sent-message">OTP Sent Successfully!</span>
+              )}
+              {otpSent && (
+                <div className="otp">
                   <input
-                    id="input"
+                    id="otp"
                     type="password"
                     required
                     value={otp}
                     onChange={handleOtpChange}
                   />
                   <label placeholder="OTP"></label>
+                  <button
+                    className="verify-otp"
+                    type="button"
+                    onClick={verifyOTP}
+                  >
+                    Verify OTP
+                  </button>
                   {otpVerified && (
                     <svg
                       version="1.1"
@@ -460,8 +372,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         className="path circle"
                         fill="none"
                         stroke="#73AF55"
-                        stroke-width="6"
-                        stroke-miterlimit="10"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
                         cx="65.1"
                         cy="65.1"
                         r="62.1"
@@ -470,35 +383,39 @@ const BookingForm: React.FC<BookingFormProps> = ({
                         className="path check"
                         fill="none"
                         stroke="#73AF55"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
                         points="100.2,40.2 51.5,88.8 29.8,67.5 "
                       />
                     </svg>
                   )}
-                  {resendDisabled ? (
+                </div>
+              )}
+              {otpSent && (
+                <>
+                  {!resendDisabled ? (
+                    <button
+                      className="resend-otp"
+                      onClick={resendOTP}
+                      type="button"
+                    >
+                      Not received OTP?{" "}
+                      <span className="resend-link">Resend OTP</span>
+                    </button>
+                  ) : (
                     <span className="timer-custom">
                       Resend OTP in{" "}
                       <span className="min-sec" style={{ marginLeft: "0.2em" }}>
                         {minutes}:{seconds}
                       </span>{" "}
                     </span>
-                  ) : (
-                    <button
-                      className="resend-otp"
-                      onClick={resendOTP}
-                      type="button"
-                    >
-                      Not received OTP ?{" "}
-                      <span className="resend-link">Resend OTP</span>
-                    </button>
                   )}
                 </>
               )}
               <div>
                 <input
-                  id="input"
+                  id="email"
                   type="text"
                   required
                   value={email}
@@ -520,6 +437,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 </p>
               </div>
               <div>
+                <button className="clear-all" onClick={clearAll}>
+                  Clear All
+                </button>
                 <button
                   className="book-now"
                   onClick={bookVehicle}
@@ -527,15 +447,13 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 >
                   Book Now
                 </button>
-                <button className="clear-all" onClick={clearAll}>
-                  Clear All
-                </button>
               </div>
             </>
           ) : (
             <>
+              <h2 className="form_heading">Enter the Details</h2>
               <input
-                id="input"
+                id="fname"
                 type="text"
                 required
                 value={firstName}
@@ -543,7 +461,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
               />
               <label placeholder="First Name"></label>
               <input
-                id="input"
+                id="Midname"
                 type="text"
                 required
                 value={middleName}
@@ -551,7 +469,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
               />
               <label placeholder="Middle Name"></label>
               <input
-                id="input"
+                id="lname"
                 type="text"
                 required
                 value={lastName}

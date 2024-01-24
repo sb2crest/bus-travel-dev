@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./BookingInfo.scss";
 import asideImage from '../../assets/images/Aside.png'
 import dataService from "../../services/data.service";
-import Warning from "../warning/Warning";
 import BookingDetails from "./booking-details/BookingDetails";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
@@ -35,7 +34,6 @@ const BookingInfo = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [bookingDetails, setBookingDetails] = useState<any>(null);
   const [ShowDetailsButton, setShowDetailsButton] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
@@ -44,7 +42,7 @@ const BookingInfo = () => {
   const validationSchema = Yup.object({
     phoneNumber: Yup.string()
       .matches(/^[0-9]*$/, "Phone number must contain only digits")
-      .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
+      .matches(/^\d{10}$/, "Phone number must be 10 digits")
       .required("Phone number is required"),
     otp: Yup.lazy((value) => {
       return value?.otpSent
@@ -167,7 +165,6 @@ const BookingInfo = () => {
   const bookingInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!values.phoneNumber || (!values.otpSent && !values.otp)) {
-      setShowWarning(true);
     } else {
       let mobile = values.phoneNumber;
       dataService
@@ -186,10 +183,6 @@ const BookingInfo = () => {
           console.log("An error occurred while retrieving booking info.");
         });
     }
-  };
-
-  const closeWarning = () => {
-    setShowWarning(false);
   };
 
   return (
@@ -287,7 +280,7 @@ const BookingInfo = () => {
                 open={snackbarOpen}
                 autoHideDuration={2000}
                 onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
               >
                 <Alert onClose={handleSnackbarClose} severity="success">
                   OTP Sent successfully!
@@ -298,7 +291,7 @@ const BookingInfo = () => {
               open={verifySnackbarOpen}
               autoHideDuration={2000}
               onClose={handleSnackbarClose}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
               <Alert onClose={handleSnackbarClose} severity="success">
                 Verification Successful
@@ -308,7 +301,7 @@ const BookingInfo = () => {
               open={failedSnackbarOpen}
               autoHideDuration={2000}
               onClose={handleSnackbarClose}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
               <Alert onClose={handleSnackbarClose} severity="error">
                 Verification failed!!
@@ -318,7 +311,6 @@ const BookingInfo = () => {
         ) : (
           bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
         )}
-        {showWarning && <Warning onClose={closeWarning} />}
       </div></>
   );
 };

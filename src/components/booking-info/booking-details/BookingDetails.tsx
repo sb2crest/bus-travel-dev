@@ -35,7 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
@@ -276,7 +275,7 @@ const history = Array.isArray(bookingDetails.history)
                             booking.userName,
                             booking.fromDate,
                             booking.toDate,
-                            booking.amount,
+                            booking.advancedPaid,
                             booking.bookingStatus,
                             booking.bookingDate,
                             booking.driverName,

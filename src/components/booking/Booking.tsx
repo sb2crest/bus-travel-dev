@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { stepConnectorClasses } from "@mui/material/StepConnector";
 import { DirectionsBus, Person, AttachMoney, Map } from "@mui/icons-material";
-import PlacesDate from "../vehicle/vehicle-info/eventChecker/PlacesDate";
+import PlacesDate from "./vehicle_searchBar/PlacesDate";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -195,6 +195,8 @@ const Booking: React.FC = (props) => {
                                   TotalAmount:vehicle.totalAmount,
                                   AdvanceAmount:vehicle.advanceAmt,
                                   RemainingAmount:vehicle.remainingAmt,
+                                  ACtype:vehicle.vehicleAC,
+                                  Sleepertype:vehicle.sleeper,
                                 },
                               }}
                             >

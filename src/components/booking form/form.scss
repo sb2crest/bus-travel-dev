@@ -1,21 +1,45 @@
 .form-main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 3vw;
+  border-radius: 10px;
+  font-family: inherit;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  .form_heading {
+    color: #0f7bab;
+    text-align: center;
+  }
+  .otp {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Georgia, serif;
-    
+    justify-content: space-between;
+    align-items: baseline;
+    svg {
+      position: absolute;
+      top: 8px;
+      right: 50%;
+      width: 20px;
+    }
+  }
+  
 form {
-    border: 1px solid #eeeeee;
     font-size: 12px;
     padding: 15px;
-    width: 100%;
-    max-width: 400px;
-}
-
-/* Name */
-input[type="text"] {
+    border-radius: 10px;
+    width: auto;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  input[type="text"],
+  input[type="number"] {
     box-sizing: border-box;
-    width: 20rem;
+    width: 17rem;
     height: calc(2em + 7px);
     margin: 0 0 1em;
     border: 1px solid #bababa;
@@ -24,35 +48,61 @@ input[type="text"] {
     font-size: 14px;
     resize: none;
     outline: none;
-}
-
-input[type="text"]:focus {
+    color: #292929;
+  }
+  input[type="password"] {
+    width: 9rem;
+    height: calc(2em + 5px);
+    margin: 0 0 1em;
+    border: 1px solid #bababa;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    color: #292929;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="password"]:focus {
     border-color: #00bafa;
-}
-
-input[type="text"]:focus+label[placeholder]:before {
+  }
+  
+  input[type="text"]:focus + label[placeholder]:before,
+  input[type="number"]:focus + label[placeholder]:before,
+  input[type="password"]:focus + label[placeholder]:before {
     color: #0091da;
-}
-
-input[type="text"]:focus+label[placeholder]:before,
-input[type="text"]:valid+label[placeholder]:before {
-    transition-duration: .2s;
+  }
+  
+  input[type="text"]:focus + label[placeholder]:before,
+  input[type="text"]:valid + label[placeholder]:before,
+  input[type="number"]:focus + label[placeholder]:before,
+  input[type="number"]:valid + label[placeholder]:before,
+  input[type="password"]:focus + label[placeholder]:before,
+  input[type="password"]:valid + label[placeholder]:before {
+    transition-duration: 0.2s;
     transform: translate(0, -1.6em) scale(0.9, 0.9);
-}
-
-// input[type="text"]:invalid+label[placeholder][alt]:before {
-//     content: attr(alt);
-// }
-
-input[type="text"]+label[placeholder] {
+  }
+  
+  input[type="text"] + label[placeholder],
+  input[type="number"] + label[placeholder] {
     display: block;
     pointer-events: none;
     line-height: 1.25em;
     margin-top: calc(-3em - 2px);
     margin-bottom: calc((3em - 1em) + 2px);
-}
-
-input[type="text"]+label[placeholder]:before {
+  }
+  input[type="password"] + label[placeholder] {
+    display: block;
+    pointer-events: none;
+    line-height: 1.25em;
+    margin-top: calc(-1em + 2px);
+    margin-bottom: calc((1em - 1em) + 2px);
+  }
+  
+  input[type="text"] + label[placeholder]:before,
+  input[type="number"] + label[placeholder]:before{
     content: attr(placeholder);
     display: inline-block;
     margin: 0 calc(0.5em + 2px);
@@ -64,132 +114,85 @@ input[type="text"]+label[placeholder]:before {
     background-size: 100% 5px;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-/* OTP */
-input[type="password"] {
-    box-sizing: border-box;
-    width: 20rem;
-    height: calc(2em + 7px);
-    margin: 0 0 1em;
-    border: 1px solid #bababa;
-    border-radius: 3px;
-    background: #fff;
-    font-size: 14px;
-    resize: none;
-    outline: none;
+  }
+  input[type="password"] + label[placeholder]:before {
+    content: attr(placeholder);
+    display: inline-block;
+    margin: 0 calc(-14em + 18px);
+    padding: 0 2px;
     color: #7d7d7d;
-}
-
-input[type="password"]:focus {
-    border-color: #00bafa;
-}
-
-:before input[type="password"]:focus+label[placeholder] {
-    color: #0091da;
-}
-
-input[type="password"]+label[placeholder]:before,
-input[type="password"]:valid+label[placeholder]:before {
-    transition-duration: .2s;
-    transform: translate(0, -1.6em) scale(0.9, 0.9);
-}
-
-input[type="password"] {
-    position: relative;
-}
-
-input[type="password"]:invalid+label[placeholder][alt]:before {
+    white-space: nowrap;
+    transition: 0.3s ease-in-out;
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+    background-size: 100% 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  input[type="password"]:invalid + label[placeholder][alt]:before {
     content: attr(alt);
-}
-
-input[type="password"]+label[placeholder] {
-    display: block;
-    pointer-events: none;
-    line-height: 1.25em;
-    margin-top: calc(-3em - 2px);
-    margin-bottom: calc((3em - 1em) + 2px);
-}
-
-input[type="password"]+label[placeholder]:before {
-    content: attr(placeholder);
-    display: inline-block;
-    margin: 0 calc(0.5em + 2px);
-    padding: 0 2px;
-    color: #7d7d7d;
-    white-space: nowrap;
-    transition: 0.3s ease-in-out;
-    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
-    background-size: 100% 5px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* Date Picker */
-.date-picker {
-    width: 20rem;
-}
-
-.react-datepicker__input-container input {
-    font-size: 12.5px;
-    font-family: Georgia, serif;
-    position: relative;
-}
-
-.react-datepicker__input-container input::placeholder {
-    position: relative;
-    left: 5px;
-}
-
-.sent-message {
+  }
+  
+  .sent-message {
     display: flex;
     justify-content: center;
     color: green;
-}
-
-.tickmark {
+  }
+  
+  .tickmark {
     position: relative;
-}
-
-.send-otp {
+  }
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  .send-otp{
     background-color: #17a2b8;
     border: none;
     color: white;
     padding: 8px 32px;
     text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     cursor: pointer;
     float: right;
     margin-bottom: 0.6em;
     margin-top: -10px;
-}
-
-.book-now {
+  }
+  .verify-otp {
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    
+  }
+  
+  .book-now {
     background-color: #17a2b8;
     border: none;
     color: white;
     padding: 8px 32px;
     text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     cursor: pointer;
     float: left;
-}
-
-.clear-all {
+  }
+  
+  .clear-all {
     background-color: #17a2b8;
     border: none;
     color: white;
     padding: 8px 32px;
     text-decoration: none;
-    display: inline-block;
     font-size: 14px;
     cursor: pointer;
     float: right;
-}
-
-.resend-otp {
+  }
+  
+  .resend-otp {
     background-color: #ffffff;
     border: none;
     padding: 8px 32px;
@@ -197,40 +200,39 @@ input[type="password"]+label[placeholder]:before {
     font-size: 13px;
     cursor: pointer;
     margin-top: -10px;
-    margin-left: 60px;
-
+  
     .resend-link {
-        background-color: #ffffff;
-        border: none;
-        color: #17a2b8;
-        text-decoration: underline;
-        display: inline-block;
-        font-size: 14px;
-        cursor: pointer;
-        margin-top: -10px;
+      background-color: #ffffff;
+      border: none;
+      color: #17a2b8;
+      text-decoration: underline;
+      display: inline-block;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: -10px;
     }
-}
-
-.timer-custom {
+  }
+  
+  .timer-custom {
     font-size: 14px;
     display: flex;
     justify-content: center;
     padding-bottom: 12px;
-
+  
     .min-sec {
-        color: #17a2b8;
-        text-decoration: underline;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      color: #17a2b8;
+      text-decoration: underline;
+      font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     }
-}
-
-/* next button */
-.cssbuttons-io-button {
+  }
+  
+  /* next button */
+  .cssbuttons-io-button {
     background: #17a2b8;
     color: white;
     font-family: inherit;
     padding-left: 2em;
-    padding-right:0 ;
+    padding-right: 0;
     font-size: 14px;
     font-weight: 500;
     border: none;
@@ -243,19 +245,18 @@ input[type="password"]+label[placeholder]:before {
     padding-right: 2em;
     float: right;
     cursor: pointer;
-}
-
-.terms-container {
+  }
+  
+  .terms-container {
     display: flex;
     font-size: 14px;
-}
-
-.conditions {
+  }
+  
+  .conditions {
     color: #17a2b8;
     text-decoration: underline;
     padding-left: 0.2em;
     padding-right: 0.2em;
-}
-
-
+  }
+  
 }
