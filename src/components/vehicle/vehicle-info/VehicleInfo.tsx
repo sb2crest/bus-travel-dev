@@ -1,7 +1,6 @@
 import "./VehicleInfo.scss";
 import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import "./form.scss";
 import IVehicleData from "../../../types/vehicle.type";
 import "../../booking-calendar/BookingCalendar.scss";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,6 +12,12 @@ interface LocationState {
   vehicleNumber: any;
   images?: string[];
   selectedDateRange: any;
+  TotalAmount:number;
+  AdvanceAmount:number;
+  RemainingAmount:number;
+  ACtype:string;
+  Sleepertype:string;
+
 }
 interface State {
   vehicleData: IVehicleData;
@@ -24,16 +29,11 @@ interface State {
   isPopupOpen: boolean;
 }
 
-interface LocationState {
-  vehicleNumber: any;
-  images?: string[];
-}
-
 const VehicleInfo: React.FC = () => {
   const location = useLocation<LocationState>();
   console.log("Location State:", location.state);
   const initialImages = location.state?.images || [];
-  const { vehicleNumber, selectedDateRange } = location.state;
+  const { vehicleNumber, selectedDateRange,TotalAmount,AdvanceAmount,RemainingAmount,ACtype,Sleepertype } = location.state;
 
   console.log("vh:" + vehicleNumber);
 
@@ -187,7 +187,7 @@ const VehicleInfo: React.FC = () => {
                 <Link
                   to={{
                     pathname: "/progressbar",
-                    state: { vehicleNumber, selectedDateRange },
+                  state: { vehicleNumber, selectedDateRange,ACtype,Sleepertype,TotalAmount,AdvanceAmount,RemainingAmount },
                   }}
                 >
                   <button className="button-53">Book Now</button>

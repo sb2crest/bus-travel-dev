@@ -5,6 +5,17 @@
   justify-content: center;
   flex-direction: column;
   margin-top: -0.5vw;
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  
   .form-control:focus {
     color: #495057;
     background-color: #fff;
@@ -55,7 +66,7 @@
     border-radius: 10px;
     padding: 20px 15px;
     background: #fff;
-    background: url(../../../../assets/images/60241.jpg);
+    background: url(../../../assets/images/60241.jpg);
     background-position: right;
     border-bottom: 5px solid #0f7bab;
     &_section {
@@ -160,6 +171,7 @@
             border: 1px solid #0f7bab;
             font-weight: 600;
             text-align: center;
+            cursor: pointer;
             &:hover {
               background-color: #106a91;
             }

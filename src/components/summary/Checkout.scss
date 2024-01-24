@@ -1,184 +1,221 @@
-.checkout-container {
-    width: 90%;
-    pointer-events: auto;
+.checkout_container {
+  width: 80%;
+  padding-top: 3vw;
+  &_section {
     display: flex;
     justify-content: center;
     align-items: center;
-    // height: 90vh;
-    margin: 0;
-    background-clip: padding-box;
-    border-radius: 0.3rem;
+    &_booking_summary {
+      border: 1.2px solid #eeeeee;
+      border-radius: 10px;
+      padding: 10px;
+      width: 50%;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      margin-right: 10px;
+      height: 38vh;
 
-    .checkout-body {
-        display: flex;
-    }
-
-    .booking-summary {
-        border: 1.2px solid #eeeeee;
-        height: 40vh;
-        width: 90vh;
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 0.5rem;
-    }
-
-    .title {
-        font-size: 14px;
-        margin-bottom: 0;
+      .title {
+        color: #0f7bab;
+        font-size: 18px;
         font-weight: 600;
-        color: #17a2b8;
-        font-family: Georgia, serif;
-    }
-
-    .line {
+        margin: 5px;
+      }
+      .line {
         border-bottom: 1.2px solid #17a2b8;
         width: 100%;
         padding-bottom: 4px;
         margin: 0;
-    }
-
-    .bus-image {
-        width: 25vh;
-        height: 20vh;
-        margin-top: 25px;
-    }
-
-    .vehicle-info {
-        display: flex;
-    }
-
-    .start-date {
-        font-family: Georgia, serif;
-        // margin-right: 50px;
-        margin-left: 35px;
-        margin-top: 35px;
-        font-size: 15px;
-        color: #A8A8A8;
-    }
-
-    .date {
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-        color: black;
-    }
-
-    .end-date {
-        font-family: Georgia, serif;
-        margin-top: 35px;
-        font-size: 15px;
-        color: #A8A8A8;
-    }
-
-    .arrow-mark {
-        margin-top: 35px;
-        // text-align: center;
-        color: #17a2b8;
-        margin-right: 100px;
-        margin-left: 60px;
-        margin-right: 60px;
-    }
-
-    .bus-name {
-        font-family: Georgia, serif;
-        margin-left: 175px;
-        margin-top: 70px;
-        font-size: 14px;
-        color: #A8A8A8;
-    }
-
-    .bus-type {
-        font-family: Georgia, serif;
-        margin-left: 175px;
-        margin-top: -10px;
-        font-size: 12px;
-        color: black;
-    }
-
-    /* Payment Summary*/
-    .checkout-right {
+      }
+      .vehicle_info {
         display: flex;
         align-items: center;
+        img {
+          padding-top: 1vw;
+          width: 65%;
+        }
+        &_left {
+          width: 35%;
+          p {
+            color: #0f2454;
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+        &_right {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 60%;
+          .start-date,
+          .arrow-mark,
+          .end-date {
+            width: 40%;
+            color: #0f7bab;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            span {
+              color: #0f2454;
+            }
+          }
+        }
+      }
     }
-
-    .payment-summary {
-        border: 1.2px solid #eeeeee;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-left: 10px;
-        border-radius: 0.5rem;
-    }
-
-    .header {
-        font-size: 14px;
-        margin-bottom: 0;
+    &_payment_summary {
+      border: 1.2px solid #eeeeee;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      width: 20%;
+      height: 38vh;
+      .title {
+        color: #0f7bab;
+        font-size: 18px;
         font-weight: 600;
-        color: #17a2b8;
-        font-family: Georgia, serif;
-    }
-
-    .line {
-        border-bottom: 1.2px solid #eeeeee;
+        margin: 5px;
+      }
+      .line {
+        border-bottom: 1.2px solid #17a2b8;
         width: 100%;
         padding-bottom: 4px;
         margin: 0;
-    }
-
-    .line-01 {
-        border-bottom: 0.5px solid #eeeeee;
-        width: 66%;
-        padding-bottom: 4px;
-        margin: -60px 168px;
-    }
-
-    .base-amount {
+      }
+      .total-amount,
+      .advance-amount,
+      .remaining-amount {
         display: flex;
-        gap: 130px;
-        margin-bottom: -20px;
-        font-size: 14px;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    }
-
-    .tax {
-        display: flex;
-        flex-direction: row;
-        gap: 189px;
-        margin-bottom: -20px;
-        font-size: 14px;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    }
-
-    .service-charges {
-        display: flex;
-        flex-direction: row;
-        gap: 115px;
-        font-size: 14px;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    }
-
-    .total-amount {
-        display: flex;
-        flex-direction: row;
-        gap: 100px;
-        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-        color: #17a2b8;
-        font-weight: 500;
-        font-size: 16px;
-        margin-top: -12px;
-    }
-
-    .proceed-to-payment {
+        justify-content: space-between;
+        align-items: center;
+      }
+      .left {
+        color: #0f2454;
+      }
+      .proceed-to-payment {
         text-align: center;
+        button {
+          background-color: #17a2b8;
+          color: #fff;
+          font-weight: 400;
+          border: 1px solid transparent;
+          padding: 0.3rem 0.75rem;
+          font-size: 16px;
+          line-height: 1.5;
+          border-radius: 5px;
+          width: 75%;
+          margin-bottom: 1rem;
+          cursor: pointer;
+        }
+      }
     }
-
-    .checkout-button {
-        background-color: #17a2b8;
-        color: #fff;
-        font-weight: 400;
-        border: 1px solid transparent;
-        padding: 0.3rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .checkout_container {
+    width: 90%;
+    &_section {
+      flex-direction: column;
+      &_booking_summary {
         width: 90%;
-        margin-bottom: 1rem;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        height: 30vh;
+        .vehicle_info {
+          flex-direction: column;
+          img {
+            padding-top: 1vw;
+            width: 45%;
+          }
+          &_left {
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            p {
+              font-size: 12px;
+              text-align: right;
+            }
+          }
+          &_right {
+            width: 95%;
+          }
+        }
+      }
+      &_payment_summary {
+        width: 90%;
+        height: 30vh;
+        .title {
+          font-size: 16px;
+        }
+        .left,
+        .right {
+          margin: 10px;
+        }
+      }
     }
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .checkout_container {
+    width: 90%;
+    &_section {
+      flex-direction: column;
+      &_booking_summary {
+        width: 90%;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        height: 30vh;
+        .vehicle_info {
+          flex-direction: column;
+          img {
+            padding-top: 1vw;
+            width: 28%;
+          }
+          &_left {
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            p {
+              font-size: 12px;
+              text-align: right;
+            }
+          }
+          &_right {
+            width: 95%;
+          }
+        }
+      }
+      &_payment_summary {
+        width: 90%;
+        height: 30vh;
+        .title {
+          font-size: 16px;
+        }
+        .left,
+        .right {
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1150px) {
+    .checkout_container {
+        width: 90%;
+        &_section {
+          &_booking_summary {
+            height: 30vh;
+          }
+          &_payment_summary {
+            width: 30%;
+            height: 30vh;
+            .left,.right {
+              margin: 10px;
+            }
+           
+          }
+        }
+      }
 }

@@ -16,8 +16,8 @@ import {
   StepIconProps,
 } from "@mui/material";
 import { stepConnectorClasses } from "@mui/material/StepConnector";
-import { DirectionsBus, Note, AttachMoney, Map } from "@mui/icons-material";
-import PlacesDate from "../vehicle/vehicle-info/eventChecker/PlacesDate";
+import { DirectionsBus, Person, AttachMoney, Map } from "@mui/icons-material";
+import PlacesDate from "./vehicle_searchBar/PlacesDate";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -69,7 +69,7 @@ function ColorlibStepIcon(props: StepIconProps) {
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <DirectionsBus />,
-    2: <Note />,
+    2: <Person />,
     3: <AttachMoney />,
     4: <Map />,
   };
@@ -124,7 +124,6 @@ const Booking: React.FC = (props) => {
     <>
       <div className="booking">
         <div className="booking_container">
-          
           <div className="booking_container_banner">
             <h1>Booking</h1>
             <h3>Book your next trip</h3>
@@ -141,9 +140,11 @@ const Booking: React.FC = (props) => {
             onResponseDataChange={handleResponseDataChange}
           />
           {shouldRenderBusDetails && (
-            <><div data-testid="filter-component" className="filterAlign1">
-              <Filter onFilterChange={handleFilterChange} />
-            </div><Fade top>
+            <>
+              <div data-testid="filter-component" className="filterAlign1">
+                <Filter onFilterChange={handleFilterChange} />
+              </div>
+              <Fade top>
                 <div className="booking_container_busDetails">
                   <Fade top>
                     <h1 className="header_content">Our Bus Collection</h1>
@@ -155,9 +156,11 @@ const Booking: React.FC = (props) => {
                     </p>
                   </Fade>
                   <img src={divimg} alt="curvedimg" className="curvedimg" />
-
                   <div className="curvedimgsection">
-                    <div data-testid="filter-component" className="filterAlign2">
+                    <div
+                      data-testid="filter-component"
+                      className="filterAlign2"
+                    >
                       <Filter onFilterChange={handleFilterChange} />
                     </div>
 
@@ -169,7 +172,8 @@ const Booking: React.FC = (props) => {
                             src={bus}
                             // src={vehicle.s3ImageUrl[0]}
                             alt={`Bus ${index}`}
-                            className="busOne_img" />
+                            className="busOne_img"
+                          />
                           {/* )} */}
                           {/* {vehicle.s3ImageUrl.length === 0 && <p>No images available.</p>} */}
 
@@ -188,10 +192,18 @@ const Booking: React.FC = (props) => {
                                   images: vehicle.s3ImageUrl || [],
                                   vehicleNumber: vehicle.vehicleNumber,
                                   selectedDateRange: selectedDateRange,
+                                  TotalAmount:vehicle.totalAmount,
+                                  AdvanceAmount:vehicle.advanceAmt,
+                                  RemainingAmount:vehicle.remainingAmt,
+                                  ACtype:vehicle.vehicleAC,
+                                  Sleepertype:vehicle.sleeper,
                                 },
                               }}
                             >
-                              <button className="button-53" onClick={scrollToTop}>
+                              <button
+                                className="button-53"
+                                onClick={scrollToTop}
+                              >
                                 View More ➤
                               </button>
                             </Link>
@@ -201,9 +213,9 @@ const Booking: React.FC = (props) => {
                     </div>
                   </div>
                 </div>
-              </Fade></>
+              </Fade>
+            </>
           )}
-          
         </div>
         <div className="howitworks">
           <Fade top>

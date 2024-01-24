@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./PlacesDate.scss";
 import { Library } from "@googlemaps/js-api-loader";
-import dataService from "../../../../services/data.service";
+import dataService from "../../../services/data.service";
 
 interface MySearchBoxOptions {
   types?: string[];

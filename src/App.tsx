@@ -15,7 +15,6 @@ import { useState, useEffect } from "react";
 import Preloader from "./components/preloader/Preloader";
 import Booking from "./components/booking/Booking";
 import BookingInfo from "./components/booking-info/BookingInfo";
-import BookVehicle from "./components/booking/book-vehicle/BookVehicle";
 import VehicleInfo from "./components/vehicle/vehicle-info/VehicleInfo";
 import BookingDetails from "./components/booking-info/booking-details/BookingDetails";
 import TermsConditions from "./components/terms & condition/TermsConditions";
@@ -44,7 +43,6 @@ const App = () => {
           <Route exact path="/bookinginfo" component={BookingInfo} />
           {/* <Route path='/bookinginfo' component={BookingDetails} /> */}
           <Route exact path="/vehicleinfo" component={VehicleInfo} />
-          <Route exact path="/bookVehicle" component={BookVehicle} />
           <Route exact path="/contactus" component={ContactUs} />
           <Route exact path="/termsConditions" component={TermsConditions} />
           <Route exact path="/aboutus" component={AboutUs} />
