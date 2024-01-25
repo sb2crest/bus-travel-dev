@@ -9,10 +9,6 @@ import IFilterRequest from "../types/filter/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IBookingInfoRequest from "../types/BookingInfo/request.type";
 import IFilterResponse from "../types/filter/response.type";
-import ICalendarRequest from "../types/availableSlots/request.type";
-import ICalendarResponse from "../types/availableSlots/response.type";
-import IEventTypeRequest from "../types/eventCheck/request.type";
-import IEventTypeResponse from "../types/eventCheck/response.type";
 class DataService {
 
   // Book now
@@ -78,16 +74,6 @@ class DataService {
   // updateVehicle(data: IVehicleData, id: any) {
   //   return http.put<any>(`updateVehicle/${id}`, data);
   // }
-
-  //getBookedSlotsByVehicleNumber
- availableSlots(vehicleNumber: string) {
-    return http.get<ICalendarResponse>(`getBookedSlotsByVehicleNumber?vehicleNumber=${vehicleNumber}`);
-  }
-  
-  //getEventType
-  eventType(data: IEventTypeRequest) {
-    return http.post<IEventTypeResponse[]>("getEventType", data);
-  }
 }
 
 export default new DataService();
