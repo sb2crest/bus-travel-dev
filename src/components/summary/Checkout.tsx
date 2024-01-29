@@ -1,8 +1,6 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import "./Checkout.scss";
 import dummyImage from "../../assets/images/dummy.webp";
-// import displayRazorpay from '../../booking/payment/PaymentGateway';
-import Approval from "../approval/Approval";
 
 interface CheckoutProps {
   fromDate: Date;
@@ -76,7 +74,7 @@ const Checkout: React.FC<CheckoutProps> = ({
     let requestBody = {
       bookingId: bookingId,
       mobile: mobile,
-      amount: amount,
+      amount: AdvanceAmount * 100,
     };
 
     let baseUrl =
@@ -187,7 +185,7 @@ const Checkout: React.FC<CheckoutProps> = ({
   return (
     <>
       {isapproval ? (
-        <Approval bookingid={bookingId} />
+        ""
       ) : (
         <div className="checkout_container">
           <div className="checkout_container_section">

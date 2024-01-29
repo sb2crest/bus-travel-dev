@@ -24,7 +24,16 @@
       width: 20px;
     }
   }
-  
+  .back_button{
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: -5px;
+    color: #17a2b8;
+    text-align: left;
+    border: none;
+    background: #fff;
+  }
 form {
     font-size: 12px;
     padding: 15px;
@@ -137,6 +146,7 @@ form {
     display: flex;
     justify-content: center;
     color: green;
+    margin-top: -13px;
   }
   
   .tickmark {
@@ -144,8 +154,8 @@ form {
   }
   .error-message {
     color: red;
-    font-size: 14px;
-    margin-top: 5px;
+    text-align: left;
+    margin: -12px 0 8px;
   }
   .send-otp{
     background-color: #17a2b8;

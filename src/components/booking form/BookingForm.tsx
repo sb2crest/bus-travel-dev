@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
-import React, { useState, useEffect, FormEvent } from "react";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect} from "react";
 import "./form.scss";
 import IVehicleData from "../../types/vehicle.type";
 import dataService from "../../services/data.service";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useSnackbar } from "notistack";
 
 interface State {
   vehicleData: IVehicleData;
@@ -56,16 +56,40 @@ const BookingForm: React.FC<BookingFormProps> = ({
     isPopupOpen: false,
   });
 
-   const validationSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
-    middleName: Yup.string().required("Middle Name is required"),
+    middleName: Yup.string(),
     lastName: Yup.string().required("Last Name is required"),
     phoneNumber: Yup.string()
       .matches(/^[0-9]*$/, "Phone number must contain only digits")
       .matches(/^\d{10}$/, "Phone number must be 10 digits")
       .required("Phone number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email"),
   });
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    setFieldTouched,
+  } = formik;
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const [OTPMessage, setOTPMessage] = useState(false);
 
@@ -82,11 +106,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
   }, [firstStepCompleted]);
 
   //Form input State Variables
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
 
   //OTP State Variables
@@ -109,10 +128,10 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
   /*OTP Generation Function*/
   const sendOTP = () => {
-    const isValidPhoneNumber = validatePhoneNumber(phoneNumber);
+    const isValidPhoneNumber = values.phoneNumber;
     if (isValidPhoneNumber) {
       dataService
-        .sendOTP(phoneNumber)
+        .sendOTP(values.phoneNumber)
         .then((response: any) => {
           if (response.data) {
             setState({ ...state, sentOtp: response.data.sentOtp });
@@ -121,7 +140,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             setOTPMessage(true);
             setTimeout(() => {
               setOTPMessage(false);
-            }, 2000);
+            }, 1000);
           } else {
             console.log("Failed to send OTP.");
           }
@@ -134,17 +153,11 @@ const BookingForm: React.FC<BookingFormProps> = ({
       console.log("Invalid phone number. Please enter a valid phone number.");
     }
   };
-
-  const validatePhoneNumber = (phoneNumber: string) => {
-    const phoneRegex = /^[0-9]*$/;
-    return phoneRegex.test(phoneNumber);
-  };
-
   useEffect(() => {
-    if (otp.length === 6) {
+    if (otp.length === 6 && state.isPopupOpen) {
       verifyOTP();
     }
-  }, [otp]);
+  }, [otp, state.isPopupOpen]);
 
   const handleOtpChange = (e: { target: { value: any } }) => {
     const enteredOtp = e.target.value;
@@ -159,7 +172,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
       return;
     }
     let requestBody = {
-      mobile: phoneNumber,
+      mobile: values.phoneNumber,
       otp: otp,
     };
     dataService
@@ -181,11 +194,11 @@ const BookingForm: React.FC<BookingFormProps> = ({
         setOtpVerified(false);
       });
   };
-  console.log("dates in bookingform", fromDate, toDate);
   /* Resend OTP Function */
   const resendOTP = (): void => {
+    let mobile = values.phoneNumber;
     dataService
-      .sendOTP(phoneNumber)
+      .sendOTP(mobile)
       .then((response: any) => {
         if (response.data) {
           setState({ ...state, sentOtp: response.data.sentOtp });
@@ -207,25 +220,28 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (
-      !firstName ||
-      !lastName ||
-      !phoneNumber ||
-      !otp ||
-      !email ||
+      !values.firstName ||
+      !values.lastName ||
+      !values.phoneNumber ||
+      !otpVerified ||
       !fromDate ||
-      !toDate
+      !toDate ||
+      !isChecked
     ) {
+      enqueueSnackbar("Please fill in all the required fields.", {
+        variant: "error",
+      });
     } else {
       let requestBody = {
         vehicleNumber: vehicleNumber,
         fromDate: fromDate ? fromDate.toISOString().split("T")[0] : "",
         toDate: toDate ? toDate.toISOString().split("T")[0] : "",
         user: {
-          firstName: firstName,
-          middleName: middleName,
-          lastName: lastName,
-          mobile: phoneNumber,
-          email: email,
+          firstName: values.firstName,
+          middleName: values.middleName,
+          lastName: values.lastName,
+          mobile: values.phoneNumber,
+          email: values.email,
         },
         slot: {
           vehicleNumber: vehicleNumber,
@@ -254,10 +270,10 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 toDate +
                 " " +
                 "phonenumber:" +
-                phoneNumber
+                values.phoneNumber
             );
             console.log("vehicle number:" + vehicleNumber);
-            onBookingIdUpdate(bookingId, phoneNumber);
+            onBookingIdUpdate(bookingId, values.phoneNumber);
           } else {
             console.log(" Booking failed");
             if (response.data.message === "Slots already Booked") {
@@ -293,202 +309,209 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
-const clearAll = () => {
-  setShowContinue(false);
-  setFirstName("");
-  setMiddleName("");
-  setLastName("");
-  setPhoneNumber("");
-  setEmail("");
-  setOtp("");
-  setIsChecked(false);
-  setResendDisabled(false);
-  setOtpSent(false);
-};
-
-
+  const clearAll = () => {
+    setShowContinue(false);
+    setOtp("");
+    setIsChecked(false);
+    setResendDisabled(false);
+    setOtpSent(false);
+    formik.resetForm();
+  };
   return (
     <div className="form-main-container">
-      <Formik
-        initialValues={{
-          firstName: "",
-          middleName: "",
-          lastName: "",
-          phoneNumber: "",
-          email: "",
-          password: "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
-          console.log(values);
-          actions.setSubmitting(false);
-        }}
-      >
-        <form>
-          {otpSent || showContinue ? (
-            <>
-              <div>
+      <form onSubmit={handleSubmit}>
+        {showContinue ? (
+          <>
+            <button
+              className="back_button"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowContinue(false);
+              }}
+            >
+              &#10918; Back
+            </button>
+            <p className="line"></p>
+            <div>
+              <input
+                type="number"
+                name="phoneNumber"
+                required
+                value={values.phoneNumber}
+                onChange={handleChange}
+                onBlur={() => setFieldTouched("phoneNumber", true)}
+                className="input-phone"
+              />
+              <label placeholder="Phone Number *" htmlFor="phone"></label>
+              {touched.phoneNumber && errors.phoneNumber && (
+                <div className="error-message">{errors.phoneNumber}</div>
+              )}
+              {!otpSent && (
+                <button className="send-otp" onClick={sendOTP} type="button">
+                  Send OTP
+                </button>
+              )}
+            </div>
+            {OTPMessage && (
+              <span className="sent-message">OTP Sent Successfully!</span>
+            )}
+            {otpSent && (
+              <div className="otp">
                 <input
-                  id="phone"
-                  type="number"
+                  id="otp"
+                  type="password"
                   required
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  value={otp}
+                  onChange={handleOtpChange}
                 />
-                <label placeholder="Phone Number" htmlFor="phone"></label>
-                {!otpSent && (
-                  <button className="send-otp" onClick={sendOTP} type="button">
-                    Send OTP
-                  </button>
+                <label placeholder="OTP"></label>
+                <button
+                  className="verify-otp"
+                  type="button"
+                  onClick={verifyOTP}
+                >
+                  Verify OTP
+                </button>
+                {otpVerified && (
+                  <svg
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 130.2 130.2"
+                  >
+                    <circle
+                      className="path circle"
+                      fill="none"
+                      stroke="#73AF55"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      cx="65.1"
+                      cy="65.1"
+                      r="62.1"
+                    />
+                    <polyline
+                      className="path check"
+                      fill="none"
+                      stroke="#73AF55"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      points="100.2,40.2 51.5,88.8 29.8,67.5 "
+                    />
+                  </svg>
                 )}
               </div>
-              {OTPMessage && (
-                <span className="sent-message">OTP Sent Successfully!</span>
-              )}
-              {otpSent && (
-                <div className="otp">
-                  <input
-                    id="otp"
-                    type="password"
-                    required
-                    value={otp}
-                    onChange={handleOtpChange}
-                  />
-                  <label placeholder="OTP"></label>
+            )}
+            {otpSent && (
+              <>
+                {!resendDisabled ? (
                   <button
-                    className="verify-otp"
+                    className="resend-otp"
+                    onClick={resendOTP}
                     type="button"
-                    onClick={verifyOTP}
                   >
-                    Verify OTP
+                    Not received OTP?{" "}
+                    <span className="resend-link">Resend OTP</span>
                   </button>
-                  {otpVerified && (
-                    <svg
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 130.2 130.2"
-                    >
-                      <circle
-                        className="path circle"
-                        fill="none"
-                        stroke="#73AF55"
-                        strokeWidth="6"
-                        strokeLinecap="round"
-                        strokeMiterlimit="10"
-                        cx="65.1"
-                        cy="65.1"
-                        r="62.1"
-                      />
-                      <polyline
-                        className="path check"
-                        fill="none"
-                        stroke="#73AF55"
-                        strokeWidth="6"
-                        strokeLinecap="round"
-                        strokeMiterlimit="10"
-                        points="100.2,40.2 51.5,88.8 29.8,67.5 "
-                      />
-                    </svg>
-                  )}
-                </div>
+                ) : (
+                  <span className="timer-custom">
+                    Resend OTP in{" "}
+                    <span className="min-sec" style={{ marginLeft: "0.2em" }}>
+                      {minutes}:{seconds}
+                    </span>{" "}
+                  </span>
+                )}
+              </>
+            )}
+            <div>
+              <input
+                id="email"
+                type="text"
+                required
+                value={values.email}
+                onChange={handleChange}
+                onBlur={() => setFieldTouched("email", true)}
+              />
+              <label placeholder="Email"></label>
+              {touched.email && errors.email && (
+                <div className="error-message">{errors.email}</div>
               )}
-              {otpSent && (
-                <>
-                  {!resendDisabled ? (
-                    <button
-                      className="resend-otp"
-                      onClick={resendOTP}
-                      type="button"
-                    >
-                      Not received OTP?{" "}
-                      <span className="resend-link">Resend OTP</span>
-                    </button>
-                  ) : (
-                    <span className="timer-custom">
-                      Resend OTP in{" "}
-                      <span className="min-sec" style={{ marginLeft: "0.2em" }}>
-                        {minutes}:{seconds}
-                      </span>{" "}
-                    </span>
-                  )}
-                </>
-              )}
-              <div>
-                <input
-                  id="email"
-                  type="text"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label placeholder="Email"></label>
-              </div>
-              <div className="terms-container">
-                <input
-                  type="checkbox"
-                  onChange={handleCheckboxChange}
-                  checked={isChecked}
-                />
-                <p>
-                  I agree to all the
-                  <Link to="/termsConditions">
-                    <span className="conditions">Terms and Conditions</span>
-                  </Link>
-                </p>
-              </div>
-              <div>
-                <button className="clear-all" onClick={clearAll}>
-                  Clear All
-                </button>
-                <button
-                  className="book-now"
-                  onClick={bookVehicle}
-                  disabled={!isChecked}
-                >
-                  Book Now
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <h2 className="form_heading">Enter the Details</h2>
+            </div>
+            <div className="terms-container">
               <input
-                id="fname"
-                type="text"
-                required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                type="checkbox"
+                onChange={handleCheckboxChange}
+                checked={isChecked}
               />
-              <label placeholder="First Name"></label>
-              <input
-                id="Midname"
-                type="text"
-                required
-                value={middleName}
-                onChange={(e) => setMiddleName(e.target.value)}
-              />
-              <label placeholder="Middle Name"></label>
-              <input
-                id="lname"
-                type="text"
-                required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-              <label placeholder="Last Name"></label>
-              <button
-                className="cssbuttons-io-button"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  e.preventDefault();
-                  setShowContinue(true);
-                }}
-              >
-                Continue
+              <p>
+                I agree to all the
+                <Link to="/termsConditions">
+                  <span className="conditions">Terms and Conditions</span>
+                </Link>
+              </p>
+            </div>
+            <div>
+              <button className="clear-all" onClick={clearAll}>
+                Clear All
               </button>
-            </>
-          )}
-        </form>
-      </Formik>
+              <button className="book-now" onClick={bookVehicle}>
+                Book Now
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 className="form_heading">Enter the Details</h2>
+            <input
+              id="firstName"
+              type="text"
+              required
+              defaultValue={values.firstName}
+              onChange={handleChange}
+              onBlur={() => setFieldTouched("firstName", true)}
+            />
+
+            <label placeholder="First Name *"></label>
+            {touched.firstName && errors.firstName && (
+              <div className="error-message">{errors.firstName}</div>
+            )}
+            <input
+              id="middleName"
+              type="text"
+              required
+              value={values.middleName}
+              onChange={handleChange}
+              onBlur={() => setFieldTouched("middleName", true)}
+            />
+            <label placeholder="Middle Name"></label>
+            {touched.middleName && errors.middleName && (
+              <div className="error-message">{errors.middleName}</div>
+            )}
+            <input
+              id="lastName"
+              type="text"
+              required
+              value={values.lastName}
+              onChange={handleChange}
+              onBlur={() => setFieldTouched("lastName", true)}
+            />
+            <label placeholder="Last Name *"></label>
+            {touched.lastName && errors.lastName && (
+              <div className="error-message">{errors.lastName}</div>
+            )}
+            <button
+              className="cssbuttons-io-button"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                setShowContinue(true);
+              }}
+            >
+              Continue
+            </button>
+          </>
+        )}
+      </form>
     </div>
   );
 };
