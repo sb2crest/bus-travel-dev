@@ -74,7 +74,7 @@ const Checkout: React.FC<CheckoutProps> = ({
     let requestBody = {
       bookingId: bookingId,
       mobile: mobile,
-      amount: AdvanceAmount * 100,
+      amount: AdvanceAmount,
     };
 
     let baseUrl =
@@ -177,7 +177,7 @@ const Checkout: React.FC<CheckoutProps> = ({
   }
 
   const razorpay: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    const amount = AdvanceAmount * 100;
+    const amount = AdvanceAmount;
     handleSecondStep();
     await displayRazorpay(bookingId, phoneNumber, amount);
     console.log("Request Body:" + bookingId + "," + phoneNumber + "," + amount);
