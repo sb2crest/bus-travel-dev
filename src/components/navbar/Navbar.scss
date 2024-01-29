@@ -13,6 +13,9 @@ nav {
   display: flex;
   justify-content: center;
 }
+.hideimg {
+  height: 6.3vw;
+}
 .fas {
   cursor: pointer;
 }
@@ -35,7 +38,7 @@ nav {
   display: none;
 }
 .menu-list.active {
-  max-height: 100%; 
+  max-height: 100%;
 }
 .menu-list {
   list-style-type: none;
@@ -43,7 +46,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   margin: 0 !important;
-  
+
   li {
     margin: 0 2.2vw;
   }
@@ -127,13 +130,13 @@ nav {
     display: block;
     color: #000;
   }
-  .menu-list{
+  .menu-list {
     flex-direction: column;
     width: 100vw;
     position: fixed;
     background: rgba(0, 0, 0, 0.7);
     left: -8.9%;
-      top: 48px;
+    top: 48px;
     padding: 0 !important;
     padding-top: 5vw !important;
     visibility: visible;
@@ -167,7 +170,6 @@ nav {
     visibility: hidden;
     opacity: 0;
     transform: translateX(100%);
-
   }
   .button-89 {
     display: none;
@@ -176,10 +178,10 @@ nav {
     display: block;
   }
   .menu-list.active {
-    max-height: 1000px; 
-    top:48px;
+    max-height: 1000px;
+    top: 48px;
     right: 0;
-    transition: all 0.7s ease ;
+    transition: all 0.7s ease;
   }
 }
 @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -213,7 +215,7 @@ nav {
 
 @media screen and (min-width: 1023px) and (max-width: 1279px) {
   .menu-list {
-    margin: 1vw 0 !important;
+    margin: 0vw 0 !important;
     padding: 0 !important;
     li {
       margin: 0 2.5vw;

@@ -237,6 +237,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                         className="form-control From_date"
                         minDate={new Date()}
                         name="From-Date"
+                        autoComplete="off"
                       />
                       <i
                         className="fa-regular fa-calendar"
@@ -260,7 +261,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
                         placeholderText="To-Date"
                         className="form-control To_date"
                         name="To-Date"
-
+                        autoComplete="off"
                       />
                       <i
                         className="fa-regular fa-calendar"

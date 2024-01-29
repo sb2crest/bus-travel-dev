@@ -22,14 +22,13 @@
     width: 70%;
     display: flex;
     justify-content: space-between;
-    padding: 25px;
+    padding: 25px 25px 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     background-color: white;
     border-radius: 10px;
     z-index: 1;
     border-bottom: 5px solid #0f7bab;
     color: #0f2454;
-
     &_one {
       text-align: center;
       padding-right: 4vw;
@@ -279,7 +278,7 @@ a {
     }
 
     .icon_container {
-      transform: translateX(25%);
+      transform: translateX(50%);
       .icon {
         &--left {
           transform: translateX(0);
@@ -568,7 +567,7 @@ a {
       display: grid;
       grid-template-columns: 2fr 2fr;
       grid-gap: 20px;
-      padding: 20px 40px;
+      padding: 20px 0px;
       box-shadow: none;
       background: none;
       margin-bottom: 0vw;
@@ -721,7 +720,7 @@ a {
   .card_banner {
     &_content {
       width: 80%;
-      padding: 30px;
+      padding: 25px 25px 10px;
       margin-bottom: 0vw;
 
       &_one {
@@ -858,7 +857,7 @@ a {
   .card_banner {
     &_content {
       width: 75%;
-      padding: 30px;
+      padding: 25px 25px 10px;
 
       &_one {
         padding-right: 2vw;
