@@ -101,7 +101,7 @@ const Checkout: React.FC<CheckoutProps> = ({
       const options = {
         key: "rzp_test_nHgaZ8pP0SqyOm",
         currency: data.currency,
-        amount: amount,
+        amount: amount * 100,
         name: "Pay Now",
         description: "Wallet Transaction",
         image: "http://localhost:8100/src/assets/images/Logo.png",
@@ -231,7 +231,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                 </div>
                 <div className="advance-amount">
                   <p className="left">Advance Amount </p>
-                  <p className="right">- {AdvanceAmount}</p>
+                  <p className="right">{AdvanceAmount}</p>
                 </div>
                 <p className="line"></p>
                 <div className="remaining-amount">
