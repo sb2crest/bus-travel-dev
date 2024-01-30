@@ -82,7 +82,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
   const sendResponseDataToBooking = (responseData: any) => {
     console.log("Response data received in PlacesDate:", responseData);
     if (onResponseDataChange) {
-      onResponseDataChange(responseData,selectedDateRange );
+      onResponseDataChange(responseData, selectedDateRange);
     }
   };
 
@@ -115,9 +115,12 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
   useEffect(() => {
     if (filterData !== null) {
       fetchData();
+      scrollToTop();
     }
   }, [filterData]);
-
+  const scrollToTop = () => {
+    window.scrollTo({ top: 580, behavior: "smooth" });
+  };
   const exploreClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
