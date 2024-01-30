@@ -19,7 +19,7 @@
         font-weight: 600;
         letter-spacing: 0.5px;
       }
-      .fa-xmark{
+      .fa-xmark {
         display: none;
       }
     }
@@ -44,7 +44,7 @@
               left,
               rgba(249, 250, 251, 1) 0%,
               rgba(213, 215, 223, 1) 50%,
-              rgba(249, 250, 251,  1) 100%
+              rgba(249, 250, 251, 1) 100%
             );
             background: -webkit-linear-gradient(
               left,
@@ -162,6 +162,23 @@
     font-size: 14px;
   }
 }
+.selected-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .selected-option {
+    display: flex;
+    align-items: baseline;
+    padding: 5px;
+    background-color: #e1f0ee;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 14px;
+    i{
+      cursor: pointer;
+    }
+  }
+}
 @media only screen and (max-width: 767px) {
   .no-scroll {
     overflow: hidden;
@@ -173,7 +190,6 @@
       padding: 8px 10px;
       border: 0.5px solid #d5d7df;
     }
-   
   }
   .filter_overlay {
     position: fixed;
@@ -208,10 +224,10 @@
         justify-content: space-between;
         span {
           font-size: 20px;
-          svg{
-              display: none;
+          svg {
+            display: none;
           }
-          .fa-xmark{
+          .fa-xmark {
             display: block;
             position: absolute;
             top: 10px;
@@ -228,26 +244,26 @@
             }
             &_checkbox {
               font-size: 18px;
-                input[type="checkbox"] {
-                  height: 18px;
+              input[type="checkbox"] {
+                height: 18px;
               }
             }
           }
-  
+
           &_sleeper_section {
             padding: 2vw;
             p {
               font-size: 18px;
             }
-  
+
             &_checkbox {
               font-size: 18px;
-                input[type="checkbox"] {
-                  height: 18px;
-                }
+              input[type="checkbox"] {
+                height: 18px;
               }
             }
-          
+          }
+
           .clear_button_section {
             button {
               font-size: 15px;

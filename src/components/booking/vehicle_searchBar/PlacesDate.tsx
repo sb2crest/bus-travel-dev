@@ -119,7 +119,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
     }
   }, [filterData]);
   const scrollToTop = () => {
-    window.scrollTo({ top: 580, behavior: "smooth" });
+    window.scrollTo({ top: 600, behavior: "smooth" });
   };
   const exploreClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
