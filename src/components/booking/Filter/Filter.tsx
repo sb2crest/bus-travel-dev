@@ -20,7 +20,6 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   const [isNonSleeperChecked, setIsNonSleeperChecked] = useState(false);
 
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-
   // Function to handle AC "All" checkbox change
   const handleACAllChange = () => {
     setIsACAllChecked(!isACAllChecked);
@@ -127,9 +126,9 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   useEffect(() => {
     updateFilter();
     if (isFilterVisible) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add("no-scroll");
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove("no-scroll");
     }
   }, [
     isACChecked,
@@ -154,7 +153,44 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   const handleToggleFilter = () => {
     setIsFilterVisible(!isFilterVisible);
   };
-
+  const handleSelectedOptionClick = (option: string) => {
+    // Deselect the corresponding checkbox
+    if (option === "ALL_AC") {
+      setIsACAllChecked(false);
+      setIsACChecked(false);
+      setIsNonACChecked(false);
+    } else if (option === "AC") {
+      setIsACChecked(false);
+      setIsACAllChecked(false);
+    } else if (option === "NA") {
+      setIsNonACChecked(false);
+      setIsACAllChecked(false);
+    } else if (option === "ALL_Sleeper") {
+      setIsSleeperAllChecked(false);
+      setIsSleeperChecked(false);
+      setIsSemiSleeperChecked(false);
+      setIsNonSleeperChecked(false);
+    } else if (option === "FS") {
+      setIsSleeperChecked(false);
+      setIsSleeperAllChecked(false);
+    } else if (option === "SS") {
+      setIsSemiSleeperChecked(false);
+      setIsSleeperAllChecked(false);
+    } else if (option === "NS") {
+      setIsNonSleeperChecked(false);
+      setIsSleeperAllChecked(false);
+    }
+  
+    if (
+      (isACChecked || isNonACChecked || isACAllChecked) &&
+      (isSleeperChecked || isSemiSleeperChecked || isNonSleeperChecked || isSleeperAllChecked)
+    ) {
+      setIsFilterVisible(true);
+    } else {
+      setIsFilterVisible(false);
+    }
+  };
+  
   return (
     <>
       <div className="toggle_filter_button">
@@ -298,6 +334,64 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
                     </div>
                   </div>
                 </>
+              </div>
+              <div className="selected-options">
+                {isACAllChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("ALL_AC")}
+                  >
+                    AC:ALL &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {!isACAllChecked && isACChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("AC")}
+                  >
+                    AC &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {!isACAllChecked && isNonACChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("NA")}
+                  >
+                    Non-AC &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {isSleeperAllChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("ALL_Sleeper")}
+                  >
+                    Sleeper:ALL &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {!isSleeperAllChecked && isSleeperChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("FS")}
+                  >
+                    Sleeper &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {!isSleeperAllChecked && isSemiSleeperChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("SS")}
+                  >
+                    Semi-Sleeper &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
+                {!isSleeperAllChecked && isNonSleeperChecked && (
+                  <div
+                    className="selected-option"
+                    onClick={() => handleSelectedOptionClick("NS")}
+                  >
+                    Seater &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  </div>
+                )}
               </div>
               {/* Close Button */}
               <div className="clear_button_section">
