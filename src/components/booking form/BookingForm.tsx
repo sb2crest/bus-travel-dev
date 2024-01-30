@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./form.scss";
 import IVehicleData from "../../types/vehicle.type";
 import dataService from "../../services/data.service";
@@ -309,6 +309,24 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const minutes: string = formatDigits(Math.floor(timer / 60));
   const seconds: string = formatDigits(timer % 60);
 
+  const handleContinueClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    Object.keys(values).forEach((field) => {
+      setFieldTouched(field, true);
+    });
+
+    if (!values.firstName) {
+      formik.setFieldError("firstName", "First Name is required");
+    }
+
+    if (!values.lastName) {
+      formik.setFieldError("lastName", "Last Name is required");
+    } else {
+      setShowContinue(true);
+    }
+  };
+
   const clearAll = () => {
     setShowContinue(false);
     setOtp("");
@@ -445,7 +463,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 checked={isChecked}
               />
               <p>
-                I agree to all the
+                &nbsp; I agree to all the
                 <Link to="/termsConditions">
                   <span className="conditions">Terms and Conditions</span>
                 </Link>
@@ -502,10 +520,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             )}
             <button
               className="cssbuttons-io-button"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                setShowContinue(true);
-              }}
+              onClick={handleContinueClick}
             >
               Continue
             </button>
