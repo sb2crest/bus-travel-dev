@@ -180,17 +180,20 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
       setIsNonSleeperChecked(false);
       setIsSleeperAllChecked(false);
     }
-  
+
     if (
       (isACChecked || isNonACChecked || isACAllChecked) &&
-      (isSleeperChecked || isSemiSleeperChecked || isNonSleeperChecked || isSleeperAllChecked)
+      (isSleeperChecked ||
+        isSemiSleeperChecked ||
+        isNonSleeperChecked ||
+        isSleeperAllChecked)
     ) {
       setIsFilterVisible(true);
     } else {
       setIsFilterVisible(false);
     }
   };
-  
+
   return (
     <>
       <div className="toggle_filter_button">
@@ -337,59 +340,66 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
               </div>
               <div className="selected-options">
                 {isACAllChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("ALL_AC")}
-                  >
-                    AC:ALL &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    AC:ALL &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("ALL_AC")}
+                    ></i>
                   </div>
                 )}
                 {!isACAllChecked && isACChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("AC")}
-                  >
-                    AC &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    AC &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("AC")}
+                    ></i>
                   </div>
                 )}
                 {!isACAllChecked && isNonACChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("NA")}
-                  >
-                    Non-AC &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    Non-AC &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("NA")}
+                    ></i>
                   </div>
                 )}
                 {isSleeperAllChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("ALL_Sleeper")}
-                  >
-                    Sleeper:ALL &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    Sleeper:ALL &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("ALL_Sleeper")}
+                    ></i>
                   </div>
                 )}
                 {!isSleeperAllChecked && isSleeperChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("FS")}
-                  >
-                    Sleeper &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    Sleeper &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("FS")}
+                    ></i>
                   </div>
                 )}
                 {!isSleeperAllChecked && isSemiSleeperChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("SS")}
-                  >
-                    Semi-Sleeper &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    Semi-Sleeper &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("SS")}
+                    ></i>
                   </div>
                 )}
                 {!isSleeperAllChecked && isNonSleeperChecked && (
-                  <div
-                    className="selected-option"
-                    onClick={() => handleSelectedOptionClick("NS")}
-                  >
-                    Seater &nbsp;<i className="fa-solid fa-xmark fa-sm"></i>
+                  <div className="selected-option">
+                    Seater &nbsp;
+                    <i
+                      className="fa-solid fa-xmark fa-sm"
+                      onClick={() => handleSelectedOptionClick("NS")}
+                    ></i>
                   </div>
                 )}
               </div>
