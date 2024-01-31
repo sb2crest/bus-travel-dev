@@ -355,13 +355,13 @@ const BookingForm: React.FC<BookingFormProps> = ({
               <input
                 type="number"
                 name="phoneNumber"
+                placeholder="Phone Number *"
                 required
                 value={values.phoneNumber}
                 onChange={handleChange}
                 onBlur={() => setFieldTouched("phoneNumber", true)}
                 className="input-phone"
               />
-              <label placeholder="Phone Number *" htmlFor="phone"></label>
               {touched.phoneNumber && errors.phoneNumber && (
                 <div className="error-message">{errors.phoneNumber}</div>
               )}
@@ -379,11 +379,11 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 <input
                   id="otp"
                   type="password"
+                  placeholder="OTP *"
                   required
                   value={otp}
                   onChange={handleOtpChange}
                 />
-                <label placeholder="OTP"></label>
                 <button
                   className="verify-otp"
                   type="button"
@@ -446,12 +446,11 @@ const BookingForm: React.FC<BookingFormProps> = ({
               <input
                 id="email"
                 type="text"
-                required
+                placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
                 onBlur={() => setFieldTouched("email", true)}
               />
-              <label placeholder="Email"></label>
               {touched.email && errors.email && (
                 <div className="error-message">{errors.email}</div>
               )}
@@ -484,37 +483,36 @@ const BookingForm: React.FC<BookingFormProps> = ({
             <input
               id="firstName"
               type="text"
+              placeholder="First name*"
               required
               defaultValue={values.firstName}
               onChange={handleChange}
               onBlur={() => setFieldTouched("firstName", true)}
             />
-
-            <label placeholder="First Name *"></label>
             {touched.firstName && errors.firstName && (
               <div className="error-message">{errors.firstName}</div>
             )}
             <input
               id="middleName"
               type="text"
+              placeholder="Middle name"
               required
               value={values.middleName}
               onChange={handleChange}
               onBlur={() => setFieldTouched("middleName", true)}
             />
-            <label placeholder="Middle Name"></label>
             {touched.middleName && errors.middleName && (
               <div className="error-message">{errors.middleName}</div>
             )}
             <input
               id="lastName"
               type="text"
+              placeholder="Last Name *"
               required
               value={values.lastName}
               onChange={handleChange}
               onBlur={() => setFieldTouched("lastName", true)}
             />
-            <label placeholder="Last Name *"></label>
             {touched.lastName && errors.lastName && (
               <div className="error-message">{errors.lastName}</div>
             )}

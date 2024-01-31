@@ -47,6 +47,7 @@ form {
   }
   input[type="text"],
   input[type="number"] {
+    display: block;
     box-sizing: border-box;
     width: 17rem;
     height: calc(2em + 7px);
@@ -58,6 +59,7 @@ form {
     resize: none;
     outline: none;
     color: #292929;
+    padding-left: 10px;
   }
   input[type="password"] {
     width: 9rem;
@@ -70,6 +72,7 @@ form {
     resize: none;
     outline: none;
     color: #292929;
+    padding-left: 10px;
   }
   
   input[type="text"]:focus,
@@ -77,71 +80,6 @@ form {
   input[type="password"]:focus {
     border-color: #00bafa;
   }
-  
-  input[type="text"]:focus + label[placeholder]:before,
-  input[type="number"]:focus + label[placeholder]:before,
-  input[type="password"]:focus + label[placeholder]:before {
-    color: #0091da;
-  }
-  
-  input[type="text"]:focus + label[placeholder]:before,
-  input[type="text"]:valid + label[placeholder]:before,
-  input[type="number"]:focus + label[placeholder]:before,
-  input[type="number"]:valid + label[placeholder]:before,
-  input[type="password"]:focus + label[placeholder]:before,
-  input[type="password"]:valid + label[placeholder]:before {
-    transition-duration: 0.2s;
-    transform: translate(0, -1.6em) scale(0.9, 0.9);
-  }
-  
-  input[type="text"] + label[placeholder],
-  input[type="number"] + label[placeholder] {
-    display: block;
-    pointer-events: none;
-    line-height: 1.25em;
-    margin-top: calc(-3em - 2px);
-    margin-bottom: calc((3em - 1em) + 2px);
-  }
-  input[type="password"] + label[placeholder] {
-    display: block;
-    pointer-events: none;
-    line-height: 1.25em;
-    margin-top: calc(-1em + 2px);
-    margin-bottom: calc((1em - 1em) + 2px);
-  }
-  
-  input[type="text"] + label[placeholder]:before,
-  input[type="number"] + label[placeholder]:before{
-    content: attr(placeholder);
-    display: inline-block;
-    margin: 0 calc(0.5em + 2px);
-    padding: 0 2px;
-    color: #7d7d7d;
-    white-space: nowrap;
-    transition: 0.3s ease-in-out;
-    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
-    background-size: 100% 5px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  input[type="password"] + label[placeholder]:before {
-    content: attr(placeholder);
-    display: inline-block;
-    margin: 0 calc(-14em + 18px);
-    padding: 0 2px;
-    color: #7d7d7d;
-    white-space: nowrap;
-    transition: 0.3s ease-in-out;
-    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
-    background-size: 100% 5px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  
-  input[type="password"]:invalid + label[placeholder][alt]:before {
-    content: attr(alt);
-  }
-  
   .sent-message {
     display: flex;
     justify-content: center;
