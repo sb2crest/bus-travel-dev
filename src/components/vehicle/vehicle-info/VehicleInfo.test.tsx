@@ -2,7 +2,7 @@ import { act, fireEvent, logRoles, render, screen, waitFor, within } from "@test
 import { MemoryRouter, BrowserRouter as Router } from "react-router-dom";
 import VehicleInfo from "./VehicleInfo";
 import nock from "nock";
-import Checkout from "../../booking/checkout/Checkout";
+import Checkout from "../../summary/Checkout";
 
 describe("Vehicle Info component", () => {
   test('renders component and triggers modal on button click', () => {
@@ -201,7 +201,13 @@ describe("Vehicle Info component", () => {
     });
 
     await waitFor(() => {
-      <Checkout bookingId={""} phoneNumber={""} fromDate={new Date()} toDate={new Date()} />
+      <Checkout bookingId={""} phoneNumber={""} fromDate={new Date()} toDate={new Date()} secondStepProp={function (step: boolean): void {
+        throw new Error("Function not implemented.");
+      } } thirdStepProp={function (step: boolean): void {
+        throw new Error("Function not implemented.");
+      } } lastStepProp={function (step: boolean): void {
+        throw new Error("Function not implemented.");
+      } } TotalAmount={0} AdvanceAmount={0} RemainingAmount={0} Sleepertype={""} ACtype={""} />
     });
   });
 

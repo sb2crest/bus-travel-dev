@@ -108,7 +108,16 @@ describe("DataService", () => {
     const data = {
       filter: "AC/SS,NS",
       fromDate: "01-01-2025",
-      toDate: "01-01-2025",
+      toDate: "01-01-2025", 
+      distanceRequest: {
+        source: "Bengaluru",
+        destination:"dharmasthala",
+        sourceLatitude: 12.9715987,
+        sourceLongitude: 77.5945627,
+        destinationLatitude: 12.9141417,
+        destinationLongitude: 74.8559568,
+        multipleDestination: false
+      }
     };
     const response = DataService.filter(data);
     const baseURL =
