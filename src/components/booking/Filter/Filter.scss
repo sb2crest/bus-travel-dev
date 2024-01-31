@@ -26,10 +26,12 @@
 
     form {
       .form_content {
+        label{
+          color: #0f2454;
+        }
         &_ac_section {
           padding: 1vw;
           position: relative;
-
           &::after {
             content: "";
             position: absolute;
@@ -67,18 +69,6 @@
             color: #0f2454;
           }
 
-          &_checkbox {
-            .checkbox {
-              padding-bottom: 7px;
-              display: flex;
-              align-items: center;
-
-              input[type="checkbox"] {
-                cursor: pointer;
-                height: 15px;
-              }
-            }
-          }
         }
 
         &_sleeper_section {
@@ -120,19 +110,6 @@
             font-size: 16px;
             font-weight: 600;
             color: #0f2454;
-          }
-
-          &_checkbox {
-            .checkbox {
-              padding-bottom: 7px;
-              display: flex;
-              align-items: center;
-
-              input[type="checkbox"] {
-                cursor: pointer;
-                height: 15px;
-              }
-            }
           }
         }
         .clear_button_section {
@@ -242,25 +219,12 @@
             p {
               font-size: 18px;
             }
-            &_checkbox {
-              font-size: 18px;
-              input[type="checkbox"] {
-                height: 18px;
-              }
-            }
           }
 
           &_sleeper_section {
             padding: 2vw;
             p {
               font-size: 18px;
-            }
-
-            &_checkbox {
-              font-size: 18px;
-              input[type="checkbox"] {
-                height: 18px;
-              }
             }
           }
 

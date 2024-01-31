@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./PlacesDate.scss";
 import { Library } from "@googlemaps/js-api-loader";
 import dataService from "../../../services/data.service";
+import Checkbox from "@mui/material/Checkbox";
 
 interface MySearchBoxOptions {
   types?: string[];
@@ -17,6 +18,7 @@ interface PlacesDateProps {
 }
 
 const libraries: Library[] = ["places"];
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const PlacesDate: React.FC<PlacesDateProps> = ({
   filterData,
@@ -151,26 +153,43 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
       setDestination
     );
   };
-
+  const customStyle = {
+    width: "5px",
+    height: "5px",
+  };
   return (
     <div className="destination">
       <div className="destination_container">
         <div className="destination_container_section">
-          <input
-            type="checkbox"
-            id="multipleDestination"
-            checked={isMultipleDestination}
-            onChange={handleCheckboxChange}
-          />
-          &nbsp;&nbsp;
-          <label htmlFor="multipleDestination" className="multipleDestination">
-            Multiple Destination
-          </label>
-          &nbsp;&nbsp;
-          <span style={{ color: "#0f7bab" }}>
-            (<u>Note</u>:&nbsp;Please select this option if you're traveling to
-            multiple destinations)
-          </span>
+          <div className="checkbox">
+            <Checkbox
+              {...label}
+              sx={{
+                color: "#0f2454",
+                '&.Mui-checked': {
+                  color: '#0f7bab',
+                },
+                '& .MuiSvgIcon-root': {
+                  fontSize: 18,
+                },
+              }}
+              id="multipleDestination"
+              checked={isMultipleDestination}
+              onChange={handleCheckboxChange}
+            />
+            <label
+              htmlFor="multipleDestination"
+              className="multipleDestination"
+            >
+              Multiple Destination
+            </label>
+            &nbsp;&nbsp;
+            <span style={{ color: "#0f7bab" }}>
+              (<u>Note</u>:&nbsp;Please select this option if you're traveling
+              to multiple destinations)
+            </span>
+          </div>
+
           <div className="destination_container_section_input">
             <form>
               <div className="search_bar">
