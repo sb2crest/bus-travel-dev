@@ -6,6 +6,7 @@ import dataService from "../../services/data.service";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSnackbar } from "notistack";
+import Checkbox from "@mui/material/Checkbox";
 
 interface State {
   vehicleData: IVehicleData;
@@ -37,6 +38,7 @@ interface BookingFormProps {
   toDate: Date;
   TotalAmount: number;
 }
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const BookingForm: React.FC<BookingFormProps> = ({
   firstStepProp,
@@ -456,13 +458,21 @@ const BookingForm: React.FC<BookingFormProps> = ({
               )}
             </div>
             <div className="terms-container">
-              <input
-                type="checkbox"
+              <Checkbox
+                {...label}
+                sx={{
+                  color: "#0f2454",
+                  "&.Mui-checked": {
+                    color: "#0f7bab",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 16,
+                  },
+                }}
                 onChange={handleCheckboxChange}
                 checked={isChecked}
               />
-              <p>
-                &nbsp; I agree to all the
+              <p>I agree to all the
                 <Link to="/termsConditions">
                   <span className="conditions">Terms and Conditions</span>
                 </Link>

@@ -15,7 +15,7 @@
     font-size: inherit;
     line-height: inherit;
   }
-  
+
   .form-control:focus {
     color: #495057;
     background-color: #fff;
@@ -71,8 +71,12 @@
     border-bottom: 5px solid #0f7bab;
     &_section {
       width: 100%;
-      .multipleDestination {
-        color: #0f2454;
+      .checkbox {
+        display: flex;
+        align-items: center;
+        .multipleDestination {
+          color: #0f2454;
+        }
       }
 
       &_input {

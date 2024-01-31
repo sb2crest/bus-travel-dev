@@ -141,9 +141,6 @@ const Booking: React.FC = (props) => {
           />
           {shouldRenderBusDetails && (
             <>
-              <div data-testid="filter-component" className="filterAlign1">
-                <Filter onFilterChange={handleFilterChange} />
-              </div>
               <Fade top>
                 <div className="booking_container_busDetails">
                   <Fade top>
@@ -159,7 +156,7 @@ const Booking: React.FC = (props) => {
                   <div className="curvedimgsection">
                     <div
                       data-testid="filter-component"
-                      className="filterAlign2"
+                      className="filterAlign"
                     >
                       <Filter onFilterChange={handleFilterChange} />
                     </div>

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../booking-calendar/BookingCalendar.scss";
 import TuneIcon from "@mui/icons-material/Tune";
+import { Checkbox } from "@mui/material";
 
 interface FilterProps {
   onFilterChange: (filterData: string) => void;
 }
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
   // State variables for AC checkboxes
   const [isACAllChecked, setIsACAllChecked] = useState(false);
@@ -196,224 +198,287 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }: FilterProps) => {
 
   return (
     <>
-      <div className="toggle_filter_button">
-        <button onClick={handleToggleFilter}>
-          FILTER &nbsp;
-          <TuneIcon sx={{ fontSize: 15 }} />
-        </button>
-      </div>
-      <div
-        className={`filter_overlay ${isFilterVisible ? "show" : ""}`}
-        onClick={handleToggleFilter}
-      ></div>
-      <div
-        className={`filter_container ${isFilterVisible ? "show" : ""}`}
-        id="FilterModal"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-      >
-        <div className="filter_container_section">
-          <div className="filter_container_section_heading">
-            <span>
-              FILTERS&nbsp;&nbsp;
-              <TuneIcon sx={{ fontSize: 18 }} />
-            </span>
-            <span onClick={handleToggleFilter}>
-              <i className="fa-solid fa-xmark" style={{ color: "#0f7bab" }}></i>
-            </span>
-          </div>
-          <form>
-            <div className="form_content">
-              {/* AC Filter */}
-              <div className="form_content_ac_section">
-                <p>AC Type</p>
-                <>
-                  <div className="form_content_ac_section_checkbox">
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        id="allCheckbox"
-                        className="input-all"
-                        checked={isACAllChecked}
-                        onChange={handleACAllChange}
-                      />
-                      <label className="label-all" htmlFor="allCheckbox">
-                        &nbsp;&nbsp;All
-                      </label>
-                    </div>
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        id="acCheckbox"
-                        className="input-ac"
-                        checked={isACChecked}
-                        onChange={handleACChange}
-                      />
-                      <label className="label-ac" htmlFor="acCheckbox">
-                        &nbsp;&nbsp;AC
-                      </label>
-                    </div>
-                    <div className="checkbox">
-                      <input
-                        type="checkbox"
-                        id="nonACCheckbox"
-                        className="input-non-ac"
-                        checked={isNonACChecked}
-                        onChange={handleNonACChange}
-                      />
-                      <label className="label-non-ac" htmlFor="nonACCheckbox">
-                        &nbsp;&nbsp;Non-AC
-                      </label>
-                    </div>
-                  </div>
-                </>
-              </div>
-              {/* Sleeper Filter */}
-              <div className="form_content_sleeper_section">
-                <p>Sleeper Type</p>
-                <>
-                  <div className="form_content_sleeper_section_checkbox">
-                    <div className="checkbox">
-                      {" "}
-                      <input
-                        id="allCheckboxsleeper"
-                        className="input-all"
-                        type="checkbox"
-                        checked={isSleeperAllChecked}
-                        onChange={handleSleeperAllChange}
-                      />
-                      <label className="label-all" htmlFor="allCheckboxsleeper">
-                        &nbsp;&nbsp;All
-                      </label>
-                    </div>
-                    <div className="checkbox">
-                      <input
-                        className="input-sleeper"
-                        id="sleeperCheckbox"
-                        type="checkbox"
-                        checked={isSleeperChecked}
-                        onChange={handleSleeperChange}
-                        disabled
-                      />
-                      <label
-                        className="label-sleeper"
-                        htmlFor="sleeperCheckbox"
-                        style={{ color: "gray" }}
-                      >
-                        &nbsp;&nbsp;Sleeper{" "}
-                        <span style={{ fontSize: "12px" }}>(Coming soon)</span>
-                      </label>
-                    </div>
-                    <div className="checkbox">
-                      <input
-                        className="input-semi-sleeper"
-                        id="semiSleeperCheckbox"
-                        type="checkbox"
-                        checked={isSemiSleeperChecked}
-                        onChange={handleSemiSleeperChange}
-                      />
-                      <label
-                        className="label-semi-sleeper"
-                        htmlFor="semiSleeperCheckbox"
-                      >
-                        &nbsp;&nbsp;Semi-Sleeper
-                      </label>
-                    </div>
-                    <div className="checkbox">
-                      <input
-                        className="input-non-sleeper"
-                        id="nonSleeperCheckbox"
-                        type="checkbox"
-                        checked={isNonSleeperChecked}
-                        onChange={handleNonSleeperChange}
-                      />
-                      <label
-                        className="label-non-sleeper"
-                        htmlFor="nonSleeperCheckbox"
-                      >
-                        &nbsp;&nbsp;Seater{" "}
-                      </label>
-                    </div>
-                  </div>
-                </>
-              </div>
-              <div className="selected-options">
-                {isACAllChecked && (
-                  <div className="selected-option">
-                    AC:ALL &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("ALL_AC")}
-                    ></i>
-                  </div>
-                )}
-                {!isACAllChecked && isACChecked && (
-                  <div className="selected-option">
-                    AC &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("AC")}
-                    ></i>
-                  </div>
-                )}
-                {!isACAllChecked && isNonACChecked && (
-                  <div className="selected-option">
-                    Non-AC &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("NA")}
-                    ></i>
-                  </div>
-                )}
-                {isSleeperAllChecked && (
-                  <div className="selected-option">
-                    Sleeper:ALL &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("ALL_Sleeper")}
-                    ></i>
-                  </div>
-                )}
-                {!isSleeperAllChecked && isSleeperChecked && (
-                  <div className="selected-option">
-                    Sleeper &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("FS")}
-                    ></i>
-                  </div>
-                )}
-                {!isSleeperAllChecked && isSemiSleeperChecked && (
-                  <div className="selected-option">
-                    Semi-Sleeper &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("SS")}
-                    ></i>
-                  </div>
-                )}
-                {!isSleeperAllChecked && isNonSleeperChecked && (
-                  <div className="selected-option">
-                    Seater &nbsp;
-                    <i
-                      className="fa-solid fa-xmark fa-sm"
-                      onClick={() => handleSelectedOptionClick("NS")}
-                    ></i>
-                  </div>
-                )}
-              </div>
-              {/* Close Button */}
-              <div className="clear_button_section">
-                <button className="button-clear" onClick={handleClearFilters}>
-                  CLEAR ALL
-                </button>
-              </div>
-            </div>
-          </form>
+    <div className="toggle_filter_button">
+      <button onClick={handleToggleFilter}>
+        FILTER &nbsp;
+        <TuneIcon sx={{ fontSize: 15 }} />
+      </button>
+    </div>
+    <div
+      className={`filter_overlay ${isFilterVisible ? "show" : ""}`}
+      onClick={handleToggleFilter}
+    ></div>
+    <div
+      className={`filter_container ${isFilterVisible ? "show" : ""}`}
+      id="FilterModal"
+      tabIndex={-1}
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+    >
+      <div className="filter_container_section">
+        <div className="filter_container_section_heading">
+          <span>
+            FILTERS&nbsp;&nbsp;
+            <TuneIcon sx={{ fontSize: 18 }} />
+          </span>
+          <span onClick={handleToggleFilter}>
+            <i className="fa-solid fa-xmark" style={{ color: "#0f7bab" }}></i>
+          </span>
         </div>
+        <form>
+          <div className="form_content">
+            {/* AC Filter */}
+            <div className="form_content_ac_section">
+              <p>AC Type</p>
+              <>
+                <div className="form_content_ac_section_checkbox">
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      id="allCheckbox"
+                      className="input-all"
+                      checked={isACAllChecked}
+                      onChange={handleACAllChange}
+                    />
+                    <label className="label-all" htmlFor="allCheckbox">
+                      &nbsp;&nbsp;All
+                    </label>
+                  </div>
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      id="acCheckbox"
+                      className="input-ac"
+                      checked={isACChecked}
+                      onChange={handleACChange}
+                    />
+                    <label className="label-ac" htmlFor="acCheckbox">
+                      &nbsp;&nbsp;AC
+                    </label>
+                  </div>
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      id="nonACCheckbox"
+                      className="input-non-ac"
+                      checked={isNonACChecked}
+                      onChange={handleNonACChange}
+                    />
+                    <label className="label-non-ac" htmlFor="nonACCheckbox">
+                      &nbsp;&nbsp;Non-AC
+                    </label>
+                  </div>
+                </div>
+              </>
+            </div>
+            {/* Sleeper Filter */}
+            <div className="form_content_sleeper_section">
+              <p>Sleeper Type</p>
+              <>
+                <div className="form_content_sleeper_section_checkbox">
+                  <div className="checkbox">
+                    {" "}
+                    <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      id="allCheckboxsleeper"
+                      className="input-all"
+                      checked={isSleeperAllChecked}
+                      onChange={handleSleeperAllChange}
+                    />
+                    <label className="label-all" htmlFor="allCheckboxsleeper">
+                      &nbsp;&nbsp;All
+                    </label>
+                  </div>
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      className="input-sleeper"
+                      id="sleeperCheckbox"
+                      checked={isSleeperChecked}
+                      onChange={handleSleeperChange}
+                      disabled
+                    />
+                    <label
+                      className="label-sleeper"
+                      htmlFor="sleeperCheckbox"
+                      style={{ color: "gray" }}
+                    >
+                      &nbsp;&nbsp;Sleeper{" "}
+                      <span style={{ fontSize: "12px" }}>(Coming soon)</span>
+                    </label>
+                  </div>
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      className="input-semi-sleeper"
+                      id="semiSleeperCheckbox"
+                      checked={isSemiSleeperChecked}
+                      onChange={handleSemiSleeperChange}
+                    />
+                    <label
+                      className="label-semi-sleeper"
+                      htmlFor="semiSleeperCheckbox"
+                    >
+                      &nbsp;&nbsp;Semi-Sleeper
+                    </label>
+                  </div>
+                  <div className="checkbox">
+                  <Checkbox
+                      {...label}
+                      sx={{
+                        color: "#0f2454",
+                        "&.Mui-checked": {
+                          color: "#0f7bab",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 18,
+                        },
+                      }}
+                      className="input-non-sleeper"
+                      id="nonSleeperCheckbox"
+                      checked={isNonSleeperChecked}
+                      onChange={handleNonSleeperChange}
+                    />
+                    <label
+                      className="label-non-sleeper"
+                      htmlFor="nonSleeperCheckbox"
+                    >
+                      &nbsp;&nbsp;Seater{" "}
+                    </label>
+                  </div>
+                </div>
+              </>
+            </div>
+            <div className="selected-options">
+              {isACAllChecked && (
+                <div className="selected-option">
+                  AC:ALL &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("ALL_AC")}
+                  ></i>
+                </div>
+              )}
+              {!isACAllChecked && isACChecked && (
+                <div className="selected-option">
+                  AC &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("AC")}
+                  ></i>
+                </div>
+              )}
+              {!isACAllChecked && isNonACChecked && (
+                <div className="selected-option">
+                  Non-AC &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("NA")}
+                  ></i>
+                </div>
+              )}
+              {isSleeperAllChecked && (
+                <div className="selected-option">
+                  Sleeper:ALL &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("ALL_Sleeper")}
+                  ></i>
+                </div>
+              )}
+              {!isSleeperAllChecked && isSleeperChecked && (
+                <div className="selected-option">
+                  Sleeper &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("FS")}
+                  ></i>
+                </div>
+              )}
+              {!isSleeperAllChecked && isSemiSleeperChecked && (
+                <div className="selected-option">
+                  Semi-Sleeper &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("SS")}
+                  ></i>
+                </div>
+              )}
+              {!isSleeperAllChecked && isNonSleeperChecked && (
+                <div className="selected-option">
+                  Seater &nbsp;
+                  <i
+                    className="fa-solid fa-xmark fa-sm"
+                    onClick={() => handleSelectedOptionClick("NS")}
+                  ></i>
+                </div>
+              )}
+            </div>
+            {/* Close Button */}
+            <div className="clear_button_section">
+              <button className="button-clear" onClick={handleClearFilters}>
+                CLEAR ALL
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
+  </>
   );
 };
 export default Filter;
