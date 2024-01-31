@@ -1,8 +1,5 @@
 .booking {
   &_container {
-    .filterAlign1 {
-      display: none;
-    }
     &_banner {
       height: 60vh;
       background: url(../../assets/images/busBackground.jpg) no-repeat;
@@ -230,7 +227,6 @@
   max-width: 460px;
   position: relative;
   cursor: pointer;
-  //   transform: rotate(-2deg);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -263,13 +259,6 @@
 @media only screen and (max-width: 480px) {
   .booking {
     &_container {
-      .filterAlign1 {
-        display: block;
-        position: absolute;
-        right: 18%;
-        z-index: 3;
-        bottom: -25%;
-      }
       &_banner {
         height: 40vh;
         background-position: bottom 60% right !important;
@@ -297,18 +286,18 @@
           width: 95%;
         }
         &_section {
-          width: 95%;
+          width: 100%;
           flex-direction: column;
-          padding-top: 15vw;
+          padding-top: 5vw;
 
           .buses {
-            width: 85%;
+            width: 80%;
             padding: 12px 0px;
             margin-bottom: 10vw;
             .busOne_img {
-              width: 95%;
+              width: 90%;
               img {
-                width: 100%;
+                width: 95%;
                 border-radius: 10px;
               }
             }
@@ -361,9 +350,10 @@
   .curvedimgsection {
     margin-top: -1vw;
     flex-direction: column;
-    align-items: center;
-    .filterAlign2 {
-      display: none;
+    align-items: end;
+    justify-content: center;
+    .filterAlign {
+      margin-right: 10%;
     }
   }
 }
@@ -371,13 +361,6 @@
 @media only screen and (min-width: 481px) and (max-width: 767px) {
   .booking {
     &_container {
-      .filterAlign1 {
-        display: block;
-        position: absolute;
-        right: 18%;
-        z-index: 3;
-        bottom: -35%;
-      }
       &_banner {
         height: 50vh;
         background-position: bottom 55% right !important;
@@ -404,7 +387,7 @@
         &_section {
           width: 95%;
           flex-direction: column;
-          padding-top: 15vw;
+          padding-top: 5vw;
           .buses {
             width: 70%;
             padding: 12px 0px;
@@ -463,8 +446,12 @@
     font-size: 1rem;
   }
   .curvedimgsection {
-    .filterAlign2 {
-      display: none;
+    margin-top: -1vw;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    .filterAlign {
+      margin-right: 15%;
     }
   }
 }
@@ -472,9 +459,6 @@
 @media screen and (min-width: 767px) and (max-width: 1023px) {
   .booking {
     &_container {
-      .filterAlign1 {
-        display: none;
-      }
       &_banner {
         background-position: bottom 56% right !important;
 
