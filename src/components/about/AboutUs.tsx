@@ -114,51 +114,47 @@ const AboutUs = () => {
         </div>
         <div className="aboutus_container_values">
           <div className="aboutus_container_values_section">
-            <Bounce right>
-              <div
-                className="aboutus_container_values_section_mission"
-                data-testid="mission-content"
-              >
-                <h4>
-                  <b>Our Mission</b>
-                </h4>
-                <p>
-                  Our mission is to provide safe, reliable, and comfortable bus
-                  rental services that cater to the diverse needs of our
-                  customers. We aim to exceed expectations by delivering
-                  exceptional transportation solutions, backed by a commitment
-                  to punctuality, professionalism, and affordability.We aim to
-                  simplify the process of renting a bus, making group travel
-                  stress-free and enjoyable. Our focus on affordability and
-                  sustainability ensures that everyone can access our services,
-                  fostering strong connections among communities, businesses,
-                  and travelers.
-                </p>
-              </div>
-            </Bounce>
-            <Bounce left>
-              <div
-                className="aboutus_container_values_section_vision"
-                data-testid="vision-content"
-              >
-                <h4>
-                  <b>Our Vision</b>
-                </h4>
-                <p>
-                  {" "}
-                  Our vision is to be the preferred choice for bus rentals,
-                  setting industry standards for excellence. We aspire to expand
-                  our fleet, reach new destinations, and continuously enhance
-                  our services. By fostering strong client relationships and
-                  embracing innovation, we strive to be a driving force in the
-                  transportation sector, connecting people and places seamlessly
-                  while promoting sustainability and convenience. With a
-                  commitment to environmental responsibility and convenience, we
-                  envision a future where travel is efficient, enjoyable, and
-                  accessible to all.
-                </p>
-              </div>
-            </Bounce>
+            <div
+              className="aboutus_container_values_section_mission"
+              data-testid="mission-content"
+            >
+              <h4>
+                <b>Our Mission</b>
+              </h4>
+              <p>
+                Our mission is to provide safe, reliable, and comfortable bus
+                rental services that cater to the diverse needs of our
+                customers. We aim to exceed expectations by delivering
+                exceptional transportation solutions, backed by a commitment to
+                punctuality, professionalism, and affordability.We aim to
+                simplify the process of renting a bus, making group travel
+                stress-free and enjoyable. Our focus on affordability and
+                sustainability ensures that everyone can access our services,
+                fostering strong connections among communities, businesses, and
+                travelers.
+              </p>
+            </div>
+            <div
+              className="aboutus_container_values_section_vision"
+              data-testid="vision-content"
+            >
+              <h4>
+                <b>Our Vision</b>
+              </h4>
+              <p>
+                {" "}
+                Our vision is to be the preferred choice for bus rentals,
+                setting industry standards for excellence. We aspire to expand
+                our fleet, reach new destinations, and continuously enhance our
+                services. By fostering strong client relationships and embracing
+                innovation, we strive to be a driving force in the
+                transportation sector, connecting people and places seamlessly
+                while promoting sustainability and convenience. With a
+                commitment to environmental responsibility and convenience, we
+                envision a future where travel is efficient, enjoyable, and
+                accessible to all.
+              </p>
+            </div>
           </div>
         </div>
         <div className="lastcontainer">
@@ -205,34 +201,29 @@ const AboutUs = () => {
 
         <div className="aboutus_container_apart">
           <div className="aboutus_container_apart_section">
-            <Fade left>
-              <div className="aboutus_container_apart_section_left">
-                <img id="img12" src={whatsets} alt="" />
-                <img id="img13" src={whatsets2} alt="" />
-              </div>
-            </Fade>
-            <Fade right>
-              <div className="aboutus_container_apart_section_right">
-                <h2>What sets us apart</h2>
-                <p>
-                  At <span>NanduBus</span> , our commitment to excellence goes
-                  beyond transportation. We take pride in offering a wide range
-                  of meticulously maintained vehicles, from luxurious coaches to
-                  versatile shuttles, ensuring there's a perfect option for
-                  every occasion. Our experienced drivers not only ensure a
-                  smooth journey but also provide expert guidance and local
-                  insights.
-                  <br />
-                  What truly distinguishes us is our unwavering dedication to
-                  safety, We embrace innovation and technology to make your
-                  booking experience seamless. and reliable arrivals our top
-                  priorities. We're not just a transportation provider, we're a
-                  team of passionate travelers, committed to delivering
-                  unforgettable experiences for our customers. Trust us to make
-                  your journey comfortable, memorable, and hassle-free.
-                </p>
-              </div>
-            </Fade>
+            <div className="aboutus_container_apart_section_left">
+              <img id="img12" src={whatsets} alt="" />
+              <img id="img13" src={whatsets2} alt="" />
+            </div>
+            <div className="aboutus_container_apart_section_right">
+              <h2>What sets us apart</h2>
+              <p>
+                At <span>NanduBus</span> , our commitment to excellence goes
+                beyond transportation. We take pride in offering a wide range of
+                meticulously maintained vehicles, from luxurious coaches to
+                versatile shuttles, ensuring there's a perfect option for every
+                occasion. Our experienced drivers not only ensure a smooth
+                journey but also provide expert guidance and local insights.
+                <br />
+                What truly distinguishes us is our unwavering dedication to
+                safety, We embrace innovation and technology to make your
+                booking experience seamless. and reliable arrivals our top
+                priorities. We're not just a transportation provider, we're a
+                team of passionate travelers, committed to delivering
+                unforgettable experiences for our customers. Trust us to make
+                your journey comfortable, memorable, and hassle-free.
+              </p>
+            </div>
           </div>
         </div>
       </div>

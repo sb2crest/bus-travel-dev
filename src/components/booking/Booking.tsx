@@ -249,63 +249,55 @@ const Booking: React.FC = (props) => {
             </Stepper>
           </Stack>
           <div className="howitworks_cards">
-            <Fade left>
-              <div className="howitworks_cards_one">
-                <i
-                  className="fa-solid fa-bus fa-2xl"
-                  style={{
-                    color: "#0f7bab",
-                  }}
-                ></i>
-                <h3>Trip Details & Select Your Bus</h3>
-                <p>
-                  Choose from a range of available buses, considering factors
-                  like destination, departure time, and seating preferences.
-                </p>
-              </div>
-            </Fade>
-            <Fade top>
-              <div className="howitworks_cards_two">
-                <i
-                  className="fa-solid fa-file fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Booking Details</h3>
-                <p>
-                  {" "}
-                  Enter your trip details, personal information, and review
-                  booking before confirming your reservation.
-                </p>
-              </div>
-            </Fade>
-            <Fade bottom>
-              <div className="howitworks_cards_three">
-                <i
-                  className="fa-solid fa-money-check-dollar fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Booking Payment</h3>
-                <p>
-                  {" "}
-                  Complete the payment process securely, ensuring your bus is
-                  reserved for the upcoming journey.
-                </p>
-              </div>
-            </Fade>
-            <Fade right>
-              <div className="howitworks_cards_four">
-                <i
-                  className="fa-solid fa-map-location-dot fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Start Your Roadtrip</h3>
-                <p>
-                  {" "}
-                  Embark on your adventure, boarding the selected bus at the
-                  designated departure point, ready for your road trip.
-                </p>
-              </div>
-            </Fade>
+            <div className="howitworks_cards_one">
+              <i
+                className="fa-solid fa-bus fa-2xl"
+                style={{
+                  color: "#0f7bab",
+                }}
+              ></i>
+              <h3>Trip Details & Select Your Bus</h3>
+              <p>
+                Choose from a range of available buses, considering factors like
+                destination, departure time, and seating preferences.
+              </p>
+            </div>
+            <div className="howitworks_cards_two">
+              <i
+                className="fa-solid fa-file fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Booking Details</h3>
+              <p>
+                {" "}
+                Enter your trip details, personal information, and review
+                booking before confirming your reservation.
+              </p>
+            </div>
+            <div className="howitworks_cards_three">
+              <i
+                className="fa-solid fa-money-check-dollar fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Booking Payment</h3>
+              <p>
+                {" "}
+                Complete the payment process securely, ensuring your bus is
+                reserved for the upcoming journey.
+              </p>
+            </div>
+            <div className="howitworks_cards_four">
+              <i
+                className="fa-solid fa-map-location-dot fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Start Your Roadtrip</h3>
+              <p>
+                {" "}
+                Embark on your adventure, boarding the selected bus at the
+                designated departure point, ready for your road trip.
+              </p>
+            </div>
           </div>
         </div>
       </div>
