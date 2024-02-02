@@ -7,6 +7,7 @@ import Filter from "./Filter/Filter";
 import divimg from "../../assets/images/divimage.svg";
 import { styled } from "@mui/system";
 import bus from "../../assets/images/busImage_1.jpg";
+import NoVehicleFound from "../../assets/images/VehicleNotFound.png";
 import {
   Stack,
   Stepper,
@@ -120,6 +121,9 @@ const Booking: React.FC = (props) => {
     setSelectedDateRange(selectedDateRange);
     setShouldRenderBusDetails(true);
   };
+  const handleExploreClick = () => {
+    setFilterData("ALL/ALL");
+  };
   return (
     <>
       <div className="booking">
@@ -138,8 +142,9 @@ const Booking: React.FC = (props) => {
           <PlacesDate
             filterData={filterData}
             onResponseDataChange={handleResponseDataChange}
+            onExploreClick={handleExploreClick}
           />
-          {shouldRenderBusDetails && (
+          {shouldRenderBusDetails && vehicles && vehicles.length > 0 && (
             <>
               <Fade top>
                 <div className="booking_container_busDetails">
@@ -154,10 +159,7 @@ const Booking: React.FC = (props) => {
                   </Fade>
                   <img src={divimg} alt="curvedimg" className="curvedimg" />
                   <div className="curvedimgsection">
-                    <div
-                      data-testid="filter-component"
-                      className="filterAlign"
-                    >
+                    <div data-testid="filter-component" className="filterAlign">
                       <Filter onFilterChange={handleFilterChange} />
                     </div>
 
@@ -189,11 +191,11 @@ const Booking: React.FC = (props) => {
                                   images: vehicle.s3ImageUrl || [],
                                   vehicleNumber: vehicle.vehicleNumber,
                                   selectedDateRange: selectedDateRange,
-                                  TotalAmount:vehicle.totalAmount,
-                                  AdvanceAmount:vehicle.advanceAmt,
-                                  RemainingAmount:vehicle.remainingAmt,
-                                  ACtype:vehicle.vehicleAC,
-                                  Sleepertype:vehicle.sleeper,
+                                  TotalAmount: vehicle.totalAmount,
+                                  AdvanceAmount: vehicle.advanceAmt,
+                                  RemainingAmount: vehicle.remainingAmt,
+                                  ACtype: vehicle.vehicleAC,
+                                  Sleepertype: vehicle.sleeper,
                                 },
                               }}
                             >
@@ -201,7 +203,7 @@ const Booking: React.FC = (props) => {
                                 className="button-53"
                                 onClick={scrollToTop}
                               >
-                                View More ➤
+                                View Details ➤
                               </button>
                             </Link>
                           </div>
@@ -212,6 +214,16 @@ const Booking: React.FC = (props) => {
                 </div>
               </Fade>
             </>
+          )}
+          {shouldRenderBusDetails && (!vehicles || vehicles.length === 0) && (
+            <div className="no_vehicles_found">
+              <div className="no_vehicles_found_card">
+                <img src={NoVehicleFound} alt="vehicle_image" />
+                <span className="scrolling-text">
+                  😔 No Vehicle was found !!!
+                </span>
+              </div>
+            </div>
           )}
         </div>
         <div className="howitworks">
