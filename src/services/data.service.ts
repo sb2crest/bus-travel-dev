@@ -9,6 +9,7 @@ import IFilterRequest from "../types/filter/request.type";
 import IBookNowRequest from "../types/BookNow/request.type";
 import IBookingInfoRequest from "../types/BookingInfo/request.type";
 import IFilterResponse from "../types/filter/response.type";
+import { IBookingList } from "../types/BookingInfo/response.type";
 class DataService {
 
   // Book now
@@ -47,7 +48,7 @@ class DataService {
 
   // bookingInfo
   bookingInfo(mobile: string) {
-    return http.get<IBookingInfoRequest>("getBookingInfo?mobile=" + mobile);
+    return http.get<IBookingList>("bookingDetails?mobile=" + mobile);
   }
 
   // filter 

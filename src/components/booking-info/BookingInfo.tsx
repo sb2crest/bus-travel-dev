@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./BookingInfo.scss";
-import asideImage from '../../assets/images/Aside.png'
+import asideImage from "../../assets/images/Aside.png";
 import dataService from "../../services/data.service";
 import BookingDetails from "./booking-details/BookingDetails";
 import Snackbar from "@mui/material/Snackbar";
@@ -8,6 +8,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { IBookingList } from "../../types/BookingInfo/response.type";
 
 interface State {
   phoneNumber: string;
@@ -32,12 +33,13 @@ const BookingInfo = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [verify, setVerify] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [bookingDetails, setBookingDetails] = useState<any>(null);
+  const [bookingDetails, setBookingDetails] = useState<IBookingList>();
   const [ShowDetailsButton, setShowDetailsButton] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [otpVerified, setOtpVerified] = useState<boolean>(false);
   const [verifySnackbarOpen, setVerifySnackbarOpen] = useState(false);
   const [failedSnackbarOpen, setFailedSnackbarOpen] = useState(false);
+  const [failedtosend, setFailedtosend] = useState(false);
 
   const validationSchema = Yup.object({
     phoneNumber: Yup.string()
@@ -47,8 +49,8 @@ const BookingInfo = () => {
     otp: Yup.lazy((value) => {
       return value?.otpSent
         ? Yup.string()
-          .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
-          .required("OTP is required")
+            .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
+            .required("OTP is required")
         : Yup.string();
     }),
   });
@@ -96,6 +98,7 @@ const BookingInfo = () => {
       .catch((error: any) => {
         console.error("Error sending OTP:", error);
         console.log("An error occurred while sending OTP.");
+        setFailedtosend(true);
       });
   };
 
@@ -108,7 +111,7 @@ const BookingInfo = () => {
       const response = await dataService.verifyOTP(requestBody);
 
       if (response.data) {
-        setState({ ...state, otpVerified: true, phoneNumberLocked: true, });
+        setState({ ...state, otpVerified: true, phoneNumberLocked: true });
         setShowDetailsButton(true);
         setVerifySnackbarOpen(true);
         setVerify(false);
@@ -117,12 +120,12 @@ const BookingInfo = () => {
       } else {
         console.log("OTP Verification Failed!");
         setOtpVerified(false);
-        setFailedSnackbarOpen(true)
+        setFailedSnackbarOpen(true);
       }
     } catch (error) {
       console.error("Error validating OTP:", error);
       setOtpVerified(false);
-      setFailedSnackbarOpen(true)
+      setFailedSnackbarOpen(true);
     } finally {
       formik.setFieldValue("otpSent", false);
     }
@@ -136,9 +139,10 @@ const BookingInfo = () => {
     if (reason === "clickaway") {
       return;
     }
-    setFailedSnackbarOpen(false)
+    setFailedSnackbarOpen(false);
     setSnackbarOpen(false);
     setVerifySnackbarOpen(false);
+    setFailedtosend(false)
   };
 
   const resendOTP = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -186,21 +190,23 @@ const BookingInfo = () => {
   };
 
   return (
-    <><div className="booking-details-main">
-      <div className="booking-details-container">
-        <div className="booking_container_banner">
-          <h1>Booking Info</h1>
-          <h3>Check Your Booking Details here...</h3>
-          <ul>
-            <li>
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li>&#10095;</li>
-            <li>Booking Info</li>
-          </ul>
+    <>
+      <div className="booking-details-main">
+        <div className="booking-details-container">
+          <div className="booking_container_banner">
+            <h1>Booking Info</h1>
+            <h3>Check Your Booking Details here...</h3>
+            <ul>
+              <li>
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li>&#10095;</li>
+              <li>Booking Info</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div><div className="booking-info">
+      <div className="booking-info">
         {!showDetails ? (
           <div className="booking-info-container">
             <form className="form" onSubmit={handleSubmit}>
@@ -216,9 +222,13 @@ const BookingInfo = () => {
                   onChange={handleChange}
                   onBlur={() => setFieldTouched("phoneNumber", true)}
                   className="input-phone"
-                  disabled={state.phoneNumberLocked} />
+                  disabled={state.phoneNumberLocked}
+                />
                 {touched.phoneNumber && errors.phoneNumber && (
-                  <div className="error" style={{ color: "red", textAlign: "left" }}>
+                  <div
+                    className="error"
+                    style={{ color: "red", textAlign: "left" }}
+                  >
                     {errors.phoneNumber}
                   </div>
                 )}
@@ -235,19 +245,29 @@ const BookingInfo = () => {
                         onChange={handleChange}
                         onBlur={() => setFieldTouched("otp", true)}
                         className="input-otp"
-                        maxLength={6} />
+                        maxLength={6}
+                      />
                       {touched.otp && errors.otp && (
-                        <div className="error" style={{ color: "red", textAlign: "left" }}>
+                        <div
+                          className="error"
+                          style={{ color: "red", textAlign: "left" }}
+                        >
                           {errors.otp}
                         </div>
                       )}
                     </div>
                     <div className="verify-resend">
                       <div className="verify-resend-01">
-                        <button className="verify" role="button" onClick={verifyOTP}>
+                        <button
+                          className="verify"
+                          type="button"
+                          role="button"
+                          onClick={verifyOTP}
+                        >
                           Verify OTP
                         </button>
-                        <button className="resend" onClick={resendOTP}>
+                          
+                        <button className="resend" onClick={resendOTP} type="button">
                           Resend
                         </button>
                       </div>
@@ -255,7 +275,7 @@ const BookingInfo = () => {
                   </>
                 ) : !verify && !otpVerified ? (
                   // Render "Send OTP" button only if OTP verification is not successful
-                  <button className="button-send-otp" onClick={sendOTP}>
+                  <button className="button-send-otp" onClick={sendOTP} type="button">
                     Send OTP
                   </button>
                 ) : null}
@@ -263,7 +283,10 @@ const BookingInfo = () => {
               {ShowDetailsButton && (
                 <div className="show-details">
                   <div className="show-details-01">
-                    <button className="button-show-details" onClick={bookingInfo}>
+                    <button
+                      className="button-show-details"
+                      onClick={bookingInfo}
+                    >
                       Show Details
                     </button>
                   </div>
@@ -284,6 +307,16 @@ const BookingInfo = () => {
               >
                 <Alert onClose={handleSnackbarClose} severity="success">
                   OTP Sent successfully!
+                </Alert>
+              </Snackbar>
+              <Snackbar
+                open={failedtosend}
+                autoHideDuration={2000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              >
+                <Alert onClose={handleSnackbarClose} severity="error">
+                  Failed to send OTP!
                 </Alert>
               </Snackbar>
             </div>
@@ -311,7 +344,8 @@ const BookingInfo = () => {
         ) : (
           bookingDetails && <BookingDetails bookingDetails={bookingDetails} />
         )}
-      </div></>
+      </div>
+    </>
   );
 };
 

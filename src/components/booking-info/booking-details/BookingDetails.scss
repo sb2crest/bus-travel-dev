@@ -1,22 +1,65 @@
-.upcoming,.past{
-    color: #0f7bab;
+.upcoming,
+.past {
+  color: #0f7bab;
 }
-.thead{
-    background-color: #0f7bab !important;
+.thead {
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  color: #0f2454 !important;
+  border: 1px solid #ddd !important;
 }
-.booking_container_banner{
-    background-position: center;
+.booking_details_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.header{
-    h1{
-        color: #0f2454;
-        background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-    }
+.booking_details_container_header {
+  width: 98%;
+  .MuiTableContainer-root {
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+  }
+  h1 {
+    color: #0f2454;
+    background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
-.css-1wvnaxz-MuiTableCell-root {
-    padding: 13px !important;
+.MuiTableRow-root {
+  border: 1px solid #ddd !important;
+  &:nth-of-type(odd) {
+    background-color: rgb(249, 249, 249) !important;
+  }
+}
+.MuiTableCell-root {
+  border: 1px solid #ddd !important;
+  padding: 8px !important;
+  text-align: center;
+}
+
+.more_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .heading{
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f2454;
+  }
+  .values{
+    color: #808080;
+  }
+  .more_left_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3vw;
+  }
+  .more_right_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
