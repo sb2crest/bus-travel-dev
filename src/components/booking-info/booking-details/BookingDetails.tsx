@@ -33,8 +33,14 @@ import {
   Drafts as DraftsIcon,
   AccountCircle as AccountCircleIcon,
   Close as CloseIcon,
+  Note as NoteIcon,
+  DirectionsBus as DirectionsBusIcon,
 } from "@mui/icons-material";
 import { IBookingList } from "../../../types/BookingInfo/response.type";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import Tab from "@mui/material/Tab";
+import TabPanel from "@mui/lab/TabPanel";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -98,11 +104,30 @@ function createData(booking: any) {
     totalAmt,
     advancedPaid,
     remainingAmt,
+    mobile: user.mobile,
+    email: user.email,
+    seatCapacity: vehicle.seatCapacity,
+    driverNumber: vehicle.driverNumber,
   };
 }
 
 interface BookingDetailsProps {
   bookingDetails: IBookingList;
+}
+
+function getStatusColor(bookingStatus: string) {
+  switch (bookingStatus) {
+    case "Booked":
+      return "#2cccfe";
+    case "Completed":
+      return "#00e300";
+    case "Enquiry":
+      return "#f9d800";
+    case "Declined":
+      return "#ff2904";
+    default:
+      return "#000000";
+  }
 }
 
 //Getting booking details from props
@@ -124,7 +149,11 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const [selectedBookingDetails, setSelectedBookingDetails] =
     useState<any>(null);
+  const [value, setValue] = React.useState("1");
 
+  const popupChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
   const handleTabChange = (tabName: string) => {
     setSelectedTab(tabName);
   };
@@ -152,7 +181,6 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   const handleClickOpen = (booking: any) => {
     setSelectedBookingDetails(booking);
     setEyeopen(true);
-    console.log("Selected Booking Details:", selectedBookingDetails);
   };
 
   const handleClose = () => {
@@ -163,6 +191,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
     onEyeIconClick: (row: any) => void;
   }) {
     const { row, onEyeIconClick } = props;
+    const statusColor = getStatusColor(row.bookingStatus);
 
     return (
       <React.Fragment>
@@ -171,7 +200,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
             component="th"
             scope="row"
             align="center"
-            sx={{ color: "#0f7bab", cursor: "pointer" }}
+            sx={{ color: statusColor, cursor: "pointer" }}
           >
             <Button
               onClick={() => onEyeIconClick(row)}
@@ -185,7 +214,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
           <StyledTableCell align="center">{row.toDate}</StyledTableCell>
           <StyledTableCell
             align="center"
-            sx={{ color: getStatusColor(row.bookingStatus), fontWeight: "600" }}
+            sx={{ color: statusColor, fontWeight: "600" }}
           >
             {row.bookingStatus}
           </StyledTableCell>
@@ -194,20 +223,6 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
     );
   }
 
-  function getStatusColor(bookingStatus: string) {
-    switch (bookingStatus) {
-      case "Booked":
-        return "#2cccfe";
-      case "Completed":
-        return "#00e300";
-      case "Enquiry":
-        return "#f9d800";
-      case "Declined":
-        return "#ff2904";
-      default:
-        return "#000000";
-    }
-  }
   return (
     <div className="booking-details-main">
       <div className="booking_details_container">
@@ -353,72 +368,142 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
             aria-labelledby="customized-dialog-title"
             open={eyeopen}
           >
-            <DialogTitle
-              sx={{ m: 0, p: 2, color: "#0f7bab", fontWeight: "600" }}
-              id="customized-dialog-title"
-            >
-              Additional Details
-            </DialogTitle>
-            <IconButton
-              aria-label="close"
-              onClick={handleClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-            <DialogContent dividers>
-              <div className="more_container">
-                <div className="more_left_container">
-                  <div className="heading">
-                    <p>User Name :</p>
-                    <p>Booking ID :</p>
-                    <p>Booking Date :</p>
-                    <p>From Date :</p>
-                    <p>To Date :</p>
+            <div className="bookingDetails_popup">
+              {" "}
+              <div className="bookingDetails_popup_container">
+                <div className="bookingDetails_popup_container_section">
+                  <div className="bookingDetails_popup_container_section_heading">
+                    <div className="bookingDetails_popup_container_section_heading_items">
+                      <div className="heading_items">
+                        <p>Booking ID : </p>
+                        <span style={{ color: "#0f7bab" }}>
+                          &nbsp;{selectedBookingDetails?.bookingId}
+                        </span>
+                      </div>
+                      <div className="heading_items">
+                        <p>Status : </p>
+                        <span
+                          style={{
+                            color: getStatusColor(
+                              selectedBookingDetails?.bookingStatus
+                            ),
+                          }}
+                        >
+                          &nbsp;{selectedBookingDetails?.bookingStatus}
+                        </span>
+                      </div>
+
+                      <CloseIcon
+                        aria-label="close"
+                        onClick={handleClose}
+                        sx={{
+                          color: "gray",
+                          fontSize: "18px",
+                        }}
+                        className="closeIcon"
+                      />
+                    </div>
                   </div>
-                  {selectedBookingDetails && (
-                    <div className="values">
-                      <p>
+                  <Divider />
+                  <div className="bookingDetails_popup_container_section_content">
+                    <div className="bookingDetails_popup_container_section_content_items">
+                      <div className="bookingDetails_popup_container_section_content_items_both">
                         {" "}
-                        {`${selectedBookingDetails?.firstName} ${selectedBookingDetails?.lastName}`}
-                      </p>
-                      <p> {selectedBookingDetails?.bookingId}</p>
-                      <p> &nbsp;{selectedBookingDetails?.bookingDate}</p>
-                      <p> {selectedBookingDetails?.fromDate}</p>
-                      <p> {selectedBookingDetails?.toDate}</p>
+                        <div className="bookingDetails_popup_container_section_content_items_both_user">
+                          <div className="icon">
+                            <AccountCircleIcon />
+                            <p>&nbsp;User Details</p>
+                          </div>
+                          <div className="details">
+                            <p>
+                              User name :
+                              <span>&nbsp;{`${selectedBookingDetails?.firstName} ${selectedBookingDetails?.lastName}`}</span>
+                            </p>
+                            <p>
+                              Mobile :{" "}
+                              <span>&nbsp;{selectedBookingDetails?.mobile}</span>
+                            </p>
+                            <p>
+                              Email :{" "}
+                              <span>
+                              &nbsp;{selectedBookingDetails?.email || "-"}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bookingDetails_popup_container_section_content_items_both_vehicle">
+                          <div className="icon">
+                            <DirectionsBusIcon />
+                            <p>&nbsp;Vehicle Details</p>
+                          </div>
+                          <div className="details">
+                            <p>
+                              Vehicle Type :{" "}
+                              <span>&nbsp;{`${selectedBookingDetails?.vehicleAC} / ${selectedBookingDetails?.sleeper}`}</span>
+                            </p>
+                            <p>
+                              Seat Capacity :{" "}
+                              <span>
+                              &nbsp;{selectedBookingDetails?.seatCapacity}
+                              </span>
+                            </p>
+                            <p>
+                              Driver Number :{" "}
+                              <span>
+                              &nbsp;{selectedBookingDetails?.driverNumber || "-"}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="bookingDetails_popup_container_section_content_items_booking">
+                        <div className="icon">
+                          <NoteIcon />
+                          <p>&nbsp;Booking Details</p>
+                        </div>
+                        <div className="details">
+                          <div className="bookingDetails1">
+                            <p>
+                              Booking Date :
+                              <span>&nbsp;{selectedBookingDetails?.bookingDate}</span>
+                            </p>
+                            <p>
+                              From Date :
+                              <span>&nbsp;{selectedBookingDetails?.fromDate}</span>
+                            </p>
+                            <p>
+                              To Date :
+                              <span>&nbsp;{selectedBookingDetails?.toDate}</span>
+                            </p>
+                          </div>
+                          <div>
+                            <p>
+                              Advance Paid :
+                              <span>
+                              &nbsp;{selectedBookingDetails?.advancedPaid || "-"}
+                              </span>
+                            </p>
+                            <p>
+                              Remaining Amount :
+                              <span>
+                              &nbsp;{selectedBookingDetails?.remainingAmt || "-"}
+                              </span>
+                            </p>
+                            <p>
+                              Total Amount :
+                              <span>
+                              &nbsp;{selectedBookingDetails?.totalAmt || "-"}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
-                <div className="more_right_container">
-                  <div className="heading">
-                    <p>Vehilcle Type :</p>
-                    <p>Status :</p>
-                    <p>Advance Paid :</p>
-                    <p>Remaining Amount :</p>
-                    <p>Total Amount :</p>
                   </div>
-                  {selectedBookingDetails && (
-                    <div className="values">
-                      <p>{`${selectedBookingDetails?.vehicleAC} / ${selectedBookingDetails?.sleeper}`}</p>
-                      <p> {selectedBookingDetails?.bookingStatus}</p>
-                      <p>{selectedBookingDetails?.advancedPaid || "-"}</p>
-                      <p>&nbsp;&nbsp;{selectedBookingDetails?.remainingAmt || "-"}</p>
-                      <p>{selectedBookingDetails?.totalAmt || "-"}</p>
-                    </div>
-                  )}
                 </div>
               </div>
-            </DialogContent>
-            <DialogActions>
-              <Button autoFocus onClick={handleClose}>
-                Done
-              </Button>
-            </DialogActions>
+            </div>
           </BootstrapDialog>
         </div>
       </div>

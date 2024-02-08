@@ -38,28 +38,100 @@
   padding: 8px !important;
   text-align: center;
 }
+.bookingDetails_popup {
+  &_container {
+    padding: 3% 5%;
+    &_section {
+      &_heading {
+        &_items {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          .heading_items {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            p {
+              background: -webkit-linear-gradient(#0f7bab 40%, #0f2454);
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              font-weight: 600;
+            }
+          }
+          .closeIcon {
+           cursor: pointer;
+          }
+        }
+      }
+      &_content {
+        &_items {
+          &_both {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
 
-.more_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .heading{
-    font-size: 16px;
-    font-weight: 600;
-    color: #0f2454;
-  }
-  .values{
-    color: #808080;
-  }
-  .more_left_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 3vw;
-  }
-  .more_right_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+            &_user {
+              width: 50%;
+              margin-right: 3vw;
+              .icon {
+                display: flex;
+                align-items: center;
+                color: #0f7bab;
+              }
+              .details {
+                p {
+                  margin-top: 0;
+                  color: #0f2454;
+                  span{
+                    color: #9DB4C0;
+                  }
+                }
+                
+              }
+            }
+            &_vehicle {
+              width: 50%;
+              .icon {
+                display: flex;
+                align-items: center;
+                color: #0f7bab;
+              }
+              .details {
+                p {
+                  margin-top: 0;
+                  color: #0f2454;
+                  span{
+                    color: #9DB4C0;
+                  }
+                }
+                
+              }
+            }
+          }
+          &_booking{
+            .icon {
+              display: flex;
+              align-items: center;
+              color: #0f7bab;
+              justify-content: center;
+            }
+            .details {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              p {
+                margin-top: 0;
+                color: #0f2454;
+                span{
+                  color: #9DB4C0;
+                }
+              }
+              
+            }
+          }
+        }
+      }
+    }
   }
 }
