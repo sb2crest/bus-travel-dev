@@ -38,9 +38,13 @@
   padding: 8px !important;
   text-align: center;
 }
+.box-container {
+  max-width: 360px;
+}
 .bookingDetails_popup {
   &_container {
-    padding: 3% 5%;
+    padding: 10px 20px;
+    width: 360px;
     &_section {
       &_heading {
         &_items {
@@ -60,7 +64,7 @@
             }
           }
           .closeIcon {
-           cursor: pointer;
+            cursor: pointer;
           }
         }
       }
@@ -73,7 +77,7 @@
 
             &_user {
               width: 50%;
-              margin-right: 3vw;
+              margin-right: 10px;
               .icon {
                 display: flex;
                 align-items: center;
@@ -82,12 +86,14 @@
               .details {
                 p {
                   margin-top: 0;
+                  margin-bottom: 2px;
+                  text-align: left;
                   color: #0f2454;
-                  span{
-                    color: #9DB4C0;
+                  span {
+                    color: #9db4c0;
+                    text-align: left;
                   }
                 }
-                
               }
             }
             &_vehicle {
@@ -101,15 +107,14 @@
                 p {
                   margin-top: 0;
                   color: #0f2454;
-                  span{
-                    color: #9DB4C0;
+                  span {
+                    color: #9db4c0;
                   }
                 }
-                
               }
             }
           }
-          &_booking{
+          &_booking {
             .icon {
               display: flex;
               align-items: center;
@@ -118,20 +123,123 @@
             }
             .details {
               display: flex;
-              justify-content: space-between;
+              justify-content: space-around;
               align-items: center;
               p {
                 margin-top: 0;
                 color: #0f2454;
-                span{
-                  color: #9DB4C0;
+                span {
+                  color: #9db4c0;
                 }
               }
-              
             }
           }
         }
       }
+    }
+  }
+}
+.closeIcon {
+  top: 5px;
+  position: absolute;
+  right: 10px;
+}
+.bookingDetails_popup_container_section_content_items_both_user .details p {
+  overflow: visible;
+  word-break: break-word;
+}
+
+@media only screen and (max-width: 767px) {
+  .grid_container {
+    flex-direction: column;
+    margin-left: 0 !important;
+    .grid_left {
+      max-width: 98%;
+      flex-grow: 1;
+      padding-left: 0 !important;
+      .box-container {
+        max-width: none;
+      }
+      .nav_items {
+        width: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        flex-grow: 1;
+        .css-9mgopn-MuiDivider-root {
+          border: none;
+          display: none;
+        }
+        .item1 {
+          grid-column-start: 1;
+          grid-column-end: 4;
+        }
+        .first-row {
+          grid-row: 1;
+          padding: 0;
+          .list-item {
+            padding: 0;
+            margin-left: 10%;
+            padding-bottom: 3vw;
+          }
+          .iconContainer {
+            justify-content: center;
+          }
+        }
+
+        .second-row {
+          grid-row: 2;
+          padding: 0;
+        }
+        .list-item-button {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          .iconContainer {
+            justify-content: center;
+            .icon {
+              padding: 0;
+            }
+          }
+        }
+        .css-10hburv-MuiTypography-root {
+          font-size: 10px;
+        }
+      }
+    }
+    .css-1on7o35-MuiGrid-root {
+      flex-grow: 1;
+      max-width: 98%;
+      margin-bottom: 5vw;
+    }
+  }
+}
+@media only screen and (max-width: 468px) {
+  .bookingDetails_popup_container_section_heading_items {
+    flex-direction: column;
+    align-items: flex-start;
+    p {
+      margin: auto auto;
+      padding: 5px;
+    }
+  }
+  .closeIcon {
+    top: 5px;
+    position: absolute;
+    right: 10px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .bookingDetails_popup {
+    &_container {
+      width: 220px;
+    }
+  }
+}
+@media only screen and (min-width: 351px) and (max-width: 420px) {
+  .bookingDetails_popup {
+    &_container {
+      width: 280px;
     }
   }
 }

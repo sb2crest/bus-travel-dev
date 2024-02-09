@@ -119,13 +119,16 @@ nav {
   .logo {
     display: block;
   }
-  nav {
-    display: grid;
-    grid-template-columns: 1fr 0fr;
-    align-items: center;
-    justify-content: space-around;
-    width: 85%;
+  .header_container {
+    nav {
+      display: grid;
+      grid-template-columns: 1fr 0fr;
+      align-items: center;
+      justify-content: space-around;
+      width: 85%;
+    }
   }
+
   .menu-icon {
     display: block;
     color: #000;

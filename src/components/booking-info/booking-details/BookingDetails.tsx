@@ -37,10 +37,6 @@ import {
   DirectionsBus as DirectionsBusIcon,
 } from "@mui/icons-material";
 import { IBookingList } from "../../../types/BookingInfo/response.type";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import Tab from "@mui/material/Tab";
-import TabPanel from "@mui/lab/TabPanel";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -149,24 +145,20 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
   const [selectedTab, setSelectedTab] = useState("All");
   const [selectedBookingDetails, setSelectedBookingDetails] =
     useState<any>(null);
-  const [value, setValue] = React.useState("1");
 
-  const popupChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
   const handleTabChange = (tabName: string) => {
     setSelectedTab(tabName);
   };
 
   function getListToShow() {
     switch (selectedTab) {
-      case "Upcoming Bookings":
+      case "Upcoming":
         return bookedList;
-      case "Completed Bookings":
+      case "Completed":
         return completedList;
-      case "Enquired Details":
+      case "Enquired":
         return enquiryList;
-      case "Declined Bookings":
+      case "Declined":
         return declineList;
       default:
         return [
@@ -228,21 +220,21 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
       <div className="booking_details_container">
         <div className="booking_details_container_header">
           <h1>Booking Details</h1>
-          <Grid container spacing={1}>
-            <Grid item xs={2.5}>
+          <Grid container spacing={1} className="grid_container">
+            <Grid item xs={2.5} className="grid_left">
               <Item>
                 <Box
                   sx={{
                     width: "100%",
-                    maxWidth: 360,
                     bgcolor: "background.paper",
                   }}
+                  className="box-container"
                 >
                   <nav aria-label="main mailbox folders">
-                    <List>
-                      <ListItem>
-                        <ListItemButton>
-                          <AccountCircleIcon sx={{ color: "#255f85" }} />
+                    <List className="nav_items">
+                      <ListItem className="first-row item1">
+                        <ListItemButton className="list-item">
+                          <AccountCircleIcon sx={{ color: "#255f85" }} className="icon"/>
                           &nbsp;&nbsp;
                           <ListItemText
                             primary={`ID: ${enquiryList[0]?.user?.mobile}`}
@@ -251,11 +243,17 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                         </ListItemButton>
                       </ListItem>
                       <Divider />
-                      <ListItem>
-                        <ListItemButton onClick={() => handleTabChange("All")}>
+                      <ListItem className="second-row">
+                        <ListItemButton
+                          onClick={() => handleTabChange("All")}
+                          className="list-item-button"
+                        >
                           {" "}
-                          <ListItemIcon>
-                            <ChecklistIcon sx={{ color: "#255f85" }} />
+                          <ListItemIcon className="iconContainer">
+                            <ChecklistIcon
+                              sx={{ color: "#255f85" }}
+                              className="icon"
+                            />
                           </ListItemIcon>
                           <ListItemText
                             primary="All"
@@ -264,57 +262,73 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                         </ListItemButton>
                       </ListItem>
                       <Divider />
-                      <ListItem>
+                      <ListItem className="second-row">
                         <ListItemButton
-                          onClick={() => handleTabChange("Upcoming Bookings")}
+                          onClick={() => handleTabChange("Upcoming")}
+                          className="list-item-button"
                         >
-                          <ListItemIcon>
-                            <AddAlarmIcon sx={{ color: "#2cccfe" }} />
+                          <ListItemIcon className="iconContainer">
+                            <AddAlarmIcon
+                              sx={{ color: "#2cccfe" }}
+                              className="icon"
+                            />
                           </ListItemIcon>
                           <ListItemText
-                            primary="Upcoming Bookings"
+                            primary="Upcoming"
                             sx={{ color: "#0f2454", fontSize: "12px" }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <Divider />
-                      <ListItem>
+                      <ListItem className="second-row">
                         <ListItemButton
-                          onClick={() => handleTabChange("Completed Bookings")}
+                          onClick={() => handleTabChange("Completed")}
+                          className="list-item-button"
                         >
-                          <ListItemIcon>
-                            <CheckCircleOutlineIcon sx={{ color: "#00e300" }} />
+                          <ListItemIcon className="iconContainer">
+                            <CheckCircleOutlineIcon
+                              sx={{ color: "#00e300" }}
+                              className="icon"
+                            />
                           </ListItemIcon>
                           <ListItemText
-                            primary="Completed Bookings"
+                            primary="Completed"
                             sx={{ color: "#0f2454", fontSize: "12px" }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <Divider />
-                      <ListItem>
+                      <ListItem className="second-row">
                         <ListItemButton
-                          onClick={() => handleTabChange("Enquired Details")}
+                          onClick={() => handleTabChange("Enquired")}
+                          className="list-item-button"
                         >
-                          <ListItemIcon>
-                            <DraftsIcon sx={{ color: "#f9d800" }} />
+                          <ListItemIcon className="iconContainer">
+                            <DraftsIcon
+                              sx={{ color: "#f9d800" }}
+                              className="icon"
+                            />
                           </ListItemIcon>
                           <ListItemText
-                            primary="Enquired Details"
+                            primary="Enquired"
                             sx={{ color: "#0f2454", fontSize: "12px" }}
                           />
                         </ListItemButton>
                       </ListItem>
                       <Divider />
-                      <ListItem>
+                      <ListItem className="second-row">
                         <ListItemButton
-                          onClick={() => handleTabChange("Declined Bookings")}
+                          onClick={() => handleTabChange("Declined")}
+                          className="list-item-button"
                         >
-                          <ListItemIcon>
-                            <BlockIcon sx={{ color: "#ff2904" }} />
+                          <ListItemIcon className="iconContainer">
+                            <BlockIcon
+                              sx={{ color: "#ff2904" }}
+                              className="icon"
+                            />
                           </ListItemIcon>
                           <ListItemText
-                            primary="Declined Bookings"
+                            primary="Declined"
                             sx={{ color: "#0f2454", fontSize: "12px" }}
                           />
                         </ListItemButton>
@@ -324,8 +338,8 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                 </Box>
               </Item>
             </Grid>
-            <Grid item xs={9.5}>
-              <TableContainer>
+            <Grid item xs={9.5} className="grid-right">
+              <TableContainer >
                 <Table aria-label="collapsible table">
                   <TableHead>
                     <StyledTableRow>
@@ -377,7 +391,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                       <div className="heading_items">
                         <p>Booking ID : </p>
                         <span style={{ color: "#0f7bab" }}>
-                          &nbsp;{selectedBookingDetails?.bookingId}
+                          {selectedBookingDetails?.bookingId}
                         </span>
                       </div>
                       <div className="heading_items">
@@ -389,7 +403,7 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                             ),
                           }}
                         >
-                          &nbsp;{selectedBookingDetails?.bookingStatus}
+                          {selectedBookingDetails?.bookingStatus}
                         </span>
                       </div>
 
@@ -412,21 +426,26 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                         <div className="bookingDetails_popup_container_section_content_items_both_user">
                           <div className="icon">
                             <AccountCircleIcon />
-                            <p>&nbsp;User Details</p>
+                            <p>User Details</p>
                           </div>
                           <div className="details">
                             <p>
-                              User name :
-                              <span>&nbsp;{`${selectedBookingDetails?.firstName} ${selectedBookingDetails?.lastName}`}</span>
+                              User name 
+                              <span style={{display:"block"}}>
+                                
+                                {`${selectedBookingDetails?.firstName} ${selectedBookingDetails?.lastName}`}
+                              </span>
                             </p>
                             <p>
-                              Mobile :{" "}
-                              <span>&nbsp;{selectedBookingDetails?.mobile}</span>
+                              Mobile {" "}
+                              <span style={{display:"block"}}>
+                               {selectedBookingDetails?.mobile}
+                              </span>
                             </p>
                             <p>
-                              Email :{" "}
-                              <span>
-                              &nbsp;{selectedBookingDetails?.email || "-"}
+                              Email {" "}
+                              <span style={{display:"block"}}>
+                                {selectedBookingDetails?.email || "-"}
                               </span>
                             </p>
                           </div>
@@ -434,23 +453,27 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                         <div className="bookingDetails_popup_container_section_content_items_both_vehicle">
                           <div className="icon">
                             <DirectionsBusIcon />
-                            <p>&nbsp;Vehicle Details</p>
+                            <p>Vehicle Details</p>
                           </div>
                           <div className="details">
                             <p>
-                              Vehicle Type :{" "}
-                              <span>&nbsp;{`${selectedBookingDetails?.vehicleAC} / ${selectedBookingDetails?.sleeper}`}</span>
-                            </p>
-                            <p>
-                              Seat Capacity :{" "}
-                              <span>
-                              &nbsp;{selectedBookingDetails?.seatCapacity}
+                              Vehicle Type {" "}
+                              <span style={{display:"block"}}>
+                                
+                                {`${selectedBookingDetails?.vehicleAC} / ${selectedBookingDetails?.sleeper}`}
                               </span>
                             </p>
                             <p>
-                              Driver Number :{" "}
-                              <span>
-                              &nbsp;{selectedBookingDetails?.driverNumber || "-"}
+                              Seat Capacity {" "}
+                              <span style={{display:"block"}}>
+                                {selectedBookingDetails?.seatCapacity}
+                              </span>
+                            </p>
+                            <p>
+                              Driver Number {" "}
+                              <span style={{display:"block"}}>
+                               
+                                {selectedBookingDetails?.driverNumber || "-"}
                               </span>
                             </p>
                           </div>
@@ -460,40 +483,48 @@ const BookingDetails: React.FC<BookingDetailsProps> = ({ bookingDetails }) => {
                       <div className="bookingDetails_popup_container_section_content_items_booking">
                         <div className="icon">
                           <NoteIcon />
-                          <p>&nbsp;Booking Details</p>
+                          <p>Booking Details</p>
                         </div>
                         <div className="details">
                           <div className="bookingDetails1">
                             <p>
-                              Booking Date :
-                              <span>&nbsp;{selectedBookingDetails?.bookingDate}</span>
+                              Booking Date 
+                              <span style={{display:"block"}}>
+                               {selectedBookingDetails?.bookingDate}
+                              </span>
                             </p>
                             <p>
-                              From Date :
-                              <span>&nbsp;{selectedBookingDetails?.fromDate}</span>
+                              From Date 
+                              <span style={{display:"block"}}>
+                               {selectedBookingDetails?.fromDate}
+                              </span>
                             </p>
                             <p>
-                              To Date :
-                              <span>&nbsp;{selectedBookingDetails?.toDate}</span>
+                              To Date 
+                              <span style={{display:"block"}}>
+                                {selectedBookingDetails?.toDate}
+                              </span>
                             </p>
                           </div>
                           <div>
                             <p>
-                              Advance Paid :
-                              <span>
-                              &nbsp;{selectedBookingDetails?.advancedPaid || "-"}
+                              Advance Paid 
+                              <span style={{display:"block"}}>
+                               
+                                {selectedBookingDetails?.advancedPaid || "-"}
                               </span>
                             </p>
                             <p>
-                              Remaining Amount :
-                              <span>
-                              &nbsp;{selectedBookingDetails?.remainingAmt || "-"}
+                              Remaining Amount 
+                              <span style={{display:"block"}}>
+                                
+                                {selectedBookingDetails?.remainingAmt || "-"}
                               </span>
                             </p>
                             <p>
-                              Total Amount :
-                              <span>
-                              &nbsp;{selectedBookingDetails?.totalAmt || "-"}
+                              Total Amount 
+                              <span style={{display:"block"}}>
+                               {selectedBookingDetails?.totalAmt || "-"}
                               </span>
                             </p>
                           </div>
