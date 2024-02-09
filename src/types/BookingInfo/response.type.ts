@@ -1,10 +1,45 @@
 export default interface IBookingInfoResponse {
-    bookingID: string,
-    driverName: string,
-    driverNumber: string,
-    alternateNumber: string,
-    vehicleNumber: string,
-    fromDate: Date,
-    toDate: Date,
-    bookingDate: Date
+  bookingId: string;
+  bookingDate: string;
+  bookingStatus: string;
+  vehicle: {
+    vehicleNumber: string;
+    seatCapacity: number;
+    s3ImageUrl: string | null;
+    vehicleAC: string;
+    sleeper: string;
+    image: string | null;
+    driverName: string | null;
+    driverNumber: string | null;
+    alternateNumber: string | null;
+    emergencyNumber: string | null;
+    totalAmount: number | null;
+    advanceAmt: number | null;
+    remainingAmt: number | null;
+    amtPerKM: number | null;
+    source: string | null;
+    destination: string | null;
+  };
+  user: {
+    firstName: string;
+    middleName: string | null;
+    lastName: string;
+    mobile: string;
+    email: string;
+  };
+  slots: {
+    vehicleNumber: string | null;
+    fromDate: string;
+    toDate: string;
+  };
+  remainingAmt: number;
+  totalAmt: number;
+  advancedPaid: number;
+}
+
+export interface IBookingList {
+  bookedList: IBookingInfoResponse[];
+  completedList: IBookingInfoResponse[];
+  enquiryList: IBookingInfoResponse[];
+  declineList: IBookingInfoResponse[];
 }

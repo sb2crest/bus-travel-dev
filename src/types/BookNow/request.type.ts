@@ -1,7 +1,7 @@
 export default interface IBookNowRequest {
     vehicleNumber: string,
-    fromDate: string,
-    toDate: string,
+    fromDate: string | null;
+  toDate: string | null;
     user: {
         firstName: string,
         middleName: string,
@@ -11,7 +11,7 @@ export default interface IBookNowRequest {
     },
     slot: {
         vehicleNumber: string,
-        fromDate: string,
-        toDate: string
+        fromDate: string | null;
+        toDate: string | null;
     }
 }

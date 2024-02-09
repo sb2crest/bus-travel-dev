@@ -15,11 +15,15 @@ const Icon = styled.i`
   }
 `;
 const Cards = () => {
+  const avoidloading = (e:any) => {
+    e.preventDefault();
+    console.log('Anchor tag clicked, but default behavior prevented.');
+  };
   return (
     <div className="ag-format-container">
       <div className="ag-courses_box">
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
 
             <div className="ag-courses-item_title">
@@ -38,7 +42,7 @@ const Cards = () => {
           </a>
         </div>
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
 
             <div className="ag-courses-item_title">
@@ -57,7 +61,7 @@ const Cards = () => {
           </a>
         </div>
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
 
             <div className="ag-courses-item_title">
@@ -77,7 +81,7 @@ const Cards = () => {
           </a>
         </div>
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
 
             <div className="ag-courses-item_title">
@@ -97,7 +101,7 @@ const Cards = () => {
           </a>
         </div>
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
 
             <div className="ag-courses-item_title">
@@ -116,7 +120,7 @@ const Cards = () => {
           </a>
         </div>
         <div className="ag-courses_item">
-          <a href="#" className="ag-courses-item_link">
+          <a href="#" className="ag-courses-item_link" onClick={avoidloading}>
             <div className="ag-courses-item_bg"></div>
             <div className="ag-courses-item_title">
               {" "}

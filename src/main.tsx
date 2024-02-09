@@ -43,7 +43,7 @@ if (rootElement) {
 
   root.render(
     <BrowserRouter>
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
         <App />
       </SnackbarProvider>
     </BrowserRouter>

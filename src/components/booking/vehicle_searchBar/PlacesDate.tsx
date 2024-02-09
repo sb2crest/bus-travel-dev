@@ -15,6 +15,7 @@ interface MySearchBoxOptions {
 interface PlacesDateProps {
   filterData: string;
   onResponseDataChange: (responseData: any, selectedDateRange: any) => void;
+  onExploreClick: () => void;
 }
 
 const libraries: Library[] = ["places"];
@@ -22,6 +23,7 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const PlacesDate: React.FC<PlacesDateProps> = ({
   filterData,
+  onExploreClick,
   onResponseDataChange,
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -81,13 +83,20 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
     setMultipleDestination(newValue);
     console.log(newValue);
   };
+  
   const sendResponseDataToBooking = (responseData: any) => {
     console.log("Response data received in PlacesDate:", responseData);
-    if (onResponseDataChange) {
-      onResponseDataChange(responseData, selectedDateRange);
+      if (Array.isArray(responseData) && responseData.length === 0) {
+      if (onResponseDataChange) {
+        onResponseDataChange(null, selectedDateRange);
+      }
+    } else {
+      if (onResponseDataChange) {
+        onResponseDataChange(responseData, selectedDateRange);
+      }
     }
   };
-
+  
   const fetchData = async () => {
     try {
       const formattedStartDate = startDate ? formatDate(startDate) : null;
@@ -127,6 +136,7 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    onExploreClick();
     fetchData();
   };
   const formatDate = (date: Date): string => {
@@ -152,10 +162,6 @@ const PlacesDate: React.FC<PlacesDateProps> = ({
       setDestinationLongitude,
       setDestination
     );
-  };
-  const customStyle = {
-    width: "5px",
-    height: "5px",
   };
   return (
     <div className="destination">

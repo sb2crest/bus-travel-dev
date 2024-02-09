@@ -118,6 +118,47 @@
         }
       }
     }
+    .no_vehicles_found {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -12.5vw;
+      background: url("../../assets/images/60241.jpg");
+      background-position: right 70%;
+      height: 130vh;
+      .no_vehicles_found_card {
+        margin-top: 9vw;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: marquee 15s linear infinite;
+        font-size: 30px;
+        color: red;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      &_card {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 20%;
+          height: 10%;
+        }
+      }
+    }
   }
   .howitworks {
     display: flex;
@@ -312,6 +353,20 @@
           }
         }
       }
+      .no_vehicles_found {
+        margin-top: 0vw;
+        background: none;
+        height: 50vh;
+        .no_vehicles_found_card {
+          margin-top: 0vw;
+          overflow: inherit;
+          width: 100%;
+          img {
+            width: 50%;
+            height: 10%;
+          }
+        }
+      }
     }
     .howitworks {
       &_header {
@@ -348,10 +403,11 @@
     font-size: 1rem;
   }
   .curvedimgsection {
-    margin-top: -1vw;
+    margin-top: -3vw;
     flex-direction: column;
     align-items: end;
     justify-content: center;
+    padding-top: 8vw;
     .filterAlign {
       margin-right: 10%;
     }
@@ -410,6 +466,20 @@
           }
         }
       }
+      .no_vehicles_found {
+        margin-top: 0vw;
+        background: none;
+        height: 50vh;
+        .no_vehicles_found_card {
+          margin-top: 0vw;
+          overflow: inherit;
+          width: 100%;
+          img {
+            width: 50%;
+            height: 10%;
+          }
+        }
+      }
     }
     .howitworks {
       &_header {
@@ -446,10 +516,11 @@
     font-size: 1rem;
   }
   .curvedimgsection {
-    margin-top: -1vw;
+    margin-top: -5vw;
     flex-direction: column;
     align-items: end;
     justify-content: center;
+    padding-top: 10vw;
     .filterAlign {
       margin-right: 15%;
     }
@@ -493,6 +564,12 @@
             }
           }
         }
+      }
+      .no_vehicles_found {
+        margin-top: -18.5%;
+        background: url("../../assets/images/60241.jpg");
+        background-position: right 70%;
+        height: 80vh;
       }
     }
     .howitworks {
@@ -549,5 +626,9 @@
     margin-top: 5vw;
     padding: 0.3rem 1rem;
     font-size: 1rem;
+  }
+  .curvedimgsection {
+    margin-top: -5vw;
+    padding-top: 5vw;
   }
 }

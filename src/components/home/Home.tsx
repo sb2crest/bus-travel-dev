@@ -28,7 +28,7 @@ const Icon = styled.i`
 `;
 export const scrollToTop = () => {
   const windowHeight = window.innerHeight;
-  const scrollToPercentage = 50; 
+  const scrollToPercentage = 50;
 
   window.scrollTo({
     top: (windowHeight * scrollToPercentage) / 100,
@@ -88,113 +88,107 @@ const Home: React.FC = () => {
       </div>
       <div className="aboutUs">
         <div className="aboutUs_container">
-          <Slide left>
-            <div className="aboutUs_container_content">
-              <h4>About Us</h4>
-              <h1>Unveiling Our Journey:</h1>
-              <p>
-                Founded on a passion for travel, our team is dedicated to
-                curating exceptional experiences. With years of expertise, we
-                offer personalized journeys, secure bookings, and expert
-                guidance. Explore with confidence, knowing you're in the hands
-                of passionate travelers
-              </p>
-              <div className="key_points">
-                <div className="key_points_one">
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Passionate about travel
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Years of expertise
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Personalized journeys
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Secure bookings
-                  </p>
-                </div>
-                <div className="key_points_two">
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Expert guidance
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Confidence in your travels
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Team of passionate travelers
-                  </p>
-                  <p>
-                    <i
-                      className="fa-solid fa-check fa-sm"
-                      style={{ color: "#0f7bab" }}
-                    ></i>
-                    &nbsp;&nbsp;Unforgettable experiences
-                  </p>
-                </div>
+          <div className="aboutUs_container_content">
+            <h4>About Us</h4>
+            <h1>Unveiling Our Journey:</h1>
+            <p>
+              Founded on a passion for travel, our team is dedicated to curating
+              exceptional experiences. With years of expertise, we offer
+              personalized journeys, secure bookings, and expert guidance.
+              Explore with confidence, knowing you're in the hands of passionate
+              travelers
+            </p>
+            <div className="key_points">
+              <div className="key_points_one">
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Passionate about travel
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Years of expertise
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Personalized journeys
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Secure bookings
+                </p>
               </div>
-                {" "}
-                <div className="btn-container">
+              <div className="key_points_two">
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Expert guidance
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Confidence in your travels
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Team of passionate travelers
+                </p>
+                <p>
+                  <i
+                    className="fa-solid fa-check fa-sm"
+                    style={{ color: "#0f7bab" }}
+                  ></i>
+                  &nbsp;&nbsp;Unforgettable experiences
+                </p>
+              </div>
+            </div>{" "}
+            <div className="btn-container">
               <Link to={"/aboutus"} onClick={scrollToTop}>
-                  <button className="Knowmore">
-                    <span className="text">Know more</span>
-                    <div className="icon_container">
-                      <div className="icon icon--left">
-                        <svg>
-                          <use href="#arrow-right"></use>
-                        </svg>
-                      </div>
-                      <div className="icon icon--right">
-                        <svg>
-                          <use href="#arrow-right"></use>
-                        </svg>
-                      </div>
+                <button className="Knowmore">
+                  <span className="text">Know more</span>
+                  <div className="icon_container">
+                    <div className="icon icon--left">
+                      <svg>
+                        <use href="#arrow-right"></use>
+                      </svg>
                     </div>
-                  </button>
+                    <div className="icon icon--right">
+                      <svg>
+                        <use href="#arrow-right"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </button>
               </Link>
-
-                </div>
-                <svg style={{ display: "none" }}>
-                  <symbol id="arrow-right" viewBox="0 0 20 10">
-                    <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
-                  </symbol>
-                </svg>
             </div>
-          </Slide>
-          <Slide right>
-            <div className="aboutUs_container_image">
-              <img id="img1" src={img1} alt="" width={500} />
-              <img id="img2" src={img2} alt="" width={42} />
-            </div>
-          </Slide>
+            <svg style={{ display: "none" }}>
+              <symbol id="arrow-right" viewBox="0 0 20 10">
+                <path d="M14.84 0l-1.08 1.06 3.3 3.2H0v1.49h17.05l-3.3 3.2L14.84 10 20 5l-5.16-5z"></path>
+              </symbol>
+            </svg>
+          </div>
+          <div className="aboutUs_container_image">
+            <img id="img1" src={img1} alt="" width={500} />
+            <img id="img2" src={img2} alt="" width={42} />
+          </div>
         </div>
       </div>
       <div className="lastcontainer">
