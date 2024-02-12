@@ -20,7 +20,7 @@
     svg {
       position: absolute;
       top: 8px;
-      right: 50%;
+      right: 45%;
       width: 20px;
     }
   }
@@ -94,6 +94,12 @@ form {
     color: red;
     text-align: left;
     margin: -12px 0 8px;
+  }
+  .checkbox-error {
+    color: red;
+    text-align: left;
+    margin-top: -5px;
+    margin-left: 5px;
   }
   .send-otp{
     background-color: #17a2b8;
@@ -199,7 +205,7 @@ form {
     display: flex;
     font-size: 14px;
     color: #0f2454;
-    margin-left: -6px;
+    margin: -10px 0 -5px -6px;
   }
   
   .conditions {

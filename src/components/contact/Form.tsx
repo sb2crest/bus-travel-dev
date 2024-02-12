@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./Form.scss";
-import IGetInTouch from "../../types/getInTouch.type";
 import dataService from "../../services/data.service";
 import ConfirmationPopup from "./ConfirmationPopup";
+import { useSnackbar } from "notistack";
 
 const Form: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  
   const resetForm = () => {
     setName("");
     setEmail("");
@@ -16,7 +18,13 @@ const Form: React.FC = () => {
   };
   const getInTouch = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+    if (!email) {
+      enqueueSnackbar("enter youe email!", {
+        variant: "error",
+        autoHideDuration: 3000
+      });
+      return;
+    }
     const requestBody = {
       name: name,
       email: email,

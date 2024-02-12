@@ -204,34 +204,29 @@ const AboutUs = () => {
 
         <div className="aboutus_container_apart">
           <div className="aboutus_container_apart_section">
-            <Fade left>
-              <div className="aboutus_container_apart_section_left">
-                <img id="img12" src={whatsets} alt="" />
-                <img id="img13" src={whatsets2} alt="" />
-              </div>
-            </Fade>
-            <Fade right>
-              <div className="aboutus_container_apart_section_right">
-                <h2>What sets us apart</h2>
-                <p>
-                  At <span>NanduBus</span> , our commitment to excellence goes
-                  beyond transportation. We take pride in offering a wide range
-                  of meticulously maintained vehicles, from luxurious coaches to
-                  versatile shuttles, ensuring there's a perfect option for
-                  every occasion. Our experienced drivers not only ensure a
-                  smooth journey but also provide expert guidance and local
-                  insights.
-                  <br />
-                  What truly distinguishes us is our unwavering dedication to
-                  safety, We embrace innovation and technology to make your
-                  booking experience seamless. and reliable arrivals our top
-                  priorities. We're not just a transportation provider, we're a
-                  team of passionate travelers, committed to delivering
-                  unforgettable experiences for our customers. Trust us to make
-                  your journey comfortable, memorable, and hassle-free.
-                </p>
-              </div>
-            </Fade>
+            <div className="aboutus_container_apart_section_left">
+              <img id="img12" src={whatsets} alt="" />
+              <img id="img13" src={whatsets2} alt="" />
+            </div>
+            <div className="aboutus_container_apart_section_right">
+              <h2>What sets us apart</h2>
+              <p>
+                At <span>NanduBus</span> , our commitment to excellence goes
+                beyond transportation. We take pride in offering a wide range of
+                meticulously maintained vehicles, from luxurious coaches to
+                versatile shuttles, ensuring there's a perfect option for every
+                occasion. Our experienced drivers not only ensure a smooth
+                journey but also provide expert guidance and local insights.
+                <br />
+                What truly distinguishes us is our unwavering dedication to
+                safety, We embrace innovation and technology to make your
+                booking experience seamless. and reliable arrivals our top
+                priorities. We're not just a transportation provider, we're a
+                team of passionate travelers, committed to delivering
+                unforgettable experiences for our customers. Trust us to make
+                your journey comfortable, memorable, and hassle-free.
+              </p>
+            </div>
           </div>
         </div>
       </div>

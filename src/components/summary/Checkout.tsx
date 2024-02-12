@@ -230,13 +230,16 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p className="right">{TotalAmount}</p>
                 </div>
                 <div className="advance-amount">
-                  <p className="left">Advance Amount </p>
-                  <p className="right">{AdvanceAmount}</p>
+                  <p className="left">Advance Amount(%)</p>
+                  <p className="right">20%</p>
                 </div>
-                <p className="line"></p>
                 <div className="remaining-amount">
-                  <p className="left">Remaining Amount &nbsp;=</p>
+                  <p className="left">Remaining Amount</p>
                   <p className="right">{RemainingAmount}</p>
+                </div>
+                <div className="advance-amount">
+                  <p className="left1">Advance Payable Amount &nbsp;&nbsp;&nbsp;=</p>
+                  <p className="left1">{AdvanceAmount}</p>
                 </div>
                 <div className="proceed-to-payment">
                   <button onClick={razorpay}>Proceed to pay</button>

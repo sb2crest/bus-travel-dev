@@ -48,6 +48,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   toDate,
   TotalAmount,
 }) => {
+  console.log("selected dates from booking form", fromDate,toDate);
   const [state, setState] = useState<State>({
     vehicleData: initialVehicleData,
     vehicleAdded: false,
@@ -103,6 +104,10 @@ const BookingForm: React.FC<BookingFormProps> = ({
     firstStepProp(true);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 100, behavior: "smooth" });
+  };
+
   useEffect(() => {
     console.log("firstStepCompleted updated:", firstStepCompleted);
   }, [firstStepCompleted]);
@@ -123,6 +128,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const [bookingId, setBookingId] = useState<string>("");
 
   const [isChecked, setIsChecked] = useState(false);
+  const [checkboxError, setCheckboxError] = useState("");
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -142,7 +148,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             setOTPMessage(true);
             setTimeout(() => {
               setOTPMessage(false);
-            }, 1000);
+            }, 2000);
           } else {
             console.log("Failed to send OTP.");
           }
@@ -150,9 +156,15 @@ const BookingForm: React.FC<BookingFormProps> = ({
         .catch((error: any) => {
           console.error("Error sending OTP:", error);
           console.log("An error occurred while sending OTP.");
+          enqueueSnackbar("Failed to send OTP!", {
+            variant: "error",
+          });
         });
     } else {
       console.log("Invalid phone number. Please enter a valid phone number.");
+      enqueueSnackbar("Enter valid Phone Number", {
+        variant: "error",
+      });
     }
   };
   useEffect(() => {
@@ -184,16 +196,20 @@ const BookingForm: React.FC<BookingFormProps> = ({
           setState({ ...state });
           console.log("OTP Verified!");
           setOtpVerified(true);
+          enqueueSnackbar("OTP Verification Successful", {
+            variant: "success",
+          });
         } else {
           console.log("OTP Verification Failed!");
           setOtpVerified(false);
         }
       })
       .catch((error: any) => {
-        if (error == "Error: Request failed with status code 400") {
-        }
         console.error("Error validating OTP:", error);
         setOtpVerified(false);
+        enqueueSnackbar("OTP Verification failed!", {
+          variant: "error",
+        });
       });
   };
   /* Resend OTP Function */
@@ -212,6 +228,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
       .catch((error: any) => {
         console.error("Error sending OTP:", error);
         console.log("An error occurred while sending OTP.");
+        enqueueSnackbar("Failed to send OTP!", {
+          variant: "error",
+        });
       });
     setOtpSent(true);
     setOtpResend(true);
@@ -221,6 +240,13 @@ const BookingForm: React.FC<BookingFormProps> = ({
   /* Book Now Function */
   const bookVehicle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (!isChecked) {
+      setCheckboxError("Please agree to the Terms and Conditions.");
+    } else {
+      setCheckboxError("");
+    }
+    setFieldTouched("phonenumber", true);
+
     if (
       !values.firstName ||
       !values.lastName ||
@@ -234,10 +260,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
         variant: "error",
       });
     } else {
+      const formattedStartDate = fromDate ? formatDate(fromDate) : null;
+      const formattedEndDate = toDate ? formatDate(toDate) : null;
       let requestBody = {
         vehicleNumber: vehicleNumber,
-        fromDate: fromDate ? fromDate.toISOString().split("T")[0] : "",
-        toDate: toDate ? toDate.toISOString().split("T")[0] : "",
+        fromDate: formattedStartDate,
+        toDate: formattedEndDate,
         user: {
           firstName: values.firstName,
           middleName: values.middleName,
@@ -247,8 +275,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
         },
         slot: {
           vehicleNumber: vehicleNumber,
-          fromDate: fromDate ? fromDate.toISOString().split("T")[0] : "",
-          toDate: toDate ? toDate.toISOString().split("T")[0] : "",
+          fromDate: formattedStartDate,
+          toDate: formattedEndDate,
         },
         totalAmount: TotalAmount,
       };
@@ -287,6 +315,14 @@ const BookingForm: React.FC<BookingFormProps> = ({
         });
     }
   };
+
+  const formatDate = (date: Date): string => {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  };
+
   /* Resend Timer  */
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -314,9 +350,9 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const handleContinueClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    Object.keys(values).forEach((field) => {
-      setFieldTouched(field, true);
-    });
+    setFieldTouched("firstName", true);
+    setFieldTouched("lastName", true);
+    setCheckboxError("");
 
     if (!values.firstName) {
       formik.setFieldError("firstName", "First Name is required");
@@ -472,12 +508,16 @@ const BookingForm: React.FC<BookingFormProps> = ({
                 onChange={handleCheckboxChange}
                 checked={isChecked}
               />
-              <p>I agree to all the
+              <p>
+                I agree to all the
                 <Link to="/termsConditions">
-                  <span className="conditions">Terms and Conditions</span>
+                  <span className="conditions" onClick={scrollToTop}>
+                    Terms and Conditions
+                  </span>
                 </Link>
               </p>
             </div>
+            {checkboxError && <p className="checkbox-error">{checkboxError}</p>}
             <div>
               <button className="clear-all" onClick={clearAll}>
                 Clear All

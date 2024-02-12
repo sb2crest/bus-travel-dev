@@ -7,6 +7,7 @@ import Filter from "./Filter/Filter";
 import divimg from "../../assets/images/divimage.svg";
 import { styled } from "@mui/system";
 import bus from "../../assets/images/busImage_1.jpg";
+import NoVehicleFound from "../../assets/images/VehicleNotFound.png";
 import {
   Stack,
   Stepper,
@@ -120,6 +121,9 @@ const Booking: React.FC = (props) => {
     setSelectedDateRange(selectedDateRange);
     setShouldRenderBusDetails(true);
   };
+  const handleExploreClick = () => {
+    setFilterData("ALL/ALL");
+  };
   return (
     <>
       <div className="booking">
@@ -138,8 +142,9 @@ const Booking: React.FC = (props) => {
           <PlacesDate
             filterData={filterData}
             onResponseDataChange={handleResponseDataChange}
+            onExploreClick={handleExploreClick}
           />
-          {shouldRenderBusDetails && (
+          {shouldRenderBusDetails && vehicles && vehicles.length > 0 && (
             <>
               <Fade top>
                 <div className="booking_container_busDetails">
@@ -154,10 +159,7 @@ const Booking: React.FC = (props) => {
                   </Fade>
                   <img src={divimg} alt="curvedimg" className="curvedimg" />
                   <div className="curvedimgsection">
-                    <div
-                      data-testid="filter-component"
-                      className="filterAlign"
-                    >
+                    <div data-testid="filter-component" className="filterAlign">
                       <Filter onFilterChange={handleFilterChange} />
                     </div>
 
@@ -189,11 +191,11 @@ const Booking: React.FC = (props) => {
                                   images: vehicle.s3ImageUrl || [],
                                   vehicleNumber: vehicle.vehicleNumber,
                                   selectedDateRange: selectedDateRange,
-                                  TotalAmount:vehicle.totalAmount,
-                                  AdvanceAmount:vehicle.advanceAmt,
-                                  RemainingAmount:vehicle.remainingAmt,
-                                  ACtype:vehicle.vehicleAC,
-                                  Sleepertype:vehicle.sleeper,
+                                  TotalAmount: vehicle.totalAmount,
+                                  AdvanceAmount: vehicle.advanceAmt,
+                                  RemainingAmount: vehicle.remainingAmt,
+                                  ACtype: vehicle.vehicleAC,
+                                  Sleepertype: vehicle.sleeper,
                                 },
                               }}
                             >
@@ -201,7 +203,7 @@ const Booking: React.FC = (props) => {
                                 className="button-53"
                                 onClick={scrollToTop}
                               >
-                                View More ➤
+                                View Details ➤
                               </button>
                             </Link>
                           </div>
@@ -212,6 +214,16 @@ const Booking: React.FC = (props) => {
                 </div>
               </Fade>
             </>
+          )}
+          {shouldRenderBusDetails && (!vehicles || vehicles.length === 0) && (
+            <div className="no_vehicles_found">
+              <div className="no_vehicles_found_card">
+                <img src={NoVehicleFound} alt="vehicle_image" />
+                <span className="scrolling-text">
+                  😔 No Vehicle was found !!!
+                </span>
+              </div>
+            </div>
           )}
         </div>
         <div className="howitworks">
@@ -237,63 +249,55 @@ const Booking: React.FC = (props) => {
             </Stepper>
           </Stack>
           <div className="howitworks_cards">
-            <Fade left>
-              <div className="howitworks_cards_one">
-                <i
-                  className="fa-solid fa-bus fa-2xl"
-                  style={{
-                    color: "#0f7bab",
-                  }}
-                ></i>
-                <h3>Trip Details & Select Your Bus</h3>
-                <p>
-                  Choose from a range of available buses, considering factors
-                  like destination, departure time, and seating preferences.
-                </p>
-              </div>
-            </Fade>
-            <Fade top>
-              <div className="howitworks_cards_two">
-                <i
-                  className="fa-solid fa-file fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Booking Details</h3>
-                <p>
-                  {" "}
-                  Enter your trip details, personal information, and review
-                  booking before confirming your reservation.
-                </p>
-              </div>
-            </Fade>
-            <Fade bottom>
-              <div className="howitworks_cards_three">
-                <i
-                  className="fa-solid fa-money-check-dollar fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Booking Payment</h3>
-                <p>
-                  {" "}
-                  Complete the payment process securely, ensuring your bus is
-                  reserved for the upcoming journey.
-                </p>
-              </div>
-            </Fade>
-            <Fade right>
-              <div className="howitworks_cards_four">
-                <i
-                  className="fa-solid fa-map-location-dot fa-2xl"
-                  style={{ color: "#0f7bab" }}
-                ></i>
-                <h3>Start Your Roadtrip</h3>
-                <p>
-                  {" "}
-                  Embark on your adventure, boarding the selected bus at the
-                  designated departure point, ready for your road trip.
-                </p>
-              </div>
-            </Fade>
+            <div className="howitworks_cards_one">
+              <i
+                className="fa-solid fa-bus fa-2xl"
+                style={{
+                  color: "#0f7bab",
+                }}
+              ></i>
+              <h3>Trip Details & Select Your Bus</h3>
+              <p>
+                Choose from a range of available buses, considering factors like
+                destination, departure time, and seating preferences.
+              </p>
+            </div>
+            <div className="howitworks_cards_two">
+              <i
+                className="fa-solid fa-file fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Booking Details</h3>
+              <p>
+                {" "}
+                Enter your trip details, personal information, and review
+                booking before confirming your reservation.
+              </p>
+            </div>
+            <div className="howitworks_cards_three">
+              <i
+                className="fa-solid fa-money-check-dollar fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Booking Payment</h3>
+              <p>
+                {" "}
+                Complete the payment process securely, ensuring your bus is
+                reserved for the upcoming journey.
+              </p>
+            </div>
+            <div className="howitworks_cards_four">
+              <i
+                className="fa-solid fa-map-location-dot fa-2xl"
+                style={{ color: "#0f7bab" }}
+              ></i>
+              <h3>Start Your Roadtrip</h3>
+              <p>
+                {" "}
+                Embark on your adventure, boarding the selected bus at the
+                designated departure point, ready for your road trip.
+              </p>
+            </div>
           </div>
         </div>
       </div>
