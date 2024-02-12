@@ -114,47 +114,50 @@ const AboutUs = () => {
         </div>
         <div className="aboutus_container_values">
           <div className="aboutus_container_values_section">
-            <div
-              className="aboutus_container_values_section_mission"
-              data-testid="mission-content"
-            >
-              <h4>
-                <b>Our Mission</b>
-              </h4>
-              <p>
-                Our mission is to provide safe, reliable, and comfortable bus
-                rental services that cater to the diverse needs of our
-                customers. We aim to exceed expectations by delivering
-                exceptional transportation solutions, backed by a commitment to
-                punctuality, professionalism, and affordability.We aim to
-                simplify the process of renting a bus, making group travel
-                stress-free and enjoyable. Our focus on affordability and
-                sustainability ensures that everyone can access our services,
-                fostering strong connections among communities, businesses, and
-                travelers.
-              </p>
-            </div>
-            <div
-              className="aboutus_container_values_section_vision"
-              data-testid="vision-content"
-            >
-              <h4>
-                <b>Our Vision</b>
-              </h4>
-              <p>
-                {" "}
-                Our vision is to be the preferred choice for bus rentals,
-                setting industry standards for excellence. We aspire to expand
-                our fleet, reach new destinations, and continuously enhance our
-                services. By fostering strong client relationships and embracing
-                innovation, we strive to be a driving force in the
-                transportation sector, connecting people and places seamlessly
-                while promoting sustainability and convenience. With a
-                commitment to environmental responsibility and convenience, we
-                envision a future where travel is efficient, enjoyable, and
-                accessible to all.
-              </p>
-            </div>
+            <Bounce right>
+              <div
+                className="aboutus_container_values_section_mission"
+                data-testid="mission-content"
+              >
+                <h4>
+                  <b>Our Mission</b>
+                </h4>
+                <p>
+                  Our mission is to provide safe, reliable, and comfortable bus
+                  rental services that cater to the diverse needs of our
+                  customers. We aim to exceed expectations by delivering
+                  exceptional transportation solutions, backed by a commitment
+                  to punctuality, professionalism, and affordability.We aim to
+                  simplify the process of renting a bus, making group travel
+                  stress-free and enjoyable. Our focus on affordability and
+                  sustainability ensures that everyone can access our services,
+                  fostering strong connections among communities, businesses,
+                  and travelers.
+                </p>
+              </div>
+            </Bounce>
+            <Bounce left>
+              <div
+                className="aboutus_container_values_section_vision"
+                data-testid="vision-content"
+              >
+                <h4>
+                  <b>Our Vision</b>
+                </h4>
+                <p>
+                  {" "}
+                  Our vision is to be the preferred choice for bus rentals,
+                  setting industry standards for excellence. We aspire to expand
+                  our fleet, reach new destinations,and continuously enhance
+                  our services. By fostering strong client relationships and
+                  embracing innovation,connecting people and places seamlessly
+                  while promoting sustainability and convenience. With a
+                  commitment to environmental responsibility and convenience, we
+                  envision a future where travel is efficient, enjoyable, and
+                  accessible to all.
+                </p>
+              </div>
+            </Bounce>
           </div>
         </div>
         <div className="lastcontainer">
