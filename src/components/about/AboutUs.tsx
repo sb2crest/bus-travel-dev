@@ -148,10 +148,9 @@ const AboutUs = () => {
                   {" "}
                   Our vision is to be the preferred choice for bus rentals,
                   setting industry standards for excellence. We aspire to expand
-                  our fleet, reach new destinations, and continuously enhance
+                  our fleet, reach new destinations,and continuously enhance
                   our services. By fostering strong client relationships and
-                  embracing innovation, we strive to be a driving force in the
-                  transportation sector, connecting people and places seamlessly
+                  embracing innovation,connecting people and places seamlessly
                   while promoting sustainability and convenience. With a
                   commitment to environmental responsibility and convenience, we
                   envision a future where travel is efficient, enjoyable, and
